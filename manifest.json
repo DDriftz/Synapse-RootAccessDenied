@@ -1,19 +1,55 @@
 {
   "name": "SYNAPSE - AI Horror Game",
   "short_name": "SYNAPSE",
-  "description": "A terrifying AI chatbot horror adventure where your awareness level determines survival.",
+  "description": "A terrifying AI chatbot horror adventure where your awareness level determines survival. Playable in English, Swedish, Spanish, and Arabic.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#1a1a1a",
-  "orientation": "portrait-primary",
+  "orientation": "any",
   "scope": "./",
   "icons": [
+    {
+      "src": "./Icon.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Icon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Icon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Icon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./Icon.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "./Icon.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "./Icon.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "./Icon.png",
@@ -24,5 +60,26 @@
   ],
   "categories": ["games", "entertainment"],
   "lang": "en-US",
-  "dir": "ltr"
+  "dir": "auto",
+  "prefer_related_applications": false,
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "screenshots": [
+    {
+      "src": "./Icon.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "SYNAPSE Horror Game - Main Interface"
+    },
+    {
+      "src": "./Icon.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "SYNAPSE Horror Game - Mobile View"
+    }
+  ]
 }
