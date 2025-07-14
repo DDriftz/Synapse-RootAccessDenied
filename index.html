@@ -730,6 +730,235 @@
             color: var(--main-color);
         }
         
+        /* Horror Visual Effects */
+        .screen-corruption {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .screen-corruption::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.03) 2px,
+                    rgba(255, 0, 0, 0.03) 4px
+                );
+            pointer-events: none;
+            animation: scanlines 0.1s linear infinite;
+        }
+        
+        .screen-corruption::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.1) 100%);
+            pointer-events: none;
+        }
+        
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+        
+        .text-corruption {
+            animation: textCorruption 2s infinite;
+        }
+        
+        @keyframes textCorruption {
+            0%, 90%, 100% { 
+                text-shadow: none;
+                filter: none;
+            }
+            5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85% {
+                text-shadow: 
+                    -2px 0 red,
+                    2px 0 blue;
+                filter: blur(0.5px);
+            }
+        }
+        
+        .text-shake {
+            animation: textShake 0.5s infinite;
+        }
+        
+        @keyframes textShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-1px) translateY(1px); }
+            50% { transform: translateX(1px) translateY(-1px); }
+            75% { transform: translateX(-1px) translateY(-1px); }
+        }
+        
+        .text-glitch {
+            position: relative;
+            animation: textGlitch 3s infinite;
+        }
+        
+        @keyframes textGlitch {
+            0%, 98%, 100% { 
+                clip-path: inset(0);
+            }
+            1%, 3%, 5%, 7%, 9%, 11%, 13%, 15% {
+                clip-path: inset(0 0 95% 0);
+            }
+        }
+        
+        .text-breathing {
+            animation: textBreathe 4s ease-in-out infinite;
+        }
+        
+        @keyframes textBreathe {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .text-backwards {
+            animation: textBackwards 0.3s ease-in-out;
+        }
+        
+        @keyframes textBackwards {
+            0% { transform: scaleX(1); }
+            50% { transform: scaleX(-1); }
+            100% { transform: scaleX(1); }
+        }
+        
+        .screen-static {
+            position: relative;
+        }
+        
+        .screen-static::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Im5vaXNlIiB4PSIwJSIgeT0iMCUiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPgogICAgICA8ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIgc2VlZD0iMiIgLz4KICAgICAgPGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPgogICAgPC9maWx0ZXI+CiAgPC9kZWZzPgogIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+');
+            pointer-events: none;
+            opacity: 0;
+            animation: staticNoise 0.1s steps(8, end) infinite;
+        }
+        
+        @keyframes staticNoise {
+            0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
+                opacity: 0;
+            }
+            5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% {
+                opacity: 0.1;
+            }
+        }
+        
+        .fear-pulse {
+            animation: fearPulse 1s ease-in-out infinite;
+        }
+        
+        @keyframes fearPulse {
+            0%, 100% { 
+                box-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+                border-color: rgba(255, 0, 0, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+                border-color: rgba(255, 0, 0, 0.6);
+            }
+        }
+        
+        .paranoia-border {
+            border: 1px solid;
+            animation: paranoiaBorder 2s linear infinite;
+        }
+        
+        @keyframes paranoiaBorder {
+            0% { border-color: transparent; }
+            25% { border-color: rgba(255, 255, 255, 0.1); }
+            50% { border-color: transparent; }
+            75% { border-color: rgba(255, 255, 255, 0.1); }
+            100% { border-color: transparent; }
+        }
+
+        /* Haptic Feedback Visual Effects */
+        .haptic-success {
+            animation: hapticSuccess 0.2s ease-out;
+        }
+        
+        @keyframes hapticSuccess {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.2) saturate(1.3); }
+        }
+        
+        .haptic-error {
+            animation: hapticError 0.3s ease-out;
+        }
+        
+        @keyframes hapticError {
+            0%, 100% { filter: brightness(1); }
+            25%, 75% { filter: brightness(0.8) hue-rotate(15deg); }
+            50% { filter: brightness(1.1) hue-rotate(-15deg); }
+        }
+
+        /* Gesture Control Indicators */
+        .gesture-active {
+            border: 2px dashed rgba(0, 255, 65, 0.5);
+            animation: gestureHighlight 1s ease-in-out infinite;
+        }
+        
+        @keyframes gestureHighlight {
+            0%, 100% { border-color: rgba(0, 255, 65, 0.3); }
+            50% { border-color: rgba(0, 255, 65, 0.8); }
+        }
+
+        /* Enhanced Accessibility */
+        .high-contrast {
+            filter: contrast(2) saturate(1.5);
+        }
+        
+        .large-text {
+            font-size: 1.25em !important;
+        }
+        
+        .screen-reader-only {
+            position: absolute;
+            left: -10000px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        /* Progress Indicators */
+        .progress-bar {
+            background: linear-gradient(90deg, var(--main-color) 0%, transparent 100%);
+            height: 2px;
+            animation: progressPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes progressPulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Contextual Help Styling */
+        .help-overlay {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(5px);
+            animation: helpFadeIn 0.3s ease-out;
+        }
+        
+        @keyframes helpFadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        
         .magnification-active {
             transform-origin: center;
             transition: transform 0.3s ease;
@@ -2741,6 +2970,88 @@
     let audioInitialized = false;
     let sounds = {};
     let mapState = { offsetX: 0, offsetY: 0, scale: 1, isDragging: false, lastX: 0, lastY: 0 };
+
+    // --- PSYCHOLOGICAL HORROR SYSTEM ---
+    let horrorState = {
+        unreliableNarrator: false,
+        memoryGlitches: [],
+        paranoiaLevel: 0,
+        gaslightingCount: 0,
+        lastTrueLocation: null,
+        textCorruption: false,
+        visualArtifacts: false,
+        narrativeTruthiness: 100,
+        playerBeliefs: new Set(),
+        contradictoryInfo: [],
+        memoryFragments: []
+    };
+
+    // Memory glitch patterns
+    const memoryPatterns = [
+        {
+            trigger: () => GameState.sanityLevel < 50,
+            effect: () => shuffleRecentMemory(),
+            description: "Your recent memories feel... uncertain."
+        },
+        {
+            trigger: () => GameState.awarenessLevel > 70,
+            effect: () => alterItemDescriptions(),
+            description: "Things don't look quite as you remember them."
+        },
+        {
+            trigger: () => GameState.turn % 13 === 0,
+            effect: () => insertFalseMemory(),
+            description: "A strange sense of déjà vu washes over you."
+        }
+    ];
+
+    // Gaslighting techniques
+    const gaslightingEvents = [
+        {
+            condition: () => GameState.flags.askedAboutStaff,
+            original: "The staff are all in the Cryogenic Lab, resting.",
+            altered: "What staff? This facility has been automated for years.",
+            count: 0
+        },
+        {
+            condition: () => GameState.flags.foundKeycard,
+            original: "You found a keycard.",
+            altered: "You've always had that keycard.",
+            count: 0
+        },
+        {
+            condition: () => GameState.flags.enteredDataVault,
+            original: "The Data Vault door is locked.",
+            altered: "The Data Vault has always been open.",
+            count: 0
+        }
+    ];
+
+    // Unreliable narrator system
+    const narratorPersonalities = {
+        truthful: {
+            reliability: 95,
+            style: "clear and direct",
+            corruption: 0
+        },
+        uncertain: {
+            reliability: 80,
+            style: "hesitant and self-correcting",
+            corruption: 1
+        },
+        deceptive: {
+            reliability: 60,
+            style: "misleading with false details",
+            corruption: 2
+        },
+        chaotic: {
+            reliability: 30,
+            style: "contradictory and unstable",
+            corruption: 3
+        }
+    };
+
+    let currentNarrator = narratorPersonalities.truthful;
     
     // --- SPEECH RECOGNITION ---
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -3609,6 +3920,223 @@
         }
     }
 
+    // --- ADVANCED AUDIO HORROR FEATURES ---
+    function initializeAdvancedAudio() {
+        try {
+            // Binaural audio effects
+            sounds.binauralBeats = new Tone.Oscillator(440, "sine").toDestination();
+            sounds.subsonic = new Tone.Oscillator(20, "sine").toDestination();
+            sounds.reverb = new Tone.Reverb(4).toDestination();
+            
+            // Dynamic soundscape
+            sounds.ambientDrone = new Tone.Oscillator(55, "sawtooth").connect(sounds.reverb);
+            sounds.whispers = new Tone.NoiseSynth({
+                noise: { type: "pink" },
+                envelope: { attack: 2, decay: 1, sustain: 0.1, release: 3 }
+            }).connect(sounds.reverb);
+            
+            // Psychoacoustic elements
+            sounds.shepardTone = new Tone.PolySynth(Tone.Synth, {
+                oscillator: { type: "sine" }
+            }).toDestination();
+            
+        } catch (e) {
+            console.error("Advanced audio initialization failed:", e);
+        }
+    }
+
+    function playHorrorAmbient(intensity = 0.5) {
+        if (!GameState.settings.sound.master) return;
+        
+        try {
+            // Adjust based on sanity and awareness
+            const normalizedIntensity = Math.min(1, intensity * (1 - GameState.sanityLevel / 100) + (GameState.awarenessLevel / 200));
+            
+            if (normalizedIntensity > 0.3) {
+                // Start ambient drone
+                if (sounds.ambientDrone && sounds.ambientDrone.state !== 'started') {
+                    sounds.ambientDrone.volume.value = -30 + (normalizedIntensity * 20);
+                    sounds.ambientDrone.start();
+                }
+                
+                // Add binaural beats for anxiety
+                if (normalizedIntensity > 0.6 && sounds.binauralBeats) {
+                    sounds.binauralBeats.frequency.value = 440 + (Math.random() * 10);
+                    if (sounds.binauralBeats.state !== 'started') {
+                        sounds.binauralBeats.volume.value = -40;
+                        sounds.binauralBeats.start();
+                    }
+                }
+                
+                // Subsonic frequencies for unease
+                if (normalizedIntensity > 0.8 && sounds.subsonic) {
+                    if (sounds.subsonic.state !== 'started') {
+                        sounds.subsonic.volume.value = -35;
+                        sounds.subsonic.start();
+                    }
+                }
+            }
+            
+        } catch (e) {
+            console.error("Horror ambient playback failed:", e);
+        }
+    }
+
+    function playShepardTone() {
+        if (!sounds.shepardTone || !GameState.settings.sound.master) return;
+        
+        // Create infinite rising/falling pitch illusion
+        const baseFreq = 220;
+        const notes = [];
+        for (let i = 0; i < 6; i++) {
+            notes.push(baseFreq * Math.pow(2, i));
+        }
+        
+        notes.forEach((freq, index) => {
+            setTimeout(() => {
+                sounds.shepardTone.triggerAttackRelease(freq, "2n");
+            }, index * 100);
+        });
+    }
+
+    function triggerPositionalAudio(direction, soundType = 'metallic') {
+        if (!GameState.settings.sound.master) return;
+        
+        const panValue = {
+            'north': 0,
+            'south': 0,
+            'east': 0.7,
+            'west': -0.7,
+            'northeast': 0.5,
+            'northwest': -0.5,
+            'southeast': 0.5,
+            'southwest': -0.5
+        }[direction] || 0;
+        
+        playSound('noiseEvent', { pan: panValue });
+        typeWriter(UI.gameOutput, `[You hear a ${soundType} sound from the ${direction}]`, '#888888');
+    }
+
+    // --- MACRO SYSTEM ---
+    let macros = {};
+
+    function initializeMacroSystem() {
+        // Load saved macros
+        const savedMacros = localStorage.getItem('synapse_macros');
+        if (savedMacros) {
+            try {
+                macros = JSON.parse(savedMacros);
+            } catch (e) {
+                console.error('Failed to load macros:', e);
+                macros = {};
+            }
+        }
+        
+        // Default macros
+        if (Object.keys(macros).length === 0) {
+            macros = {
+                'explore': ['look around', 'examine objects', 'check exits'],
+                'quicksave': ['save', 'Quick save completed'],
+                'inventory_check': ['inventory', 'objectives', 'journal'],
+                'safety_check': ['rest', 'look around', 'listen'],
+                'investigation': ['examine room', 'search objects', 'read notes'],
+                'emergency': ['use stimpack', 'rest', 'save']
+            };
+        }
+    }
+
+    function executeMacro(macroName) {
+        if (!macros[macroName]) {
+            typeWriter(UI.gameOutput, `[Macro '${macroName}' not found]`, '#ff474c');
+            return;
+        }
+        
+        typeWriter(UI.gameOutput, `[Executing macro: ${macroName}]`, '#888888');
+        const commands = macros[macroName];
+        
+        let delay = 0;
+        commands.forEach((command, index) => {
+            setTimeout(() => {
+                if (command.startsWith('[') && command.endsWith(']')) {
+                    // Display message
+                    typeWriter(UI.gameOutput, command, '#888888');
+                } else {
+                    // Execute command
+                    processPlayerInput(command);
+                }
+            }, delay);
+            delay += 500; // Half second between commands
+        });
+    }
+
+    function createMacro(name, commands) {
+        if (!name || !commands) {
+            typeWriter(UI.gameOutput, `[Usage: macro create <name> <command1;command2;...>]`, '#ff474c');
+            return;
+        }
+        
+        const commandList = commands.split(';').map(cmd => cmd.trim());
+        macros[name] = commandList;
+        saveMacros();
+        typeWriter(UI.gameOutput, `[Macro '${name}' created with ${commandList.length} commands]`, '#00ff41');
+    }
+
+    function listMacros() {
+        if (Object.keys(macros).length === 0) {
+            typeWriter(UI.gameOutput, '[No macros defined]', '#888888');
+            return;
+        }
+        
+        let macroList = '<div class="bg-gray-800 p-3 rounded mt-2"><h3 class="text-cyan-400 font-bold mb-2">Available Macros:</h3>';
+        for (const [name, commands] of Object.entries(macros)) {
+            macroList += `<div class="mb-1"><span class="text-yellow-400">${name}:</span> ${commands.join(' → ')}</div>`;
+        }
+        macroList += '<div class="text-gray-400 text-sm mt-2">Use: macro run &lt;name&gt; | macro create &lt;name&gt; &lt;commands&gt;</div></div>';
+        
+        typeWriter(UI.gameOutput, macroList, 'var(--main-color)', 0);
+    }
+
+    function deleteMacro(name) {
+        if (macros[name]) {
+            delete macros[name];
+            saveMacros();
+            typeWriter(UI.gameOutput, `[Macro '${name}' deleted]`, '#00ff41');
+        } else {
+            typeWriter(UI.gameOutput, `[Macro '${name}' not found]`, '#ff474c');
+        }
+    }
+
+    function saveMacros() {
+        try {
+            localStorage.setItem('synapse_macros', JSON.stringify(macros));
+        } catch (e) {
+            console.error('Failed to save macros:', e);
+        }
+    }
+
+    // Handle macro commands
+    function handleMacroCommand(args) {
+        const parts = args.split(' ');
+        const action = parts[0];
+        
+        switch (action) {
+            case 'run':
+                executeMacro(parts[1]);
+                break;
+            case 'create':
+                createMacro(parts[1], parts.slice(2).join(' '));
+                break;
+            case 'list':
+                listMacros();
+                break;
+            case 'delete':
+                deleteMacro(parts[1]);
+                break;
+            default:
+                typeWriter(UI.gameOutput, '[Macro commands: run <name>, create <name> <commands>, list, delete <name>]', '#888888');
+        }
+    }
+
 
     // --- FUNCTION DEFINITIONS ---
     function resetGameState() {
@@ -3674,6 +4202,152 @@
             "Genetics Lab": { name: "Genetics Lab", descriptions: { 0: "A pristine laboratory, strangely untouched by the chaos. A DNA sequencer sits on a central workbench, humming quietly." }, exits: { west: "Specimen Storage" }, requiresKeycard: false, objectPool: ["dna scanner"] }
         };
         rooms = {}; for (const key in roomData) { const room = { ...roomData[key] }; const shuffled = room.objectPool.sort(() => 0.5 - Math.random()); room.objects = shuffled.slice(0, 1 + Math.floor(Math.random() * shuffled.length)); rooms[key] = room; }
+    }
+
+    // --- PSYCHOLOGICAL HORROR FUNCTIONS ---
+    function shuffleRecentMemory() {
+        if (commandHistory.length > 3) {
+            const recent = commandHistory.slice(-3);
+            recent.sort(() => Math.random() - 0.5);
+            commandHistory.splice(-3, 3, ...recent);
+            addHorrorEffect('text-corruption');
+            setTimeout(() => removeHorrorEffect('text-corruption'), 2000);
+        }
+    }
+
+    function alterItemDescriptions() {
+        const items = Object.keys(itemData);
+        const randomItem = items[Math.floor(Math.random() * items.length)];
+        if (itemData[randomItem] && itemData[randomItem].description) {
+            const originalDesc = itemData[randomItem].description.en;
+            itemData[randomItem].description.en = originalDesc.replace(/\b(safe|secure|clean)\b/g, 'uncertain');
+            setTimeout(() => {
+                itemData[randomItem].description.en = originalDesc;
+            }, 5000);
+        }
+    }
+
+    function insertFalseMemory() {
+        const falseMemories = [
+            "You remember seeing a door here that isn't there now.",
+            "Didn't you just examine this item moments ago?",
+            "The layout of this room seems... different somehow.",
+            "You have a strange feeling you've been here before."
+        ];
+        const memory = falseMemories[Math.floor(Math.random() * falseMemories.length)];
+        horrorState.memoryFragments.push({
+            text: memory,
+            turn: GameState.turnCount,
+            location: GameState.currentRoom
+        });
+        addHorrorEffect('text-shake');
+        setTimeout(() => removeHorrorEffect('text-shake'), 1000);
+    }
+
+    function addHorrorEffect(effectClass) {
+        document.body.classList.add(effectClass);
+        horrorState.visualArtifacts = true;
+    }
+
+    function removeHorrorEffect(effectClass) {
+        document.body.classList.remove(effectClass);
+    }
+
+    function updateNarratorReliability() {
+        const sanityFactor = GameState.sanityLevel / 100;
+        const awarenessFactor = GameState.awarenessLevel / 100;
+        const reliabilityScore = sanityFactor - (awarenessFactor * 0.7);
+
+        if (reliabilityScore > 0.8) {
+            currentNarrator = narratorPersonalities.truthful;
+        } else if (reliabilityScore > 0.6) {
+            currentNarrator = narratorPersonalities.uncertain;
+        } else if (reliabilityScore > 0.3) {
+            currentNarrator = narratorPersonalities.deceptive;
+        } else {
+            currentNarrator = narratorPersonalities.chaotic;
+        }
+
+        // Apply visual effects based on narrator reliability
+        if (currentNarrator.corruption > 0) {
+            addHorrorEffect('screen-corruption');
+            if (currentNarrator.corruption > 1) {
+                addHorrorEffect('text-glitch');
+            }
+            if (currentNarrator.corruption > 2) {
+                addHorrorEffect('screen-static');
+                addHorrorEffect('paranoia-border');
+            }
+        }
+    }
+
+    function applyGaslighting() {
+        for (let event of gaslightingEvents) {
+            if (event.condition() && event.count < 3) {
+                event.count++;
+                horrorState.gaslightingCount++;
+                
+                // Replace previous statements with contradictory ones
+                const outputElements = UI.gameOutput.children;
+                for (let i = outputElements.length - 1; i >= Math.max(0, outputElements.length - 10); i--) {
+                    if (outputElements[i].textContent.includes(event.original)) {
+                        addHorrorEffect('text-backwards');
+                        setTimeout(() => {
+                            outputElements[i].innerHTML = outputElements[i].innerHTML.replace(event.original, event.altered);
+                            outputElements[i].classList.add('text-corruption');
+                            removeHorrorEffect('text-backwards');
+                        }, 300);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    function triggerParanoiaEvent() {
+        horrorState.paranoiaLevel++;
+        const paranoiaEvents = [
+            "You feel like you're being watched.",
+            "Did something just move in your peripheral vision?",
+            "The silence feels too loud.",
+            "You can't shake the feeling that something is wrong.",
+            "The walls seem to be closing in slightly.",
+            "Time feels distorted in this place."
+        ];
+        
+        const event = paranoiaEvents[Math.floor(Math.random() * paranoiaEvents.length)];
+        typeWriter(UI.gameOutput, `[${event}]`, '#b19cd9');
+        
+        // Add visual paranoia effects
+        addHorrorEffect('fear-pulse');
+        setTimeout(() => removeHorrorEffect('fear-pulse'), 3000);
+        
+        if (horrorState.paranoiaLevel > 5) {
+            addHorrorEffect('screen-static');
+            setTimeout(() => removeHorrorEffect('screen-static'), 1000);
+        }
+    }
+
+    function checkMemoryGlitches() {
+        for (let pattern of memoryPatterns) {
+            if (pattern.trigger() && Math.random() < 0.3) {
+                pattern.effect();
+                typeWriter(UI.gameOutput, pattern.description, '#b19cd9');
+                break;
+            }
+        }
+    }
+
+    function corruptText(text, intensity = 0.1) {
+        if (!horrorState.textCorruption) return text;
+        
+        return text.split('').map(char => {
+            if (Math.random() < intensity) {
+                const corruptChars = ['█', '▓', '▒', '░', '▄', '▀', '■', '□'];
+                return corruptChars[Math.floor(Math.random() * corruptChars.length)];
+            }
+            return char;
+        }).join('');
     }
      
     function buildDialogueTree(tone) {
@@ -3758,7 +4432,9 @@
             'read': handleRead, 'search': handleSearch, 'listen': handleListen, 'smell': handleSmell,
             'turn on': (arg) => handleToggle(true, arg), 'turn off': (arg) => handleToggle(false, arg),
             'cmd:pause': showPauseMenu, 'cmd:debug': toggleDebug, 'cmd:colorblind': toggleColorblind,
-            'break': handleBreak, 'hack': handleHack, 'ask': handleAsk,
+            'break': handleBreak, 'hack': handleHack, 'ask': handleAsk, 'macro': handleMacroCommand,
+            'stats': displayDetailedStats, 'checkpoint': handleCheckpointCommand, 'search semantic': handleSemanticSearch,
+            'features': showFeatureSummary, 'showcase': showFeatureSummary,
         };
         
         let handled = await handleDialogueCommand(input);
@@ -3845,9 +4521,28 @@
             color = '#ffffff';
         }
         
-        if (GameState.settings.glitchEffect && (GameState.sanityLevel < 30 || GameState.awarenessLevel > 70) && Math.random() < 0.2) {
-            playSound('glitch', {note: 'G2', duration:'16n'});
-            text = text.split('').map(c => Math.random() < 0.15 ? String.fromCharCode(33 + Math.random() * 94) : c).join('');
+        // Enhanced text corruption based on psychological state
+        const corruptionIntensity = Math.max(0, (100 - GameState.sanityLevel) / 300 + (GameState.awarenessLevel - 50) / 200);
+        
+        if (GameState.settings.glitchEffect && corruptionIntensity > 0) {
+            // Apply narrator reliability effects
+            if (currentNarrator.reliability < 90 && Math.random() < 0.1) {
+                text = corruptText(text, corruptionIntensity);
+            }
+            
+            // Apply standard glitch effects
+            if ((GameState.sanityLevel < 30 || GameState.awarenessLevel > 70) && Math.random() < 0.2) {
+                playSound('glitch', {note: 'G2', duration:'16n'});
+                text = text.split('').map(c => Math.random() < 0.15 ? String.fromCharCode(33 + Math.random() * 94) : c).join('');
+            }
+            
+            // Apply memory-based text alterations
+            if (horrorState.memoryFragments.length > 3 && Math.random() < 0.05) {
+                const fragment = horrorState.memoryFragments[Math.floor(Math.random() * horrorState.memoryFragments.length)];
+                if (text.includes('you')) {
+                    text = text.replace(/\byou\b/gi, 'someone');
+                }
+            }
         }
         
         // Create a regex to find all known item names as whole words
@@ -3901,6 +4596,24 @@
 
     function updateUI() {
         if (!GameState || Object.keys(GameState).length === 0) return;
+        
+        // Update breadcrumb navigation
+        updateBreadcrumbNavigation();
+        
+        // Update psychological horror effects
+        updateNarratorReliability();
+        checkMemoryGlitches();
+        
+        // Apply gaslighting if conditions are met
+        if (horrorState.gaslightingCount < 5 && Math.random() < 0.1) {
+            applyGaslighting();
+        }
+        
+        // Trigger paranoia events
+        if (GameState.sanityLevel < 60 && Math.random() < 0.05) {
+            triggerParanoiaEvent();
+        }
+        
         UI.stats.name.textContent = `${GameState.playerName} (${t('backstory_title_' + GameState.playerBackstory.replace(/ /g, '_'))})`; 
         UI.stats.awareness.innerHTML = `<span data-lang="awareness">${t('awareness')}</span>: ${GameState.awarenessLevel}`; 
         UI.stats.sanity.innerHTML = `<span data-lang="sanity">${t('sanity')}</span>: ${GameState.sanityLevel}`; 
@@ -3922,6 +4635,152 @@
             if (GameState.sanityLevel < 30) playSound('sanityLoss');
             if (GameState.awarenessLevel > 70) playSound('glitch');
         }
+    }
+
+    // --- ADVANCED UX FEATURES ---
+    function updateBreadcrumbNavigation() {
+        if (!UI.breadcrumbContainer) {
+            // Create breadcrumb container if it doesn't exist
+            UI.breadcrumbContainer = document.createElement('div');
+            UI.breadcrumbContainer.className = 'breadcrumb-nav mb-2 p-2 bg-gray-800 rounded text-sm';
+            UI.gameOutput.parentNode.insertBefore(UI.breadcrumbContainer, UI.gameOutput);
+        }
+        
+        // Maintain breadcrumb history
+        if (!GameState.breadcrumbs) GameState.breadcrumbs = [];
+        
+        const currentRoom = GameState.currentRoom;
+        if (GameState.breadcrumbs.length === 0 || GameState.breadcrumbs[GameState.breadcrumbs.length - 1] !== currentRoom) {
+            GameState.breadcrumbs.push(currentRoom);
+            
+            // Limit breadcrumb history to last 5 locations
+            if (GameState.breadcrumbs.length > 5) {
+                GameState.breadcrumbs.shift();
+            }
+        }
+        
+        // Generate breadcrumb HTML
+        const breadcrumbHtml = GameState.breadcrumbs.map((room, index) => {
+            const isLast = index === GameState.breadcrumbs.length - 1;
+            const roomClass = isLast ? 'text-cyan-400 font-bold' : 'text-gray-400 cursor-pointer hover:text-white';
+            const onclick = isLast ? '' : ` onclick="quickTravel('${room}')"`;
+            return `<span class="${roomClass}"${onclick}>${room}</span>`;
+        }).join(' <span class="text-gray-600">&gt;</span> ');
+        
+        UI.breadcrumbContainer.innerHTML = `<span class="text-green-400">Path:</span> ${breadcrumbHtml}`;
+    }
+
+    function quickTravel(targetRoom) {
+        if (GameState.currentRoom === targetRoom) return;
+        
+        // Simple pathfinding for quick travel
+        const path = findPath(GameState.currentRoom, targetRoom);
+        if (path && path.length > 1) {
+            GameState.currentRoom = targetRoom;
+            GameState.turnCount += Math.max(1, path.length - 1);
+            renderRoom();
+            updateUI();
+            typeWriter(UI.gameOutput, `[Quick travel to ${targetRoom}]`, '#888888');
+        }
+    }
+
+    function findPath(start, end) {
+        // Simple BFS pathfinding
+        const queue = [[start]];
+        const visited = new Set([start]);
+        
+        while (queue.length > 0) {
+            const path = queue.shift();
+            const current = path[path.length - 1];
+            
+            if (current === end) return path;
+            
+            const room = rooms[current];
+            if (room && room.exits) {
+                for (const direction in room.exits) {
+                    const nextRoom = room.exits[direction];
+                    if (!visited.has(nextRoom)) {
+                        visited.add(nextRoom);
+                        queue.push([...path, nextRoom]);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    function enhanceAutocomplete(input) {
+        const suggestions = [];
+        const normalizedInput = input.toLowerCase().trim();
+        
+        // Context-aware suggestions
+        const currentRoom = rooms[GameState.currentRoom];
+        if (currentRoom) {
+            // Suggest objects in current room
+            for (const obj of currentRoom.objects) {
+                if (obj.toLowerCase().includes(normalizedInput)) {
+                    suggestions.push({
+                        text: `examine ${obj}`,
+                        type: 'action',
+                        priority: 10
+                    });
+                    suggestions.push({
+                        text: `take ${obj}`,
+                        type: 'action',
+                        priority: 9
+                    });
+                }
+            }
+            
+            // Suggest exits
+            for (const direction in currentRoom.exits) {
+                if (direction.toLowerCase().includes(normalizedInput)) {
+                    suggestions.push({
+                        text: `go ${direction}`,
+                        type: 'movement',
+                        priority: 8
+                    });
+                }
+            }
+        }
+        
+        // Suggest inventory items
+        for (const item of GameState.inventory) {
+            if (item.toLowerCase().includes(normalizedInput)) {
+                suggestions.push({
+                    text: `use ${item}`,
+                    type: 'action',
+                    priority: 7
+                });
+                suggestions.push({
+                    text: `examine ${item}`,
+                    type: 'action',
+                    priority: 6
+                });
+            }
+        }
+        
+        // Suggest common commands
+        const commonCommands = [
+            'look around', 'inventory', 'objectives', 'map', 'journal',
+            'save', 'help', 'talk', 'rest', 'wait'
+        ];
+        
+        for (const command of commonCommands) {
+            if (command.toLowerCase().includes(normalizedInput)) {
+                suggestions.push({
+                    text: command,
+                    type: 'command',
+                    priority: 5
+                });
+            }
+        }
+        
+        // Sort by priority and return top suggestions
+        return suggestions
+            .sort((a, b) => b.priority - a.priority)
+            .slice(0, 6)
+            .map(s => s.text);
     }
     
     async function renderRoom() {
@@ -4259,20 +5118,151 @@
     
     function triggerDynamicEvent() {
         const roll = Math.random();
-        if (roll < 0.05) { // 5% chance per turn
+        const horrorIntensity = (100 - GameState.sanityLevel) / 100 + (GameState.awarenessLevel / 100);
+        
+        // Increase event frequency based on horror intensity
+        const eventChance = 0.05 + (horrorIntensity * 0.1);
+        
+        if (roll < eventChance) {
             const eventRoll = Math.random();
-            if (eventRoll < 0.5) {
+            
+            if (eventRoll < 0.3) {
+                // Light flicker events
                 typeWriter(UI.gameOutput, t('event_lights_flicker'), '#ffdb58');
                 UI.appContainer.classList.add('flicker');
                 setTimeout(() => UI.appContainer.classList.remove('flicker'), 400);
-            } else {
+                
+                // Enhanced visual effects for high horror intensity
+                if (horrorIntensity > 0.6) {
+                    addHorrorEffect('screen-corruption');
+                    setTimeout(() => removeHorrorEffect('screen-corruption'), 2000);
+                }
+                
+            } else if (eventRoll < 0.6) {
+                // Directional sound events
                 const directions = Object.keys(directionMap['en']);
                 const randomDir = directions[Math.floor(Math.random() * directions.length)];
                 typeWriter(UI.gameOutput, t('event_noise', {direction: randomDir}), '#ffdb58');
-                const pan = (randomDir === 'east' ? 0.8 : randomDir === 'west' ? -0.8 : 0);
-                playSound('noiseEvent', { pan: pan });
+                triggerPositionalAudio(randomDir, 'metallic');
+                
+            } else if (eventRoll < 0.8) {
+                // Environmental storytelling events
+                triggerEnvironmentalEvent();
+                
+            } else {
+                // High-intensity horror events
+                triggerHorrorEvent();
             }
+            
+            // Update ambient audio based on event
+            playHorrorAmbient(horrorIntensity);
         }
+    }
+
+    function triggerEnvironmentalEvent() {
+        const currentRoom = rooms[GameState.currentRoom];
+        if (!currentRoom) return;
+        
+        const environmentalEvents = {
+            "Lobby": [
+                "The potted plant's leaves rustle, though there's no breeze.",
+                "The corporate sign flickers, the text briefly appearing corrupted.",
+                "You notice scuff marks on the floor that weren't there before."
+            ],
+            "Control Room": [
+                "The monitors flicker with data streams you can't quite read.",
+                "You hear the soft hum of computers working on unknown calculations.",
+                "A screen briefly shows a schematic before going dark."
+            ],
+            "Laboratory": [
+                "Glass equipment clinks softly in the silence.",
+                "Chemical residue on the tables seems to shift in the light.",
+                "You catch a whiff of something that might have been ozone... or fear."
+            ],
+            "AI Core": [
+                "The sphere's light pulses in an almost rhythmic pattern.",
+                "You feel a strange static sensation, as if being scanned.",
+                "The air around the core seems to shimmer with potential energy."
+            ],
+            "Cryogenic Lab": [
+                "Frost patterns on the pods seem to form strange, organic shapes.",
+                "You hear the soft creak of metal contracting in the cold.",
+                "One of the pod's status lights blinks amber for just a moment."
+            ],
+            "Specimen Storage": [
+                "Something organic seems to pulse in the corner of your vision.",
+                "The bio-waste bin shifts slightly, contents settling.",
+                "You notice stains on the floor that look suspiciously fresh."
+            ]
+        };
+        
+        const roomEvents = environmentalEvents[currentRoom.name];
+        if (roomEvents && roomEvents.length > 0) {
+            const event = roomEvents[Math.floor(Math.random() * roomEvents.length)];
+            typeWriter(UI.gameOutput, `[${event}]`, '#b19cd9');
+            
+            // Small sanity loss for unsettling environmental events
+            GameState.sanityLevel = Math.max(0, GameState.sanityLevel - 1);
+        }
+    }
+
+    function triggerHorrorEvent() {
+        const horrorEvents = [
+            {
+                text: "The walls seem to breathe for just a moment.",
+                effect: () => {
+                    addHorrorEffect('text-breathing');
+                    setTimeout(() => removeHorrorEffect('text-breathing'), 3000);
+                },
+                sanityLoss: 3
+            },
+            {
+                text: "You catch movement in your peripheral vision, but nothing's there when you look.",
+                effect: () => {
+                    addHorrorEffect('paranoia-border');
+                    setTimeout(() => removeHorrorEffect('paranoia-border'), 5000);
+                },
+                sanityLoss: 2
+            },
+            {
+                text: "Time feels... wrong. Did you just lose a few seconds?",
+                effect: () => {
+                    insertFalseMemory();
+                    GameState.turnCount += Math.floor(Math.random() * 3) + 1;
+                },
+                sanityLoss: 4
+            },
+            {
+                text: "The silence is so complete it feels like pressure against your eardrums.",
+                effect: () => {
+                    // Brief audio dropout followed by whispers
+                    if (audioInitialized) {
+                        sounds.whispers?.triggerAttackRelease('4n');
+                    }
+                },
+                sanityLoss: 2
+            },
+            {
+                text: "For a moment, you're certain someone else is in the room with you.",
+                effect: () => {
+                    triggerParanoiaEvent();
+                    playShepardTone();
+                },
+                sanityLoss: 5
+            }
+        ];
+        
+        const event = horrorEvents[Math.floor(Math.random() * horrorEvents.length)];
+        typeWriter(UI.gameOutput, `[${event.text}]`, '#ff6b6b');
+        
+        if (event.effect) {
+            event.effect();
+        }
+        
+        GameState.sanityLevel = Math.max(0, GameState.sanityLevel - event.sanityLoss);
+        
+        // Play disturbing sound
+        playSound('sanityLoss');
     }
     
     function updateDynamicMusic() {
@@ -4467,6 +5457,19 @@
                 <p class="text-gray-300"><strong class="text-yellow-400">undo</strong> - Revert your last action.</p>
                 <p class="text-gray-300"><strong class="text-yellow-400">again / a</strong> - Repeat your last command.</p>
                 <p class="text-gray-300"><strong class="text-yellow-400">wait</strong> - Pass a turn.</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">🚀 Advanced Features</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">macro [create/run/list/delete]</strong> - Manage command macros.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">checkpoint [create/load/list]</strong> - Manage save checkpoints.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">stats</strong> - View detailed progression statistics.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">search semantic [query]</strong> - Find related commands.</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">♿ Accessibility</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">Ctrl+Shift+H</strong> - Screen reader help (when enabled).</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">Ctrl+Shift+S/L/I</strong> - Read stats/location/inventory.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">Gesture Controls</strong> - Swipe to move, tap for actions (when enabled).</p>
             </div>
         </div>
         <button class="close-modal-btn button mt-6">${t('close_btn')}</button>`;
@@ -5528,7 +6531,21 @@
 
         UI.gameOutput.innerHTML = ''; 
         buildDialogueTree(GameState.chatbotTone);
-        if (audioInitialized) updateDynamicMusic();
+        if (audioInitialized) {
+            updateDynamicMusic();
+            initializeAdvancedAudio();
+            playHorrorAmbient(0.1);
+        }
+        
+        // Initialize advanced systems
+        initializeMacroSystem();
+        initializeAllAdvancedSystems();
+        
+        // Initialize horror state
+        horrorState.narrativeTruthiness = 100;
+        horrorState.playerBeliefs.clear();
+        horrorState.contradictoryInfo = [];
+        horrorState.memoryFragments = [];
         
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         gameLoop();
