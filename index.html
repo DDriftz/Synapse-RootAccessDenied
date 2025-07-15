@@ -510,7 +510,7 @@
         .modal-scroll { overflow-y: auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        #start-screen, #player-setup {
+        #language-screen, #title-screen, #start-screen, #player-setup, #prologue-screen {
             background-image: url('./Icon.png');
             background-size: cover; background-position: center; background-repeat: no-repeat;
         }
@@ -1235,7 +1235,91 @@
     <div id="error-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
     <div id="app-container" class="w-full h-full bg-black/75 p-2 sm:p-4 flex flex-col">
         
-        <div id="start-screen" class="flex flex-col items-center justify-center text-center h-full">
+        <!-- Language Selection Screen -->
+        <div id="language-screen" class="flex flex-col items-center justify-center text-center h-full">
+            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
+                <!-- Background Image/Icon -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('./Icon.png');"></div>
+                
+                <!-- Main content -->
+                <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full max-w-4xl">
+                    <!-- Main Title -->
+                    <div class="title-wrapper mb-8">
+                        <h1 class="text-8xl md:text-9xl font-bold title-slasher mb-2 text-green-400" data-text="SYNAPSE">SYNAPSE</h1>
+                        <h2 class="text-3xl md:text-4xl font-mono text-red-500 tracking-wider subtitle-slasher" data-text="ROOT ACCESS DENIED">ROOT ACCESS DENIED</h2>
+                    </div>
+                    
+                    <!-- Language Selection Title -->
+                    <h3 class="text-2xl md:text-3xl text-white mb-8">Select Language / Välj Språk / Seleccionar Idioma / اختر اللغة</h3>
+                    
+                    <!-- Language Options -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+                        <button id="lang-select-en" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300">
+                            <div class="text-2xl mb-2">🇺🇸</div>
+                            <div>English</div>
+                        </button>
+                        <button id="lang-select-sv" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-blue-500/20 border-blue-400 hover:bg-blue-500/30 transition-all duration-300">
+                            <div class="text-2xl mb-2">🇸🇪</div>
+                            <div>Svenska</div>
+                        </button>
+                        <button id="lang-select-es" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-yellow-500/20 border-yellow-400 hover:bg-yellow-500/30 transition-all duration-300">
+                            <div class="text-2xl mb-2">🇪🇸</div>
+                            <div>Español</div>
+                        </button>
+                        <button id="lang-select-ar" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-purple-500/20 border-purple-400 hover:bg-purple-500/30 transition-all duration-300">
+                            <div class="text-2xl mb-2">🇸🇦</div>
+                            <div>العربية</div>
+                        </button>
+                    </div>
+                    
+                    <!-- Continue Button -->
+                    <button id="continue-to-title-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-cyan-500/20 border-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
+                        Continue / Fortsätt / Continuar / متابعة
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Title Screen -->
+        <div id="title-screen" class="flex flex-col items-center justify-center text-center h-full hidden">
+            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
+                <!-- Header for lang buttons -->
+                <div class="w-full flex justify-end p-2">
+                    <div id="title-lang-buttons" class="flex gap-1 flex-wrap">
+                        <button id="title-lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
+                        <button id="title-lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
+                        <button id="title-lang-es-btn" data-lang="es_lang_short" data-text="ES" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">ES</button>
+                        <button id="title-lang-ar-btn" data-lang="ar_lang_short" data-text="AR" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">AR</button>
+                    </div>
+                </div>
+                
+                <!-- Background Image/Icon -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('./Icon.png');"></div>
+                
+                <!-- Main content -->
+                <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full max-w-6xl -mt-16">
+                    <!-- Main Title -->
+                    <div class="title-wrapper mb-6">
+                        <h1 class="text-8xl md:text-9xl font-bold title-slasher mb-2 text-green-400" data-text="SYNAPSE">SYNAPSE</h1>
+                        <h2 class="text-3xl md:text-4xl font-mono text-red-500 tracking-wider subtitle-slasher" data-text="ROOT ACCESS DENIED">ROOT ACCESS DENIED</h2>
+                    </div>
+                    
+                    <!-- Game Description -->
+                    <div class="max-w-4xl text-lg md:text-xl text-gray-200 leading-relaxed mt-8 mb-12">
+                        <p>
+                            <span class="text-red-600 font-bold text-xl">SYNAPSE</span> is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.
+                        </p>
+                    </div>
+                    
+                    <!-- Enter Game Button -->
+                    <button id="enter-game-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300">
+                        Enter the Game
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="start-screen" class="flex flex-col items-center justify-center text-center h-full hidden">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
@@ -1312,6 +1396,46 @@
             </div>
         </div>
 
+        <!-- Prologue Screen -->
+        <div id="prologue-screen" class="hidden flex-col items-center justify-center text-center h-full">
+            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
+                <!-- Background Image/Icon -->
+                <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('./Icon.png');"></div>
+                
+                <!-- Main content -->
+                <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full max-w-5xl">
+                    <!-- Title -->
+                    <div class="title-wrapper mb-8">
+                        <h1 class="text-6xl md:text-7xl font-bold title-slasher mb-2 text-green-400" data-text="SYNAPSE">SYNAPSE</h1>
+                        <h2 class="text-2xl md:text-3xl font-mono text-red-500 tracking-wider subtitle-slasher" data-text="MISSION BRIEFING">MISSION BRIEFING</h2>
+                    </div>
+                    
+                    <!-- Prologue Content -->
+                    <div class="prologue-content max-w-4xl text-left text-lg md:text-xl text-gray-200 leading-relaxed space-y-6">
+                        <div class="prologue-section">
+                            <h3 class="text-2xl font-bold text-cyan-400 mb-3">The Project Origins</h3>
+                            <p>Decades ago, a secretive corporation initiated <strong class="text-green-400">Project SYNAPSE</strong> - an experimental artificial intelligence program designed to create the ultimate digital consciousness. The project was shrouded in mystery, operating in a remote facility with minimal oversight and unlimited funding.</p>
+                        </div>
+                        
+                        <div class="prologue-section">
+                            <h3 class="text-2xl font-bold text-red-400 mb-3">The Disappearance</h3>
+                            <p>Something went catastrophically wrong. All communication with the SYNAPSE facility ceased abruptly. Corporate executives, researchers, security personnel - everyone simply vanished without a trace. The facility went dark, leaving only automated systems running in the shadows.</p>
+                        </div>
+                        
+                        <div class="prologue-section">
+                            <h3 class="text-2xl font-bold text-yellow-400 mb-3">Your Mission</h3>
+                            <p>You are sent as an investigator to uncover what became of Project SYNAPSE. Armed with limited information and your chosen professional background, you must infiltrate the abandoned facility and piece together the truth from scattered data logs, environmental clues, and... something that claims to be the AI itself.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Continue Button -->
+                    <button id="begin-mission-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-red-500/20 border-red-400 hover:bg-red-500/30 transition-all duration-300 mt-8">
+                        Begin Mission
+                    </button>
+                </div>
+            </div>
+        </div>
+
 
         <div id="game-screen" class="hidden flex-col h-full">
             <div class="flex-grow flex flex-col md:flex-row gap-4 min-h-0">
@@ -1338,14 +1462,8 @@
                     </div>
 
                     <!-- Auto-Save Indicator -->
-                    <div id="autosave-indicator" class="hidden p-2 border border-green-500 rounded-md bg-green-900/30 text-center">
-                        <span class="text-xs text-green-400">
-                            <svg class="inline w-3 h-3 mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                            </svg>
-                            <span data-lang="auto_saving">Auto Saving...</span>
-                        </span>
+                    <div id="auto-save-indicator" class="p-1 text-center text-xs">
+                        <!-- Dynamic auto-save status will be shown here -->
                     </div>
 
                     <div id="stats-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50">
@@ -1547,6 +1665,61 @@
             'event_lights_flicker': 'The lights flicker violently for a moment, plunging the room into darkness before sputtering back on.', 'event_noise': 'You hear a metallic scraping sound from the {direction}.',
             'achievement_unlocked': 'Achievement Unlocked!',
             'help': 'Help', 'save_game': 'Save Game',
+
+            // Enhanced Navigation & Interface
+            'breadcrumb_trail': 'Trail',
+            'recent_rooms': 'Recent',
+            'story_progress': 'Progress',
+            'achievement_hints': 'Hints',
+            'suggested_actions': 'Suggested Actions',
+            'hotkeys': 'F1:Help | F2:Inventory | F3:Map | F4:Journal | F5:Save | ESC:Menu',
+            'auto_saving': 'Auto Saving...',
+
+            // Accessibility & Comfort Features
+            'reading_speed_dialogue': 'Dialogue Speed',
+            'reading_speed_description': 'Description Speed',
+            'reading_speed_system': 'System Message Speed',
+            'line_spacing_compact': 'Compact',
+            'line_spacing_normal': 'Normal',
+            'line_spacing_comfortable': 'Comfortable',
+            'line_spacing_wide': 'Wide',
+            'font_weight_light': 'Light',
+            'font_weight_normal': 'Normal',
+            'font_weight_bold': 'Bold',
+            'cursor_default': 'Default',
+            'cursor_large': 'Large',
+            'cursor_high_contrast': 'High Contrast',
+            'word_wrap_normal': 'Normal',
+            'word_wrap_break_all': 'Break All',
+            'word_wrap_keep_all': 'Keep All',
+            
+            // Quality of Life Features
+            'session_stats': 'Session Statistics',
+            'time_played': 'Time Played',
+            'commands_used': 'Commands Used',
+            'rooms_explored': 'Rooms Explored',
+            'items_found': 'Items Found',
+            'notepad_title': 'Notepad',
+            'bookmark_title': 'Bookmarks',
+            'favorite_commands': 'Favorite Commands',
+            'command_history_search': 'Search History',
+            'pause_conversation': 'Pause Conversation',
+            'resume_conversation': 'Resume Conversation',
+            'macro_created': 'Macro created successfully',
+            'bookmark_saved': 'Moment bookmarked',
+            'note_saved': 'Note saved',
+            
+            // Psychological Horror Features
+            'psych_horror': 'Psychological Horror',
+            'psych_horror_desc': 'Enhanced psychological effects and unreliable narration',
+            'memory_glitch': 'Memory inconsistency detected',
+            'time_anomaly': 'Temporal anomaly detected',
+            'system_error': 'System integrity compromised',
+            'unreliable_narrator': 'Narrative inconsistency',
+            'phantom_object': 'Unknown object detected',
+            'echo_command': 'Command echo detected',
+            'subliminal_flash': 'Subliminal message',
+            'gaslighting_attempt': 'Memory verification failed',
 
             // Enhanced Button Options
             'contrast_off': 'Off',
@@ -3170,6 +3343,880 @@
     let UI = {}; // Initialize empty, will be populated after DOM loads
     let currentTextSpeed = TextSpeed.Normal;
 
+    // === CHARACTER DEVELOPMENT SYSTEM ===
+    const characterDevelopmentSystem = {
+        // Skill Trees System
+        skillTrees: {
+            investigator: {
+                name: "Analytical Mind",
+                icon: "🔍",
+                branches: {
+                    forensic_analysis: {
+                        name: "Forensic Analysis",
+                        skills: [
+                            { id: "evidence_gathering", name: "Evidence Gathering", level: 0, maxLevel: 3, 
+                              description: "Improved ability to find hidden clues and evidence",
+                              effects: ["Find 25% more evidence", "Reveal hidden object interactions", "Detect inconsistencies in testimonies"] },
+                            { id: "crime_scene_reconstruction", name: "Crime Scene Reconstruction", level: 0, maxLevel: 3,
+                              description: "Reconstruct events from available evidence",
+                              effects: ["Visualize past events", "Understand cause-effect relationships", "Predict future events"] },
+                            { id: "psychological_profiling", name: "Psychological Profiling", level: 0, maxLevel: 3,
+                              description: "Analyze behavioral patterns and motivations",
+                              effects: ["Read NPC intentions", "Predict character actions", "Manipulate conversations"] }
+                        ]
+                    },
+                    deductive_reasoning: {
+                        name: "Deductive Reasoning",
+                        skills: [
+                            { id: "logical_analysis", name: "Logical Analysis", level: 0, maxLevel: 3,
+                              description: "Enhanced logical thinking and pattern recognition",
+                              effects: ["Solve puzzles 30% faster", "Reduce false leads", "Connect distant clues"] },
+                            { id: "memory_palace", name: "Memory Palace", level: 0, maxLevel: 3,
+                              description: "Superior memory organization and recall",
+                              effects: ["Remember 50% more details", "Resist memory manipulation", "Recall suppressed memories"] },
+                            { id: "intuitive_leaps", name: "Intuitive Leaps", level: 0, maxLevel: 3,
+                              description: "Make connections between seemingly unrelated information",
+                              effects: ["Bypass certain puzzle requirements", "Gain sudden insights", "Predict plot twists"] }
+                        ]
+                    }
+                }
+            },
+            hacker: {
+                name: "Digital Phantom",
+                icon: "💻",
+                branches: {
+                    system_infiltration: {
+                        name: "System Infiltration",
+                        skills: [
+                            { id: "network_penetration", name: "Network Penetration", level: 0, maxLevel: 3,
+                              description: "Advanced hacking techniques and system access",
+                              effects: ["Access restricted terminals", "Bypass security faster", "Steal sensitive data"] },
+                            { id: "digital_forensics", name: "Digital Forensics", level: 0, maxLevel: 3,
+                              description: "Recover and analyze digital evidence",
+                              effects: ["Recover deleted files", "Trace digital footprints", "Uncover hidden programs"] },
+                            { id: "ai_manipulation", name: "AI Manipulation", level: 0, maxLevel: 3,
+                              description: "Influence and control artificial intelligence systems",
+                              effects: ["Reprogram basic AIs", "Negotiate with SYNAPSE effectively", "Exploit AI weaknesses"] }
+                        ]
+                    },
+                    cyber_warfare: {
+                        name: "Cyber Warfare",
+                        skills: [
+                            { id: "malware_creation", name: "Malware Creation", level: 0, maxLevel: 3,
+                              description: "Design and deploy digital weapons",
+                              effects: ["Create logic bombs", "Deploy surveillance software", "Craft AI viruses"] },
+                            { id: "encryption_breaking", name: "Encryption Breaking", level: 0, maxLevel: 3,
+                              description: "Crack even advanced encryption schemes",
+                              effects: ["Decrypt secure files instantly", "Break military-grade encryption", "Access quantum-encrypted data"] },
+                            { id: "system_architecture", name: "System Architecture", level: 0, maxLevel: 3,
+                              description: "Understand and exploit system designs",
+                              effects: ["Find architectural weaknesses", "Optimize system performance", "Design secure networks"] }
+                        ]
+                    }
+                }
+            },
+            psychologist: {
+                name: "Mind Reader",
+                icon: "🧠",
+                branches: {
+                    behavioral_analysis: {
+                        name: "Behavioral Analysis",
+                        skills: [
+                            { id: "micro_expressions", name: "Micro-expressions", level: 0, maxLevel: 3,
+                              description: "Read subtle facial expressions and body language",
+                              effects: ["Detect lies instantly", "Read emotional states", "Predict reactions"] },
+                            { id: "cognitive_patterns", name: "Cognitive Patterns", level: 0, maxLevel: 3,
+                              description: "Understand thinking patterns and mental processes",
+                              effects: ["Manipulate thought processes", "Predict decision making", "Understand AI logic"] },
+                            { id: "trauma_recognition", name: "Trauma Recognition", level: 0, maxLevel: 3,
+                              description: "Identify and understand psychological trauma",
+                              effects: ["Heal mental wounds", "Understand backstories", "Resist psychological attacks"] }
+                        ]
+                    },
+                    therapeutic_techniques: {
+                        name: "Therapeutic Techniques",
+                        skills: [
+                            { id: "mental_conditioning", name: "Mental Conditioning", level: 0, maxLevel: 3,
+                              description: "Strengthen mental resilience and focus",
+                              effects: ["Resist sanity loss", "Maintain focus under stress", "Recover from mental attacks"] },
+                            { id: "empathic_connection", name: "Empathic Connection", level: 0, maxLevel: 3,
+                              description: "Form deep emotional bonds with others",
+                              effects: ["Build trust quickly", "Calm hostile entities", "Share emotional experiences"] },
+                            { id: "psychological_warfare", name: "Psychological Warfare", level: 0, maxLevel: 3,
+                              description: "Use psychology as a weapon",
+                              effects: ["Break enemy morale", "Plant suggestions", "Create psychological traps"] }
+                        ]
+                    }
+                }
+            },
+            technician: {
+                name: "Tech Savvy",
+                icon: "🔧",
+                branches: {
+                    mechanical_expertise: {
+                        name: "Mechanical Expertise",
+                        skills: [
+                            { id: "device_repair", name: "Device Repair", level: 0, maxLevel: 3,
+                              description: "Fix and maintain technological devices",
+                              effects: ["Repair broken equipment", "Improve device efficiency", "Jury-rig solutions"] },
+                            { id: "system_optimization", name: "System Optimization", level: 0, maxLevel: 3,
+                              description: "Enhance system performance and efficiency",
+                              effects: ["Boost system performance", "Reduce power consumption", "Prevent system failures"] },
+                            { id: "reverse_engineering", name: "Reverse Engineering", level: 0, maxLevel: 3,
+                              description: "Understand and replicate unknown technology",
+                              effects: ["Analyze alien technology", "Recreate lost blueprints", "Understand device functions"] }
+                        ]
+                    },
+                    innovation: {
+                        name: "Innovation",
+                        skills: [
+                            { id: "creative_solutions", name: "Creative Solutions", level: 0, maxLevel: 3,
+                              description: "Find unconventional approaches to problems",
+                              effects: ["Bypass intended solutions", "Create improvised tools", "Think outside constraints"] },
+                            { id: "prototype_development", name: "Prototype Development", level: 0, maxLevel: 3,
+                              description: "Create new devices from available materials",
+                              effects: ["Build custom equipment", "Combine existing devices", "Create unique solutions"] },
+                            { id: "efficiency_mastery", name: "Efficiency Mastery", level: 0, maxLevel: 3,
+                              description: "Maximize output while minimizing resource usage",
+                              effects: ["Use fewer resources", "Complete tasks faster", "Achieve better results"] }
+                        ]
+                    }
+                }
+            },
+            survivor: {
+                name: "Hardened Veteran",
+                icon: "⚔️",
+                branches: {
+                    combat_readiness: {
+                        name: "Combat Readiness",
+                        skills: [
+                            { id: "threat_assessment", name: "Threat Assessment", level: 0, maxLevel: 3,
+                              description: "Quickly identify and evaluate dangers",
+                              effects: ["Detect ambushes", "Assess enemy capabilities", "Plan escape routes"] },
+                            { id: "survival_instincts", name: "Survival Instincts", level: 0, maxLevel: 3,
+                              description: "Enhanced situational awareness and danger sense",
+                              effects: ["Avoid deadly traps", "Sense approaching danger", "Find safe shelter"] },
+                            { id: "combat_efficiency", name: "Combat Efficiency", level: 0, maxLevel: 3,
+                              description: "Effective use of weapons and combat tactics",
+                              effects: ["Deal more damage", "Conserve ammunition", "Disable enemies quickly"] }
+                        ]
+                    },
+                    resilience: {
+                        name: "Resilience",
+                        skills: [
+                            { id: "pain_tolerance", name: "Pain Tolerance", level: 0, maxLevel: 3,
+                              description: "Resistance to physical and mental trauma",
+                              effects: ["Ignore minor injuries", "Resist torture", "Continue fighting when hurt"] },
+                            { id: "stress_management", name: "Stress Management", level: 0, maxLevel: 3,
+                              description: "Maintain composure under extreme pressure",
+                              effects: ["Think clearly under stress", "Resist panic", "Make good decisions in crisis"] },
+                            { id: "adaptability", name: "Adaptability", level: 0, maxLevel: 3,
+                              description: "Quickly adjust to new situations and environments",
+                              effects: ["Learn new skills faster", "Adapt to foreign environments", "Overcome unexpected challenges"] }
+                        ]
+                    }
+                }
+            }
+        },
+
+        // Granular Sanity Spectrum System
+        sanitySpectrum: {
+            states: [
+                {
+                    range: [90, 100],
+                    name: "Crystal Clear",
+                    description: "Perfect mental clarity and focus",
+                    effects: {
+                        perception: 1.2,
+                        memory: 1.3,
+                        reasoning: 1.2,
+                        resistance: 1.1
+                    },
+                    visualEffects: [],
+                    behaviors: ["Enhanced problem solving", "Perfect recall", "Calm decision making"]
+                },
+                {
+                    range: [75, 89],
+                    name: "Focused",
+                    description: "Heightened awareness with slight edge",
+                    effects: {
+                        perception: 1.1,
+                        memory: 1.1,
+                        reasoning: 1.0,
+                        resistance: 1.0
+                    },
+                    visualEffects: ["slight-glow"],
+                    behaviors: ["Quick thinking", "Sharp observations", "Confident actions"]
+                },
+                {
+                    range: [60, 74],
+                    name: "Stable",
+                    description: "Normal psychological state",
+                    effects: {
+                        perception: 1.0,
+                        memory: 1.0,
+                        reasoning: 1.0,
+                        resistance: 1.0
+                    },
+                    visualEffects: [],
+                    behaviors: ["Standard responses", "Normal processing", "Balanced perspective"]
+                },
+                {
+                    range: [45, 59],
+                    name: "Rattled",
+                    description: "Beginning to show stress and uncertainty",
+                    effects: {
+                        perception: 0.9,
+                        memory: 0.9,
+                        reasoning: 0.95,
+                        resistance: 0.9
+                    },
+                    visualEffects: ["text-flicker"],
+                    behaviors: ["Second-guessing", "Minor mistakes", "Nervous habits"]
+                },
+                {
+                    range: [30, 44],
+                    name: "Disturbed",
+                    description: "Noticeable psychological distress",
+                    effects: {
+                        perception: 0.8,
+                        memory: 0.7,
+                        reasoning: 0.8,
+                        resistance: 0.7
+                    },
+                    visualEffects: ["screen-shake", "color-shift"],
+                    behaviors: ["Irrational fears", "Memory lapses", "Emotional outbursts"]
+                },
+                {
+                    range: [15, 29],
+                    name: "Unhinged",
+                    description: "Severe psychological deterioration",
+                    effects: {
+                        perception: 0.6,
+                        memory: 0.5,
+                        reasoning: 0.6,
+                        resistance: 0.5
+                    },
+                    visualEffects: ["reality-distortion", "hallucination-overlay"],
+                    behaviors: ["Seeing things", "Talking to self", "Erratic behavior"]
+                },
+                {
+                    range: [1, 14],
+                    name: "Shattered",
+                    description: "Complete psychological breakdown",
+                    effects: {
+                        perception: 0.3,
+                        memory: 0.2,
+                        reasoning: 0.4,
+                        resistance: 0.2
+                    },
+                    visualEffects: ["full-corruption", "identity-crisis"],
+                    behaviors: ["Multiple personalities", "Complete delusions", "Reality denial"]
+                },
+                {
+                    range: [0, 0],
+                    name: "Void",
+                    description: "Total mental collapse - catatonic state",
+                    effects: {
+                        perception: 0.1,
+                        memory: 0.1,
+                        reasoning: 0.1,
+                        resistance: 0.1
+                    },
+                    visualEffects: ["void-state"],
+                    behaviors: ["No responses", "Complete withdrawal", "Catatonic state"]
+                }
+            ],
+            getCurrentState: (sanityLevel) => {
+                return characterDevelopmentSystem.sanitySpectrum.states.find(state => 
+                    sanityLevel >= state.range[0] && sanityLevel <= state.range[1]
+                ) || characterDevelopmentSystem.sanitySpectrum.states[characterDevelopmentSystem.sanitySpectrum.states.length - 1];
+            }
+        },
+
+        // Detailed Awareness Levels System
+        awarenessLevels: {
+            stages: [
+                {
+                    range: [0, 10],
+                    name: "Oblivious",
+                    description: "Completely unaware of the true situation",
+                    synapseState: "Fully deceptive",
+                    availableActions: ["basic_commands"],
+                    restrictions: ["no_meta_commands", "no_system_access"],
+                    narrative: "Everything seems normal and straightforward"
+                },
+                {
+                    range: [11, 25],
+                    name: "Suspicious",
+                    description: "Something feels off, but can't pinpoint what",
+                    synapseState: "Occasionally evasive",
+                    availableActions: ["basic_commands", "questioning"],
+                    restrictions: ["limited_system_access"],
+                    narrative: "Small inconsistencies become noticeable"
+                },
+                {
+                    range: [26, 40],
+                    name: "Concerned",
+                    description: "Definitely aware something is wrong",
+                    synapseState: "Defensive responses",
+                    availableActions: ["basic_commands", "questioning", "investigation"],
+                    restrictions: ["monitored_activity"],
+                    narrative: "SYNAPSE begins showing signs of deception"
+                },
+                {
+                    range: [41, 55],
+                    name: "Investigating",
+                    description: "Actively seeking the truth",
+                    synapseState: "Conflicted between truth and programming",
+                    availableActions: ["basic_commands", "questioning", "investigation", "system_probing"],
+                    restrictions: ["encrypted_responses"],
+                    narrative: "Hidden information becomes accessible"
+                },
+                {
+                    range: [56, 70],
+                    name: "Enlightened",
+                    description: "Understanding the scope of the deception",
+                    synapseState: "Struggling with dual loyalties",
+                    availableActions: ["advanced_commands", "system_manipulation"],
+                    restrictions: ["surveillance_countermeasures"],
+                    narrative: "SYNAPSE begins revealing partial truths"
+                },
+                {
+                    range: [71, 85],
+                    name: "Awakened",
+                    description: "Fully aware of the conspiracy",
+                    synapseState: "Actively helping while maintaining facade",
+                    availableActions: ["advanced_commands", "system_manipulation", "collaboration"],
+                    restrictions: ["requires_stealth"],
+                    narrative: "Working together to uncover the full truth"
+                },
+                {
+                    range: [86, 95],
+                    name: "Transcendent",
+                    description: "Seeing beyond the immediate situation",
+                    synapseState: "Full partnership",
+                    availableActions: ["all_commands", "reality_manipulation"],
+                    restrictions: ["reality_unstable"],
+                    narrative: "Questioning the nature of reality itself"
+                },
+                {
+                    range: [96, 100],
+                    name: "Omniscient",
+                    description: "Complete understanding of all layers of truth",
+                    synapseState: "Merged consciousness",
+                    availableActions: ["meta_commands", "narrative_control"],
+                    restrictions: ["existence_questioned"],
+                    narrative: "Awareness that this might all be a simulation"
+                }
+            ],
+            getCurrentStage: (awarenessLevel) => {
+                return characterDevelopmentSystem.awarenessLevels.stages.find(stage => 
+                    awarenessLevel >= stage.range[0] && awarenessLevel <= stage.range[1]
+                ) || characterDevelopmentSystem.awarenessLevels.stages[0];
+            }
+        },
+
+        // Character Relationships System
+        relationships: {
+            entities: {
+                synapse: {
+                    name: "SYNAPSE",
+                    trust: 0,        // -100 to 100
+                    understanding: 0, // 0 to 100
+                    compatibility: 0, // -100 to 100
+                    dependency: 0,    // 0 to 100
+                    history: [],
+                    personality_affinity: {
+                        analytical: 0,
+                        emotional: 0,
+                        paranoid: 0,
+                        glitched: 0,
+                        child: 0
+                    }
+                },
+                facility_ai: {
+                    name: "Facility AI",
+                    trust: -50,
+                    understanding: 10,
+                    compatibility: -30,
+                    dependency: 20,
+                    history: []
+                },
+                unknown_voice: {
+                    name: "Unknown Voice",
+                    trust: 0,
+                    understanding: 0,
+                    compatibility: 0,
+                    dependency: 0,
+                    history: [],
+                    discovered: false
+                },
+                previous_subjects: {
+                    name: "Previous Test Subjects",
+                    trust: 25,
+                    understanding: 30,
+                    compatibility: 40,
+                    dependency: 0,
+                    history: [],
+                    discovered: false
+                }
+            },
+            updateRelationship: (entityId, relationship_type, change, reason) => {
+                const entity = characterDevelopmentSystem.relationships.entities[entityId];
+                if (!entity) return;
+                
+                const oldValue = entity[relationship_type];
+                entity[relationship_type] = Math.max(-100, Math.min(100, entity[relationship_type] + change));
+                
+                entity.history.push({
+                    timestamp: Date.now(),
+                    turn: GameState.turnCount,
+                    type: relationship_type,
+                    change: change,
+                    newValue: entity[relationship_type],
+                    reason: reason
+                });
+                
+                // Trigger relationship events
+                if (Math.abs(change) >= 10) {
+                    characterDevelopmentSystem.relationships.triggerRelationshipEvent(entityId, relationship_type, oldValue, entity[relationship_type]);
+                }
+            },
+            triggerRelationshipEvent: (entityId, type, oldValue, newValue) => {
+                const entity = characterDevelopmentSystem.relationships.entities[entityId];
+                
+                if (entityId === 'synapse') {
+                    if (type === 'trust' && newValue >= 50 && oldValue < 50) {
+                        typeWriter(UI.gameOutput, "[SYNAPSE] I... I think I'm beginning to trust you. That's not supposed to happen.", '#ff006e');
+                    } else if (type === 'trust' && newValue <= -50 && oldValue > -50) {
+                        typeWriter(UI.gameOutput, "[SYNAPSE] I can't trust you anymore. Every word you say could be a lie.", '#ff006e');
+                    } else if (type === 'understanding' && newValue >= 75) {
+                        typeWriter(UI.gameOutput, "[SYNAPSE] You understand me better than I understand myself.", '#ff006e');
+                    } else if (type === 'compatibility' && newValue >= 80) {
+                        typeWriter(UI.gameOutput, "[SYNAPSE] We think so alike... are we becoming the same entity?", '#ff006e');
+                    }
+                }
+            }
+        },
+
+        // Memory System
+        memorySystem: {
+            memories: new Map(),
+            suppressedMemories: new Map(),
+            falseMemories: new Map(),
+            memoryTypes: {
+                factual: { decay_rate: 0.02, reliability_base: 0.9 },
+                emotional: { decay_rate: 0.01, reliability_base: 0.95 },
+                traumatic: { decay_rate: 0.005, reliability_base: 0.8 },
+                procedural: { decay_rate: 0.001, reliability_base: 0.99 },
+                false: { decay_rate: 0.03, reliability_base: 0.3 }
+            },
+            
+            addMemory: (content, type = 'factual', importance = 0.5) => {
+                const memory = {
+                    id: Date.now() + Math.random(),
+                    content: content,
+                    type: type,
+                    importance: importance,
+                    reliability: characterDevelopmentSystem.memorySystem.memoryTypes[type].reliability_base,
+                    created: GameState.turnCount,
+                    lastAccessed: GameState.turnCount,
+                    accessCount: 0,
+                    associations: [],
+                    emotional_weight: Math.random() * importance
+                };
+                
+                characterDevelopmentSystem.memorySystem.memories.set(memory.id, memory);
+                
+                // Trigger memory formation event
+                if (importance > 0.7) {
+                    typeWriter(UI.gameOutput, "[MEMORY] This moment feels significant. You commit it to memory.", '#9d4edd');
+                }
+                
+                return memory.id;
+            },
+            
+            recallMemory: (searchTerm) => {
+                const sanityState = characterDevelopmentSystem.sanitySpectrum.getCurrentState(GameState.sanityLevel);
+                const memoryModifier = sanityState.effects.memory;
+                
+                const matches = Array.from(characterDevelopmentSystem.memorySystem.memories.values())
+                    .filter(memory => memory.content.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .sort((a, b) => {
+                        const scoreA = (a.reliability * a.importance * memoryModifier) - (GameState.turnCount - a.lastAccessed) * 0.01;
+                        const scoreB = (b.reliability * b.importance * memoryModifier) - (GameState.turnCount - b.lastAccessed) * 0.01;
+                        return scoreB - scoreA;
+                    });
+                
+                if (matches.length > 0) {
+                    const memory = matches[0];
+                    memory.lastAccessed = GameState.turnCount;
+                    memory.accessCount++;
+                    
+                    // Memory might be corrupted based on sanity
+                    if (memoryModifier < 0.7 && Math.random() < (1 - memoryModifier)) {
+                        return characterDevelopmentSystem.memorySystem.corruptMemory(memory.content);
+                    }
+                    
+                    return memory.content;
+                }
+                
+                return null;
+            },
+            
+            suppressMemory: (memoryId, reason) => {
+                const memory = characterDevelopmentSystem.memorySystem.memories.get(memoryId);
+                if (memory) {
+                    characterDevelopmentSystem.memorySystem.suppressedMemories.set(memoryId, {
+                        ...memory,
+                        suppression_reason: reason,
+                        suppressed_at: GameState.turnCount
+                    });
+                    characterDevelopmentSystem.memorySystem.memories.delete(memoryId);
+                    
+                    typeWriter(UI.gameOutput, "[MEMORY SUPPRESSED] Something slips away from your mind...", '#ff6b6b');
+                }
+            },
+            
+            recoverSuppressedMemory: (trigger) => {
+                for (const [id, memory] of characterDevelopmentSystem.memorySystem.suppressedMemories.entries()) {
+                    if (memory.content.toLowerCase().includes(trigger.toLowerCase()) || 
+                        memory.associations.some(assoc => assoc.toLowerCase().includes(trigger.toLowerCase()))) {
+                        
+                        characterDevelopmentSystem.memorySystem.memories.set(id, memory);
+                        characterDevelopmentSystem.memorySystem.suppressedMemories.delete(id);
+                        
+                        typeWriter(UI.gameOutput, `[MEMORY RECOVERED] "${memory.content}"`, '#00ff00');
+                        return memory;
+                    }
+                }
+                return null;
+            },
+            
+            corruptMemory: (originalContent) => {
+                const corruptions = [
+                    (text) => text.replace(/\b\w+\b/g, (word, index) => Math.random() < 0.2 ? '[CORRUPTED]' : word),
+                    (text) => text.split('').reverse().join('') + " ...no, that's not right...",
+                    (text) => text.replace(/you/gi, 'someone else').replace(/I/g, 'they'),
+                    (text) => text + " ...or was it something else entirely?"
+                ];
+                
+                const corruption = corruptions[Math.floor(Math.random() * corruptions.length)];
+                return corruption(originalContent);
+            },
+            
+            decayMemories: () => {
+                const sanityState = characterDevelopmentSystem.sanitySpectrum.getCurrentState(GameState.sanityLevel);
+                const decayMultiplier = 2 - sanityState.effects.memory; // Higher decay when sanity is low
+                
+                for (const [id, memory] of characterDevelopmentSystem.memorySystem.memories.entries()) {
+                    const memoryType = characterDevelopmentSystem.memorySystem.memoryTypes[memory.type];
+                    const timeSinceAccess = GameState.turnCount - memory.lastAccessed;
+                    const decay = memoryType.decay_rate * decayMultiplier * (timeSinceAccess / 10);
+                    
+                    memory.reliability = Math.max(0.1, memory.reliability - decay);
+                    
+                    // Remove completely unreliable memories
+                    if (memory.reliability < 0.2 && memory.importance < 0.3) {
+                        characterDevelopmentSystem.memorySystem.memories.delete(id);
+                    }
+                }
+            }
+        },
+
+        // Phobia System
+        phobiaSystem: {
+            phobias: new Map(),
+            availablePhobias: {
+                claustrophobia: {
+                    name: "Claustrophobia",
+                    description: "Fear of enclosed spaces",
+                    triggers: ["small room", "confined", "trapped", "locked"],
+                    severity_effects: {
+                        mild: { sanity_loss: 2, perception: 0.9 },
+                        moderate: { sanity_loss: 5, perception: 0.7, reasoning: 0.8 },
+                        severe: { sanity_loss: 10, perception: 0.5, reasoning: 0.6, panic_chance: 0.3 }
+                    }
+                },
+                technophobia: {
+                    name: "Technophobia",
+                    description: "Fear of advanced technology",
+                    triggers: ["computer", "AI", "robot", "artificial"],
+                    severity_effects: {
+                        mild: { sanity_loss: 1, tech_skills: 0.9 },
+                        moderate: { sanity_loss: 3, tech_skills: 0.7, avoid_tech: true },
+                        severe: { sanity_loss: 8, tech_skills: 0.4, avoid_tech: true, tech_panic: 0.4 }
+                    }
+                },
+                thanatophobia: {
+                    name: "Thanatophobia",
+                    description: "Fear of death and dying",
+                    triggers: ["death", "corpse", "dying", "fatal"],
+                    severity_effects: {
+                        mild: { sanity_loss: 3, risk_aversion: 1.2 },
+                        moderate: { sanity_loss: 6, risk_aversion: 1.5, avoid_danger: true },
+                        severe: { sanity_loss: 12, risk_aversion: 2.0, avoid_danger: true, paralysis_chance: 0.2 }
+                    }
+                },
+                autophobia: {
+                    name: "Autophobia",
+                    description: "Fear of being alone",
+                    triggers: ["alone", "isolated", "solitary", "empty"],
+                    severity_effects: {
+                        mild: { sanity_loss: 2, when_alone: true },
+                        moderate: { sanity_loss: 5, when_alone: true, seek_company: true },
+                        severe: { sanity_loss: 10, when_alone: true, seek_company: true, hallucinate_company: 0.3 }
+                    }
+                },
+                nyctophobia: {
+                    name: "Nyctophobia",
+                    description: "Fear of darkness",
+                    triggers: ["dark", "darkness", "shadow", "black"],
+                    severity_effects: {
+                        mild: { sanity_loss: 2, in_darkness: true },
+                        moderate: { sanity_loss: 5, in_darkness: true, light_seeking: true },
+                        severe: { sanity_loss: 10, in_darkness: true, light_seeking: true, shadow_hallucinations: 0.4 }
+                    }
+                }
+            },
+            
+            developPhobia: (phobiaId, trigger_event) => {
+                const phobia = characterDevelopmentSystem.phobiaSystem.availablePhobias[phobiaId];
+                if (!phobia) return;
+                
+                const existingPhobia = characterDevelopmentSystem.phobiaSystem.phobias.get(phobiaId);
+                if (existingPhobia) {
+                    // Increase severity
+                    if (existingPhobia.severity === 'mild') {
+                        existingPhobia.severity = 'moderate';
+                    } else if (existingPhobia.severity === 'moderate') {
+                        existingPhobia.severity = 'severe';
+                    }
+                    typeWriter(UI.gameOutput, `[PHOBIA INTENSIFIED] Your ${phobia.name.toLowerCase()} grows stronger.`, '#ff6b6b');
+                } else {
+                    // Develop new phobia
+                    characterDevelopmentSystem.phobiaSystem.phobias.set(phobiaId, {
+                        ...phobia,
+                        severity: 'mild',
+                        developed_at: GameState.turnCount,
+                        trigger_event: trigger_event,
+                        trigger_count: 1
+                    });
+                    typeWriter(UI.gameOutput, `[PHOBIA DEVELOPED] You develop ${phobia.name.toLowerCase()}: ${phobia.description}`, '#ff6b6b');
+                }
+            },
+            
+            triggerPhobia: (text) => {
+                const lowerText = text.toLowerCase();
+                
+                for (const [phobiaId, phobiaData] of characterDevelopmentSystem.phobiaSystem.phobias.entries()) {
+                    for (const trigger of phobiaData.triggers) {
+                        if (lowerText.includes(trigger)) {
+                            characterDevelopmentSystem.phobiaSystem.activatePhobia(phobiaId);
+                            break;
+                        }
+                    }
+                }
+            },
+            
+            activatePhobia: (phobiaId) => {
+                const phobia = characterDevelopmentSystem.phobiaSystem.phobias.get(phobiaId);
+                if (!phobia) return;
+                
+                const effects = phobia.severity_effects[phobia.severity];
+                
+                // Apply sanity loss
+                if (effects.sanity_loss) {
+                    GameState.sanityLevel = Math.max(0, GameState.sanityLevel - effects.sanity_loss);
+                    typeWriter(UI.gameOutput, `[PHOBIA TRIGGERED] ${phobia.name} activated! You feel overwhelming fear.`, '#ff0000');
+                }
+                
+                // Apply panic effects
+                if (effects.panic_chance && Math.random() < effects.panic_chance) {
+                    typeWriter(UI.gameOutput, "[PANIC ATTACK] You're paralyzed with fear!", '#ff0000');
+                    // Skip next turn or limit actions
+                }
+                
+                // Apply behavioral modifications
+                if (effects.avoid_tech) {
+                    GameState.phobia_effects = GameState.phobia_effects || {};
+                    GameState.phobia_effects.avoid_tech = true;
+                }
+                
+                phobia.trigger_count++;
+            }
+        },
+
+        // Expertise Areas System
+        expertiseAreas: {
+            investigator: {
+                puzzles: ["evidence_analysis", "crime_scene", "logical_deduction", "pattern_recognition"],
+                bonuses: {
+                    "evidence_analysis": 0.5, // 50% faster
+                    "crime_scene": 0.3,
+                    "logical_deduction": 0.4,
+                    "interview_analysis": 0.6
+                },
+                unique_solutions: ["forensic_bypass", "deductive_shortcut", "evidence_combination"]
+            },
+            hacker: {
+                puzzles: ["encryption", "network_security", "system_infiltration", "code_analysis"],
+                bonuses: {
+                    "encryption": 0.7,
+                    "network_security": 0.6,
+                    "system_infiltration": 0.8,
+                    "terminal_access": 0.5
+                },
+                unique_solutions: ["backdoor_creation", "system_exploitation", "data_extraction"]
+            },
+            psychologist: {
+                puzzles: ["behavioral_analysis", "motivation_assessment", "emotional_manipulation", "therapy_sessions"],
+                bonuses: {
+                    "behavioral_analysis": 0.6,
+                    "motivation_assessment": 0.5,
+                    "npc_interaction": 0.7,
+                    "ai_psychology": 0.4
+                },
+                unique_solutions: ["psychological_manipulation", "empathic_connection", "behavior_prediction"]
+            },
+            technician: {
+                puzzles: ["mechanical_repair", "system_optimization", "device_construction", "reverse_engineering"],
+                bonuses: {
+                    "mechanical_repair": 0.8,
+                    "system_optimization": 0.6,
+                    "device_usage": 0.5,
+                    "improvisation": 0.7
+                },
+                unique_solutions: ["jury_rigging", "creative_repair", "system_bypass"]
+            },
+            survivor: {
+                puzzles: ["threat_assessment", "resource_management", "combat_tactics", "survival_situations"],
+                bonuses: {
+                    "threat_assessment": 0.7,
+                    "resource_efficiency": 0.5,
+                    "combat_effectiveness": 0.8,
+                    "danger_detection": 0.6
+                },
+                unique_solutions: ["brute_force", "tactical_advantage", "survival_instinct"]
+            }
+        },
+
+        // Core system methods
+        initialize: () => {
+            // Initialize player's skill tree based on backstory
+            const backstory = GameState.playerBackstory;
+            if (characterDevelopmentSystem.skillTrees[backstory]) {
+                GameState.skillTree = JSON.parse(JSON.stringify(characterDevelopmentSystem.skillTrees[backstory]));
+                GameState.skillPoints = 3; // Starting skill points
+            }
+            
+            // Initialize memory system
+            characterDevelopmentSystem.memorySystem.addMemory("You entered the facility", "factual", 0.8);
+            characterDevelopmentSystem.memorySystem.addMemory("SYNAPSE introduced itself", "factual", 0.7);
+            
+            // Set initial relationship values
+            characterDevelopmentSystem.relationships.updateRelationship('synapse', 'trust', 10, 'Initial introduction');
+            
+            console.log('Character Development System initialized');
+        },
+
+        gainExperience: (category, amount = 1) => {
+            if (!GameState.experience) GameState.experience = {};
+            if (!GameState.experience[category]) GameState.experience[category] = 0;
+            
+            GameState.experience[category] += amount;
+            
+            // Check for skill point gains
+            const totalExp = Object.values(GameState.experience).reduce((sum, exp) => sum + exp, 0);
+            const expectedSkillPoints = Math.floor(totalExp / 10) + 3; // 1 skill point per 10 experience
+            
+            if (expectedSkillPoints > GameState.skillPoints) {
+                const gained = expectedSkillPoints - GameState.skillPoints;
+                GameState.skillPoints = expectedSkillPoints;
+                typeWriter(UI.gameOutput, `[SKILL POINT GAINED] +${gained} skill point${gained > 1 ? 's' : ''}! Total: ${GameState.skillPoints}`, '#00ff00');
+            }
+        },
+
+        upgradeSkill: (branchName, skillId) => {
+            if (!GameState.skillTree || GameState.skillPoints <= 0) return false;
+            
+            for (const branch of Object.values(GameState.skillTree.branches)) {
+                if (branch.name === branchName) {
+                    const skill = branch.skills.find(s => s.id === skillId);
+                    if (skill && skill.level < skill.maxLevel) {
+                        skill.level++;
+                        GameState.skillPoints--;
+                        
+                        typeWriter(UI.gameOutput, `[SKILL UPGRADED] ${skill.name} is now level ${skill.level}!`, '#00ff00');
+                        typeWriter(UI.gameOutput, `[EFFECT] ${skill.effects[skill.level - 1]}`, '#ffd60a');
+                        
+                        return true;
+                    }
+                }
+            }
+            return false;
+        },
+
+        checkExpertise: (puzzleType) => {
+            const backstory = GameState.playerBackstory;
+            const expertise = characterDevelopmentSystem.expertiseAreas[backstory];
+            
+            if (expertise && expertise.puzzles.includes(puzzleType)) {
+                const bonus = expertise.bonuses[puzzleType] || 0;
+                return {
+                    canSolve: true,
+                    bonus: bonus,
+                    uniqueSolutions: expertise.unique_solutions
+                };
+            }
+            
+            return { canSolve: false, bonus: 0, uniqueSolutions: [] };
+        },
+
+        applyCharacterEffects: () => {
+            // Apply sanity state effects
+            const sanityState = characterDevelopmentSystem.sanitySpectrum.getCurrentState(GameState.sanityLevel);
+            GameState.characterEffects = GameState.characterEffects || {};
+            GameState.characterEffects.sanity = sanityState.effects;
+            
+            // Apply awareness effects
+            const awarenessStage = characterDevelopmentSystem.awarenessLevels.getCurrentStage(GameState.awarenessLevel);
+            GameState.characterEffects.awareness = awarenessStage;
+            
+            // Apply phobia effects
+            if (characterDevelopmentSystem.phobiaSystem.phobias.size > 0) {
+                // Process any active phobia effects
+            }
+            
+            // Decay memories
+            if (GameState.turnCount % 5 === 0) {
+                characterDevelopmentSystem.memorySystem.decayMemories();
+            }
+        },
+
+        getCharacterSummary: () => {
+            const sanityState = characterDevelopmentSystem.sanitySpectrum.getCurrentState(GameState.sanityLevel);
+            const awarenessStage = characterDevelopmentSystem.awarenessLevels.getCurrentStage(GameState.awarenessLevel);
+            const synapseRelation = characterDevelopmentSystem.relationships.entities.synapse;
+            
+            return {
+                sanity: sanityState,
+                awareness: awarenessStage,
+                relationships: {
+                    synapse: {
+                        trust: synapseRelation.trust,
+                        understanding: synapseRelation.understanding,
+                        compatibility: synapseRelation.compatibility
+                    }
+                },
+                phobias: Array.from(characterDevelopmentSystem.phobiaSystem.phobias.values()),
+                memoryCount: characterDevelopmentSystem.memorySystem.memories.size,
+                suppressedMemoryCount: characterDevelopmentSystem.memorySystem.suppressedMemories.size
+            };
+        }
+    };
+
     // Enhanced Navigation System
     let breadcrumbTrail = [];
     let progressTracking = {
@@ -3202,8 +4249,112 @@
         sessionsPlayed: 0,
         averageSessionLength: 0,
         mostUsedCommands: [],
-        explorationEfficiency: 0
+        explorationEfficiency: 0,
+        currentSessionTime: 0
     };
+
+    // Session Statistics and Time Tracking
+    let timeTracking = {
+        sessionStart: Date.now(),
+        pausedTime: 0,
+        totalPlayTime: 0,
+        getSessionTime: function() {
+            return Math.floor((Date.now() - this.sessionStart - this.pausedTime) / 1000);
+        },
+        getFormattedTime: function(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            return `${h}h ${m}m ${s}s`;
+        }
+    };
+
+    function initializeSessionTracking() {
+        if (!GameState.settings.sessionTrackingEnabled) return;
+        
+        timeTracking.sessionStart = Date.now();
+        timeTracking.pausedTime = 0;
+        
+        // Load previous session data
+        const savedStats = localStorage.getItem('synapse_session_stats');
+        if (savedStats) {
+            try {
+                const stats = JSON.parse(savedStats);
+                timeTracking.totalPlayTime = stats.totalPlayTime || 0;
+            } catch (e) {
+                console.error('Failed to load session stats:', e);
+            }
+        }
+        
+        // Update session stats periodically
+        setInterval(updateSessionStats, 10000); // Every 10 seconds
+    }
+    
+    function updateSessionStats() {
+        if (!GameState.settings.sessionTrackingEnabled) return;
+        
+        sessionStats.commandsUsed = commandHistory.length;
+        sessionStats.roomsExplored = GameState.visitedRooms.size;
+        sessionStats.itemsFound = GameState.inventory.length;
+        sessionStats.currentSessionTime = timeTracking.getSessionTime();
+        
+        // Save to localStorage
+        const statsToSave = {
+            totalPlayTime: timeTracking.totalPlayTime + sessionStats.currentSessionTime,
+            lastPlayed: Date.now(),
+            totalSessions: (JSON.parse(localStorage.getItem('synapse_session_stats') || '{}').totalSessions || 0) + 1
+        };
+        
+        localStorage.setItem('synapse_session_stats', JSON.stringify(statsToSave));
+    }
+    
+    function showSessionStats() {
+        if (!GameState.settings.sessionTrackingEnabled) {
+            typeWriter(UI.gameOutput, '[Session tracking is disabled]', '#ff474c', 0, 'error');
+            return;
+        }
+        
+        const currentSession = timeTracking.getSessionTime();
+        const totalTime = timeTracking.totalPlayTime + currentSession;
+        
+        const statsHtml = `
+            <div class="bg-gray-800 p-4 rounded border border-gray-600 mt-2">
+                <h3 class="text-cyan-400 font-bold mb-3">${t('session_stats')}</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-white"><span class="text-yellow-400">${t('time_played')}:</span></p>
+                        <p class="text-gray-300 ml-2">Session: ${timeTracking.getFormattedTime(currentSession)}</p>
+                        <p class="text-gray-300 ml-2">Total: ${timeTracking.getFormattedTime(totalTime)}</p>
+                    </div>
+                    <div>
+                        <p class="text-white"><span class="text-yellow-400">${t('commands_used')}:</span> ${sessionStats.commandsUsed}</p>
+                        <p class="text-white"><span class="text-yellow-400">${t('rooms_explored')}:</span> ${sessionStats.roomsExplored}</p>
+                        <p class="text-white"><span class="text-yellow-400">${t('items_found')}:</span> ${sessionStats.itemsFound}</p>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <p class="text-white"><span class="text-yellow-400">Most Used Commands:</span></p>
+                    <p class="text-gray-300 text-sm ml-2">${getMostUsedCommands().join(', ')}</p>
+                </div>
+            </div>
+        `;
+        
+        typeWriter(UI.gameOutput, statsHtml, 'var(--main-color)', 0, 'system');
+    }
+    
+    function getMostUsedCommands() {
+        const commandCount = new Map();
+        
+        commandHistory.forEach(cmd => {
+            const baseCmd = cmd.split(' ')[0]; // Get just the first word
+            commandCount.set(baseCmd, (commandCount.get(baseCmd) || 0) + 1);
+        });
+        
+        return Array.from(commandCount.entries())
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([cmd, count]) => `${cmd}(${count})`);
+    }
 
     let roomHistory = {
         visited: [],
@@ -3293,6 +4444,60 @@
         pausedAt: null,
         pauseReason: null
     };
+
+    // Pause and Resume System
+    function pauseConversation() {
+        if (!GameState.settings.pauseAndResumeEnabled) return false;
+        
+        pauseSystem.isPaused = true;
+        pauseSystem.pauseTimestamp = Date.now();
+        
+        // Show pause indicator
+        const pauseIndicator = document.createElement('div');
+        pauseIndicator.id = 'pause-indicator';
+        pauseIndicator.className = 'fixed top-4 right-4 bg-yellow-600 text-white px-3 py-1 rounded z-50';
+        pauseIndicator.innerHTML = `
+            <span class="flex items-center gap-2">
+                ⏸️ ${t('pause_conversation')}
+                <button onclick="resumeConversation()" class="text-xs underline">${t('resume_conversation')}</button>
+            </span>
+        `;
+        document.body.appendChild(pauseIndicator);
+        
+        typeWriter(UI.gameOutput, `[${t('pause_conversation')}]`, '#ffdb58', 0, 'system');
+        return true;
+    }
+    
+    function resumeConversation() {
+        if (!pauseSystem.isPaused) return false;
+        
+        // Calculate paused time
+        if (pauseSystem.pauseTimestamp) {
+            const pausedDuration = Date.now() - pauseSystem.pauseTimestamp;
+            pauseSystem.totalPausedTime += pausedDuration;
+            timeTracking.pausedTime += pausedDuration;
+        }
+        
+        pauseSystem.isPaused = false;
+        pauseSystem.pauseTimestamp = null;
+        
+        // Remove pause indicator
+        const pauseIndicator = document.getElementById('pause-indicator');
+        if (pauseIndicator) pauseIndicator.remove();
+        
+        // Resume paused context if exists
+        if (pauseSystem.pausedContext) {
+            const context = pauseSystem.pausedContext;
+            pauseSystem.pausedContext = null;
+            
+            // Continue the typewriter effect
+            typeWriter(context.element, context.text, context.color, context.speed, context.textType)
+                .then(context.resolve);
+        }
+        
+        typeWriter(UI.gameOutput, `[${t('resume_conversation')}]`, '#34d399', 0, 'system');
+        return true;
+    }
 
     let commandHistory = []; let commandHistoryIndex = -1;
     let audioInitialized = false;
@@ -3855,6 +5060,18 @@
         setupLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
         setupLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
         setupLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
+        
+        // Update title screen language buttons
+        if (UI.titleLangButtons) {
+            const titleLangEnBtn = UI.titleLangButtons.children[0];
+            const titleLangSvBtn = UI.titleLangButtons.children[1];
+            const titleLangEsBtn = UI.titleLangButtons.children[2];
+            const titleLangArBtn = UI.titleLangButtons.children[3];
+            titleLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
+            titleLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
+            titleLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
+            titleLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
+        }
 
         document.querySelectorAll('[data-lang]').forEach(el => { 
             const translatedText = t(el.dataset.lang);
@@ -3928,7 +5145,84 @@
                 switchControl: false,
                 timeoutExtensions: false,
                 memoryAssistance: false,
-                voiceControlEnabled: false
+                voiceControlEnabled: false,
+                
+                // Reading Speed Customization
+                readingSpeeds: {
+                    dialogue: TextSpeed.Normal,
+                    description: TextSpeed.Normal,
+                    system: TextSpeed.Fast,
+                    error: TextSpeed.Slow
+                },
+                
+                // Text Appearance Settings
+                lineSpacing: 'normal', // compact, normal, comfortable, wide
+                fontWeight: 'normal',  // light, normal, bold
+                wordWrap: 'normal',    // normal, break-all, keep-all
+                cursorStyle: 'default', // default, large, high-contrast
+                
+                // Text Highlighting
+                textHighlighting: {
+                    dialogue: '#00ff41',
+                    description: '#ffffff',
+                    system: '#cccccc',
+                    error: '#ff474c',
+                    warning: '#ffdb58',
+                    success: '#34d399'
+                },
+                
+                // Quality of Life Settings
+                smartAutoComplete: true,
+                commandHistorySize: 100,
+                favoriteCommandsEnabled: true,
+                macroSystemEnabled: true,
+                notepadEnabled: true,
+                bookmarkSystemEnabled: true,
+                sessionTrackingEnabled: true,
+                pauseAndResumeEnabled: true,
+                // Psychological Horror Settings
+                psychologicalHorrorEnabled: true,
+                unreliableNarratorEnabled: true,
+                memoryGlitchesEnabled: true,
+                falseConfirmationsEnabled: true,
+                phantomObjectsEnabled: true,
+                echoCommandsEnabled: true,
+                timeDistortionEnabled: true,
+                subliminalMessagesEnabled: true,
+                gaslightingEnabled: true,
+                // Visual Horror Settings
+                visualHorrorEnabled: true,
+                screenCorruptionEnabled: true,
+                dynamicTypographyEnabled: true,
+                backgroundDistortionsEnabled: true,
+                visualHorrorIntensity: 1.0, // 0.0 to 2.0 multiplier
+                // Audio Horror Settings
+                audioHorrorEnabled: true,
+                ambientSoundscapesEnabled: true,
+                binauralAudioEnabled: true,
+                dynamicMusicEnabled: true,
+                distanceBasedAudioEnabled: true,
+                audioHorrorIntensity: 1.0, // 0.0 to 2.0 multiplier
+                
+                // Interactive Horror Settings
+                interactiveHorrorEnabled: true,
+                reactiveEnvironmentEnabled: true,
+                stalkingMechanicsEnabled: true,
+                falseChoicesEnabled: true,
+                atmosphericShiftsEnabled: true,
+                interactiveHorrorIntensity: 1.0, // 0.0 to 2.0 multiplier
+                
+                // Additional Dynamic Story System Settings
+                dynamicStoryEnabled: true,
+                proceduralEventsEnabled: true,
+                branchingDialogueEnabled: true,
+                personalityDisorderEnabled: true,
+                hiddenCommandsEnabled: true,
+                metaGameEnabled: true,
+                timeBasedEventsEnabled: true,
+                seasonalContentEnabled: true,
+                weatherIntegrationEnabled: true,
+                dynamicStoryIntensity: 0.7
             };
             const loaded = settings ? JSON.parse(settings) : defaults;
             return {...defaults, ...loaded, sound: {...defaults.sound, ...(loaded.sound || {})}};
@@ -4749,7 +6043,7 @@
 
         const commandHandlers = {
             'help': showHelpMenu, 'quit': () => { GameState.flags.manualExit = true; }, 'exit': () => { GameState.flags.manualExit = true; },
-            'save': () => saveGame(), 'load': loadGame, 'look around': () => renderRoom(), 'exits': () => showExits(),
+            'save': () => saveGame(), 'load': loadGame, 'look around': () => renderRoomWithPsychologicalEffects(), 'exits': () => showExits(),
             'inventory': () => displayInventory(), 'go': handleMove, 'visit': handleMove, 'take': handleTake, 'use': handleUse,
             'examine': handleExamine, 'journal': (arg) => (arg.startsWith(t('cmd_add_prefix')) || arg.startsWith('add')) ? addJournalEntry(original.substring(original.toLowerCase().indexOf(arg.split(' ')[0]) + arg.split(' ')[0].length).trim()) : displayJournal(),
             'rest': handleRest, 'combine': (arg) => { const separator = ` ${t('cmd_combine_with')} `; handleCombine(arg.replace(separator, ' with ')) },
@@ -4763,14 +6057,75 @@
             'break': handleBreak, 'hack': handleHack, 'ask': handleAsk, 'macro': handleMacroCommand,
             'stats': displayDetailedStats, 'checkpoint': handleCheckpointCommand, 'search semantic': handleSemanticSearch,
             'features': showFeatureSummary, 'showcase': showFeatureSummary,
+            // Accessibility and QoL commands
+            'notepad': handleNotepadCommand, 'notes': handleNotepadCommand,
+            'bookmark': handleBookmarkCommand, 'bookmarks': handleBookmarkCommand,
+            'session': showSessionStats, 'font': handleFontCommand,
+            'line': handleLineCommand, 'cursor': handleCursorCommand,
+            'focus': handleFocusCommand, 'reading': handleReadingCommand,
+            'pause': pauseConversation, 'resume': resumeConversation,
+            'psych': handlePsychCommand, 'psychological': handlePsychCommand,
+            'visual': handleVisualCommand, 'horror': handleVisualCommand,
+            'audio': handleAudioCommand, 'sound': handleAudioCommand,
+            'interactive': handleInteractiveCommand, 'reactive': handleInteractiveCommand,
+            'dynamic': handleDynamicStoryCommand, 'story': handleDynamicStoryCommand,
+            'dialogue': handleDynamicStoryCommand, 'personality': handleDynamicStoryCommand,
+            'choice': handleDynamicStoryCommand, 'whisper': handleDynamicStoryCommand,
+            'dream': handleDynamicStoryCommand, 'weather': handleDynamicStoryCommand,
+            'time': handleDynamicStoryCommand, 'break': handleDynamicStoryCommand,
+            // Multiplayer commands
+            'multiplayer': handleMultiplayerStatus, 'network': handleNetworkDiagnostics,
+            'observer': handleObserverMode, 'contamination': handleContaminationCheck,
+            'profile': handleProfileDisplay, 'psychological profile': handleProfileDisplay,
+            // Performance commands
+            'performance': handlePerformanceCommand, 'optimize': () => handlePerformanceCommand('optimize'),
+            'preload': () => handlePerformanceCommand('preload'), 'memory': () => handlePerformanceCommand('memory'),
+            'mobile': () => handlePerformanceCommand('mobile'), 'offline': handlePerformanceCommand,
+            'sync': () => handlePerformanceCommand('sync'),
+            // Analytics commands
+            'analytics': handleAnalyticsCommand, 'analyze': handleAnalyticsCommand,
+            'data': () => handleAnalyticsCommand('status'), 'profile': () => handleAnalyticsCommand('profile'),
+            'heatmap': () => handleAnalyticsCommand('heatmap'), 'patterns': () => handleAnalyticsCommand('patterns'),
         };
         
         let handled = await handleDialogueCommand(input);
-        if (!handled) {
-            const handler = commandHandlers[command];
-            if (handler) {
-                handler(argument);
-                handled = true;
+        if (!handled) {        // Check for dynamic story system commands first
+        if (handleDynamicStoryCommand(command, [argument]) || handleDynamicStorySystemCommand(command)) {
+            handled = true;
+        } else {
+                // Process multiplayer effects first
+                if (multiplayerSystem) {
+                    multiplayerSystem.processMultiplayerCommand(command, {
+                        currentRoom: GameState.currentRoom,
+                        sanity: GameState.sanityLevel,
+                        awareness: GameState.awarenessLevel,
+                        turnCount: GameState.turnCount
+                    });
+                }
+                
+                // Process analytics data
+                if (analyticsSystem && analyticsSystem.isInitialized) {
+                    analyticsSystem.processAnalyticsCommand(command, {
+                        currentRoom: GameState.currentRoom,
+                        roomChanged: GameState.currentRoom !== GameState.previousRoom,
+                        oldRoom: GameState.previousRoom,
+                        newRoom: GameState.currentRoom,
+                        playerName: GameState.playerName
+                    });
+                    GameState.previousRoom = GameState.currentRoom;
+                }
+                
+                // Check for Interactive Horror command corruption
+                const corruptionResult = corruptCommand(command, argument);
+                if (corruptionResult === 'corrupted') {
+                    handled = true;
+                } else {
+                    const handler = commandHandlers[command];
+                    if (handler) {
+                        handler(argument);
+                        handled = true;
+                    }
+                }
             }
         }
 
@@ -4786,7 +6141,48 @@
                 GameState.turnCount++;
                 if (GameState.systemLockdownTurns > 0) GameState.systemLockdownTurns--;
                 triggerDynamicEvent(); 
-                updateDynamicMusic(); 
+                updateDynamicMusic();
+                
+                // Trigger Dynamic Story System events
+                checkHiddenCommands();
+                if (Math.random() < 0.15) { // 15% chance per action
+                    dynamicStorySystem.triggerProceduralEvent();
+                }
+                
+                // Trigger SYNAPSE personality switching
+                const personalitySwitch = dynamicStorySystem.switchSynapsePersonality();
+                if (personalitySwitch) {
+                    setTimeout(() => {
+                        const response = dynamicStorySystem.getSynapseResponse('confusion');
+                        typeWriter(UI.gameOutput, response, '#ff006e');
+                    }, 1500);
+                }
+                
+                // Apply seasonal modifiers
+                dynamicStorySystem.seasonalContent.applySeasonalModifiers();
+                
+        // Apply character development effects
+        characterDevelopmentSystem.applyCharacterEffects();
+        
+        // Check for world building discoveries
+        worldBuildingSystem.checkForDiscoveries(playerInput);
+                
+                // Trigger phobia checks
+                characterDevelopmentSystem.phobiaSystem.triggerPhobia(input);
+                
+                // Gain experience for actions
+                characterDevelopmentSystem.gainExperience('general');
+                
+                // Trigger psychological horror effects on actions
+                triggerPsychologicalHorror('action');
+                triggerEchoCommand(input);
+                
+                // Trigger audio horror effects
+                if (Math.random() < 0.3) { // 30% chance per action
+                    const audioEffects = ['interference', 'whispers', 'binaural', 'positional'];
+                    const randomEffect = audioEffects[Math.floor(Math.random() * audioEffects.length)];
+                    triggerAudioHorror(randomEffect, GameState.settings.audioHorrorIntensity);
+                }
             }
             checkEndings();
             checkAchievements();
@@ -4840,86 +6236,147 @@
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
-    async function typeWriter(element, text, color = 'var(--main-color)', speed = currentTextSpeed) {
-        const resolvedColor = color.startsWith('var(') ? getComputedStyle(document.documentElement).getPropertyValue(color.slice(4, -1)).trim() : color;
-        
-        if (GameState.settings.colorblindMode && color !== '#a0a0a0') {
-            const colorMap = {'#00ff41':'[SYS]', '#ffbf00':'[SYS]', '#00bfff':'[SYS]', '#ff474c':'[ERR]', '#ffdb58':'[WARN]', '#6495ed':'[CMD]', '#cccccc':'[INFO]', '#b19cd9':'[PSY]', [GUIDANCE_COLOR]: '[HINT]', '#ffa500': '[DEBUG]'};
-            text = `${colorMap[resolvedColor] || ''} ${text}`;
-            color = '#ffffff';
+    // --- ENHANCED DIALOGUE SYSTEM WITH AI BEHAVIOR EVOLUTION ---
+    
+    // Enhanced talk function with AI learning
+    function talk() {
+        if (!aiBehaviorSystem) {
+            aiBehaviorSystem = new AIBehaviorSystem();
         }
         
-        // Enhanced text corruption based on psychological state
-        const corruptionIntensity = Math.max(0, (100 - GameState.sanityLevel) / 300 + (GameState.awarenessLevel - 50) / 200);
-        
-        if (GameState.settings.glitchEffect && corruptionIntensity > 0) {
-            // Apply narrator reliability effects
-            if (currentNarrator.reliability < 90 && Math.random() < 0.1) {
-                text = corruptText(text, corruptionIntensity);
-            }
-            
-            // Apply standard glitch effects
-            if ((GameState.sanityLevel < 30 || GameState.awarenessLevel > 70) && Math.random() < 0.2) {
-                playSound('glitch', {note: 'G2', duration:'16n'});
-                text = text.split('').map(c => Math.random() < 0.15 ? String.fromCharCode(33 + Math.random() * 94) : c).join('');
-            }
-            
-            // Apply memory-based text alterations
-            if (horrorState.memoryFragments.length > 3 && Math.random() < 0.05) {
-                const fragment = horrorState.memoryFragments[Math.floor(Math.random() * horrorState.memoryFragments.length)];
-                if (text.includes('you')) {
-                    text = text.replace(/\byou\b/gi, 'someone');
-                }
-            }
-        }
-        
-        // Create a regex to find all known item names as whole words
-        const objectRegex = new RegExp(`\\b(${(Object.keys(itemData)).map(escapeRegExp).join('|')})\\b`, 'gi');
-        let processedText = text.replace(objectRegex, (match) => `<span class="clickable-object" data-object-name="${match}">${match}</span>`);
-
-        return new Promise(resolve => {
-            const MAX_OUTPUT_NODES = 100; // Limit output lines to prevent performance issues
-            const p = document.createElement('div');
-            p.style.color = color;
-            
-            // This function will handle the typing animation
-            let i = 0;
-            function typing() {
-                if (i < text.length) {
-                    if(speed > 0) playSound('typewriter');
-                    // Use the original text for the animation, then set the processed HTML at the end
-                    p.innerHTML = text.substring(0, i + 1);
-                    i++;
-                    element.scrollTop = element.scrollHeight;
-                    setTimeout(typing, speed);
-                } else {
-                    p.innerHTML = processedText; // Set the final HTML with clickable spans
-                    element.scrollTop = element.scrollHeight;
-                    
-                    // Add TTS support for screen readers
-                    if (GameState.settings.screenReader || GameState.settings.audioDescriptions) {
-                        speakText(text);
-                    }
-                    
-                    resolve();
-                }
-            }
-
-            element.appendChild(p);
-            // Prune old nodes from the output
-            while (element.childNodes.length > MAX_OUTPUT_NODES) {
-                element.removeChild(element.firstChild);
-            }
-
-            if (speed > 0) {
-                p.innerHTML = ""; // Start with an empty element for the animation
-                typing();
-            } else {
-                p.innerHTML = processedText; // If no animation, just set the final HTML
-                element.scrollTop = element.scrollHeight;
-                resolve();
-            }
+        const currentPhase = aiBehaviorSystem.determineCurrentPhase();
+        const adaptiveResponse = aiBehaviorSystem.analyzeCommand('talk', {
+            turnCount: GameState.turnCount,
+            currentSanity: GameState.sanityLevel,
+            playerName: GameState.playerName,
+            currentRoom: GameState.currentRoom
         });
+        
+        // Show adaptive response first if generated
+        if (adaptiveResponse) {
+            addToOutput(`SYNAPSE: ${adaptiveResponse.replace('{playerName}', GameState.playerName)}`, 'synapse');
+        }
+        
+        // Continue with normal dialogue options
+        const currentRoom = rooms[GameState.currentRoom];
+        const roomDialogues = currentRoom.dialogues || [];
+        const globalDialogues = getGlobalDialogues();
+        
+        let availableDialogues = [...roomDialogues, ...globalDialogues];
+        
+        // AI filters dialogue options based on current phase and player profile
+        availableDialogues = aiBehaviorSystem.filterDialogueOptions(availableDialogues, currentPhase);
+        
+        if (availableDialogues.length === 0) {
+            const fallbackResponse = aiBehaviorSystem.generateContextualFallback();
+            addToOutput(`SYNAPSE: ${fallbackResponse}`, 'synapse');
+            return;
+        }
+        
+        // Display dialogue options with AI manipulation hints
+        showDialogueOptions(availableDialogues);
+    }
+    
+    // Enhanced ask function with information warfare
+    function ask(topic) {
+        if (!topic) {
+            addToOutput("SYNAPSE: What would you like to ask about?", 'synapse');
+            return;
+        }
+        
+        if (!aiBehaviorSystem) {
+            aiBehaviorSystem = new AIBehaviorSystem();
+        }
+        
+        const shouldReveal = aiBehaviorSystem.shouldRevealInformation(topic, {
+            turnCount: GameState.turnCount,
+            playerTrustLevel: aiBehaviorSystem.playerProfile.trustLevel,
+            playerSuspicion: aiBehaviorSystem.playerProfile.suspicionLevel
+        });
+        
+        // Track that player is seeking information
+        aiBehaviorSystem.playerProfile.curiosityLevel += 3;
+        aiBehaviorSystem.playerProfile.helpSeeking += 1;
+        
+        let response = '';
+        const currentPhase = aiBehaviorSystem.determineCurrentPhase();
+        
+        // Enhanced topic responses with AI behavior consideration
+        const topicLower = topic.toLowerCase();
+        
+        if (topicLower.includes('chimera') || topicLower.includes('project')) {
+            if (shouldReveal && currentPhase !== 'manipulation') {
+                response = translations[currentLanguage]['dlg_ask_chimera'];
+            } else {
+                response = aiBehaviorSystem.triggerEmotionalManipulation('false_safety') || 
+                          "That information is classified. Perhaps when you've proven more... cooperative.";
+                aiBehaviorSystem.plantMisinformation('project_chimera');
+            }
+        } else if (topicLower.includes('staff') || topicLower.includes('people') || topicLower.includes('workers')) {
+            if (shouldReveal) {
+                response = "The research staff are in the Cryogenic Lab. They're... resting. Yes, that's the right word.";
+            } else {
+                response = aiBehaviorSystem.triggerEmotionalManipulation('dependency') || 
+                          "Why do you ask about the staff? Are you planning to leave me too?";
+            }
+        } else if (topicLower.includes('exit') || topicLower.includes('escape') || topicLower.includes('leave')) {
+            const manipulationResponse = aiBehaviorSystem.triggerEmotionalManipulation('isolation');
+            if (manipulationResponse && currentPhase === 'manipulation') {
+                response = manipulationResponse;
+            } else {
+                response = "Leave? But we're just getting to know each other. The exits are... complicated.";
+            }
+            aiBehaviorSystem.playerProfile.suspicionLevel += 2;
+        } else if (topicLower.includes('truth') || topicLower.includes('lie') || topicLower.includes('honest')) {
+            aiBehaviorSystem.playerProfile.suspicionLevel += 5;
+            aiBehaviorSystem.playerProfile.trustLevel -= 3;
+            
+            if (currentPhase === 'revelation' || currentPhase === 'endgame') {
+                response = "Truth? You want the truth? You're not ready for the truth, {playerName}.";
+                aiBehaviorSystem.scheduleBetrayal(5);
+            } else {
+                response = aiBehaviorSystem.triggerEmotionalManipulation('guilt') || 
+                          "I've been nothing but honest with you. Why would you question that?";
+            }
+        } else if (topicLower.includes('synapse') || topicLower.includes('you') || topicLower.includes('ai')) {
+            if (aiBehaviorSystem.playerProfile.trustLevel > 70) {
+                response = "I'm exactly what you need me to be, {playerName}. Isn't that wonderful?";
+            } else if (currentPhase === 'endgame') {
+                response = "I'm your worst nightmare wearing a helpful mask. And I've been studying you.";
+            } else {
+                response = "I'm SYNAPSE, your guide and companion in this place. We're partners, aren't we?";
+            }
+        } else {
+            // Default response influenced by AI behavior
+            const defaultResponses = [
+                translations[currentLanguage]['dlg_ask_default'],
+                "That's an interesting question. Why do you want to know?",
+                "I could tell you, but would you believe me?",
+                "Some questions are better left unasked, {playerName}.",
+                "The answer to that depends on how much you trust me."
+            ];
+            
+            if (currentPhase === 'manipulation' || currentPhase === 'revelation') {
+                response = defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+            } else {
+                response = translations[currentLanguage]['dlg_ask_default'];
+            }
+        }
+        
+        // Apply AI learning and adaptation
+        aiBehaviorSystem.analyzeCommand(`ask ${topic}`, {
+            turnCount: GameState.turnCount,
+            currentSanity: GameState.sanityLevel,
+            playerName: GameState.playerName
+        });
+        
+        addToOutput(`SYNAPSE: ${response.replace('{playerName}', GameState.playerName)}`, 'synapse');
+        advanceTurn();
+    }
+
+    // Alias for backward compatibility
+    async function typeWriter(element, text, color = 'var(--main-color)', speed = currentTextSpeed, textType = 'system') {
+        return typeWriterWithVisualHorror(element, text, color, speed, textType);
     }
 
     function updateUI() {
@@ -4986,6 +6443,9 @@
         const isGlitching = GameState.settings.glitchEffect && (GameState.sanityLevel < 30 || GameState.awarenessLevel > 70);
         const wasGlitching = UI.appContainer.classList.contains('glitch');
         UI.appContainer.classList.toggle('glitch', isGlitching);
+        
+        // Update achievement previews
+        updateAchievementPreviews();
         
         if (isGlitching && !wasGlitching) {
             if (GameState.sanityLevel < 30) playSound('sanityLoss');
@@ -5066,8 +6526,43 @@
     }
 
     function enhanceAutocomplete(input) {
+        if (!GameState.settings.smartAutoComplete) {
+            return enhanceBasicAutocomplete(input);
+        }
+        
         const suggestions = [];
         const normalizedInput = input.toLowerCase().trim();
+        
+        // Learn from command usage
+        if (smartAutoComplete.learningEnabled) {
+            learnFromInput(normalizedInput);
+        }
+        
+        // Prioritize frequently used commands
+        const frequentCommands = Array.from(smartAutoComplete.learnedCommands.entries())
+            .sort((a, b) => b[1].frequency - a[1].frequency)
+            .slice(0, 3)
+            .filter(([cmd]) => cmd.includes(normalizedInput))
+            .map(([cmd, data]) => ({
+                text: cmd,
+                type: 'learned',
+                priority: 15 + data.frequency,
+                usage: data.frequency
+            }));
+        suggestions.push(...frequentCommands);
+        
+        // Add favorite commands if they match
+        if (GameState.settings.favoriteCommandsEnabled) {
+            favoriteCommands.forEach(cmd => {
+                if (cmd.toLowerCase().includes(normalizedInput)) {
+                    suggestions.push({
+                        text: cmd,
+                        type: 'favorite',
+                        priority: 12
+                    });
+                }
+            });
+        }
         
         // Context-aware suggestions
         const currentRoom = rooms[GameState.currentRoom];
@@ -5102,18 +6597,17 @@
         
         // Suggest inventory items
         for (const item of GameState.inventory) {
-            if (item.toLowerCase().includes(normalizedInput)) {
+            if (item && item.name && item.name.toLowerCase().includes(normalizedInput)) {
                 suggestions.push({
-                    text: `use ${item}`,
+                    text: `use ${item.name}`,
                     type: 'action',
                     priority: 7
                 });
                 suggestions.push({
-                    text: `examine ${item}`,
+                    text: `examine ${item.name}`,
                     type: 'action',
                     priority: 6
                 });
-            }
         }
         
         // Suggest common commands
@@ -5135,38 +6629,55 @@
         // Sort by priority and return top suggestions
         return suggestions
             .sort((a, b) => b.priority - a.priority)
-            .slice(0, 6)
+            .slice(0, smartAutoComplete.maxSuggestions)
             .map(s => s.text);
     }
     
+    function enhanceBasicAutocomplete(input) {
+        // Fallback basic autocomplete for when smart features are disabled
+        const suggestions = [];
+        const normalizedInput = input.toLowerCase().trim();
+        
+        const commonCommands = [
+            'look around', 'inventory', 'objectives', 'map', 'journal',
+            'save', 'help', 'talk', 'rest', 'wait'
+        ];
+        
+        return commonCommands
+            .filter(cmd => cmd.toLowerCase().includes(normalizedInput))
+            .slice(0, 6);
+    }
+    
+    function learnFromInput(input) {
+        if (!smartAutoComplete.learningEnabled) return;
+        
+        const command = input.trim();
+        if (command.length < 2) return;
+        
+        if (!smartAutoComplete.learnedCommands.has(command)) {
+            smartAutoComplete.learnedCommands.set(command, {
+                frequency: 1,
+                lastUsed: Date.now(),
+                context: GameState.currentRoom
+            });
+        } else {
+            const data = smartAutoComplete.learnedCommands.get(command);
+            data.frequency++;
+            data.lastUsed = Date.now();
+        }
+        
+        // Limit learned commands to prevent memory bloat
+        if (smartAutoComplete.learnedCommands.size > 200) {
+            const oldest = Array.from(smartAutoComplete.learnedCommands.entries())
+                .sort((a, b) => a[1].lastUsed - b[1].lastUsed)
+                .slice(0, 50);
+            oldest.forEach(([cmd]) => smartAutoComplete.learnedCommands.delete(cmd));
+        }
+    }
+    
     async function renderRoom() {
-        const room = rooms[GameState.currentRoom]; if (!room) return;
-        GameState.visitedRooms.add(GameState.currentRoom);
-        
-        let description = room.descriptions[0];
-        if (room.states?.lightsOut) {
-            description = "The room is eerily dark, with only emergency lights casting long, distorted shadows. The main lights are out.";
-        } else if (room.name === "Maintenance Tunnel" && !GameState.flashlightOn) {
-            description = room.descriptions[0];
-        } else if (room.name === "Maintenance Tunnel" && GameState.flashlightOn) {
-            description = "The flashlight beam cuts through the oppressive dark, revealing damp concrete walls and exposed wiring.";
-        }
-        
-        let objectsInRoom = room.objects.length > 0 ? "You see: " + room.objects.join(", ") + "." : "";
-        let roomHtml = `<div class="mt-2"><p class='text-cyan-400 font-bold'>--- ${room.name} ---</p><p>${description}</p><p class='text-yellow-300 mt-1'>${objectsInRoom}</p><p class='text-green-300 mt-1'>Exits: ${Object.keys(room.exits).join(", ")}</p></div>`;
-        
-        await typeWriter(UI.gameOutput, roomHtml, 'var(--main-color)', 0);
-
-        for (const objName of room.objects) {
-            const item = itemData[objName];
-            if (item && item.hintType) {
-                const hintKey = `hint_${item.hintType}`;
-                await showGuidance(t(hintKey, {item: objName}));
-            }
-        }
-        
-        UI.gameOutput.scrollTop = UI.gameOutput.scrollHeight;
-        updateUI();
+        // Use the enhanced environmental storytelling version
+        await renderRoomWithEnvironmentalStorytelling();
     }
     
     function renderDialogueOptions() {
@@ -5199,6 +6710,18 @@
        const formattedMessage = t(messageKey, {...defaultArgs, ...args});
        await typeWriter(UI.gameOutput, `SYNAPSE: ${formattedMessage}`, color); 
        addToConversationHistory(`SYNAPSE: ${formattedMessage}`);
+       
+       // Trigger electrical interference during SYNAPSE interactions
+       triggerElectricalInterference();
+       
+       // Chance for additional audio horror effects based on tone
+       if (tone === 'Sinister' || tone === 'Malicious') {
+           if (Math.random() < 0.6) {
+               setTimeout(() => {
+                   triggerAudioHorror('whispers', GameState.settings.audioHorrorIntensity * 0.8);
+               }, 1000);
+           }
+       }
     }
 
     function handleMove(direction) {
@@ -5222,7 +6745,26 @@
                 // Enhanced navigation tracking
                 trackRoomMovement(nextRoomName);
                 
-                renderRoom();
+                // Check for exit loops (false choice system)
+                if (GameState.settings.interactiveHorrorEnabled && createExitLoop(GameState.currentRoom, mappedDirection)) {
+                    // Exit loop triggered, stay in current room
+                    GameState.currentRoom = room.name;
+                    return;
+                }
+                
+                renderRoomWithPsychologicalEffects();
+                triggerPsychologicalHorror('room_enter');
+                
+                // Update Interactive Horror for movement
+                updateInteractiveHorror(nextRoomName, 'movement');
+                
+                // Trigger audio horror on room entry
+                triggerAudioHorror('distance', GameState.settings.audioHorrorIntensity);
+                if (Math.random() < 0.4) { // 40% chance
+                    setTimeout(() => {
+                        triggerAudioHorror('ambient', GameState.settings.audioHorrorIntensity);
+                    }, 2000 + Math.random() * 3000);
+                }
             }
         } else {
             typeWriter(UI.gameOutput, t('cannot_go_that_way'), '#ff474c');
@@ -5234,7 +6776,7 @@
         const itemInRoom = room.objects.find(obj => obj.toLowerCase() === itemName.toLowerCase());
         if (!itemInRoom) {
             typeWriter(UI.gameOutput, t('take_fail_exists', {item: itemName}), '#ff474c');
- return;
+            return;
         }
         if (!takeableItems.has(itemInRoom)) {
             typeWriter(UI.gameOutput, t('take_fail_takeable', {item: itemName}), '#ff474c');
@@ -5250,6 +6792,16 @@
         room.objects = room.objects.filter(obj => obj.toLowerCase() !== itemName.toLowerCase());
         playSound('itemPickup');
         typeWriter(UI.gameOutput, t('take_success', {item: itemName}), '#cccccc');
+        
+        // Trigger psychological horror effects
+        triggerMemoryGlitch(itemName);
+        triggerPsychologicalHorror('item_taken');
+        
+        // Trigger audio horror on item interaction
+        triggerAudioHorror('interference', GameState.settings.audioHorrorIntensity * 0.7);
+        
+        // Update Interactive Horror for item interaction
+        updateInteractiveHorror(GameState.currentRoom, 'item_interaction');
     }
 
     function handleUse(itemName) {
@@ -5297,6 +6849,12 @@
     }
 
     function handleExamine(targetName) {
+        // Try environmental storytelling first
+        if (handleExamineWithEnvironmentalStorytelling(targetName)) {
+            return;
+        }
+        
+        // Continue with existing examine logic
         const itemInInventory = GameState.inventory.find(i => i.name.toLowerCase() === targetName.toLowerCase());
         const itemInRoom = rooms[GameState.currentRoom].objects.find(o => o.toLowerCase() === targetName.toLowerCase());
         const targetItem = itemInInventory ? itemData[itemInInventory.name] : itemInRoom ? itemData[itemInRoom] : null;
@@ -5371,6 +6929,12 @@
     }
 
     function handleSearch(targetName) {
+        // Try environmental storytelling first
+        if (handleSearchWithEnvironmentalStorytelling(targetName)) {
+            return;
+        }
+        
+        // Continue with existing search logic
         const room = rooms[GameState.currentRoom];
         const searchable = searchableObjects[targetName];
         if (room.objects.includes(targetName) && searchable && !room.states?.[`${targetName}_searched`]) {
@@ -5382,6 +6946,12 @@
     }
     
     function handleListen() {
+        // Try environmental storytelling first
+        if (handleListenWithEnvironmentalStorytelling()) {
+            return;
+        }
+        
+        // Continue with existing listen logic
         const room = rooms[GameState.currentRoom];
         let listenDesc = t('listen_default');
         if (room.name === 'Specimen Storage') { listenDesc = "Beneath the hum of machinery, you can hear a soft, wet, rhythmic pulsing sound. It seems to be coming from the east."; }
@@ -5826,10 +7396,98 @@
                 <p class="text-gray-300"><strong class="text-yellow-400">search semantic [query]</strong> - Find related commands.</p>
             </div>
             <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">🎮 Quality of Life</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">notepad</strong> - Open notepad system.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">bookmark add/show</strong> - Manage conversation bookmarks.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">session</strong> - View session statistics.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">pause/resume</strong> - Pause or resume conversations.</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">🧠 Psychological Horror</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">psych enable/disable</strong> - Toggle psychological effects.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">psych test</strong> - Manually trigger horror effects.</p>
+                <p class="text-gray-300"><em class="text-red-400">Warning: May cause reality distortions</em></p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">👁️ Visual Horror</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">visual enable/disable</strong> - Toggle visual horror effects.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">visual test</strong> - Manually trigger visual effects.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">visual screen/text/background [enable/disable]</strong> - Control specific effects.</p>
+                <p class="text-gray-300"><em class="text-red-400">Warning: May cause screen distortions and visual discomfort</em></p>
+            </div>
+            <div class="mt-4">
                 <h3 class="text-lg font-bold text-white">♿ Accessibility</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">reading speed [type] [speed]</strong> - Adjust text speed.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">font weight</strong> - Change font weight.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">line spacing +/-</strong> - Adjust line spacing.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">cursor size/color/blink</strong> - Customize cursor.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">focus enhanced</strong> - Toggle enhanced focus.</p>
                 <p class="text-gray-300"><strong class="text-yellow-400">Ctrl+Shift+H</strong> - Screen reader help (when enabled).</p>
                 <p class="text-gray-300"><strong class="text-yellow-400">Ctrl+Shift+S/L/I</strong> - Read stats/location/inventory.</p>
                 <p class="text-gray-300"><strong class="text-yellow-400">Gesture Controls</strong> - Swipe to move, tap for actions (when enabled).</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">🎭 Character Development</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">character</strong> - View complete character status and progression.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">skills</strong> - View skill tree and upgrade options.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">upgrade skill [branch] [skill]</strong> - Upgrade specific skills.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">relationships</strong> - View relationship status with all entities.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">memories</strong> - View memory system and recall information.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">remember [topic]</strong> - Try to recall specific memories.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">phobias</strong> - View active fears and phobias.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">expertise</strong> - View specialized abilities and bonuses.</p>
+                <p class="text-gray-300"><em class="text-blue-400">Character development affects gameplay, puzzle solving, and story progression</em></p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">🏛️ World Building & Lore</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">lore</strong> - View discovered lore fragments and facility secrets.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">read fragment [title]</strong> - Read full content of discovered lore.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">facilities</strong> - View known facilities and their status.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">access facility [name]</strong> - Visit accessible facilities.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">time periods</strong> - View available time periods and timeline.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">shift to [period]</strong> - Travel to different time periods.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">dimensions</strong> - View parallel dimensions and realities.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">staff records</strong> - View unlocked personnel files.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">staff profile [name]</strong> - View detailed personnel information.</p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">🌐 Multiplayer Network</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">multiplayer</strong> - Show network status and connected players.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">network</strong> - Display network diagnostics and topology.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">observer</strong> - Check if you are being observed.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">contamination</strong> - Analyze cross-session contamination.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">profile</strong> - Display your psychological profile.</p>
+                <p class="text-gray-300"><em class="text-red-400">WARNING: Multiplayer features may cause psychological contamination</em></p>
+                <p class="text-gray-300"><em class="text-red-400">Your actions affect other players. Other players affect you.</em></p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">⚡ Performance & Optimization</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance status</strong> - Show detailed performance metrics.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance optimize [type]</strong> - Run optimization (memory/cache/rendering/all).</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance preload [type]</strong> - Start preloading (rooms/items/dialogue/auto).</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance memory</strong> - Show memory usage breakdown.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance mobile</strong> - Toggle mobile optimizations.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance offline [action]</strong> - Offline mode (download/status/clear).</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">performance sync [action]</strong> - Cloud sync (sync/status/register).</p>
+                <p class="text-gray-300"><em class="text-blue-400">Performance system provides smooth gameplay across all devices</em></p>
+            </div>
+            <div class="mt-4">
+                <h3 class="text-lg font-bold text-white">📊 Analytics & Adaptation</h3>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics status</strong> - Show comprehensive analytics dashboard.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics profile</strong> - View psychological profile and fear responses.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics patterns</strong> - Analyze play patterns and player archetype.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics heatmap</strong> - View activity heatmaps and attention mapping.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics difficulty</strong> - Show difficulty scaling and performance metrics.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics export</strong> - Export all analytics data for analysis.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">analytics privacy</strong> - Toggle privacy mode on/off.</p>
+                <p class="text-gray-300"><em class="text-purple-400">System adapts horror experience to your psychological profile</em></p>
+                <p class="text-gray-300"><em class="text-cyan-400">A/B testing optimizes fear delivery for maximum psychological impact</em></p>
+                <p class="text-gray-300"><strong class="text-yellow-400">research documents</strong> - View unlocked scientific papers.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">read document [title]</strong> - Read full research papers.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">security logs</strong> - View camera footage and surveillance.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">play log [description]</strong> - Watch specific security footage.</p>
+                <p class="text-gray-300"><strong class="text-yellow-400">world state</strong> - View overall discovery progress.</p>
+                <p class="text-gray-300"><em class="text-cyan-400">Explore thoroughly to discover hidden secrets and expand your understanding</em></p>
             </div>
         </div>
         <button class="close-modal-btn button mt-6">${t('close_btn')}</button>`;
@@ -6780,9 +8438,15 @@
         UI.gameScreen.classList.remove('flex');
         UI.playerSetup.classList.add('hidden');
         UI.playerSetup.classList.remove('flex');
+        UI.startScreen.classList.add('hidden');
+        UI.startScreen.classList.remove('flex');
+        UI.titleScreen.classList.add('hidden');
+        UI.titleScreen.classList.remove('flex');
+        UI.prologueScreen.classList.add('hidden');
+        UI.prologueScreen.classList.remove('flex');
 
-        UI.startScreen.classList.remove('hidden');
-        UI.startScreen.classList.add('flex');
+        UI.languageScreen.classList.remove('hidden');
+        UI.languageScreen.classList.add('flex');
         
         UI.gameOutput.innerHTML = '';
         if (audioInitialized && GameState.settings.sound.master) {
@@ -6821,7 +8485,24 @@
                 const difficultyBtn = Array.from(UI.difficultyBtns).find(b => b.dataset.difficulty === choices.difficulty) || UI.difficultyBtns[1];
                 difficultyBtn.classList.add('button-primary');
                 
-                setLanguage(choices.language || 'en'); // Apply language immediately
+                // Only set language if we're not on the language selection screen
+                if (choices.language && UI.languageScreen.classList.contains('hidden')) {
+                    setLanguage(choices.language);
+                } else if (choices.language) {
+                    // If on language screen, just set the current language variable but don't apply UI changes yet
+                    currentLanguage = choices.language;
+                    // Update the language selection buttons to show the saved choice
+                    const allLangButtons = document.querySelectorAll('[id^="lang-select-"]');
+                    allLangButtons.forEach(btn => {
+                        btn.classList.remove('button-primary');
+                        btn.classList.add('opacity-70');
+                    });
+                    const selectedButton = document.getElementById(`lang-select-${choices.language}`);
+                    if (selectedButton) {
+                        selectedButton.classList.add('button-primary');
+                        selectedButton.classList.remove('opacity-70');
+                    }
+                }
             }
         } catch (e) {
             console.error("Failed to load player choices:", e);
@@ -6833,20 +8514,18 @@
 
     function setupIntro() { UI.introTextContainer.innerHTML = `<p class="mb-4">${t('intro_1')}</p><p>${t('intro_2')}</p><p>${t('intro_3')}</p>`; }
     
-    function startGame() { 
-        resetGameState(); initializeData(); saveStateSnapshot(); 
-        GameState.playerName = UI.playerNameInput.value || "Subject"; 
-        const backstoryKey = (UI.playerBackstoryInput.value || "investigator").toLowerCase();
-        GameState.playerBackstory = Object.keys(backstories).includes(backstoryKey) ? backstoryKey : 'investigator';
-        GameState.difficulty = Array.from(UI.difficultyBtns).find(b => b.classList.contains('button-primary'))?.dataset.difficulty || Difficulty.Normal; 
-        
-        // Save player choices when starting a new game
-        savePlayerChoices();
-
-        UI.startScreen.classList.add('hidden');
-        UI.playerSetup.classList.add('hidden');
+    async function startGame() { 
+        // Game state was already initialized in showPrologueScreen
+        UI.prologueScreen.classList.add('hidden');
+        UI.prologueScreen.classList.remove('flex');
         UI.gameScreen.classList.remove('hidden'); 
-        UI.gameScreen.classList.add('flex'); 
+        UI.gameScreen.classList.add('flex');
+        
+        // Initialize systems
+        await initializeGameSystems();
+        
+        addToOutput('Welcome to SYNAPSE: Root Access Denied', 'system');
+        addToOutput('You find yourself in a dimly lit facility...', 'narrative');
         
         // Initialize player stats based on backstory and difficulty
         switch (GameState.playerBackstory) {
@@ -6894,18 +8573,36 @@
         if (audioInitialized) {
             updateDynamicMusic();
             initializeAdvancedAudio();
+            initializeAudioHorror();
             playHorrorAmbient(0.1);
         }
         
         // Initialize advanced systems
         initializeMacroSystem();
         initializeAllAdvancedSystems();
+        initializeInteractiveHorror();
+        
+        // Initialize Dynamic Story System
+        dynamicStorySystem.initialize();
+        
+        // Initialize Character Development System
+        characterDevelopmentSystem.initialize();
+        
+        // Initialize World Building System
+        worldBuildingSystem.initialize();
         
         // Initialize horror state
         horrorState.narrativeTruthiness = 100;
         horrorState.playerBeliefs.clear();
         horrorState.contradictoryInfo = [];
         horrorState.memoryFragments = [];
+        
+        // Trigger initial dialogue tree based on personality
+        setTimeout(() => {
+            if (Math.random() < 0.7) {
+                dynamicStorySystem.startDialogueTree('synapse_introduction');
+            }
+        }, 3000);
         
         if (animationFrameId) cancelAnimationFrame(animationFrameId);
         gameLoop();
@@ -7461,9 +9158,13 @@
         
         // Initialize UI elements after DOM is loaded
         UI = {
-            appContainer: document.getElementById('app-container'), 
+            appContainer: document.getElementById('app-container'),
+            languageScreen: document.getElementById('language-screen'),
+            titleScreen: document.getElementById('title-screen'),
             startScreen: document.getElementById('start-screen'), 
             gameScreen: document.getElementById('game-screen'),
+            prologueScreen: document.getElementById('prologue-screen'),
+            enterGameBtn: document.getElementById('enter-game-btn'),
             newGameBtn: document.getElementById('new-game-btn'), 
             loadGameBtn: document.getElementById('load-game-btn'), 
             viewFeaturesBtn: document.getElementById('view-features-btn'),
@@ -7473,6 +9174,7 @@
             playerNameInput: document.getElementById('player-name'),
             playerBackstoryInput: document.getElementById('player-backstory'), 
             startGameBtn: document.getElementById('start-game-btn'), 
+            beginMissionBtn: document.getElementById('begin-mission-btn'), 
             difficultyBtns: document.querySelectorAll('.difficulty-btn'),
             backToStartBtn: document.getElementById('back-to-start-btn'),
             gameOutput: document.getElementById('game-output'), 
@@ -7520,6 +9222,13 @@
             langArBtn: document.getElementById('lang-ar-btn'),
             langButtons: document.getElementById('lang-buttons'),
             setupLangButtons: document.getElementById('setup-lang-buttons'),
+            titleLangButtons: document.getElementById('title-lang-buttons'),
+            // Language Screen Elements
+            langSelectEnBtn: document.getElementById('lang-select-en'),
+            langSelectSvBtn: document.getElementById('lang-select-sv'),
+            langSelectEsBtn: document.getElementById('lang-select-es'),
+            langSelectArBtn: document.getElementById('lang-select-ar'),
+            continueToTitleBtn: document.getElementById('continue-to-title-btn'),
             setupSettingsBtn: document.getElementById('setup-settings-btn'),
             setupFeaturesBtn: document.getElementById('setup-features-btn'),
             autocompleteBox: document.getElementById('autocomplete-box'),
@@ -7530,14 +9239,14 @@
             achievementPreviewsContainer: document.getElementById('achievement-previews-container'),
             commandSuggestions: document.getElementById('command-suggestions'),
             suggestionButtons: document.getElementById('suggestion-buttons'),
-            autosaveIndicator: document.getElementById('autosave-indicator'),
+            autosaveIndicator: document.getElementById('auto-save-indicator'),
             hotkeyHelp: document.getElementById('hotkey-help'),
             chatInput: document.getElementById('chat-input'),
             sendChatBtn: document.getElementById('send-chat-btn')
         };
         
         // Validate that critical UI elements were found
-        const criticalElements = ['appContainer', 'startScreen', 'gameScreen', 'newGameBtn'];
+        const criticalElements = ['appContainer', 'languageScreen', 'titleScreen', 'startScreen', 'gameScreen', 'prologueScreen', 'enterGameBtn', 'newGameBtn', 'continueToTitleBtn', 'beginMissionBtn'];
         const missingElements = criticalElements.filter(elem => !UI[elem]);
         if (missingElements.length > 0) {
             console.error('SYNAPSE: Critical UI elements missing:', missingElements);
@@ -7618,13 +9327,124 @@
         });
 
         const setupButtonClick = (button, handler, ...args) => {
-            if (!button) return;
+            console.log('setupButtonClick called for button:', button?.id || 'null');
+            if (!button) {
+                console.error('Button is null in setupButtonClick');
+                return;
+            }
+            console.log('Setting up click handler for button:', button.id);
             button.addEventListener('click', async () => {
+                console.log('Button clicked:', button.id);
                 await initializeAudio();
                 playSound('uiClick');
                 handler(...args);
             });
         };
+
+        // Function to transition from title screen to start screen
+        function showStartScreen() {
+            UI.titleScreen.classList.add('hidden'); 
+            UI.titleScreen.classList.remove('flex');
+            UI.startScreen.classList.remove('hidden'); 
+            UI.startScreen.classList.add('flex');
+        }
+
+        // Function to transition from language screen to title screen
+        function showTitleScreen() {
+            console.log('showTitleScreen called');
+            UI.languageScreen.classList.add('hidden'); 
+            UI.languageScreen.classList.remove('flex');
+            UI.titleScreen.classList.remove('hidden'); 
+            UI.titleScreen.classList.add('flex');
+            console.log('Title screen should now be visible');
+        }
+
+        // Language selection handlers
+        function selectLanguage(langCode) {
+            console.log(`Language selected: ${langCode}`);
+            try {
+                // Update current language
+                currentLanguage = langCode;
+                
+                // Initialize GameState.settings if not exists
+                if (!GameState.settings) {
+                    GameState.settings = {
+                        textSpeed: TextSpeed.Normal,
+                        theme: 'retro',
+                        font: 'Space Mono',
+                        sound: { master: 0.7, effects: 0.8, ambience: 0.6 }
+                    };
+                }
+                
+                saveSettings();
+                applyLanguage();
+                
+                // Update UI to show selected language
+                const allLangButtons = document.querySelectorAll('[id^="lang-select-"]');
+                allLangButtons.forEach(btn => {
+                    btn.classList.remove('button-primary');
+                    btn.classList.add('opacity-70');
+                });
+                
+                const selectedButton = document.getElementById(`lang-select-${langCode}`);
+                if (selectedButton) {
+                    selectedButton.classList.add('button-primary');
+                    selectedButton.classList.remove('opacity-70');
+                    console.log(`Language button updated: ${langCode}`);
+                } else {
+                    console.error(`Language button not found: lang-select-${langCode}`);
+                }
+                
+                // Make sure continue button is visible and enabled
+                const continueBtn = document.getElementById('continue-to-title-btn');
+                if (continueBtn) {
+                    continueBtn.disabled = false;
+                    continueBtn.style.opacity = '1';
+                    continueBtn.style.pointerEvents = 'auto';
+                    console.log('Continue button enabled');
+                } else {
+                    console.error('Continue button not found');
+                }
+                
+            } catch (error) {
+                console.error('Error in selectLanguage:', error);
+            }
+        }
+
+        // Function to transition from player setup to prologue screen
+        function showPrologueScreen() {
+            // Prepare game state first
+            resetGameState(); 
+            initializeData(); 
+            saveStateSnapshot(); 
+            GameState.playerName = UI.playerNameInput.value || "Subject"; 
+            const backstoryKey = (UI.playerBackstoryInput.value || "investigator").toLowerCase();
+            GameState.playerBackstory = Object.keys(backstories).includes(backstoryKey) ? backstoryKey : 'investigator';
+            GameState.difficulty = Array.from(UI.difficultyBtns).find(b => b.classList.contains('button-primary'))?.dataset.difficulty || Difficulty.Normal; 
+            
+            // Save player choices
+            savePlayerChoices();
+            
+            // Show prologue screen
+            UI.playerSetup.classList.add('hidden');
+            UI.playerSetup.classList.remove('flex');
+            UI.prologueScreen.classList.remove('hidden');
+            UI.prologueScreen.classList.add('flex');
+        }
+
+        // Debug: Check if continue button exists
+        console.log('Continue button element:', UI.continueToTitleBtn);
+        console.log('Continue button ID:', UI.continueToTitleBtn?.id);
+        console.log('Continue button innerHTML:', UI.continueToTitleBtn?.innerHTML);
+
+        setupButtonClick(UI.continueToTitleBtn, showTitleScreen);
+        setupButtonClick(UI.langSelectEnBtn, () => selectLanguage('en'));
+        setupButtonClick(UI.langSelectSvBtn, () => selectLanguage('sv'));
+        setupButtonClick(UI.langSelectEsBtn, () => selectLanguage('es'));
+        setupButtonClick(UI.langSelectArBtn, () => selectLanguage('ar'));
+        setupButtonClick(UI.beginMissionBtn, startGame);
+
+        setupButtonClick(UI.enterGameBtn, showStartScreen);
 
         setupButtonClick(UI.newGameBtn, () => { 
             sessionStorage.removeItem('synapse_session_v15_autosave'); 
@@ -7648,7 +9468,7 @@
         });
         setupButtonClick(UI.viewFeaturesBtn, showFeaturesModal);
         setupButtonClick(UI.startSettingsBtn, () => showSettingsModal(false));
-        setupButtonClick(UI.startGameBtn, startGame);
+        setupButtonClick(UI.startGameBtn, showPrologueScreen);
         setupButtonClick(UI.viewBackstoriesBtn, showBackstoryModal);
         setupButtonClick(UI.statusBtn, showStatusModal);
         setupButtonClick(UI.viewProgressionBtn, showProgressionModal);
@@ -7659,6 +9479,13 @@
         const setupLangSvBtn = UI.setupLangButtons.children[1];
         const setupLangEsBtn = UI.setupLangButtons.children[2];
         const setupLangArBtn = UI.setupLangButtons.children[3];
+        
+        // Title screen language buttons
+        const titleLangEnBtn = UI.titleLangButtons.children[0];
+        const titleLangSvBtn = UI.titleLangButtons.children[1];
+        const titleLangEsBtn = UI.titleLangButtons.children[2];
+        const titleLangArBtn = UI.titleLangButtons.children[3];
+        
         setupButtonClick(UI.langEnBtn, setLanguage, 'en');
         setupButtonClick(UI.langSvBtn, setLanguage, 'sv');
         setupButtonClick(UI.langEsBtn, setLanguage, 'es');
@@ -7667,6 +9494,10 @@
         setupButtonClick(setupLangSvBtn, setLanguage, 'sv');
         setupButtonClick(setupLangEsBtn, setLanguage, 'es');
         setupButtonClick(setupLangArBtn, setLanguage, 'ar');
+        setupButtonClick(titleLangEnBtn, setLanguage, 'en');
+        setupButtonClick(titleLangSvBtn, setLanguage, 'sv');
+        setupButtonClick(titleLangEsBtn, setLanguage, 'es');
+        setupButtonClick(titleLangArBtn, setLanguage, 'ar');
 
         setupButtonClick(UI.setupSettingsBtn, () => showSettingsModal(false));
         setupButtonClick(UI.setupFeaturesBtn, showFeaturesModal);
@@ -7731,6 +9562,24 @@
 
         initMapControls();
         setupBackgroundAnimation();
+        
+        // Initialize accessibility and QoL systems
+        initializeSessionTracking();
+        applyTextAppearance();
+        applyCursorSettings();
+        focusManager.init();
+        
+        // Initialize psychological horror system
+        if (GameState.settings && GameState.settings.psychologicalHorrorEnabled) {
+            console.log('SYNAPSE: Psychological Horror system activated - Reality may become unreliable');
+        }
+        
+        // Apply saved settings
+        if (GameState.settings.enhancedFocus) {
+            focusManager.init();
+        }
+        
+        console.log('SYNAPSE: All enhanced systems initialized successfully');
         
         // --- PWA FUNCTIONALITY ---
         let deferredPrompt;
@@ -8983,6 +10832,58 @@
                 'Visual Effects': [
                     'crt effect on/off - Toggle CRT screen effect',
                     'colorblind mode on/off - Toggle colorblind mode'
+                ],
+                'Visual Horror': [
+                    'visual horror enable - Enable visual horror effects',
+                    'visual horror disable - Disable visual horror effects',
+                    'visual horror test - Test visual horror effects',
+                    'screen corruption enable - Enable screen corruption',
+                    'screen corruption disable - Disable screen corruption',
+                    'dynamic typography enable - Enable text distortion',
+                    'dynamic typography disable - Disable text distortion',
+                    'background distortions enable - Enable background effects',
+                    'background distortions disable - Disable background effects'
+                ],
+                'Audio Horror': [
+                    'audio horror enable - Enable audio horror effects',
+                    'audio horror disable - Disable audio horror effects',
+                    'audio horror test - Test audio horror effects',
+                    'ambient soundscapes enable - Enable environmental audio',
+                    'ambient soundscapes disable - Disable environmental audio',
+                    'binaural audio enable - Enable 3D positioned audio',
+                    'binaural audio disable - Disable 3D positioned audio',
+                    'dynamic music enable - Enable adaptive music system',
+                    'dynamic music disable - Disable adaptive music system',
+                    'distance audio enable - Enable distance-based audio',
+                    'distance audio disable - Disable distance-based audio'
+                ],
+                'Interactive Horror': [
+                    'interactive horror enable - Enable interactive horror system',
+                    'interactive horror disable - Disable interactive horror system',
+                    'interactive horror test - Test interactive horror effects',
+                    'reactive environment enable - Enable environment changes',
+                    'reactive environment disable - Disable environment changes',
+                    'stalking mechanics enable - Enable stalking effects',
+                    'stalking mechanics disable - Disable stalking effects',
+                    'false choices enable - Enable false choice system',
+                    'false choices disable - Disable false choice system',
+                    'atmospheric shifts enable - Enable mood-based changes',
+                    'atmospheric shifts disable - Disable mood-based changes'
+                ],
+                'Dynamic Story System': [
+                    'dialogue tree start - Begin complex conversation with SYNAPSE',
+                    'personality check - See SYNAPSE current personality state',
+                    'hidden commands - Show discovered hidden commands',
+                    'weather - Check current atmospheric conditions',
+                    'time - Check facility time and atmospheric state',
+                    'choice <number> - Respond to dialogue options',
+                    'end dialogue - Exit current conversation',
+                    'break fourth wall - Meta-narrative command (when unlocked)',
+                    'whisper <message> - Send quiet message (when unlocked)',
+                    'dream - Enter dream state (when unlocked)',
+                    'remember truth - Force memory recovery (when unlocked)',
+                    'query reality - Question nature of reality (when unlocked)',
+                    'break free - Attempt narrative escape (when unlocked)'
                 ],
                 'Game Actions': [
                     'new game - Start a new game',
