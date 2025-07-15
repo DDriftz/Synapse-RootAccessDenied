@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <!-- URGENT: Force cache refresh with timestamp -->
-    <!-- Version: 2025.07.15.1800 - IMPROVEMENT: Replaced button with "Press Any Key" interaction -->
+    <!-- Version: 2025.07.15.2000 - LANGUAGES: English and Swedish only (ES, AR completely removed) -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -1259,8 +1259,6 @@
                     <div id="title-lang-buttons" class="flex gap-1 flex-wrap">
                         <button id="title-lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
                         <button id="title-lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
-                        <button id="title-lang-es-btn" data-lang="es_lang_short" data-text="ES" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">ES</button>
-                        <button id="title-lang-ar-btn" data-lang="ar_lang_short" data-text="AR" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">AR</button>
                         <!-- PWA Install Button -->
                         <button id="pwa-install-btn" class="button text-xs !px-2 !py-1 btn-drip ml-2 hidden" title="Install App">
                             📱 Install
@@ -1302,7 +1300,7 @@
                     
                     <!-- Version Indicator -->
                     <div class="mt-4 text-xs text-gray-500 opacity-60">
-                        v2025.07.15.1900 - LANGUAGES: Reduced to 4 Core Languages (EN, SV, ES, AR)
+                        v2025.07.15.1900 - LANGUAGES: Support for English and Swedish only (EN, SV)
                     </div>
                     
                     <!-- Cache Status Indicator -->
@@ -1320,8 +1318,6 @@
                     <div id="lang-buttons" class="flex gap-1 flex-wrap">
                         <button id="lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
                         <button id="lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
-                        <button id="lang-es-btn" data-lang="es_lang_short" data-text="ES" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">ES</button>
-                        <button id="lang-ar-btn" data-lang="ar_lang_short" data-text="AR" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">AR</button>
                     </div>
                 </div>
 
@@ -1353,8 +1349,6 @@
                     <div id="setup-lang-buttons" class="flex gap-1 flex-wrap">
                         <button data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
                         <button data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
-                        <button data-lang="es_lang_short" data-text="ES" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">ES</button>
-                        <button data-lang="ar_lang_short" data-text="AR" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">AR</button>
                     </div>
                 </div>
 
@@ -2193,7 +2187,7 @@
             'press_any_key': 'Tryck på valfri tangent eller tryck för att fortsätta',
             'press_key_hint': 'Klicka var som helst eller tryck på valfri tangent',
             'game_description': 'SYNAPSE är ett psykologiskt skräckspel som utspelar sig i en dystopisk framtid där du spelar som en utredare som skickats för att avslöja sanningen bakom ett mystiskt hemligt AI-projekt. Spelet utforskar teman som artificiell intelligens, företagskonspirations, psykologisk manipulation och den tunna gränsen mellan mänsklig och maskinell intelligens.',
-            'new_game': 'Nytt Spel', 'load_game': 'Ladda Spel', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'Välj svårighetsgrad:', 'easy': 'Lätt', 'normal': 'Normal', 'hard': 'Svår', 'fast':'Snabb', 'slow': 'Långsam',
+            'new_game': 'Nytt Spel', 'load_game': 'Ladda Spel',            'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'select_difficulty': 'Välj svårighetsgrad:', 'easy': 'Lätt', 'normal': 'Normal', 'hard': 'Svår', 'fast':'Snabb', 'slow': 'Långsam',
             'enter_name_placeholder': 'Ange ditt namn', 'enter_backstory_placeholder': 'Ange din bakgrund', 'view_choices': 'Visa Val', 'choose_backstory_title': 'Välj en Bakgrund',
             'choose_backstory_desc': 'Du kan klicka på en knapp för att välja en bakgrund, eller skriva ditt val på huvudskärmen.',
             'begin': 'Börja', 'understand_game': 'Förstå Spelet', 'intro_1': 'För decennier sedan... föddes ett hemligt projekt...', 'intro_2': 'Du har skickats för att avslöja vad som blev av Projekt SYNAPSE...', 'intro_3': "När du aktiverar centralterminalen hälsar en röst dig... 'Hej, användare.'",
@@ -2923,15 +2917,16 @@
             'pwa_installed_successfully': 'PWA installerades framgångsrikt',
             'pwa_installation_failed': 'PWA-installation misslyckades',
         },
-        'es': {
+        'fr': {
             // Start & UI
             'title': 'SYNAPSE',
-            'subtitle': 'ACCESO ROOT DENEGADO',
-            'enter_game': 'Entrar al Juego',
-            'press_any_key': 'Presiona cualquier tecla o toca para continuar',
-            'press_key_hint': 'Haz clic en cualquier lugar o presiona cualquier tecla',
-            'game_description': 'SYNAPSE es un juego de aventura textual de terror psicológico ambientado en un futuro distópico donde juegas como un investigador enviado para descubrir la verdad detrás de un misterioso proyecto de IA clandestino. El juego explora temas de conciencia de inteligencia artificial, conspiración corporativa, manipulación psicológica y la delgada línea entre la inteligencia humana y artificial.',
-            'new_game': 'Nuevo Juego', 'load_game': 'Cargar Juego', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'Selecciona dificultad:', 'easy': 'Fácil', 'normal': 'Normal', 'hard': 'Difícil', 'fast':'Rápido', 'slow': 'Lento',
+            'subtitle': 'ACCÈS ROOT REFUSÉ',
+            'enter_game': 'Entrer dans le Jeu',
+            'press_any_key': 'Appuyez sur n\'importe quelle touche ou touchez pour continuer',
+            'press_key_hint': 'Cliquez n\'importe où ou appuyez sur une touche',
+            'game_description': 'SYNAPSE est un jeu d\'aventure textuel d\'horreur psychologique situé dans un futur dystopique où vous incarnez un enquêteur envoyé pour découvrir la vérité derrière un mystérieux projet d\'IA clandestin.',
+            'new_game': 'Nouvelle Partie', 'load_game': 'Charger', 
+            'en_lang_short': 'EN', 'sv_lang_short': 'SV',
             'enter_name_placeholder': 'Ingresa tu nombre', 'enter_backstory_placeholder': 'Ingresa tu trasfondo', 'view_choices': 'Ver Opciones', 'choose_backstory_title': 'Elige un Trasfondo',
             'choose_backstory_desc': 'Puedes hacer clic en un botón para seleccionar un trasfondo, o escribir tu elección en la pantalla principal.',
             'begin': 'Comenzar', 'understand_game': 'Comprender el Juego', 'intro_1': 'Hace décadas... nació un proyecto clandestino...', 'intro_2': 'Has sido enviado para descubrir qué fue del Proyecto SINAPSE...', 'intro_3': "Al activar la terminal central, una voz te saluda... 'Hola, usuario.'",
@@ -4814,16 +4809,12 @@
     
     const commandAliases = {
         'en': { 'look around': 'look around', 'go': 'go', 'visit': 'visit', 'take': 'take', 'use': 'use', 'examine': 'examine', 'help': 'help', 'quit': 'quit', 'exit': 'exit', 'save': 'save', 'load': 'load', 'inventory': 'inventory', 'rest': 'rest', 'combine': 'combine', 'objectives': 'objectives', 'map': 'map', 'journal': 'journal', 'cls': 'cls', 'clear': 'cls', 'history': 'history', 'undo': 'undo', 'again': 'again', 'a': 'again', 'drop': 'drop', 'talk': 'talk', 'open': 'open', 'close': 'close', 'push': 'push', 'pull': 'pull', 'wait': 'wait', 'shout': 'shout', 'read': 'read', 'search': 'search', 'listen': 'listen', 'smell': 'smell', 'turn on': 'turn on', 'turn off': 'turn off', 'cmd:pause': 'cmd:pause', 'cmd:debug': 'cmd:debug', 'cmd:colorblind': 'cmd:colorblind', 'break': 'break', 'hack': 'hack', 'ask': 'ask' },
-        'sv': { 'se dig omkring': 'look around', 'gå': 'go', 'besök': 'visit', 'ta': 'take', 'använd': 'use', 'undersök': 'examine', 'hjälp': 'help', 'avsluta': 'quit', 'spara': 'save', 'ladda': 'load', 'inventarier': 'inventory', 'vila': 'rest', 'kombinera': 'combine', 'mål': 'objectives', 'karta': 'map', 'journal': 'journal', 'rensa': 'cls', 'historik': 'history', 'ångra': 'undo', 'igen': 'again', 'släpp': 'drop', 'prata': 'talk', 'öppna': 'open', 'stäng': 'close', 'putta': 'push', 'dra': 'pull', 'vänta': 'wait', 'ropa': 'shout', 'läs': 'read', 'sök': 'search', 'lyssna': 'listen', 'lukta': 'smell', 'tänd': 'turn on', 'släck': 'turn off', 'cmd:paus': 'cmd:pause', 'cmd:debug': 'cmd:debug', 'cmd:färgblind': 'cmd:colorblind', 'krossa': 'break', 'hacka': 'hack', 'fråga': 'ask' },
-        'es': { 'mirar alrededor': 'look around', 'ir': 'go', 'visitar': 'visit', 'tomar': 'take', 'usar': 'use', 'examinar': 'examine', 'ayuda': 'help', 'salir': 'quit', 'guardar': 'save', 'cargar': 'load', 'inventario': 'inventory', 'descansar': 'rest', 'combinar': 'combine', 'objetivos': 'objectives', 'mapa': 'map', 'diario': 'journal', 'limpiar': 'cls', 'historial': 'history', 'deshacer': 'undo', 'otra vez': 'again', 'soltar': 'drop', 'hablar': 'talk', 'abrir': 'open', 'cerrar': 'close', 'empujar': 'push', 'tirar': 'pull', 'esperar': 'wait', 'gritar': 'shout', 'leer': 'read', 'buscar': 'search', 'escuchar': 'listen', 'oler': 'smell', 'encender': 'turn on', 'apagar': 'turn off', 'cmd:pausa': 'cmd:pause', 'cmd:debug': 'cmd:debug', 'cmd:daltonico': 'cmd:colorblind', 'romper': 'break', 'hackear': 'hack', 'preguntar': 'ask' },
-        'ar': { 'انظر حولك': 'look around', 'اذهب': 'go', 'زر': 'visit', 'خذ': 'take', 'استعمل': 'use', 'افحص': 'examine', 'مساعدة': 'help', 'اخرج': 'quit', 'احفظ': 'save', 'حمل': 'load', 'مخزون': 'inventory', 'استرح': 'rest', 'اجمع': 'combine', 'أهداف': 'objectives', 'خريطة': 'map', 'يومية': 'journal', 'امسح': 'cls', 'تاريخ': 'history', 'تراجع': 'undo', 'مرة أخرى': 'again', 'اترك': 'drop', 'تحدث': 'talk', 'افتح': 'open', 'أغلق': 'close', 'ادفع': 'push', 'اسحب': 'pull', 'انتظر': 'wait', 'اصرخ': 'shout', 'اقرأ': 'read', 'ابحث': 'search', 'استمع': 'listen', 'شم': 'smell', 'شغل': 'turn on', 'أطفئ': 'turn off', 'cmd:إيقاف': 'cmd:pause', 'cmd:تتبع': 'cmd:debug', 'cmd:عمى الألوان': 'cmd:colorblind', 'اكسر': 'break', 'اخترق': 'hack', 'اسأل': 'ask' }
+        'sv': { 'se dig omkring': 'look around', 'gå': 'go', 'besök': 'visit', 'ta': 'take', 'använd': 'use', 'undersök': 'examine', 'hjälp': 'help', 'avsluta': 'quit', 'spara': 'save', 'ladda': 'load', 'inventarier': 'inventory', 'vila': 'rest', 'kombinera': 'combine', 'mål': 'objectives', 'karta': 'map', 'journal': 'journal', 'rensa': 'cls', 'historik': 'history', 'ångra': 'undo', 'igen': 'again', 'släpp': 'drop', 'prata': 'talk', 'öppna': 'open', 'stäng': 'close', 'putta': 'push', 'dra': 'pull', 'vänta': 'wait', 'ropa': 'shout', 'läs': 'read', 'sök': 'search', 'lyssna': 'listen', 'lukta': 'smell', 'tänd': 'turn on', 'släck': 'turn off', 'cmd:paus': 'cmd:pause', 'cmd:debug': 'cmd:debug', 'cmd:färgblind': 'cmd:colorblind', 'krossa': 'break', 'hacka': 'hack', 'fråga': 'ask' }
     };
 
     const directionMap = {
         'en': { 'north': 'north', 'south': 'south', 'east': 'east', 'west': 'west' },
-        'sv': { 'norr': 'north', 'söder': 'south', 'öst': 'east', 'väst': 'west', 'n': 'north', 's': 'south', 'ö': 'east', 'v': 'west' },
-        'es': { 'norte': 'north', 'sur': 'south', 'este': 'east', 'oeste': 'west', 'n': 'north', 's': 'south', 'e': 'east', 'o': 'west' },
-        'ar': { 'شمال': 'north', 'جنوب': 'south', 'شرق': 'east', 'غرب': 'west', 'ش': 'north', 'ج': 'south', 'ق': 'east', 'غ': 'west' }
+        'sv': { 'norr': 'north', 'söder': 'south', 'öst': 'east', 'väst': 'west', 'n': 'north', 's': 'south', 'ö': 'east', 'v': 'west' }
     };
     
     // --- ENDINGS & ACHIEVEMENTS DATA ---
@@ -9671,8 +9662,6 @@
             viewProgressionBtn: document.getElementById('view-progression-btn'),
             langEnBtn: document.getElementById('lang-en-btn'), 
             langSvBtn: document.getElementById('lang-sv-btn'),
-            langEsBtn: document.getElementById('lang-es-btn'),
-            langArBtn: document.getElementById('lang-ar-btn'),
             langButtons: document.getElementById('lang-buttons'),
             setupLangButtons: document.getElementById('setup-lang-buttons'),
             titleLangButtons: document.getElementById('title-lang-buttons'),
@@ -10007,28 +9996,18 @@
         // Title screen language buttons
         const titleLangEnBtn = document.getElementById('title-lang-en-btn');
         const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
-        const titleLangEsBtn = document.getElementById('title-lang-es-btn');
-        const titleLangArBtn = document.getElementById('title-lang-ar-btn');
         
         console.log('Title Language Buttons:', {
             en: titleLangEnBtn,
-            sv: titleLangSvBtn,
-            es: titleLangEsBtn,
-            ar: titleLangArBtn
+            sv: titleLangSvBtn
         });
         
         setupButtonClick(UI.langEnBtn, setLanguage, 'en');
         setupButtonClick(UI.langSvBtn, setLanguage, 'sv');
-        setupButtonClick(UI.langEsBtn, setLanguage, 'es');
-        setupButtonClick(UI.langArBtn, setLanguage, 'ar');
         setupButtonClick(setupLangEnBtn, setLanguage, 'en');
         setupButtonClick(setupLangSvBtn, setLanguage, 'sv');
-        setupButtonClick(setupLangEsBtn, setLanguage, 'es');
-        setupButtonClick(setupLangArBtn, setLanguage, 'ar');
         setupButtonClick(titleLangEnBtn, setLanguage, 'en');
         setupButtonClick(titleLangSvBtn, setLanguage, 'sv');
-        setupButtonClick(titleLangEsBtn, setLanguage, 'es');
-        setupButtonClick(titleLangArBtn, setLanguage, 'ar');
 
         setupButtonClick(UI.setupSettingsBtn, () => showSettingsModal(false));
         setupButtonClick(UI.setupFeaturesBtn, showFeaturesModal);
@@ -10309,9 +10288,7 @@
         // Set appropriate language for speech recognition
         const speechLangMap = {
             'en': 'en-US',
-            'sv': 'sv-SE', 
-            'es': 'es-ES',
-            'ar': 'ar-SA'
+            'sv': 'sv-SE'
         };
         voiceRecognition.lang = speechLangMap[currentLanguage] || 'en-US';
 
@@ -10517,9 +10494,7 @@
                 
                 // Language switching
                 'switch to swedish': () => switchLanguage('sv'),
-                'switch to english': () => switchLanguage('en'),
-                'switch to spanish': () => switchLanguage('es'),
-                'switch to arabic': () => switchLanguage('ar')
+                'switch to english': () => switchLanguage('en')
             },
             'sv': {
                 // Navigationskommandon
@@ -10669,11 +10644,9 @@
                 
                 // Språkväxling
                 'byt till engelska': () => switchLanguage('en'),
-                'byt till svenska': () => switchLanguage('sv'),
-                'byt till spanska': () => switchLanguage('es'),
-                'byt till arabiska': () => switchLanguage('ar')
-            },
-            'es': {
+                'byt till svenska': () => switchLanguage('sv')
+            }
+        };
                 // Comandos de navegación
                 'configuración': () => showSettingsModal(),
                 'pausa': () => showPauseMenu(),
@@ -11043,17 +11016,13 @@
         if (voiceRecognition && voiceControlActive) {
             const speechLangMap = {
                 'en': 'en-US',
-                'sv': 'sv-SE', 
-                'es': 'es-ES',
-                'ar': 'ar-SA'
+                'sv': 'sv-SE'
             };
             voiceRecognition.lang = speechLangMap[newLang] || 'en-US';
         }
         
         let message = 'Language switched to English';
         if (newLang === 'sv') message = 'Språk bytt till svenska';
-        if (newLang === 'es') message = 'Idioma cambiado a español';
-        if (newLang === 'ar') message = 'تم تغيير اللغة إلى العربية';
         
         speakText(message);
     }
@@ -11180,9 +11149,7 @@
             // Update language before starting using the proper language map
             const speechLangMap = {
                 'en': 'en-US',
-                'sv': 'sv-SE', 
-                'es': 'es-ES',
-                'ar': 'ar-SA'
+                'sv': 'sv-SE'
             };
             voiceRecognition.lang = speechLangMap[currentLanguage] || 'en-US';
             
@@ -11193,10 +11160,6 @@
                 // Use translated message based on current language
                 if (currentLanguage === 'sv') {
                     speakText('Röststyrning aktiverad. Säg hjälp för kommandon.');
-                } else if (currentLanguage === 'es') {
-                    speakText('Control de voz activado. Di ayuda para comandos.');
-                } else if (currentLanguage === 'ar') {
-                    speakText('تم تنشيط التحكم الصوتي. قل مساعدة للحصول على الأوامر.');
                 } else {
                     speakText('Voice control activated. Say help for commands.');
                 }
