@@ -2966,6 +2966,89 @@
     let animationFrameId = null;
     let UI = {}; // Initialize empty, will be populated after DOM loads
     let currentTextSpeed = TextSpeed.Normal;
+
+    // --- NEW USER EXPERIENCE SYSTEMS ---
+    let sessionStats = {
+        startTime: Date.now(),
+        commandsUsed: {},
+        roomsExplored: 0,
+        itemsFound: 0,
+        totalPlayTime: 0,
+        sessionsPlayed: 0,
+        averageSessionLength: 0,
+        mostUsedCommands: [],
+        explorationEfficiency: 0
+    };
+
+    let roomHistory = {
+        visited: [],
+        maxHistory: 10,
+        currentIndex: -1
+    };
+
+    let noteSystem = {
+        notes: [],
+        bookmarks: [],
+        searchIndex: new Map()
+    };
+
+    let hotkeySystem = {
+        'F1': () => showHelpMenu(),
+        'F2': () => displayInventory(),
+        'F3': () => displayJournal(),
+        'F4': () => displayMap(),
+        'F5': () => showProgressionModal(),
+        'F6': () => showPauseMenu(),
+        'F7': () => saveGame(),
+        'F8': () => loadGame(),
+        'F9': () => showSettingsModal(),
+        'F10': () => showAchievementsModal(),
+        'F11': () => toggleMapFullscreen(),
+        'F12': () => showStatusModal(),
+        'Escape': () => showPauseMenu(),
+        'Ctrl+S': () => saveGame(),
+        'Ctrl+L': () => loadGame(),
+        'Ctrl+Z': () => undoLastAction(),
+        'Ctrl+H': () => showHistory(),
+        'Ctrl+N': () => showNoteModal(),
+        'Ctrl+B': () => showBookmarkModal(),
+        'Ctrl+T': () => showSessionStatsModal(),
+        'Ctrl+Shift+H': () => showHotkeyReference()
+    };
+
+    let favoriteCommands = new Set(['look around', 'inventory', 'save', 'map', 'help']);
+    let commandFrequency = new Map();
+
+    // Reading speed per text type
+    let readingSpeeds = {
+        dialogue: TextSpeed.Normal,
+        description: TextSpeed.Normal,
+        system: TextSpeed.Fast,
+        hint: TextSpeed.Slow,
+        narrative: TextSpeed.Normal
+    };
+
+    // Auto-save indicators
+    let autoSaveState = {
+        lastSave: null,
+        unsavedChanges: false,
+        indicator: null
+    };
+
+    // Enhanced autocomplete with learning
+    let smartAutocomplete = {
+        learningData: new Map(),
+        contextualSuggestions: new Map(),
+        userPatterns: new Map()
+    };
+
+    // Pause and resume system
+    let pauseState = {
+        isPaused: false,
+        pausedAt: null,
+        pauseReason: null
+    };
+
     let commandHistory = []; let commandHistoryIndex = -1;
     let audioInitialized = false;
     let sounds = {};
