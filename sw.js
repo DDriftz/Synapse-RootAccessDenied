@@ -1,4 +1,4 @@
-const CACHE_NAME = 'synapse-horror-v1.0.1';
+const CACHE_NAME = 'synapse-horror-v1.0.2-hotfix-1730';
 const urlsToCache = [
   './',
   './index.html',
@@ -23,8 +23,9 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches AGGRESSIVELY
 self.addEventListener('activate', event => {
+  console.log('SYNAPSE: Service worker activating - clearing ALL old caches');
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -35,9 +36,11 @@ self.addEventListener('activate', event => {
           }
         })
       );
+    }).then(() => {
+      console.log('SYNAPSE: All old caches cleared, claiming clients');
+      return self.clients.claim();
     })
   );
-  self.clients.claim();
 });
 
 // Fetch event - serve from cache, fallback to network

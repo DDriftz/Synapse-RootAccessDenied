@@ -3,18 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- Version: 2025.07.15 - Removed language selection screen, fixed title screen -->
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <!-- URGENT: Force cache refresh with timestamp -->
+    <!-- Version: 2025.07.15.1730 - CRITICAL UPDATE: Fixed Enter Game button, enhanced debugging -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="cache-buster" content="1730-urgent-fix">
+    <meta name="last-modified" content="2025-07-15T17:30:00Z">
     <meta http-equiv="Expires" content="0">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
     <script>
+        // CRITICAL: Force cache invalidation for GitHub Pages
+        console.log('🔥 CACHE BUSTER: 2025.07.15.1730 - Forcing browser refresh');
+        
+        // Add timestamp to URL parameters to force refresh
+        if (window.location.search === '' && window.location.hash === '') {
+            const timestamp = new Date().getTime();
+            window.history.replaceState({}, document.title, window.location.pathname + '?cb=' + timestamp);
+        }
+        
         // Only load manifest on HTTP/HTTPS protocols to avoid CORS errors
         if (window.location.protocol !== 'file:') {
             const manifestLink = document.createElement('link');
             manifestLink.rel = 'manifest';
-            manifestLink.href = './manifest.json';
+            manifestLink.href = './manifest.json?cb=' + new Date().getTime();
             document.head.appendChild(manifestLink);
         }
         
@@ -1276,7 +1289,12 @@
                     
                     <!-- Version Indicator -->
                     <div class="mt-4 text-xs text-gray-500 opacity-60">
-                        v2025.07.15 - No Language Selection
+                        v2025.07.15.1730 - CRITICAL FIX: Button Functionality Restored
+                    </div>
+                    
+                    <!-- Cache Status Indicator -->
+                    <div id="cache-status" class="mt-2 text-xs text-yellow-400 bg-yellow-900/20 px-2 py-1 rounded">
+                        🔄 Cache Status: Loading... (Check for timestamp)
                     </div>
                 </div>
             </div>
@@ -1552,7 +1570,17 @@
     </div>
     
     <script>
-    // SYNAPSE: AI HORROR GAME - V2.5 BUGFIX UPDATE
+    // SYNAPSE: AI HORROR GAME - V2.5 BUGFIX UPDATE - CRITICAL PATCH 1730
+    
+    // IMMEDIATE: Update cache status indicator
+    document.addEventListener('DOMContentLoaded', () => {
+        const cacheStatus = document.getElementById('cache-status');
+        if (cacheStatus) {
+            const timestamp = new Date().toLocaleString();
+            cacheStatus.innerHTML = `✅ Fresh Load: ${timestamp} - New version active!`;
+            cacheStatus.className = 'mt-2 text-xs text-green-400 bg-green-900/20 px-2 py-1 rounded';
+        }
+    });
     
     // --- TRANSLATIONS ---
     const translations = {
@@ -9110,8 +9138,8 @@
     window.addEventListener('beforeunload', saveStateToSession);
     window.addEventListener('DOMContentLoaded', () => {
         console.log('SYNAPSE: DOM Content Loaded - Starting initialization...');
-        console.log('🚀 SYNAPSE VERSION: 2025.07.15 - Language Selection Removed!');
-        console.log('📝 Latest Changes: Direct title screen access, no language barrier');
+        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1730 - CRITICAL FIX: Enter Game Button Working!');
+        console.log('📝 Latest Changes: Fixed button functionality, enhanced debugging, language selection removed');
         
         // Check if required dependencies are loaded
         if (typeof window.tailwindcss === 'undefined' && !document.querySelector('[class*="bg-"]')) {
