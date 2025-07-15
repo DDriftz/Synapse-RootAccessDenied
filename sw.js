@@ -1,4 +1,4 @@
-const CACHE_NAME = 'synapse-horror-v1.0.2-hotfix-1730';
+const CACHE_NAME = 'synapse-horror-v1.0.3-pwa-install-feature';
 const urlsToCache = [
   './',
   './index.html',

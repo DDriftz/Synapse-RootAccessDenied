@@ -1261,6 +1261,11 @@
                         <button id="title-lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
                         <button id="title-lang-es-btn" data-lang="es_lang_short" data-text="ES" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">ES</button>
                         <button id="title-lang-ar-btn" data-lang="ar_lang_short" data-text="AR" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">AR</button>
+                        <button id="title-lang-zh-btn" data-lang="zh_lang_short" data-text="ZH" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">ZH</button>
+                        <!-- PWA Install Button -->
+                        <button id="pwa-install-btn" class="button text-xs !px-2 !py-1 btn-drip ml-2 hidden" title="Install App">
+                            📱 Install
+                        </button>
                         <button id="title-lang-fr-btn" data-lang="fr_lang_short" data-text="FR" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">FR</button>
                         <button id="title-lang-de-btn" data-lang="de_lang_short" data-text="DE" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">DE</button>
                         <button id="title-lang-it-btn" data-lang="it_lang_short" data-text="IT" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">IT</button>
@@ -1592,6 +1597,23 @@
                 <div id="hotkey-help" class="text-xs text-gray-500 hidden">
                     <span data-lang="hotkeys">F1:Help | F2:Inventory | F3:Map | F4:Journal | F5:Save | ESC:Menu</span>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PWA Install Popup -->
+    <div id="pwa-install-popup" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+        <div class="bg-gray-900 border border-green-500 rounded-lg p-6 max-w-sm mx-4 text-center">
+            <div class="text-4xl mb-4">📱</div>
+            <h3 class="text-xl font-bold text-green-400 mb-4">Install SYNAPSE</h3>
+            <p class="text-gray-300 mb-6">Install SYNAPSE as an app for the best experience. Access it anytime, even offline!</p>
+            <div class="flex gap-3 justify-center">
+                <button id="pwa-install-confirm" class="button px-4 py-2">
+                    Install Now
+                </button>
+                <button id="pwa-install-dismiss" class="button opacity-50 px-4 py-2">
+                    Maybe Later
+                </button>
             </div>
         </div>
     </div>
@@ -5366,7 +5388,7 @@
         }
     };
 
-    // 60 Ending Achievements (one per ending)
+    // 90 Ending Achievements (one per ending)
     const achievements = {
         // Ending achievements (auto-generated, one per ending)
         ...Object.fromEntries(Object.keys(endings || {}).map(key => [
@@ -5374,7 +5396,7 @@
             { title_key: `ach_ending_${key}_title`, req_key: `ach_ending_${key}_req`, check: () => GameState.unlockedEndings && GameState.unlockedEndings[key] }
         ])),
 
-        // 10 General/Early-game achievements
+        // 20 General/Early-game achievements (doubled from 10)
         'first_step': { title_key: 'ach_first_step_title', req_key: 'ach_first_step_req', check: () => GameState.turnCount > 0 },
         'explorer': { title_key: 'ach_explorer_title', req_key: 'ach_explorer_req', check: () => GameState.visitedRooms.size >= 5 },
         'pack_rat': { title_key: 'ach_pack_rat_title', req_key: 'ach_pack_rat_req', check: () => GameState.inventory.reduce((sum, item) => sum + (item?.weight || 1), 0) >= MAX_INVENTORY_WEIGHT },
@@ -5386,15 +5408,26 @@
         'first_secret': { title_key: 'ach_first_secret_title', req_key: 'ach_first_secret_req', check: () => GameState.flags.firstSecret },
         'first_death': { title_key: 'ach_first_death_title', req_key: 'ach_first_death_req', check: () => GameState.flags.firstDeath },
         'first_save': { title_key: 'ach_first_save_title', req_key: 'ach_first_save_req', check: () => GameState.flags.firstSave },
+        // 10 new general achievements
+        'newbie_investigator': { title_key: 'ach_newbie_investigator_title', req_key: 'ach_newbie_investigator_req', check: () => GameState.turnCount >= 5 && GameState.flags.firstExamine },
+        'cautious_explorer': { title_key: 'ach_cautious_explorer_title', req_key: 'ach_cautious_explorer_req', check: () => GameState.visitedRooms.size >= 3 && GameState.sanityLevel > 80 },
+        'item_collector': { title_key: 'ach_item_collector_title', req_key: 'ach_item_collector_req', check: () => GameState.inventory.length >= 3 },
+        'command_user': { title_key: 'ach_command_user_title', req_key: 'ach_command_user_req', check: () => GameState.flags.usedHelpCommand },
+        'first_interaction': { title_key: 'ach_first_interaction_title', req_key: 'ach_first_interaction_req', check: () => GameState.flags.firstInteraction },
+        'inventory_manager': { title_key: 'ach_inventory_manager_title', req_key: 'ach_inventory_manager_req', check: () => GameState.flags.checkedInventory },
+        'room_observer': { title_key: 'ach_room_observer_title', req_key: 'ach_room_observer_req', check: () => GameState.flags.lookedAround >= 5 },
+        'safety_first': { title_key: 'ach_safety_first_title', req_key: 'ach_safety_first_req', check: () => GameState.sanityLevel === 100 && GameState.turnCount >= 10 },
+        'beginner_luck': { title_key: 'ach_beginner_luck_title', req_key: 'ach_beginner_luck_req', check: () => GameState.flags.foundItemFirstTry },
+        'tutorial_graduate': { title_key: 'ach_tutorial_graduate_title', req_key: 'ach_tutorial_graduate_req', check: () => GameState.turnCount >= 15 && GameState.visitedRooms.size >= 4 },
 
-        // 15 Challenge achievements
+        // 30 Challenge achievements (doubled from 15)
         'speedrunner': { title_key: 'ach_speedrunner_title', req_key: 'ach_speedrunner_req', check: () => GameState.turnCount < 30 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
         'ironman': { title_key: 'ach_ironman_title', req_key: 'ach_ironman_req', check: () => GameState.flags.noDeath && Object.keys(GameState.unlockedEndings || {}).length > 0 },
         'minimalist': { title_key: 'ach_minimalist_title', req_key: 'ach_minimalist_req', check: () => GameState.inventory.length <= 2 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
         'pacifist': { title_key: 'ach_pacifist_title', req_key: 'ach_pacifist_req', check: () => GameState.flags.noCombat && Object.keys(GameState.unlockedEndings || {}).length > 0 },
         'hoarder': { title_key: 'ach_hoarder_title', req_key: 'ach_hoarder_req', check: () => GameState.inventory.length >= 15 },
         'all_endings': { title_key: 'ach_all_endings_title', req_key: 'ach_all_endings_req', check: () => Object.keys(GameState.unlockedEndings || {}).length === Object.keys(endings || {}).length },
-        'all_achievements': { title_key: 'ach_all_achievements_title', req_key: 'ach_all_achievements_req', check: () => Object.keys(GameState.achievements || {}).length === 80 },
+        'all_achievements': { title_key: 'ach_all_achievements_title', req_key: 'ach_all_achievements_req', check: () => Object.keys(GameState.achievements || {}).length === 170 },
         'no_items': { title_key: 'ach_no_items_title', req_key: 'ach_no_items_req', check: () => GameState.inventory.length === 0 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
         'max_stats': { title_key: 'ach_max_stats_title', req_key: 'ach_max_stats_req', check: () => GameState.sanityLevel === GameState.maxSanity && GameState.awarenessLevel === 100 },
         'no_saves': { title_key: 'ach_no_saves_title', req_key: 'ach_no_saves_req', check: () => GameState.flags.noSave && Object.keys(GameState.unlockedEndings || {}).length > 0 },
@@ -5404,8 +5437,25 @@
             'speedrunner','ironman','minimalist','pacifist','hoarder','all_endings','all_achievements','no_items','max_stats','no_saves','hardcore','easy_mode'
         ].every(id => GameState.achievements.includes(id)) },
         'challenge_master': { title_key: 'ach_challenge_master_title', req_key: 'ach_challenge_master_req', check: () => GameState.achievements.filter(id => id.startsWith('ach_') && id.includes('challenge')).length >= 10 },
+        'nightmare_mode': { title_key: 'ach_nightmare_mode_title', req_key: 'ach_nightmare_mode_req', check: () => GameState.difficulty === Difficulty.Nightmare && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        // 15 new challenge achievements
+        'ultra_speedrunner': { title_key: 'ach_ultra_speedrunner_title', req_key: 'ach_ultra_speedrunner_req', check: () => GameState.turnCount < 20 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'legendary_speedrunner': { title_key: 'ach_legendary_speedrunner_title', req_key: 'ach_legendary_speedrunner_req', check: () => GameState.turnCount < 15 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'extreme_minimalist': { title_key: 'ach_extreme_minimalist_title', req_key: 'ach_extreme_minimalist_req', check: () => GameState.inventory.length === 0 && GameState.turnCount < 25 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'perfect_memory': { title_key: 'ach_perfect_memory_title', req_key: 'ach_perfect_memory_req', check: () => GameState.flags.noHints && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'one_try_wonder': { title_key: 'ach_one_try_wonder_title', req_key: 'ach_one_try_wonder_req', check: () => GameState.flags.solvedAllPuzzlesFirstTry },
+        'endurance_runner': { title_key: 'ach_endurance_runner_title', req_key: 'ach_endurance_runner_req', check: () => GameState.turnCount > 200 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'sanity_keeper': { title_key: 'ach_sanity_keeper_title', req_key: 'ach_sanity_keeper_req', check: () => GameState.sanityLevel > 90 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'awareness_warrior': { title_key: 'ach_awareness_warrior_title', req_key: 'ach_awareness_warrior_req', check: () => GameState.awarenessLevel > 95 && GameState.sanityLevel > 50 },
+        'multi_ending_master': { title_key: 'ach_multi_ending_master_title', req_key: 'ach_multi_ending_master_req', check: () => Object.keys(GameState.unlockedEndings || {}).length >= 10 },
+        'backstory_explorer': { title_key: 'ach_backstory_explorer_title', req_key: 'ach_backstory_explorer_req', check: () => GameState.flags.playedAllBackstories },
+        'difficulty_master': { title_key: 'ach_difficulty_master_title', req_key: 'ach_difficulty_master_req', check: () => GameState.flags.completedAllDifficulties },
+        'flawless_victory': { title_key: 'ach_flawless_victory_title', req_key: 'ach_flawless_victory_req', check: () => GameState.sanityLevel === 100 && GameState.awarenessLevel === 0 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'chaos_theory': { title_key: 'ach_chaos_theory_title', req_key: 'ach_chaos_theory_req', check: () => GameState.sanityLevel < 20 && GameState.awarenessLevel > 80 && Object.keys(GameState.unlockedEndings || {}).length > 0 },
+        'completionist_supreme': { title_key: 'ach_completionist_supreme_title', req_key: 'ach_completionist_supreme_req', check: () => Object.keys(GameState.unlockedEndings || {}).length >= 50 },
+        'achievement_hunter': { title_key: 'ach_achievement_hunter_title', req_key: 'ach_achievement_hunter_req', check: () => Object.keys(GameState.achievements || {}).length >= 100 },
 
-        // 15 Secret achievements
+        // 30 Secret achievements (doubled from 15)
         'secret_1': { title_key: 'ach_secret_1_title', req_key: 'ach_secret_1_req', check: () => GameState.flags.secret1 },
         'secret_2': { title_key: 'ach_secret_2_title', req_key: 'ach_secret_2_req', check: () => GameState.flags.secret2 },
         'secret_3': { title_key: 'ach_secret_3_title', req_key: 'ach_secret_3_req', check: () => GameState.flags.secret3 },
@@ -5421,6 +5471,22 @@
         'secret_13': { title_key: 'ach_secret_13_title', req_key: 'ach_secret_13_req', check: () => GameState.flags.secret13 },
         'secret_14': { title_key: 'ach_secret_14_title', req_key: 'ach_secret_14_req', check: () => GameState.flags.secret14 },
         'secret_15': { title_key: 'ach_secret_15_title', req_key: 'ach_secret_15_req', check: () => GameState.flags.secret15 },
+        // 15 new secret achievements
+        'secret_16': { title_key: 'ach_secret_16_title', req_key: 'ach_secret_16_req', check: () => GameState.flags.secret16 },
+        'secret_17': { title_key: 'ach_secret_17_title', req_key: 'ach_secret_17_req', check: () => GameState.flags.secret17 },
+        'secret_18': { title_key: 'ach_secret_18_title', req_key: 'ach_secret_18_req', check: () => GameState.flags.secret18 },
+        'secret_19': { title_key: 'ach_secret_19_title', req_key: 'ach_secret_19_req', check: () => GameState.flags.secret19 },
+        'secret_20': { title_key: 'ach_secret_20_title', req_key: 'ach_secret_20_req', check: () => GameState.flags.secret20 },
+        'secret_21': { title_key: 'ach_secret_21_title', req_key: 'ach_secret_21_req', check: () => GameState.flags.secret21 },
+        'secret_22': { title_key: 'ach_secret_22_title', req_key: 'ach_secret_22_req', check: () => GameState.flags.secret22 },
+        'secret_23': { title_key: 'ach_secret_23_title', req_key: 'ach_secret_23_req', check: () => GameState.flags.secret23 },
+        'secret_24': { title_key: 'ach_secret_24_title', req_key: 'ach_secret_24_req', check: () => GameState.flags.secret24 },
+        'secret_25': { title_key: 'ach_secret_25_title', req_key: 'ach_secret_25_req', check: () => GameState.flags.secret25 },
+        'secret_26': { title_key: 'ach_secret_26_title', req_key: 'ach_secret_26_req', check: () => GameState.flags.secret26 },
+        'secret_27': { title_key: 'ach_secret_27_title', req_key: 'ach_secret_27_req', check: () => GameState.flags.secret27 },
+        'secret_28': { title_key: 'ach_secret_28_title', req_key: 'ach_secret_28_req', check: () => GameState.flags.secret28 },
+        'secret_29': { title_key: 'ach_secret_29_title', req_key: 'ach_secret_29_req', check: () => GameState.flags.secret29 },
+        'secret_30': { title_key: 'ach_secret_30_title', req_key: 'ach_secret_30_req', check: () => GameState.flags.secret30 },
 
         // 10 New Exploration Achievements
         'master_explorer': { title_key: 'ach_master_explorer_title', req_key: 'ach_master_explorer_req', check: () => GameState.visitedRooms.size >= 15 },

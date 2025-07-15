@@ -1,7 +1,7 @@
 {
   "name": "SYNAPSE - AI Horror Game",
   "short_name": "SYNAPSE",
-  "description": "A terrifying AI chatbot horror adventure where your awareness level determines survival. Playable in English, Swedish, Spanish, and Arabic.",
+  "description": "A terrifying AI chatbot horror adventure where your awareness level determines survival. Playable in 12 languages including English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Swedish, and Arabic.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
