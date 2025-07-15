@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <!-- URGENT: Force cache refresh with timestamp -->
-    <!-- Version: 2025.07.15.1730 - CRITICAL UPDATE: Fixed Enter Game button, enhanced debugging -->
+    <!-- Version: 2025.07.15.1745 - CRITICAL BUGFIX: GameState initialization and defensive coding -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="cache-buster" content="1730-urgent-fix">
-    <meta name="last-modified" content="2025-07-15T17:30:00Z">
+    <meta name="cache-buster" content="1745-urgent-fix">
+    <meta name="last-modified" content="2025-07-15T17:45:00Z">
     <meta http-equiv="Expires" content="0">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
@@ -1289,7 +1289,7 @@
                     
                     <!-- Version Indicator -->
                     <div class="mt-4 text-xs text-gray-500 opacity-60">
-                        v2025.07.15.1730 - CRITICAL FIX: Button Functionality Restored
+                        v2025.07.15.1745 - CRITICAL BUGFIX: GameState & Button Issues Resolved
                     </div>
                     
                     <!-- Cache Status Indicator -->
@@ -5052,30 +5052,34 @@
     function setLanguage(lang) {
         console.log('setLanguage called with:', lang);
         currentLanguage = lang;
-        UI.langEnBtn.classList.toggle('opacity-50', lang !== 'en');
-        UI.langSvBtn.classList.toggle('opacity-50', lang !== 'sv');
-        UI.langEsBtn.classList.toggle('opacity-50', lang !== 'es');
-        UI.langArBtn.classList.toggle('opacity-50', lang !== 'ar');
-        const setupLangEnBtn = UI.setupLangButtons.children[0];
-        const setupLangSvBtn = UI.setupLangButtons.children[1];
-        const setupLangEsBtn = UI.setupLangButtons.children[2];
-        const setupLangArBtn = UI.setupLangButtons.children[3];
-        setupLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
-        setupLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
-        setupLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
-        setupLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
         
-        // Update title screen language buttons
-        if (UI.titleLangButtons) {
-            const titleLangEnBtn = document.getElementById('title-lang-en-btn');
-            const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
-            const titleLangEsBtn = document.getElementById('title-lang-es-btn');
-            const titleLangArBtn = document.getElementById('title-lang-ar-btn');
-            if (titleLangEnBtn) titleLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
-            if (titleLangSvBtn) titleLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
-            if (titleLangEsBtn) titleLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
-            if (titleLangArBtn) titleLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
+        // Safely update start screen language buttons (if they exist)
+        if (UI.langEnBtn) UI.langEnBtn.classList.toggle('opacity-50', lang !== 'en');
+        if (UI.langSvBtn) UI.langSvBtn.classList.toggle('opacity-50', lang !== 'sv');
+        if (UI.langEsBtn) UI.langEsBtn.classList.toggle('opacity-50', lang !== 'es');
+        if (UI.langArBtn) UI.langArBtn.classList.toggle('opacity-50', lang !== 'ar');
+        
+        // Safely update setup screen language buttons (if they exist)
+        if (UI.setupLangButtons && UI.setupLangButtons.children) {
+            const setupLangEnBtn = UI.setupLangButtons.children[0];
+            const setupLangSvBtn = UI.setupLangButtons.children[1];
+            const setupLangEsBtn = UI.setupLangButtons.children[2];
+            const setupLangArBtn = UI.setupLangButtons.children[3];
+            if (setupLangEnBtn) setupLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
+            if (setupLangSvBtn) setupLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
+            if (setupLangEsBtn) setupLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
+            if (setupLangArBtn) setupLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
         }
+        
+        // Update title screen language buttons (always find fresh references)
+        const titleLangEnBtn = document.getElementById('title-lang-en-btn');
+        const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
+        const titleLangEsBtn = document.getElementById('title-lang-es-btn');
+        const titleLangArBtn = document.getElementById('title-lang-ar-btn');
+        if (titleLangEnBtn) titleLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
+        if (titleLangSvBtn) titleLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
+        if (titleLangEsBtn) titleLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
+        if (titleLangArBtn) titleLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
 
         document.querySelectorAll('[data-lang]').forEach(el => { 
             const translatedText = t(el.dataset.lang);
@@ -5490,6 +5494,12 @@
     }
 
     function playSound(soundKey, options = {}) {
+        // Defensive checks for GameState structure
+        if (!GameState || !GameState.settings || !GameState.settings.sound) {
+            console.warn('⚠️ GameState.settings.sound not available, skipping sound');
+            return;
+        }
+        
         if (!audioInitialized || !sounds[soundKey] || !GameState.settings.sound.master) return;
         
         if (soundKey === 'itemPickup' && !GameState.settings.sound.item) return;
@@ -9138,8 +9148,8 @@
     window.addEventListener('beforeunload', saveStateToSession);
     window.addEventListener('DOMContentLoaded', () => {
         console.log('SYNAPSE: DOM Content Loaded - Starting initialization...');
-        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1730 - CRITICAL FIX: Enter Game Button Working!');
-        console.log('📝 Latest Changes: Fixed button functionality, enhanced debugging, language selection removed');
+        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1745 - CRITICAL BUGFIX: GameState & Defensive Coding!');
+        console.log('📝 Latest Changes: Fixed GameState initialization issues, defensive button handlers, safer language switching');
         
         // Check if required dependencies are loaded
         if (typeof window.tailwindcss === 'undefined' && !document.querySelector('[class*="bg-"]')) {
@@ -9330,6 +9340,21 @@
                 console.log('📍 Click event:', e);
                 try {
                     console.log('🔊 Initializing audio...');
+                    
+                    // Check if GameState exists and has the required structure
+                    if (!window.GameState) {
+                        console.warn('⚠️ GameState not initialized, creating minimal structure');
+                        window.GameState = { settings: { sound: { master: true } } };
+                    }
+                    if (!GameState.settings) {
+                        console.warn('⚠️ GameState.settings missing, creating default');
+                        GameState.settings = { sound: { master: true } };
+                    }
+                    if (!GameState.settings.sound) {
+                        console.warn('⚠️ GameState.settings.sound missing, creating default');
+                        GameState.settings.sound = { master: true };
+                    }
+                    
                     await initializeAudio();
                     console.log('🔊 Playing UI click sound...');
                     playSound('uiClick');
@@ -9338,6 +9363,14 @@
                     console.log('✅ Handler function completed');
                 } catch (error) {
                     console.error('❌ Error in button click handler:', error);
+                    // Even if audio fails, still try to execute the handler
+                    try {
+                        console.log('🎯 Attempting to call handler despite audio error...');
+                        handler(...args);
+                        console.log('✅ Handler function completed despite audio error');
+                    } catch (handlerError) {
+                        console.error('❌ Handler function also failed:', handlerError);
+                    }
                 }
             });
         };
@@ -9386,6 +9419,14 @@
         console.log('🎮 Setting up Enter Game button...');
         console.log('🎮 UI.enterGameBtn:', UI.enterGameBtn);
         console.log('🎮 showStartScreen function:', showStartScreen);
+        
+        // Add a backup direct event listener as well
+        if (UI.enterGameBtn) {
+            UI.enterGameBtn.addEventListener('click', () => {
+                console.log('🚨 BACKUP: Direct click handler fired for Enter Game button');
+            });
+        }
+        
         setupButtonClick(UI.enterGameBtn, showStartScreen);
 
         setupButtonClick(UI.newGameBtn, () => { 
