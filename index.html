@@ -918,7 +918,134 @@
             50% { border-color: rgba(0, 255, 65, 0.8); }
         }
 
-        /* Enhanced Accessibility */
+        /* Enhanced Navigation Styles */
+        .breadcrumb-item {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 1px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .breadcrumb-item:hover {
+            background: rgba(0, 255, 65, 0.2);
+            border-color: rgba(0, 255, 65, 0.5);
+        }
+        
+        .breadcrumb-item.current {
+            background: rgba(0, 255, 65, 0.3);
+            border-color: var(--main-color);
+            color: var(--main-color);
+        }
+        
+        .room-history-item {
+            padding: 2px 4px;
+            cursor: pointer;
+            border-radius: 2px;
+            transition: background-color 0.2s ease;
+        }
+        
+        .room-history-item:hover {
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 2px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--main-color), #00cc55);
+            transition: width 0.3s ease;
+        }
+        
+        .suggestion-btn {
+            padding: 2px 6px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 11px;
+        }
+        
+        .suggestion-btn:hover {
+            background: rgba(0, 255, 65, 0.2);
+            border-color: var(--main-color);
+        }
+        
+        .achievement-hint {
+            padding: 2px 4px;
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 2px solid rgba(255, 215, 0, 0.3);
+            margin: 1px 0;
+            font-size: 10px;
+        }
+        
+        .interactive-map-marker {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .interactive-map-marker:hover {
+            filter: brightness(1.3);
+            transform: scale(1.1);
+        }
+        
+        .drag-item {
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+        
+        .drag-item:active {
+            cursor: grabbing;
+        }
+        
+        .drag-item.dragging {
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+        
+        .drop-zone {
+            border: 2px dashed transparent;
+            transition: border-color 0.2s ease;
+        }
+        
+        .drop-zone.drag-over {
+            border-color: var(--main-color);
+            background: rgba(0, 255, 65, 0.1);
+        }
+        
+        .hotkey-indicator {
+            opacity: 0.7;
+            font-size: 10px;
+            color: #888;
+        }
+        
+        #autosave-indicator.visible {
+            display: block !important;
+            animation: fadeInOut 2s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        .input-mode-game {
+            border-bottom-color: var(--main-color) !important;
+        }
+        
+        .input-mode-chat {
+            border-bottom-color: #ffd700 !important;
+        }
         .high-contrast {
             filter: contrast(2) saturate(1.5);
         }
@@ -1194,6 +1321,33 @@
                 </div>
 
                 <div id="side-panel" class="w-full md:w-1/4 hidden md:flex flex-col gap-4">
+                    <!-- Breadcrumb Navigation -->
+                    <div id="breadcrumb-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/50">
+                        <h3 class="text-xs font-bold text-cyan-400 mb-2" data-lang="breadcrumb_trail">Trail</h3>
+                        <div id="breadcrumb-container" class="text-xs text-gray-300 space-y-1 max-h-16 overflow-y-auto">
+                            <!-- Breadcrumbs will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Room History Panel -->
+                    <div id="room-history-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/50">
+                        <h3 class="text-xs font-bold text-cyan-400 mb-2" data-lang="recent_rooms">Recent</h3>
+                        <div id="room-history-container" class="text-xs space-y-1 max-h-20 overflow-y-auto">
+                            <!-- Room history will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Auto-Save Indicator -->
+                    <div id="autosave-indicator" class="hidden p-2 border border-green-500 rounded-md bg-green-900/30 text-center">
+                        <span class="text-xs text-green-400">
+                            <svg class="inline w-3 h-3 mr-1 animate-spin" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="m4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span data-lang="auto_saving">Auto Saving...</span>
+                        </span>
+                    </div>
+
                     <div id="stats-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50">
                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2" data-lang="stats_title">STATS</h3>
                         <div id="player-name-display"></div>
@@ -1234,6 +1388,23 @@
                          <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2" data-lang="journal_title">JOURNAL</h3>
                          <ul id="journal-list" class="list-none p-0 text-sm"></ul>
                      </div>
+
+                     <!-- Progress Tracking -->
+                     <div id="progress-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/50">
+                         <h3 class="text-xs font-bold text-cyan-400 mb-2" data-lang="story_progress">Progress</h3>
+                         <div id="progress-tracking-container" class="text-xs space-y-2">
+                             <!-- Progress bars will be populated here -->
+                         </div>
+                     </div>
+
+                     <!-- Achievement Previews -->
+                     <div id="achievement-hints-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/50">
+                         <h3 class="text-xs font-bold text-cyan-400 mb-2" data-lang="achievement_hints">Hints</h3>
+                         <div id="achievement-previews-container" class="text-xs space-y-1 max-h-16 overflow-y-auto">
+                             <!-- Achievement hints will be populated here -->
+                         </div>
+                     </div>
+
                      <div class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50">
                          <button id="view-progression-btn" class="button w-full" data-lang="progress_btn">PROGRESS</button>
                      </div>
@@ -1247,18 +1418,50 @@
                 </svg>
             </div>
 
-            <div class="mt-2 flex items-center border-t-2 border-[var(--main-color-border)] pt-2 gap-2 relative">
-                <div id="autocomplete-box" class="hidden"></div>
-                <button id="status-btn" class="button md:hidden" data-lang="status_btn">Status</button>
-                <span class="text-xl hidden sm:inline">&gt;</span>
-                <input type="text" id="player-input" class="flex-grow bg-transparent text-lg ml-2 focus:outline-none" autocomplete="off" autocapitalize="none" spellcheck="false">
-                <div class="input-caret"></div>
-                <button id="mic-btn" class="button !p-2 ml-2" data-lang-title="mic_tooltip" title="Use Voice Command">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M5 3a3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
-                        <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
-                    </svg>
-                </button>
+            <div class="mt-2 border-t-2 border-[var(--main-color-border)] pt-2 space-y-2">
+                <!-- Context-aware Command Suggestions -->
+                <div id="command-suggestions" class="hidden bg-gray-800 border border-gray-600 rounded p-2">
+                    <div class="text-xs text-cyan-400 mb-1" data-lang="suggested_actions">Suggested Actions:</div>
+                    <div id="suggestion-buttons" class="flex flex-wrap gap-1">
+                        <!-- Command suggestion buttons will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Split Command Input -->
+                <div class="flex flex-col gap-2">
+                    <!-- Game Command Input -->
+                    <div class="flex items-center gap-2 relative">
+                        <div id="autocomplete-box" class="hidden"></div>
+                        <button id="status-btn" class="button md:hidden" data-lang="status_btn">Status</button>
+                        <span class="text-lg text-cyan-400 hidden sm:inline">&gt;</span>
+                        <input type="text" id="player-input" class="flex-grow bg-transparent text-lg focus:outline-none border-b border-gray-600 pb-1" 
+                               placeholder="Enter game command..." autocomplete="off" autocapitalize="none" spellcheck="false">
+                        <div class="input-caret"></div>
+                        <button id="mic-btn" class="button !p-2" data-lang-title="mic_tooltip" title="Use Voice Command">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M5 3a3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
+                                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Chat with SYNAPSE Input -->
+                    <div class="flex items-center gap-2">
+                        <span class="text-lg text-yellow-400 hidden sm:inline">@</span>
+                        <input type="text" id="chat-input" class="flex-grow bg-transparent text-sm focus:outline-none border-b border-gray-700 pb-1 text-yellow-200" 
+                               placeholder="Chat with SYNAPSE..." autocomplete="off" autocapitalize="none" spellcheck="false">
+                        <button id="send-chat-btn" class="button !p-1 text-xs" title="Send to SYNAPSE">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hotkey Help -->
+                <div id="hotkey-help" class="text-xs text-gray-500 hidden">
+                    <span data-lang="hotkeys">F1:Help | F2:Inventory | F3:Map | F4:Journal | F5:Save | ESC:Menu</span>
+                </div>
             </div>
         </div>
     </div>
@@ -2967,6 +3170,28 @@
     let UI = {}; // Initialize empty, will be populated after DOM loads
     let currentTextSpeed = TextSpeed.Normal;
 
+    // Enhanced Navigation System
+    let breadcrumbTrail = [];
+    let progressTracking = {
+        investigation: 0,
+        exploration: 0,
+        interactions: 0,
+        secrets: 0
+    };
+    let commandSuggestions = [];
+    let draggedItem = null;
+    let autoSaveTimeout = null;
+    
+    // Hotkey mappings
+    const HOTKEYS = {
+        'F1': () => showHelpMenu(),
+        'F2': () => showStatusModal(),
+        'F3': () => toggleMapFullscreen(),
+        'F4': () => displayJournal(),
+        'F5': () => saveGame(),
+        'Escape': () => showPauseMenu()
+    };
+
     // --- NEW USER EXPERIENCE SYSTEMS ---
     let sessionStats = {
         startTime: Date.now(),
@@ -2982,8 +3207,28 @@
 
     let roomHistory = {
         visited: [],
-        maxHistory: 10,
-        currentIndex: -1
+        maxHistory: 15,
+        currentIndex: -1,
+        // Enhanced navigation features
+        addRoom: function(roomName) {
+            if (this.visited[this.visited.length - 1] !== roomName) {
+                this.visited.push(roomName);
+                if (this.visited.length > this.maxHistory) {
+                    this.visited.shift();
+                }
+                this.currentIndex = this.visited.length - 1;
+                updateRoomHistoryPanel();
+            }
+        },
+        quickTravel: function(roomName) {
+            if (GameState.visitedRooms.has(roomName) && rooms[roomName]) {
+                GameState.currentRoom = roomName;
+                renderRoom();
+                updateUI();
+                return true;
+            }
+            return false;
+        }
     };
 
     let noteSystem = {
@@ -4240,6 +4485,10 @@
             settings: loadSettings(),
             activeMinigame: null,
             systemLockdownTurns: 0,
+            // Navigation enhancements
+            breadcrumbTrail: [],
+            roomHistory: { visited: [], timestamps: {} },
+            progressTracking: { exploration: 0, objectives: 0, story: 0 }
         };
         applySettings();
     }
@@ -4680,8 +4929,11 @@
     function updateUI() {
         if (!GameState || Object.keys(GameState).length === 0) return;
         
-        // Update breadcrumb navigation
+        // Update enhanced navigation elements
         updateBreadcrumbNavigation();
+        updateRoomHistoryPanel();
+        updateProgressTracking();
+        updateAchievementPreviews();
         
         // Update psychological horror effects
         updateNarratorReliability();
@@ -4705,8 +4957,20 @@
         const currentWeight = GameState.inventory.reduce((sum, item) => sum + (item?.weight || 1), 0);
         UI.inventory.weight.textContent = `${currentWeight}`;
         if(currentWeight >= MAX_INVENTORY_WEIGHT) UI.inventory.weight.parentElement.classList.add('text-red-500'); else UI.inventory.weight.parentElement.classList.remove('text-red-500');
-        // Safely render inventory items, checking if item is defined before accessing its properties
-        UI.inventory.list.innerHTML = GameState.inventory.length > 0 ? GameState.inventory.map(item => `<li>- ${item ? item.name : '[Unknown Item]'}</li>`).join('') : `<li>${t('empty_inventory')}</li>`;
+        
+        // Enhanced inventory rendering with drag and drop
+        if (UI.inventory.list) {
+            UI.inventory.list.innerHTML = GameState.inventory.length > 0 ? 
+                GameState.inventory.map(item => 
+                    `<li class="drag-item drop-zone" draggable="true" 
+                         data-item-name="${item ? item.name : 'unknown'}" 
+                         data-drop-type="use">
+                         - ${item ? item.name : '[Unknown Item]'}
+                     </li>`
+                ).join('') : 
+                `<li>${t('empty_inventory')}</li>`;
+        }
+        
         UI.journal.list.innerHTML = GameState.journalEntries.slice().reverse().map(entry => `<li>${entry}</li>`).join('');
         UI.objectives.list.innerHTML = GameState.objectives.length > 0 ? GameState.objectives.map(obj => `<li>${obj.completed ? `<span class="text-gray-500 line-through">${obj.text}</span>` : `&gt; ${obj.text}`}</li>`).join('') : `<li>${t('no_objectives')}</li>`;
         
@@ -4892,6 +5156,9 @@
             }
         }
         
+        // Update command suggestions for new room
+        updateCommandSuggestions();
+        
         UI.gameOutput.scrollTop = UI.gameOutput.scrollHeight;
         updateUI();
     }
@@ -4945,6 +5212,10 @@
             } else {
                 GameState.currentRoom = nextRoomName;
                 playSound('doorOpen');
+                
+                // Enhanced navigation tracking
+                trackRoomMovement(nextRoomName);
+                
                 renderRoom();
             }
         } else {
@@ -5414,6 +5685,13 @@
                 renderRoom(); 
                 updateUI(); 
                 renderDialogueOptions();
+                // Restore navigation enhancements after UI is ready
+                if (GameState.breadcrumbTrail) breadcrumbTrail = GameState.breadcrumbTrail;
+                if (GameState.roomHistory) roomHistory = GameState.roomHistory;
+                if (GameState.progressTracking) progressTracking = GameState.progressTracking;
+                updateBreadcrumbNavigation();
+                updateRoomHistoryPanel();
+                updateProgressTracking();
             } catch(e) { console.error("Load failed:", e); showModal(t('load_fail')); }
         } else { showModal(t('no_save')); }
     }
@@ -6566,6 +6844,11 @@
         // Save player choices when starting a new game
         savePlayerChoices();
 
+        // Initialize navigation enhancements
+        breadcrumbTrail = GameState.breadcrumbTrail;
+        roomHistory = GameState.roomHistory;
+        progressTracking = GameState.progressTracking;
+
         UI.startScreen.classList.add('hidden');
         UI.playerSetup.classList.add('hidden');
         UI.gameScreen.classList.remove('hidden'); 
@@ -7246,6 +7529,17 @@
             setupSettingsBtn: document.getElementById('setup-settings-btn'),
             setupFeaturesBtn: document.getElementById('setup-features-btn'),
             autocompleteBox: document.getElementById('autocomplete-box'),
+            // Enhanced navigation elements
+            breadcrumbContainer: document.getElementById('breadcrumb-container'),
+            roomHistoryContainer: document.getElementById('room-history-container'),
+            progressTrackingContainer: document.getElementById('progress-tracking-container'),
+            achievementPreviewsContainer: document.getElementById('achievement-previews-container'),
+            commandSuggestions: document.getElementById('command-suggestions'),
+            suggestionButtons: document.getElementById('suggestion-buttons'),
+            autosaveIndicator: document.getElementById('autosave-indicator'),
+            hotkeyHelp: document.getElementById('hotkey-help'),
+            chatInput: document.getElementById('chat-input'),
+            sendChatBtn: document.getElementById('send-chat-btn')
         };
         
         // Validate that critical UI elements were found
@@ -7257,17 +7551,77 @@
         } else {
             console.log('SYNAPSE: All critical UI elements found successfully');
         }
-        
-        // Load player choices first to pre-populate the setup screen
+          // Load player choices first to pre-populate the setup screen
         loadPlayerChoices();
 
+        // Enhanced input handling
         UI.playerInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') { 
-                const input = UI.playerInput.value.trim(); 
-                if(input) { processPlayerInput(input); }
-            } else if (e.key === 'ArrowUp') { e.preventDefault(); if (commandHistory.length > 0) { commandHistoryIndex = Math.max(0, commandHistoryIndex - 1); UI.playerInput.value = commandHistory[commandHistoryIndex] || ''; }
-            } else if (e.key === 'ArrowDown') { e.preventDefault(); if (commandHistory.length > 0) { commandHistoryIndex = Math.min(commandHistory.length, commandHistoryIndex + 1); UI.playerInput.value = commandHistory[commandHistoryIndex] || ''; } }
+                const input = UI.playerInput.value.trim();
+                if(input) { 
+                    processPlayerInput(input); 
+                    hideCommandSuggestions();
+                }
+            } else if (e.key === 'ArrowUp') { 
+                e.preventDefault(); 
+                if (commandHistory.length > 0) { 
+                    commandHistoryIndex = Math.max(0, commandHistoryIndex - 1); 
+                    UI.playerInput.value = commandHistory[commandHistoryIndex] || ''; 
+                }
+            } else if (e.key === 'ArrowDown') { 
+                e.preventDefault(); 
+                if (commandHistory.length > 0) { 
+                    commandHistoryIndex = Math.min(commandHistory.length, commandHistoryIndex + 1); 
+                    UI.playerInput.value = commandHistory[commandHistoryIndex] || ''; 
+                } 
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                if (commandSuggestions.length > 0) {
+                    UI.playerInput.value = commandSuggestions[0];
+                }
+            }
         });
+
+        // Chat input handling
+        UI.chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const input = UI.chatInput.value.trim();
+                if (input) {
+                    handleChatInput(input);
+                }
+            }
+        });
+
+        // Send chat button
+        if (UI.sendChatBtn) {
+            UI.sendChatBtn.addEventListener('click', () => {
+                const input = UI.chatInput.value.trim();
+                if (input) {
+                    handleChatInput(input);
+                }
+            });
+        }
+
+        // Show command suggestions on focus
+        UI.playerInput.addEventListener('focus', () => {
+            updateCommandSuggestions();
+        });
+
+        // Hide suggestions when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (!UI.commandSuggestions.contains(e.target) && e.target !== UI.playerInput) {
+                hideCommandSuggestions();
+            }
+        });
+
+        // Hotkey system
+        document.addEventListener('keydown', handleHotkeys);
+
+        // Initialize drag and drop
+        setupDragAndDrop();
+
+        // Enhance map interactivity
+        enhanceMapInteractivity();
         
         UI.playerInput.addEventListener('input', updateAutocomplete);
         UI.autocompleteBox.addEventListener('click', (e) => {
