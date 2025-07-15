@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- Version: 2025.07.13 - Latest with 60 endings and dialogue fixes -->
+    <!-- Version: 2025.07.15 - Removed language selection screen, fixed title screen -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
     <script>
@@ -1270,6 +1273,11 @@
                     <button id="enter-game-btn" data-lang="enter_game" data-text="Enter the Game" class="button btn-glow btn-drip text-xl px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300">
                         Enter the Game
                     </button>
+                    
+                    <!-- Version Indicator -->
+                    <div class="mt-4 text-xs text-gray-500 opacity-60">
+                        v2025.07.15 - No Language Selection
+                    </div>
                 </div>
             </div>
         </div>
@@ -5014,6 +5022,7 @@
     }
 
     function setLanguage(lang) {
+        console.log('setLanguage called with:', lang);
         currentLanguage = lang;
         UI.langEnBtn.classList.toggle('opacity-50', lang !== 'en');
         UI.langSvBtn.classList.toggle('opacity-50', lang !== 'sv');
@@ -5030,14 +5039,14 @@
         
         // Update title screen language buttons
         if (UI.titleLangButtons) {
-            const titleLangEnBtn = UI.titleLangButtons.children[0];
-            const titleLangSvBtn = UI.titleLangButtons.children[1];
-            const titleLangEsBtn = UI.titleLangButtons.children[2];
-            const titleLangArBtn = UI.titleLangButtons.children[3];
-            titleLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
-            titleLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
-            titleLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
-            titleLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
+            const titleLangEnBtn = document.getElementById('title-lang-en-btn');
+            const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
+            const titleLangEsBtn = document.getElementById('title-lang-es-btn');
+            const titleLangArBtn = document.getElementById('title-lang-ar-btn');
+            if (titleLangEnBtn) titleLangEnBtn.classList.toggle('opacity-50', lang !== 'en');
+            if (titleLangSvBtn) titleLangSvBtn.classList.toggle('opacity-50', lang !== 'sv');
+            if (titleLangEsBtn) titleLangEsBtn.classList.toggle('opacity-50', lang !== 'es');
+            if (titleLangArBtn) titleLangArBtn.classList.toggle('opacity-50', lang !== 'ar');
         }
 
         document.querySelectorAll('[data-lang]').forEach(el => { 
@@ -9101,6 +9110,8 @@
     window.addEventListener('beforeunload', saveStateToSession);
     window.addEventListener('DOMContentLoaded', () => {
         console.log('SYNAPSE: DOM Content Loaded - Starting initialization...');
+        console.log('🚀 SYNAPSE VERSION: 2025.07.15 - Language Selection Removed!');
+        console.log('📝 Latest Changes: Direct title screen access, no language barrier');
         
         // Check if required dependencies are loaded
         if (typeof window.tailwindcss === 'undefined' && !document.querySelector('[class*="bg-"]')) {
@@ -9200,6 +9211,14 @@
             console.log('SYNAPSE: All critical UI elements found successfully');
         }
         
+        // Debug: Check if key elements exist
+        console.log('🔍 Enter Game Button Debug:');
+        console.log('  Element:', UI.enterGameBtn);
+        console.log('  ID:', UI.enterGameBtn?.id);
+        console.log('  Classes:', UI.enterGameBtn?.className);
+        console.log('  Text Content:', UI.enterGameBtn?.textContent);
+        console.log('🔍 Title Lang Buttons Container:', UI.titleLangButtons);
+        
         // Load player choices first to pre-populate the setup screen
         loadPlayerChoices();
 
@@ -9272,20 +9291,45 @@
         });
 
         const setupButtonClick = (button, handler, ...args) => {
-            if (!button) return;
-            button.addEventListener('click', async () => {
-                await initializeAudio();
-                playSound('uiClick');
-                handler(...args);
+            if (!button) {
+                console.error('❌ Button is null in setupButtonClick');
+                return;
+            }
+            console.log('✅ Setting up click handler for button:', button.id || button.className);
+            console.log('📝 Button element details:', button);
+            button.addEventListener('click', async (e) => {
+                console.log('🖱️ Button clicked:', button.id || button.className);
+                console.log('📍 Click event:', e);
+                try {
+                    console.log('🔊 Initializing audio...');
+                    await initializeAudio();
+                    console.log('🔊 Playing UI click sound...');
+                    playSound('uiClick');
+                    console.log('🎯 Calling handler function...');
+                    handler(...args);
+                    console.log('✅ Handler function completed');
+                } catch (error) {
+                    console.error('❌ Error in button click handler:', error);
+                }
             });
         };
 
         // Function to transition from title screen to start screen
         function showStartScreen() {
+            console.log('🎬 showStartScreen called');
+            console.log('📺 Title screen element:', UI.titleScreen);
+            console.log('📺 Start screen element:', UI.startScreen);
+            console.log('📺 Title screen classes before:', UI.titleScreen?.className);
+            console.log('📺 Start screen classes before:', UI.startScreen?.className);
+            
             UI.titleScreen.classList.add('hidden'); 
             UI.titleScreen.classList.remove('flex');
             UI.startScreen.classList.remove('hidden'); 
             UI.startScreen.classList.add('flex');
+            
+            console.log('📺 Title screen classes after:', UI.titleScreen?.className);
+            console.log('📺 Start screen classes after:', UI.startScreen?.className);
+            console.log('✅ Screen transition completed');
         }
 
         // Function to transition from player setup to prologue screen
@@ -9311,6 +9355,9 @@
 
         setupButtonClick(UI.beginMissionBtn, startGame);
 
+        console.log('🎮 Setting up Enter Game button...');
+        console.log('🎮 UI.enterGameBtn:', UI.enterGameBtn);
+        console.log('🎮 showStartScreen function:', showStartScreen);
         setupButtonClick(UI.enterGameBtn, showStartScreen);
 
         setupButtonClick(UI.newGameBtn, () => { 
@@ -9348,10 +9395,17 @@
         const setupLangArBtn = UI.setupLangButtons.children[3];
         
         // Title screen language buttons
-        const titleLangEnBtn = UI.titleLangButtons.children[0];
-        const titleLangSvBtn = UI.titleLangButtons.children[1];
-        const titleLangEsBtn = UI.titleLangButtons.children[2];
-        const titleLangArBtn = UI.titleLangButtons.children[3];
+        const titleLangEnBtn = document.getElementById('title-lang-en-btn');
+        const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
+        const titleLangEsBtn = document.getElementById('title-lang-es-btn');
+        const titleLangArBtn = document.getElementById('title-lang-ar-btn');
+        
+        console.log('Title Language Buttons:', {
+            en: titleLangEnBtn,
+            sv: titleLangSvBtn,
+            es: titleLangEsBtn,
+            ar: titleLangArBtn
+        });
         
         setupButtonClick(UI.langEnBtn, setLanguage, 'en');
         setupButtonClick(UI.langSvBtn, setLanguage, 'sv');
