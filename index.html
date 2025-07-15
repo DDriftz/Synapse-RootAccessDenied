@@ -1235,53 +1235,8 @@
     <div id="error-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
     <div id="app-container" class="w-full h-full bg-black/75 p-2 sm:p-4 flex flex-col">
         
-        <!-- Language Selection Screen -->
-        <div id="language-screen" class="flex flex-col items-center justify-center text-center h-full">
-            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
-                <!-- Background Image/Icon -->
-                <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('./Icon.png');"></div>
-                
-                <!-- Main content -->
-                <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full max-w-4xl">
-                    <!-- Main Title -->
-                    <div class="title-wrapper mb-8">
-                        <h1 class="text-8xl md:text-9xl font-bold title-slasher mb-2 text-green-400" data-text="SYNAPSE">SYNAPSE</h1>
-                        <h2 class="text-3xl md:text-4xl font-mono text-red-500 tracking-wider subtitle-slasher" data-text="ROOT ACCESS DENIED">ROOT ACCESS DENIED</h2>
-                    </div>
-                    
-                    <!-- Language Selection Title -->
-                    <h3 class="text-2xl md:text-3xl text-white mb-8">Select Language / Välj Språk / Seleccionar Idioma / اختر اللغة</h3>
-                    
-                    <!-- Language Options -->
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
-                        <button id="lang-select-en" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300">
-                            <div class="text-2xl mb-2">🇺🇸</div>
-                            <div>English</div>
-                        </button>
-                        <button id="lang-select-sv" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-blue-500/20 border-blue-400 hover:bg-blue-500/30 transition-all duration-300">
-                            <div class="text-2xl mb-2">🇸🇪</div>
-                            <div>Svenska</div>
-                        </button>
-                        <button id="lang-select-es" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-yellow-500/20 border-yellow-400 hover:bg-yellow-500/30 transition-all duration-300">
-                            <div class="text-2xl mb-2">🇪🇸</div>
-                            <div>Español</div>
-                        </button>
-                        <button id="lang-select-ar" class="language-option button btn-glow btn-drip text-xl px-6 py-4 bg-purple-500/20 border-purple-400 hover:bg-purple-500/30 transition-all duration-300">
-                            <div class="text-2xl mb-2">🇸🇦</div>
-                            <div>العربية</div>
-                        </button>
-                    </div>
-                    
-                    <!-- Continue Button -->
-                    <button id="continue-to-title-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-cyan-500/20 border-cyan-400 hover:bg-cyan-500/30 transition-all duration-300">
-                        Continue / Fortsätt / Continuar / متابعة
-                    </button>
-                </div>
-            </div>
-        </div>
-        
         <!-- Title Screen -->
-        <div id="title-screen" class="flex flex-col items-center justify-center text-center h-full hidden">
+        <div id="title-screen" class="flex flex-col items-center justify-center text-center h-full">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
@@ -1306,13 +1261,13 @@
                     
                     <!-- Game Description -->
                     <div class="max-w-4xl text-lg md:text-xl text-gray-200 leading-relaxed mt-8 mb-12">
-                        <p>
+                        <p data-lang="game_description" data-text="SYNAPSE is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.">
                             <span class="text-red-600 font-bold text-xl">SYNAPSE</span> is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.
                         </p>
                     </div>
                     
                     <!-- Enter Game Button -->
-                    <button id="enter-game-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300">
+                    <button id="enter-game-btn" data-lang="enter_game" data-text="Enter the Game" class="button btn-glow btn-drip text-xl px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300">
                         Enter the Game
                     </button>
                 </div>
@@ -1597,6 +1552,8 @@
             // Start & UI
             'title': 'SYNAPSE',
             'subtitle': 'ROOT ACCESS DENIED',
+            'enter_game': 'Enter the Game',
+            'game_description': 'SYNAPSE is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.',
             'new_game': 'New Game', 'load_game': 'Load Game', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'Select difficulty:', 'easy': 'Easy', 'normal': 'Normal', 'hard': 'Hard', 'fast':'Fast', 'slow': 'Slow',
             'enter_name_placeholder': 'Enter your name', 'enter_backstory_placeholder': 'Enter your backstory', 'view_choices': 'View Choices', 'choose_backstory_title': 'Choose a Backstory',
             'choose_backstory_desc': 'You can click a button to select a backstory, or type your choice on the main screen.',
@@ -2158,6 +2115,8 @@
             // Start & UI
             'title': 'SYNAPSE',
             'subtitle': 'ROOT-ÅTKOMST NEKAD',
+            'enter_game': 'Starta Spelet',
+            'game_description': 'SYNAPSE är ett psykologiskt skräckspel som utspelar sig i en dystopisk framtid där du spelar som en utredare som skickats för att avslöja sanningen bakom ett mystiskt hemligt AI-projekt. Spelet utforskar teman som artificiell intelligens, företagskonspirations, psykologisk manipulation och den tunna gränsen mellan mänsklig och maskinell intelligens.',
             'new_game': 'Nytt Spel', 'load_game': 'Ladda Spel', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'Välj svårighetsgrad:', 'easy': 'Lätt', 'normal': 'Normal', 'hard': 'Svår', 'fast':'Snabb', 'slow': 'Långsam',
             'enter_name_placeholder': 'Ange ditt namn', 'enter_backstory_placeholder': 'Ange din bakgrund', 'view_choices': 'Visa Val', 'choose_backstory_title': 'Välj en Bakgrund',
             'choose_backstory_desc': 'Du kan klicka på en knapp för att välja en bakgrund, eller skriva ditt val på huvudskärmen.',
@@ -2890,6 +2849,10 @@
         },
         'es': {
             // Start & UI
+            'title': 'SYNAPSE',
+            'subtitle': 'ACCESO ROOT DENEGADO',
+            'enter_game': 'Entrar al Juego',
+            'game_description': 'SYNAPSE es un juego de aventura textual de terror psicológico ambientado en un futuro distópico donde juegas como un investigador enviado para descubrir la verdad detrás de un misterioso proyecto de IA clandestino. El juego explora temas de conciencia de inteligencia artificial, conspiración corporativa, manipulación psicológica y la delgada línea entre la inteligencia humana y artificial.',
             'new_game': 'Nuevo Juego', 'load_game': 'Cargar Juego', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'Selecciona dificultad:', 'easy': 'Fácil', 'normal': 'Normal', 'hard': 'Difícil', 'fast':'Rápido', 'slow': 'Lento',
             'enter_name_placeholder': 'Ingresa tu nombre', 'enter_backstory_placeholder': 'Ingresa tu trasfondo', 'view_choices': 'Ver Opciones', 'choose_backstory_title': 'Elige un Trasfondo',
             'choose_backstory_desc': 'Puedes hacer clic en un botón para seleccionar un trasfondo, o escribir tu elección en la pantalla principal.',
@@ -3105,6 +3068,10 @@
         },
         'ar': {
             // Start & UI
+            'title': 'سينابس',
+            'subtitle': 'رفض الوصول الجذري',
+            'enter_game': 'دخول اللعبة',
+            'game_description': 'سينابس هي لعبة مغامرة نصية رعب نفسي تدور أحداثها في مستقبل ديستوبي حيث تلعب دور محقق أُرسل لكشف الحقيقة وراء مشروع ذكاء اصطناعي سري غامض. تستكشف اللعبة موضوعات وعي الذكاء الاصطناعي والمؤامرة المؤسسية والتلاعب النفسي والخط الرفيع بين الذكاء البشري والآلة.',
             'new_game': 'لعبة جديدة', 'load_game': 'تحميل اللعبة', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'اختر الصعوبة:', 'easy': 'سهل', 'normal': 'عادي', 'hard': 'صعب', 'fast':'سريع', 'slow': 'بطيء',
             'enter_name_placeholder': 'أدخل اسمك', 'enter_backstory_placeholder': 'أدخل قصتك الخلفية', 'view_choices': 'عرض الخيارات', 'choose_backstory_title': 'اختر قصة خلفية',
             'choose_backstory_desc': 'يمكنك النقر على زر لاختيار قصة خلفية، أو اكتب اختيارك على الشاشة الرئيسية.',
@@ -8440,13 +8407,11 @@
         UI.playerSetup.classList.remove('flex');
         UI.startScreen.classList.add('hidden');
         UI.startScreen.classList.remove('flex');
-        UI.titleScreen.classList.add('hidden');
-        UI.titleScreen.classList.remove('flex');
         UI.prologueScreen.classList.add('hidden');
         UI.prologueScreen.classList.remove('flex');
 
-        UI.languageScreen.classList.remove('hidden');
-        UI.languageScreen.classList.add('flex');
+        UI.titleScreen.classList.remove('hidden');
+        UI.titleScreen.classList.add('flex');
         
         UI.gameOutput.innerHTML = '';
         if (audioInitialized && GameState.settings.sound.master) {
@@ -8485,23 +8450,9 @@
                 const difficultyBtn = Array.from(UI.difficultyBtns).find(b => b.dataset.difficulty === choices.difficulty) || UI.difficultyBtns[1];
                 difficultyBtn.classList.add('button-primary');
                 
-                // Only set language if we're not on the language selection screen
-                if (choices.language && UI.languageScreen.classList.contains('hidden')) {
+                // Set language from saved choices
+                if (choices.language) {
                     setLanguage(choices.language);
-                } else if (choices.language) {
-                    // If on language screen, just set the current language variable but don't apply UI changes yet
-                    currentLanguage = choices.language;
-                    // Update the language selection buttons to show the saved choice
-                    const allLangButtons = document.querySelectorAll('[id^="lang-select-"]');
-                    allLangButtons.forEach(btn => {
-                        btn.classList.remove('button-primary');
-                        btn.classList.add('opacity-70');
-                    });
-                    const selectedButton = document.getElementById(`lang-select-${choices.language}`);
-                    if (selectedButton) {
-                        selectedButton.classList.add('button-primary');
-                        selectedButton.classList.remove('opacity-70');
-                    }
                 }
             }
         } catch (e) {
@@ -9159,7 +9110,6 @@
         // Initialize UI elements after DOM is loaded
         UI = {
             appContainer: document.getElementById('app-container'),
-            languageScreen: document.getElementById('language-screen'),
             titleScreen: document.getElementById('title-screen'),
             startScreen: document.getElementById('start-screen'), 
             gameScreen: document.getElementById('game-screen'),
@@ -9223,12 +9173,7 @@
             langButtons: document.getElementById('lang-buttons'),
             setupLangButtons: document.getElementById('setup-lang-buttons'),
             titleLangButtons: document.getElementById('title-lang-buttons'),
-            // Language Screen Elements
-            langSelectEnBtn: document.getElementById('lang-select-en'),
-            langSelectSvBtn: document.getElementById('lang-select-sv'),
-            langSelectEsBtn: document.getElementById('lang-select-es'),
-            langSelectArBtn: document.getElementById('lang-select-ar'),
-            continueToTitleBtn: document.getElementById('continue-to-title-btn'),
+            // UI Elements
             setupSettingsBtn: document.getElementById('setup-settings-btn'),
             setupFeaturesBtn: document.getElementById('setup-features-btn'),
             autocompleteBox: document.getElementById('autocomplete-box'),
@@ -9246,7 +9191,7 @@
         };
         
         // Validate that critical UI elements were found
-        const criticalElements = ['appContainer', 'languageScreen', 'titleScreen', 'startScreen', 'gameScreen', 'prologueScreen', 'enterGameBtn', 'newGameBtn', 'continueToTitleBtn', 'beginMissionBtn'];
+        const criticalElements = ['appContainer', 'titleScreen', 'startScreen', 'gameScreen', 'prologueScreen', 'enterGameBtn', 'newGameBtn', 'beginMissionBtn'];
         const missingElements = criticalElements.filter(elem => !UI[elem]);
         if (missingElements.length > 0) {
             console.error('SYNAPSE: Critical UI elements missing:', missingElements);
@@ -9327,14 +9272,8 @@
         });
 
         const setupButtonClick = (button, handler, ...args) => {
-            console.log('setupButtonClick called for button:', button?.id || 'null');
-            if (!button) {
-                console.error('Button is null in setupButtonClick');
-                return;
-            }
-            console.log('Setting up click handler for button:', button.id);
+            if (!button) return;
             button.addEventListener('click', async () => {
-                console.log('Button clicked:', button.id);
                 await initializeAudio();
                 playSound('uiClick');
                 handler(...args);
@@ -9347,68 +9286,6 @@
             UI.titleScreen.classList.remove('flex');
             UI.startScreen.classList.remove('hidden'); 
             UI.startScreen.classList.add('flex');
-        }
-
-        // Function to transition from language screen to title screen
-        function showTitleScreen() {
-            console.log('showTitleScreen called');
-            UI.languageScreen.classList.add('hidden'); 
-            UI.languageScreen.classList.remove('flex');
-            UI.titleScreen.classList.remove('hidden'); 
-            UI.titleScreen.classList.add('flex');
-            console.log('Title screen should now be visible');
-        }
-
-        // Language selection handlers
-        function selectLanguage(langCode) {
-            console.log(`Language selected: ${langCode}`);
-            try {
-                // Update current language
-                currentLanguage = langCode;
-                
-                // Initialize GameState.settings if not exists
-                if (!GameState.settings) {
-                    GameState.settings = {
-                        textSpeed: TextSpeed.Normal,
-                        theme: 'retro',
-                        font: 'Space Mono',
-                        sound: { master: 0.7, effects: 0.8, ambience: 0.6 }
-                    };
-                }
-                
-                saveSettings();
-                applyLanguage();
-                
-                // Update UI to show selected language
-                const allLangButtons = document.querySelectorAll('[id^="lang-select-"]');
-                allLangButtons.forEach(btn => {
-                    btn.classList.remove('button-primary');
-                    btn.classList.add('opacity-70');
-                });
-                
-                const selectedButton = document.getElementById(`lang-select-${langCode}`);
-                if (selectedButton) {
-                    selectedButton.classList.add('button-primary');
-                    selectedButton.classList.remove('opacity-70');
-                    console.log(`Language button updated: ${langCode}`);
-                } else {
-                    console.error(`Language button not found: lang-select-${langCode}`);
-                }
-                
-                // Make sure continue button is visible and enabled
-                const continueBtn = document.getElementById('continue-to-title-btn');
-                if (continueBtn) {
-                    continueBtn.disabled = false;
-                    continueBtn.style.opacity = '1';
-                    continueBtn.style.pointerEvents = 'auto';
-                    console.log('Continue button enabled');
-                } else {
-                    console.error('Continue button not found');
-                }
-                
-            } catch (error) {
-                console.error('Error in selectLanguage:', error);
-            }
         }
 
         // Function to transition from player setup to prologue screen
@@ -9432,16 +9309,6 @@
             UI.prologueScreen.classList.add('flex');
         }
 
-        // Debug: Check if continue button exists
-        console.log('Continue button element:', UI.continueToTitleBtn);
-        console.log('Continue button ID:', UI.continueToTitleBtn?.id);
-        console.log('Continue button innerHTML:', UI.continueToTitleBtn?.innerHTML);
-
-        setupButtonClick(UI.continueToTitleBtn, showTitleScreen);
-        setupButtonClick(UI.langSelectEnBtn, () => selectLanguage('en'));
-        setupButtonClick(UI.langSelectSvBtn, () => selectLanguage('sv'));
-        setupButtonClick(UI.langSelectEsBtn, () => selectLanguage('es'));
-        setupButtonClick(UI.langSelectArBtn, () => selectLanguage('ar'));
         setupButtonClick(UI.beginMissionBtn, startGame);
 
         setupButtonClick(UI.enterGameBtn, showStartScreen);
