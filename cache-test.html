@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYNAPSE Cache Test</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+        body { 
+            font-family: monospace; 
+            background: #000; 
+            color: #0f0; 
+            padding: 20px; 
+            text-align: center;
+        }
+        .status { 
+            border: 2px solid #0f0; 
+            padding: 20px; 
+            margin: 20px; 
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 SYNAPSE Cache Status Test</h1>
+    <div class="status">
+        <h2>Version: 2025.07.15.1730 - CRITICAL UPDATE</h2>
+        <p>✅ If you can see this page, the cache has been refreshed!</p>
+        <p>📅 Generated: <span id="timestamp"></span></p>
+        <p>🌐 Go back to: <a href="index.html" style="color: #0f0;">SYNAPSE Game</a></p>
+    </div>
+    
+    <script>
+        document.getElementById('timestamp').textContent = new Date().toLocaleString();
+        console.log('SYNAPSE Cache Test - Generated at:', new Date().toISOString());
+    </script>
+</body>
+</html>
