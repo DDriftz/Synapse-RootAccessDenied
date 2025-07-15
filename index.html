@@ -10,7 +10,8 @@
     <meta http-equiv="Expires" content="0">
     <meta name="cache-buster" content="1800-press-any-key">
     <meta name="last-modified" content="2025-07-15T18:00:00Z">
-    <meta http-equiv="Expires" content="0">
+    <!-- Content Security Policy for enhanced security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com;">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
     <script>
@@ -42,11 +43,11 @@
             };
         }
     </script>
-    <script src="https://cdn.tailwindcss.com" onerror="console.error('Failed to load Tailwind CSS')"></script>
+    <script src="https://cdn.tailwindcss.com" crossorigin="anonymous" onerror="console.error('Failed to load Tailwind CSS')"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Mono&family=Courier+Prime&display=swap" rel="stylesheet" onerror="console.error('Failed to load Google Fonts')">
-    <script src="https://unpkg.com/tone@15.0.4/build/Tone.js" onerror="console.error('Failed to load Tone.js')"></script>
+    <script src="https://unpkg.com/tone@15.0.4/build/Tone.js" crossorigin="anonymous" onerror="console.error('Failed to load Tone.js')"></script>
     <style>
         :root {
             --main-color: #00ff41;
@@ -67,7 +68,7 @@
             background-color: #0d0d0d;
             color: var(--main-color);
             font-family: 'Space Mono', monospace;
-            position: fixed; 
+            min-height: 100vh; 
         }
         #background-canvas {
             position: fixed;
