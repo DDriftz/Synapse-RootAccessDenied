@@ -4485,10 +4485,6 @@
             settings: loadSettings(),
             activeMinigame: null,
             systemLockdownTurns: 0,
-            // Navigation enhancements
-            breadcrumbTrail: [],
-            roomHistory: { visited: [], timestamps: {} },
-            progressTracking: { exploration: 0, objectives: 0, story: 0 }
         };
         applySettings();
     }
@@ -4929,11 +4925,8 @@
     function updateUI() {
         if (!GameState || Object.keys(GameState).length === 0) return;
         
-        // Update enhanced navigation elements
+        // Update breadcrumb navigation
         updateBreadcrumbNavigation();
-        updateRoomHistoryPanel();
-        updateProgressTracking();
-        updateAchievementPreviews();
         
         // Update psychological horror effects
         updateNarratorReliability();
@@ -4958,19 +4951,35 @@
         UI.inventory.weight.textContent = `${currentWeight}`;
         if(currentWeight >= MAX_INVENTORY_WEIGHT) UI.inventory.weight.parentElement.classList.add('text-red-500'); else UI.inventory.weight.parentElement.classList.remove('text-red-500');
         
-        // Enhanced inventory rendering with drag and drop
-        if (UI.inventory.list) {
-            UI.inventory.list.innerHTML = GameState.inventory.length > 0 ? 
-                GameState.inventory.map(item => 
-                    `<li class="drag-item drop-zone" draggable="true" 
-                         data-item-name="${item ? item.name : 'unknown'}" 
-                         data-drop-type="use">
-                         - ${item ? item.name : '[Unknown Item]'}
-                     </li>`
-                ).join('') : 
-                `<li>${t('empty_inventory')}</li>`;
+        // Enhanced inventory rendering with drag-and-drop and quick-use capabilities
+        if (GameState.inventory.length > 0) {
+            UI.inventory.list.innerHTML = GameState.inventory.map((item, index) => {
+                if (!item) return '<li class="text-red-400">- [Unknown Item]</li>';
+                return `<li class="inventory-item flex items-center justify-between p-2 mb-1 rounded border border-gray-600 hover:border-[var(--main-color)] transition-colors cursor-grab" 
+                    draggable="true" 
+                    data-item-index="${index}" 
+                    data-item-name="${item.name.toLowerCase()}">
+                    <span class="flex-1">- ${item.name}</span>
+                    <div class="flex gap-1">
+                        <button class="quick-use-btn text-xs px-2 py-1 bg-blue-600 hover:bg-blue-500 rounded transition-colors" 
+                            data-item-name="${item.name.toLowerCase()}" 
+                            title="Quick Use">
+                            ⚡
+                        </button>
+                        <button class="quick-combine-btn text-xs px-2 py-1 bg-green-600 hover:bg-green-500 rounded transition-colors" 
+                            data-item-name="${item.name.toLowerCase()}" 
+                            title="Quick Combine">
+                            🔗
+                        </button>
+                    </div>
+                </li>`;
+            }).join('');
+            
+            // Setup drag-and-drop for inventory items
+            setupInventoryDragDrop();
+        } else {
+            UI.inventory.list.innerHTML = `<li>${t('empty_inventory')}</li>`;
         }
-        
         UI.journal.list.innerHTML = GameState.journalEntries.slice().reverse().map(entry => `<li>${entry}</li>`).join('');
         UI.objectives.list.innerHTML = GameState.objectives.length > 0 ? GameState.objectives.map(obj => `<li>${obj.completed ? `<span class="text-gray-500 line-through">${obj.text}</span>` : `&gt; ${obj.text}`}</li>`).join('') : `<li>${t('no_objectives')}</li>`;
         
@@ -5155,9 +5164,6 @@
                 await showGuidance(t(hintKey, {item: objName}));
             }
         }
-        
-        // Update command suggestions for new room
-        updateCommandSuggestions();
         
         UI.gameOutput.scrollTop = UI.gameOutput.scrollHeight;
         updateUI();
@@ -5685,13 +5691,6 @@
                 renderRoom(); 
                 updateUI(); 
                 renderDialogueOptions();
-                // Restore navigation enhancements after UI is ready
-                if (GameState.breadcrumbTrail) breadcrumbTrail = GameState.breadcrumbTrail;
-                if (GameState.roomHistory) roomHistory = GameState.roomHistory;
-                if (GameState.progressTracking) progressTracking = GameState.progressTracking;
-                updateBreadcrumbNavigation();
-                updateRoomHistoryPanel();
-                updateProgressTracking();
             } catch(e) { console.error("Load failed:", e); showModal(t('load_fail')); }
         } else { showModal(t('no_save')); }
     }
@@ -6844,11 +6843,6 @@
         // Save player choices when starting a new game
         savePlayerChoices();
 
-        // Initialize navigation enhancements
-        breadcrumbTrail = GameState.breadcrumbTrail;
-        roomHistory = GameState.roomHistory;
-        progressTracking = GameState.progressTracking;
-
         UI.startScreen.classList.add('hidden');
         UI.playerSetup.classList.add('hidden');
         UI.gameScreen.classList.remove('hidden'); 
@@ -7551,17 +7545,14 @@
         } else {
             console.log('SYNAPSE: All critical UI elements found successfully');
         }
-          // Load player choices first to pre-populate the setup screen
+        
+        // Load player choices first to pre-populate the setup screen
         loadPlayerChoices();
 
-        // Enhanced input handling
         UI.playerInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') { 
-                const input = UI.playerInput.value.trim();
-                if(input) { 
-                    processPlayerInput(input); 
-                    hideCommandSuggestions();
-                }
+                const input = UI.playerInput.value.trim(); 
+                if(input) { processPlayerInput(input); }
             } else if (e.key === 'ArrowUp') { 
                 e.preventDefault(); 
                 if (commandHistory.length > 0) { 
@@ -7576,23 +7567,27 @@
                 } 
             } else if (e.key === 'Tab') {
                 e.preventDefault();
-                if (commandSuggestions.length > 0) {
-                    UI.playerInput.value = commandSuggestions[0];
+                // Show command suggestions when Tab is pressed
+                if (UI.commandSuggestions && UI.commandSuggestions.classList.contains('hidden')) {
+                    updateCommandSuggestions();
+                } else {
+                    hideCommandSuggestions();
                 }
             }
         });
 
-        // Chat input handling
-        UI.chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const input = UI.chatInput.value.trim();
-                if (input) {
-                    handleChatInput(input);
+        // Chat input event listeners
+        if (UI.chatInput) {
+            UI.chatInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const input = e.target.value.trim();
+                    if (input) {
+                        handleChatInput(input);
+                    }
                 }
-            }
-        });
+            });
+        }
 
-        // Send chat button
         if (UI.sendChatBtn) {
             UI.sendChatBtn.addEventListener('click', () => {
                 const input = UI.chatInput.value.trim();
@@ -7602,26 +7597,8 @@
             });
         }
 
-        // Show command suggestions on focus
-        UI.playerInput.addEventListener('focus', () => {
-            updateCommandSuggestions();
-        });
-
-        // Hide suggestions when clicking elsewhere
-        document.addEventListener('click', (e) => {
-            if (!UI.commandSuggestions.contains(e.target) && e.target !== UI.playerInput) {
-                hideCommandSuggestions();
-            }
-        });
-
-        // Hotkey system
+        // Global hotkey listener
         document.addEventListener('keydown', handleHotkeys);
-
-        // Initialize drag and drop
-        setupDragAndDrop();
-
-        // Enhance map interactivity
-        enhanceMapInteractivity();
         
         UI.playerInput.addEventListener('input', updateAutocomplete);
         UI.autocompleteBox.addEventListener('click', (e) => {
