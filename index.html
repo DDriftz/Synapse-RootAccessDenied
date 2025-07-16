@@ -8,7 +8,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="cache-buster" content="1900-clean-title-screen">
+    <meta name="cache-buster" content="1900-removed-title-screen">
     <meta name="last-modified" content="2025-07-15T18:00:00Z">
     <!-- Content Security Policy for enhanced security -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com;">
@@ -574,13 +574,13 @@
         .modal-scroll { overflow-y: auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        #language-screen, #title-screen, #start-screen, #player-setup, #prologue-screen {
+        #language-screen, #start-screen, #player-setup, #prologue-screen {
             background-image: url('./Icon.png');
             background-size: cover; background-position: center; background-repeat: no-repeat;
         }
         
         /* Make all game screens fullscreen within app-container */
-        #title-screen, #start-screen, #player-setup, #prologue-screen, #game-screen {
+        #start-screen, #player-setup, #prologue-screen, #game-screen {
             position: absolute;
             top: 0;
             left: 0;
@@ -592,7 +592,7 @@
         }
         
         /* Ensure proper display when screens are shown */
-        #title-screen.flex, #start-screen.flex, #player-setup.flex, #prologue-screen.flex, #game-screen.flex {
+        #start-screen.flex, #player-setup.flex, #prologue-screen.flex, #game-screen.flex {
             display: flex !important;
             flex-direction: column !important;
             align-items: center !important;
@@ -603,7 +603,7 @@
         }
         
         /* Hide screens when they have hidden class */
-        #title-screen.hidden, #start-screen.hidden, #player-setup.hidden, #prologue-screen.hidden, #game-screen.hidden {
+        #start-screen.hidden, #player-setup.hidden, #prologue-screen.hidden, #game-screen.hidden {
             display: none !important;
         }
         
@@ -1332,55 +1332,7 @@
     <div id="error-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
     <div id="app-container" class="bg-black/90 p-4 rounded-lg border border-green-500/30 flex flex-col shadow-2xl">
         
-        <!-- Title Screen -->
-        <div id="title-screen" class="flex flex-col items-center justify-center text-center">
-            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
-                <!-- Header for lang buttons -->
-                <div class="w-full flex justify-end p-2">
-                    <div id="title-lang-buttons" class="flex gap-1 flex-wrap">
-                        <button id="title-lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
-                        <button id="title-lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
-                    </div>
-                </div>
-                
-                <!-- Background Image/Icon -->
-                <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('./Icon.png');"></div>
-                
-                <!-- Main content -->
-                <div class="relative z-10 flex flex-col items-center justify-center text-center px-4 w-full max-w-6xl -mt-16">
-                    <!-- Main Title -->
-                    <div class="title-wrapper mb-6">
-                        <h1 class="text-8xl md:text-9xl font-bold title-slasher mb-2 text-green-400" data-text="SYNAPSE">SYNAPSE</h1>
-                        <h2 class="text-3xl md:text-4xl font-mono text-red-500 tracking-wider subtitle-slasher" data-text="ROOT ACCESS DENIED">ROOT ACCESS DENIED</h2>
-                    </div>
-                    
-                    <!-- Game Description -->
-                    <div class="max-w-4xl text-lg md:text-xl text-gray-200 leading-relaxed mt-8 mb-12">
-                        <p data-lang="game_description" data-text="SYNAPSE is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.">
-                            <span class="text-red-600 font-bold text-xl">SYNAPSE</span> is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.
-                        </p>
-                    </div>
-                    
-                    <!-- Enter Game Button -->
-                    <button id="title-enter-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300 mb-8">
-                        Enter Game
-                    </button>
-
-                    
-                    <!-- Version Indicator -->
-                    <div class="mt-4 text-xs text-gray-500 opacity-60">
-                        v2025.07.15.1900 - LANGUAGES: Support for English and Swedish only (EN, SV)
-                    </div>
-                    
-                    <!-- Cache Status Indicator -->
-                    <div id="cache-status" class="mt-2 text-xs text-yellow-400 bg-yellow-900/20 px-2 py-1 rounded">
-                        🔄 Cache Status: Loading... (Check for timestamp)
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div id="start-screen" class="hidden flex-col items-center justify-center text-center">
+        <div id="start-screen" class="flex flex-col items-center justify-center text-center">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
@@ -1407,6 +1359,16 @@
                 <div class="w-full flex flex-wrap justify-between items-center p-2 gap-2">
                     <button id="start-settings-btn" data-lang="settings_btn" data-text="Settings" class="button btn-glow btn-drip">Settings</button>
                     <button id="view-features-btn" data-lang="understand_game" data-text="Understand the Game" class="button btn-glow btn-drip">Understand the Game</button>
+                </div>
+                
+                <!-- Version and Cache Status -->
+                <div class="w-full text-center px-4 pb-2">
+                    <div class="text-xs text-gray-500 opacity-60 mb-1">
+                        v2025.07.15.1900 - LANGUAGES: Support for English and Swedish only (EN, SV)
+                    </div>
+                    <div id="cache-status" class="text-xs text-yellow-400 bg-yellow-900/20 px-2 py-1 rounded">
+                        🔄 Cache Status: Loading... (Check for timestamp)
+                    </div>
                 </div>
             </div>
         </div>
@@ -4951,12 +4913,6 @@
             });
         }
         
-        // Update title screen language buttons (always find fresh references)
-        languages.forEach(langCode => {
-            const btn = document.getElementById(`title-lang-${langCode}-btn`);
-            if (btn) btn.classList.toggle('opacity-50', lang !== langCode);
-        });
-
         document.querySelectorAll('[data-lang]').forEach(el => { 
             const translatedText = t(el.dataset.lang);
             el.textContent = translatedText;
@@ -7809,13 +7765,12 @@
         UI.gameScreen.classList.remove('flex');
         UI.playerSetup.classList.add('hidden');
         UI.playerSetup.classList.remove('flex');
-        UI.startScreen.classList.add('hidden');
-        UI.startScreen.classList.remove('flex');
         UI.prologueScreen.classList.add('hidden');
         UI.prologueScreen.classList.remove('flex');
 
-        UI.titleScreen.classList.remove('hidden');
-        UI.titleScreen.classList.add('flex');
+        UI.startScreen.classList.remove('hidden');
+        UI.startScreen.classList.add('flex');
+        setupIntro();
         
         UI.gameOutput.innerHTML = '';
         if (audioInitialized && GameState.settings.sound.master) {
@@ -8505,8 +8460,8 @@
     window.addEventListener('beforeunload', saveStateToSession);
     window.addEventListener('DOMContentLoaded', () => {
         console.log('SYNAPSE: DOM Content Loaded - Starting initialization...');
-        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1800 - IMPROVED: Clean title screen');
-        console.log('📝 Latest Changes: Removed Enter Game button and Press any key interaction from title screen');
+        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1900 - REMOVED: Title screen completely');
+        console.log('📝 Latest Changes: Removed title screen HTML, CSS, and JavaScript - game starts directly on start screen');
         
         // Check if required dependencies are loaded
         if (typeof window.tailwindcss === 'undefined' && !document.querySelector('[class*="bg-"]')) {
@@ -8516,12 +8471,10 @@
         // Initialize UI elements after DOM is loaded
         UI = {
             appContainer: document.getElementById('app-container'),
-            titleScreen: document.getElementById('title-screen'),
             startScreen: document.getElementById('start-screen'), 
             gameScreen: document.getElementById('game-screen'),
             prologueScreen: document.getElementById('prologue-screen'),
 
-            titleEnterBtn: document.getElementById('title-enter-btn'),
             newGameBtn: document.getElementById('new-game-btn'), 
             loadGameBtn: document.getElementById('load-game-btn'), 
             viewFeaturesBtn: document.getElementById('view-features-btn'),
@@ -8577,7 +8530,6 @@
             langSvBtn: document.getElementById('lang-sv-btn'),
             langButtons: document.getElementById('lang-buttons'),
             setupLangButtons: document.getElementById('setup-lang-buttons'),
-            titleLangButtons: document.getElementById('title-lang-buttons'),
             // UI Elements
             setupSettingsBtn: document.getElementById('setup-settings-btn'),
             setupFeaturesBtn: document.getElementById('setup-features-btn'),
@@ -8596,7 +8548,7 @@
         };
         
         // Validate that critical UI elements were found
-        const criticalElements = ['appContainer', 'titleScreen', 'startScreen', 'gameScreen', 'prologueScreen', 'newGameBtn', 'beginMissionBtn'];
+        const criticalElements = ['appContainer', 'startScreen', 'gameScreen', 'prologueScreen', 'newGameBtn', 'beginMissionBtn'];
         const missingElements = criticalElements.filter(elem => !UI[elem]);
         if (missingElements.length > 0) {
             console.error('SYNAPSE: Critical UI elements missing:', missingElements);
@@ -8604,10 +8556,6 @@
         } else {
             console.log('SYNAPSE: All critical UI elements found successfully');
         }
-        
-        // Debug: Check if key elements exist
-
-        console.log('🔍 Title Lang Buttons Container:', UI.titleLangButtons);
         
         // Load player choices first to pre-populate the setup screen
         loadPlayerChoices();
@@ -8727,24 +8675,6 @@
             });
         };
 
-        // Function to transition from title screen to start screen
-        function showStartScreen() {
-            console.log('🎬 showStartScreen called');
-            console.log('📺 Title screen element:', UI.titleScreen);
-            console.log('📺 Start screen element:', UI.startScreen);
-            console.log('📺 Title screen classes before:', UI.titleScreen?.className);
-            console.log('📺 Start screen classes before:', UI.startScreen?.className);
-            
-            UI.titleScreen.classList.add('hidden'); 
-            UI.titleScreen.classList.remove('flex');
-            UI.startScreen.classList.remove('hidden'); 
-            UI.startScreen.classList.add('flex');
-            
-            console.log('📺 Title screen classes after:', UI.titleScreen?.className);
-            console.log('📺 Start screen classes after:', UI.startScreen?.className);
-            console.log('✅ Screen transition completed');
-        }
-
         // Function to transition from player setup to prologue screen
         function showPrologueScreen() {
             // Prepare game state first
@@ -8769,14 +8699,6 @@
         setupButtonClick(UI.beginMissionBtn, startGame);
 
 
-
-        setupButtonClick(UI.titleEnterBtn, () => {
-            UI.titleScreen.classList.add('hidden');
-            UI.titleScreen.classList.remove('flex');
-            UI.startScreen.classList.remove('hidden');
-            UI.startScreen.classList.add('flex');
-            setupIntro();
-        });
 
         setupButtonClick(UI.newGameBtn, () => { 
             sessionStorage.removeItem('synapse_session_v15_autosave'); 
@@ -8812,21 +8734,10 @@
         const setupLangEsBtn = UI.setupLangButtons.children[2];
         const setupLangArBtn = UI.setupLangButtons.children[3];
         
-        // Title screen language buttons
-        const titleLangEnBtn = document.getElementById('title-lang-en-btn');
-        const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
-        
-        console.log('Title Language Buttons:', {
-            en: titleLangEnBtn,
-            sv: titleLangSvBtn
-        });
-        
         setupButtonClick(UI.langEnBtn, setLanguage, 'en');
         setupButtonClick(UI.langSvBtn, setLanguage, 'sv');
         setupButtonClick(setupLangEnBtn, setLanguage, 'en');
         setupButtonClick(setupLangSvBtn, setLanguage, 'sv');
-        setupButtonClick(titleLangEnBtn, setLanguage, 'en');
-        setupButtonClick(titleLangSvBtn, setLanguage, 'sv');
 
         setupButtonClick(UI.setupSettingsBtn, () => showSettingsModal(false));
         setupButtonClick(UI.setupFeaturesBtn, showFeaturesModal);
@@ -8878,11 +8789,9 @@
 
         if (!restored) {
             resetGameState();
-            // Show title screen by default and hide all others
-            UI.titleScreen.classList.remove('hidden');
-            UI.titleScreen.classList.add('flex');
-            UI.startScreen.classList.add('hidden');
-            UI.startScreen.classList.remove('flex');
+            // Show start screen by default and hide all others
+            UI.startScreen.classList.remove('hidden');
+            UI.startScreen.classList.add('flex');
             UI.playerSetup.classList.add('hidden');
             UI.playerSetup.classList.remove('flex');
             UI.prologueScreen.classList.add('hidden');
@@ -8891,6 +8800,7 @@
             UI.gameScreen.classList.remove('flex');
             // Language is already set by loadPlayerChoices, no need to re-set here
             // setLanguage('en'); 
+            setupIntro();
             setTimeout(() => {
                 const playerLayout = roomLayout[GameState.currentRoom];
                 if(playerLayout && UI.mapCanvas.offsetWidth > 0 && UI.mapCanvas.offsetHeight > 0) {
