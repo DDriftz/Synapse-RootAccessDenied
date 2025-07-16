@@ -11,7 +11,7 @@
     <meta name="cache-buster" content="1900-removed-title-screen">
     <meta name="last-modified" content="2025-07-15T18:00:00Z">
     <!-- Content Security Policy for enhanced security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; worker-src 'self' blob:; connect-src 'self' https:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; worker-src 'self' blob:; connect-src 'self' https:;">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
     <script>
@@ -32,32 +32,19 @@
             document.head.appendChild(manifestLink);
         }
         
-        // Suppress Tailwind CDN production warning
-        if (typeof console !== 'undefined' && console.warn) {
-            const originalWarn = console.warn;
-            console.warn = function(message) {
-                if (typeof message === 'string' && message.includes('cdn.tailwindcss.com should not be used in production')) {
-                    return; // Suppress this specific warning
-                }
-                originalWarn.apply(console, arguments);
-            };
+        // Cache control and manifest loading
+        if (window.location.protocol !== 'file:') {
+            const manifestLink = document.createElement('link');
+            manifestLink.rel = 'manifest';
+            manifestLink.href = './manifest.json?cb=' + new Date().getTime();
+            document.head.appendChild(manifestLink);
         }
     </script>
     
-    <!-- Conditional loading for external resources -->
+    <!-- Local Tailwind CSS - No CDN dependency -->
     <script>
-        // Load Tailwind CSS only if not running from file protocol
-        if (window.location.protocol !== 'file:') {
-            const tailwindScript = document.createElement('script');
-            tailwindScript.src = 'https://cdn.tailwindcss.com';
-            tailwindScript.crossOrigin = 'anonymous';
-            tailwindScript.onerror = function() {
-                console.warn('Tailwind CSS CDN failed to load - using fallback styles');
-            };
-            document.head.appendChild(tailwindScript);
-        } else {
-            console.log('Running from file:// - Tailwind CSS CDN skipped to avoid CORS issues');
-        }
+        // Note: Removed CDN dependency - using comprehensive fallback styles instead
+        console.log('Using local fallback styles instead of Tailwind CDN for reliability');
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -4819,11 +4806,24 @@
             alert('App installation not supported in this browser. Please bookmark this page for easy access.');
         }
     }
+    // Enhanced feature detection for Web Speech API
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (window.SpeechRecognition) {
+        console.log('Web Speech API is supported');
+    } else {
+        console.warn('Web Speech API is not supported in this browser');
+    }
+    
     let recognition;
-    if (SpeechRecognition) {
-        recognition = new SpeechRecognition();
-        recognition.continuous = false;
-        recognition.interimResults = false;
+    if (window.SpeechRecognition) {
+        try {
+            recognition = new window.SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+        } catch (error) {
+            console.error('Failed to initialize SpeechRecognition:', error);
+            window.SpeechRecognition = null;
+        }
     }
     
     // --- GAME DATA ---
@@ -5906,6 +5906,19 @@
 
     async function initializeAudio() { 
         if (audioInitialized) return; 
+        
+        // Feature detection for Web Audio API
+        if (!window.Tone) {
+            console.warn('Tone.js not available - audio features disabled');
+            return;
+        }
+        
+        // Check if AudioContext is supported
+        if (!window.AudioContext && !window.webkitAudioContext) {
+            console.warn('Web Audio API not supported - audio features disabled');
+            return;
+        }
+        
         try {
             // Create sounds with local synthesis instead of external URLs to avoid CORS issues
             sounds.uiClick = new Tone.Synth({ 
@@ -5971,13 +5984,18 @@
         if (soundKey === 'sanityLoss' && !GameState.settings.sound.sanity) return;
 
         try {
-            // Ensure AudioContext is started before playing sounds
-            if (Tone.context.state !== 'running') {
+            // Only start AudioContext in response to user gesture and with error handling
+            if (window.Tone && Tone.context && Tone.context.state !== 'running') {
+                // AudioContext must be started by user interaction
                 Tone.start().then(() => {
                     playActualSound(soundKey, options);
-                }).catch(e => console.warn('Could not start audio context:', e));
-            } else {
+                }).catch(e => {
+                    console.warn('Could not start audio context (user interaction required):', e);
+                });
+            } else if (window.Tone && Tone.context) {
                 playActualSound(soundKey, options);
+            } else {
+                console.warn('Tone.js not available for audio playback');
             }
         } catch (e) {
             if (!e.message.includes('cancelScheduledValues')) {
@@ -8635,7 +8653,7 @@
     }
 
     function startSpeechRecognition() {
-        if (!SpeechRecognition) {
+        if (!window.SpeechRecognition || !recognition) {
             typeWriter(UI.gameOutput, "[SYSTEM] Speech recognition is not supported in your browser.", '#ff474c');
             return;
         }
@@ -9338,7 +9356,7 @@
         UI.difficultyBtns.forEach(btn => { setupButtonClick(btn, () => { UI.difficultyBtns.forEach(b => b.classList.remove('button-primary')); btn.classList.add('button-primary'); updateAbilityDisplay(); }); });
         UI.playerBackstoryInput.addEventListener('input', updateAbilityDisplay);
         
-        if (SpeechRecognition) {
+        if (window.SpeechRecognition && recognition) {
             setupButtonClick(UI.micBtn, startSpeechRecognition);
         } else {
             UI.micBtn.style.display = 'none';
@@ -9511,13 +9529,17 @@
     let voiceControlActive = false;
 
     function initializeVoiceControl() {
-        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+        if (!window.SpeechRecognition) {
             console.warn('Speech recognition not supported in this browser');
             return false;
         }
 
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        voiceRecognition = new SpeechRecognition();
+        try {
+            voiceRecognition = new window.SpeechRecognition();
+        } catch (error) {
+            console.error('Failed to create SpeechRecognition instance:', error);
+            return false;
+        }
         
         voiceRecognition.continuous = true;
         voiceRecognition.interimResults = false;
@@ -10662,7 +10684,7 @@
             }
             
             // Auto-enable voice control by default if supported
-            if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            if (window.SpeechRecognition) {
                 console.log('Speech recognition is supported in this browser');
                 GameState.settings.voiceCommands = true;
                 saveSettings();
