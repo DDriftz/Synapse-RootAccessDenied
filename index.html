@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <!-- URGENT: Force cache refresh with timestamp -->
-    <!-- Version: 2025.07.15.2000 - LANGUAGES: English and Swedish only (ES, AR completely removed) -->
+    <!-- Version: 2025.07.15.2000 - LANGUAGES: English and Swedish only 
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -1332,42 +1332,46 @@
     <div id="error-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
     <div id="app-container" class="bg-black/90 p-4 rounded-lg border border-green-500/30 flex flex-col shadow-2xl">
         
-        <div id="start-screen" class="flex flex-col items-center justify-center text-center">
-            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
-                <!-- Header for lang buttons -->
-                <div class="w-full flex justify-end p-2">
-                    <div id="lang-buttons" class="flex gap-1 flex-wrap">
-                        <button id="lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
-                        <button id="lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
-                    </div>
-                </div>
-
-                <!-- Main content flex-grow -->
-                <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full">
-                    <div class="title-wrapper -mt-16 sm:-mt-20">
-                        <h1 id="game-title" data-lang="title" data-text="SYNAPSE" class="text-7xl md:text-9xl font-bold title-slasher mb-2">SYNAPSE</h1>
-                        <h2 data-lang="subtitle" data-text="ROOT ACCESS DENIED" class="text-2xl md:text-3xl font-mono text-red-500 tracking-wider subtitle-slasher -mt-2 mb-4">ROOT ACCESS DENIED</h2>
-                    </div>
-                    <div id="intro-text-container" class="max-w-4xl text-sm md:text-base text-white mt-8 sm:mt-12"></div>
-                    <div id="start-options" class="mt-10 flex flex-wrap justify-center gap-4">
-                        <button id="new-game-btn" data-lang="new_game" data-text="New Game" class="button btn-glow btn-drip">New Game</button>
-                        <button id="load-game-btn" data-lang="load_game" data-text="Load Game" class="button btn-glow btn-drip">Load Game</button>
-                    </div>
-                </div>
-
-                <!-- Footer for other buttons -->
-                <div class="w-full flex flex-wrap justify-between items-center p-2 gap-2">
-                    <button id="start-settings-btn" data-lang="settings_btn" data-text="Settings" class="button btn-glow btn-drip">Settings</button>
-                    <button id="view-features-btn" data-lang="understand_game" data-text="Understand the Game" class="button btn-glow btn-drip">Understand the Game</button>
-                </div>
+        <div id="start-screen" class="flex flex-col items-center justify-center text-center relative min-h-screen">
+            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative min-h-screen">
                 
-                <!-- Version and Cache Status -->
-                <div class="w-full text-center px-4 pb-2">
-                    <div class="text-xs text-gray-500 opacity-60 mb-1">
-                        v2025.07.15.1900 - LANGUAGES: Support for English and Swedish only (EN, SV)
+                <!-- English button - Left Upper Corner -->
+                <div class="absolute top-4 left-4 z-30">
+                    <button id="lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-sm px-3 py-1 btn-drip bg-green-600/20 border-green-400 text-green-400">EN</button>
+                </div>
+
+                <!-- Swedish button - Right Upper Corner -->
+                <div class="absolute top-4 right-4 z-30">
+                    <button id="lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-sm px-3 py-1 btn-drip bg-green-600/10 border-green-400/50 text-green-400/50 opacity-50">SV</button>
+                </div>
+
+                <!-- Settings button - Left Lower Corner -->
+                <div class="absolute bottom-4 left-4 z-30">
+                    <button id="start-settings-btn" data-lang="settings_btn" data-text="Settings" class="button btn-glow btn-drip bg-blue-600/20 border-blue-400 text-blue-400">Settings</button>
+                </div>
+
+                <!-- Understand the Game button - Right Lower Corner -->
+                <div class="absolute bottom-4 right-4 z-30">
+                    <button id="view-features-btn" data-lang="understand_game" data-text="Understand the Game" class="button btn-glow btn-drip bg-cyan-600/20 border-cyan-400 text-cyan-400">Understand the Game</button>
+                </div>
+
+                <!-- Main content - Center -->
+                <div class="flex flex-col items-center justify-center text-center px-4 w-full max-w-6xl">
+                    <!-- Main Title with Blood Drip Effect -->
+                    <div class="title-wrapper mb-8 relative">
+                        <h1 id="game-title" data-lang="title" data-text="SYNAPSE" class="text-8xl md:text-9xl font-bold title-slasher mb-4 text-green-400 relative z-10">SYNAPSE</h1>
+                        <h2 data-lang="subtitle" data-text="ROOT ACCESS DENIED" class="text-3xl md:text-4xl font-mono text-red-500 tracking-wider subtitle-slasher">ROOT ACCESS DENIED</h2>
                     </div>
-                    <div id="cache-status" class="text-xs text-yellow-400 bg-yellow-900/20 px-2 py-1 rounded">
-                        🔄 Cache Status: Loading... (Check for timestamp)
+                    
+                    <!-- Game Description -->
+                    <div id="intro-text-container" class="max-w-4xl text-base md:text-lg text-gray-200 leading-relaxed mt-8 mb-8"></div>
+                    
+                    <!-- Game Options -->
+                    <div id="start-options" class="mt-6 flex flex-wrap justify-center gap-6">
+                        <button id="new-game-btn" data-lang="new_game" data-text="New Game" class="button btn-glow btn-drip text-lg px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30">New Game</button>
+                        <button id="load-game-btn" data-lang="load_game" data-text="Load Game" class="button btn-glow btn-drip text-lg px-8 py-3 bg-amber-500/20 border-amber-400 hover:bg-amber-500/30">Load Game</button>
+                    </div>
+                </div>
                     </div>
                 </div>
             </div>
@@ -1611,16 +1615,6 @@
     
     <script>
     // SYNAPSE: AI HORROR GAME - V2.5 BUGFIX UPDATE - CRITICAL PATCH 1730
-    
-    // IMMEDIATE: Update cache status indicator
-    document.addEventListener('DOMContentLoaded', () => {
-        const cacheStatus = document.getElementById('cache-status');
-        if (cacheStatus) {
-            const timestamp = new Date().toLocaleString();
-            cacheStatus.innerHTML = `✅ Fresh Load: ${timestamp} - New version active!`;
-            cacheStatus.className = 'mt-2 text-xs text-green-400 bg-green-900/20 px-2 py-1 rounded';
-        }
-    });
     
     // --- TRANSLATIONS ---
     const translations = {
