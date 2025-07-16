@@ -8252,299 +8252,27 @@
                     <span class="slider"></span>
                 </label>
             </div>
-            
+
             <hr class="border-gray-700 my-4">
-            <h3 class="text-lg text-cyan-400 mb-2">${t('accessibility_settings')}</h3>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('high_contrast_mode')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="contrast-off" class="button text-xs px-3 py-1 ${!settings.highContrast || settings.contrastLevel === 'off' ? 'button-primary' : ''}" data-level="off">${t('contrast_off')}</button>
-                    <button id="contrast-medium" class="button text-xs px-3 py-1 ${settings.contrastLevel === 'medium' ? 'button-primary' : ''}" data-level="medium">${t('contrast_medium')}</button>
-                    <button id="contrast-high" class="button text-xs px-3 py-1 ${settings.contrastLevel === 'high' ? 'button-primary' : ''}" data-level="high">${t('contrast_high')}</button>
-                    <button id="contrast-maximum" class="button text-xs px-3 py-1 ${settings.contrastLevel === 'maximum' ? 'button-primary' : ''}" data-level="maximum">${t('contrast_maximum')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('large_text')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="text-small" class="button text-xs px-3 py-1 ${settings.textSize === 'small' ? 'button-primary' : ''}" data-size="small">${t('text_size_small')}</button>
-                    <button id="text-normal" class="button text-xs px-3 py-1 ${!settings.textSize || settings.textSize === 'normal' ? 'button-primary' : ''}" data-size="normal">${t('text_size_normal')}</button>
-                    <button id="text-large" class="button text-xs px-3 py-1 ${settings.textSize === 'large' ? 'button-primary' : ''}" data-size="large">${t('text_size_large')}</button>
-                    <button id="text-xl" class="button text-xs px-3 py-1 ${settings.textSize === 'xl' ? 'button-primary' : ''}" data-size="xl">${t('text_size_xl')}</button>
-                    <button id="text-xxl" class="button text-xs px-3 py-1 ${settings.textSize === 'xxl' ? 'button-primary' : ''}" data-size="xxl">${t('text_size_xxl')}</button>
-                </div>
-            </div>
-            
+
             <div class="flex items-center justify-between">
-                <span>${t('screen_reader_support')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-screen-reader" ${settings.screenReader ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
+                <span>Voice Control Settings</span>
+                <button id="voice-settings-btn" class="button text-xs">Configure</button>
             </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('reduced_motion')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="motion-full" class="button text-xs px-3 py-1 ${!settings.motionLevel || settings.motionLevel === 'full' ? 'button-primary' : ''}" data-level="full">${t('motion_full')}</button>
-                    <button id="motion-reduced" class="button text-xs px-3 py-1 ${settings.motionLevel === 'reduced' ? 'button-primary' : ''}" data-level="reduced">${t('motion_reduced')}</button>
-                    <button id="motion-minimal" class="button text-xs px-3 py-1 ${settings.motionLevel === 'minimal' ? 'button-primary' : ''}" data-level="minimal">${t('motion_minimal')}</button>
-                    <button id="motion-none" class="button text-xs px-3 py-1 ${settings.motionLevel === 'none' ? 'button-primary' : ''}" data-level="none">${t('motion_none')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('audio_descriptions')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="audio-desc-off" class="button text-xs px-3 py-1 ${!settings.audioDescLevel || settings.audioDescLevel === 'off' ? 'button-primary' : ''}" data-level="off">${t('audio_desc_off')}</button>
-                    <button id="audio-desc-basic" class="button text-xs px-3 py-1 ${settings.audioDescLevel === 'basic' ? 'button-primary' : ''}" data-level="basic">${t('audio_desc_basic')}</button>
-                    <button id="audio-desc-detailed" class="button text-xs px-3 py-1 ${settings.audioDescLevel === 'detailed' ? 'button-primary' : ''}" data-level="detailed">${t('audio_desc_detailed')}</button>
-                    <button id="audio-desc-comprehensive" class="button text-xs px-3 py-1 ${settings.audioDescLevel === 'comprehensive' ? 'button-primary' : ''}" data-level="comprehensive">${t('audio_desc_comprehensive')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('keyboard_navigation')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="keyboard-basic" class="button text-xs px-3 py-1 ${!settings.keyboardLevel || settings.keyboardLevel === 'basic' ? 'button-primary' : ''}" data-level="basic">${t('keyboard_basic')}</button>
-                    <button id="keyboard-enhanced" class="button text-xs px-3 py-1 ${settings.keyboardLevel === 'enhanced' ? 'button-primary' : ''}" data-level="enhanced">${t('keyboard_enhanced')}</button>
-                    <button id="keyboard-full" class="button text-xs px-3 py-1 ${settings.keyboardLevel === 'full' ? 'button-primary' : ''}" data-level="full">${t('keyboard_full')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('focus_indicators')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="focus-subtle" class="button text-xs px-3 py-1 ${!settings.focusLevel || settings.focusLevel === 'subtle' ? 'button-primary' : ''}" data-level="subtle">${t('focus_subtle')}</button>
-                    <button id="focus-clear" class="button text-xs px-3 py-1 ${settings.focusLevel === 'clear' ? 'button-primary' : ''}" data-level="clear">${t('focus_clear')}</button>
-                    <button id="focus-bold" class="button text-xs px-3 py-1 ${settings.focusLevel === 'bold' ? 'button-primary' : ''}" data-level="bold">${t('focus_bold')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('color_blind_support')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="colorblind-none" class="button text-xs px-3 py-1 ${!settings.colorblindType || settings.colorblindType === 'none' ? 'button-primary' : ''}" data-type="none">${t('colorblind_none')}</button>
-                    <button id="colorblind-protanopia" class="button text-xs px-3 py-1 ${settings.colorblindType === 'protanopia' ? 'button-primary' : ''}" data-type="protanopia">${t('colorblind_protanopia')}</button>
-                    <button id="colorblind-deuteranopia" class="button text-xs px-3 py-1 ${settings.colorblindType === 'deuteranopia' ? 'button-primary' : ''}" data-type="deuteranopia">${t('colorblind_deuteranopia')}</button>
-                    <button id="colorblind-tritanopia" class="button text-xs px-3 py-1 ${settings.colorblindType === 'tritanopia' ? 'button-primary' : ''}" data-type="tritanopia">${t('colorblind_tritanopia')}</button>
-                    <button id="colorblind-full" class="button text-xs px-3 py-1 ${settings.colorblindType === 'full' ? 'button-primary' : ''}" data-type="full">${t('colorblind_full')}</button>
-                </div>
-            </div>
-            
+
             <div class="flex items-center justify-between">
-                <span>${t('dyslexia_friendly_font')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-dyslexia-font" ${settings.dyslexiaFont ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
+                <span data-lang="setting_reset_defaults">${t('setting_reset_defaults')}</span>
+                <button id="reset-settings-btn" class="button button-danger text-xs">Reset</button>
             </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('auto_scroll_text')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-auto-scroll" ${settings.autoScroll ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('click_sound_feedback')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-click-feedback" ${settings.clickFeedback ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('simplified_ui')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-simplified-ui" ${settings.simplifiedUI ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('text_to_speech_speed')}</label>
-                <div class="flex gap-2">
-                    <button id="tts-speed-slow" class="button text-xs px-3 py-1" data-speed="0.5">${t('tts_slow')}</button>
-                    <button id="tts-speed-normal" class="button text-xs px-3 py-1 button-primary" data-speed="1">${t('tts_normal')}</button>
-                    <button id="tts-speed-fast" class="button text-xs px-3 py-1" data-speed="1.5">${t('tts_fast')}</button>
-                    <button id="tts-speed-very-fast" class="button text-xs px-3 py-1" data-speed="2">${t('tts_very_fast')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('ui_scale')}</label>
-                <div class="flex gap-2">
-                    <button id="ui-scale-small" class="button text-xs px-3 py-1" data-scale="0.8">${t('ui_small')}</button>
-                    <button id="ui-scale-normal" class="button text-xs px-3 py-1 button-primary" data-scale="1">${t('ui_normal')}</button>
-                    <button id="ui-scale-large" class="button text-xs px-3 py-1" data-scale="1.2">${t('ui_large')}</button>
-                    <button id="ui-scale-xl" class="button text-xs px-3 py-1" data-scale="1.5">${t('ui_extra_large')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('voice_commands')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="voice-off" class="button text-xs px-3 py-1 ${!settings.voiceLevel || settings.voiceLevel === 'off' ? 'button-primary' : ''}" data-level="off">${t('voice_off')}</button>
-                    <button id="voice-basic" class="button text-xs px-3 py-1 ${settings.voiceLevel === 'basic' ? 'button-primary' : ''}" data-level="basic">${t('voice_basic')}</button>
-                    <button id="voice-advanced" class="button text-xs px-3 py-1 ${settings.voiceLevel === 'advanced' ? 'button-primary' : ''}" data-level="advanced">${t('voice_advanced')}</button>
-                    <button id="voice-full" class="button text-xs px-3 py-1 ${settings.voiceLevel === 'full' ? 'button-primary' : ''}" data-level="full">${t('voice_full')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('magnification')}</label>
-                <div class="flex gap-2 flex-wrap">
-                    <button id="magnify-off" class="button text-xs px-3 py-1 ${!settings.magnifyLevel || settings.magnifyLevel === 'off' ? 'button-primary' : ''}" data-level="off">${t('magnify_off')}</button>
-                    <button id="magnify-1-5x" class="button text-xs px-3 py-1 ${settings.magnifyLevel === '1.5x' ? 'button-primary' : ''}" data-level="1.5x">${t('magnify_1_5x')}</button>
-                    <button id="magnify-2x" class="button text-xs px-3 py-1 ${settings.magnifyLevel === '2x' ? 'button-primary' : ''}" data-level="2x">${t('magnify_2x')}</button>
-                    <button id="magnify-3x" class="button text-xs px-3 py-1 ${settings.magnifyLevel === '3x' ? 'button-primary' : ''}" data-level="3x">${t('magnify_3x')}</button>
-                    <button id="magnify-custom" class="button text-xs px-3 py-1 ${settings.magnifyLevel === 'custom' ? 'button-primary' : ''}" data-level="custom">${t('magnify_custom')}</button>
-                </div>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('sticky_keys')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-sticky-keys" ${settings.stickyKeys ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('one_hand_mode')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-one-hand-mode" ${settings.oneHandMode ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('visual_notifications')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-visual-notifications" ${settings.visualNotifications ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('audio_cues')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-audio-cues" ${settings.audioCues ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('reading_support_level')}</label>
-                <div class="flex gap-2">
-                    <button id="reading-basic" class="button text-xs px-3 py-1 button-primary" data-level="basic">${t('reading_basic')}</button>
-                    <button id="reading-enhanced" class="button text-xs px-3 py-1" data-level="enhanced">${t('reading_enhanced')}</button>
-                    <button id="reading-full" class="button text-xs px-3 py-1" data-level="full">${t('reading_full_support')}</button>
-                </div>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-sm font-medium mb-2">${t('motor_assistance')}</label>
-                <div class="flex gap-2">
-                    <button id="motor-none" class="button text-xs px-3 py-1 button-primary" data-level="none">${t('motor_none')}</button>
-                    <button id="motor-basic" class="button text-xs px-3 py-1" data-level="basic">${t('motor_basic')}</button>
-                    <button id="motor-advanced" class="button text-xs px-3 py-1" data-level="advanced">${t('motor_advanced')}</button>
-                </div>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('reading_support')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-reading-support" ${settings.readingSupport ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('voice_control_settings')}</span>
-                <button id="voice-settings-btn" class="button text-xs px-3 py-1">${t('voice_configure')}</button>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('seizure_protection')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-seizure-protection" ${settings.seizureProtection ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('haptic_feedback')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-haptic-feedback" ${settings.hapticFeedback ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('gesture_controls')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-gesture-controls" ${settings.gestureControls ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('cognitive_load_reduction')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-cognitive-load" ${settings.cognitiveLoad ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('eye_tracking_support')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-eye-tracking" ${settings.eyeTracking ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('switch_control')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-switch-control" ${settings.switchControl ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('timeout_extensions')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-timeout-extensions" ${settings.timeoutExtensions ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="flex items-center justify-between">
-                <span>${t('memory_assistance')}</span>
-                <label class="toggle-switch">
-                    <input type="checkbox" id="setting-memory-assistance" ${settings.memoryAssistance ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <hr class="border-gray-700 my-4">
-            
-            <button id="reset-settings-btn" class="button w-full text-yellow-300 border-yellow-300/80">${t('setting_reset_defaults')}</button>
         </div>
         <button class="close-modal-btn button mt-6">${t('close_btn')}</button>`;
+        
         showModal(settingsText, true);
 
         const setupToggle = (id, obj, key) => {
-            const el = document.getElementById(id);
-            if(el) {
-                el.onchange = (e) => {
+            const toggle = document.getElementById(id);
+            if(toggle) {
+                toggle.onchange = (e) => {
                     obj[key] = e.target.checked;
                     saveSettings();
                     applySettings();
@@ -8558,272 +8286,18 @@
         setupToggle('setting-sanity', GameState.settings.sound, 'sanity');
         setupToggle('setting-colorblind', GameState.settings, 'colorblindMode');
         setupToggle('setting-crt', GameState.settings, 'glitchEffect');
-        
-        // Accessibility toggles
-        setupToggle('setting-high-contrast', GameState.settings, 'highContrast');
-        setupToggle('setting-large-text', GameState.settings, 'largeText');
-        setupToggle('setting-screen-reader', GameState.settings, 'screenReader');
-        setupToggle('setting-dyslexia-font', GameState.settings, 'dyslexiaFont');
-        setupToggle('setting-auto-scroll', GameState.settings, 'autoScroll');
-        setupToggle('setting-click-feedback', GameState.settings, 'clickFeedback');
-        setupToggle('setting-simplified-ui', GameState.settings, 'simplifiedUI');
-        setupToggle('setting-sticky-keys', GameState.settings, 'stickyKeys');
-        setupToggle('setting-one-hand-mode', GameState.settings, 'oneHandMode');
-        setupToggle('setting-visual-notifications', GameState.settings, 'visualNotifications');
-        setupToggle('setting-audio-cues', GameState.settings, 'audioCues');
-        setupToggle('setting-reading-support', GameState.settings, 'readingSupport');
-        
-        // New accessibility toggles
-        setupToggle('setting-seizure-protection', GameState.settings, 'seizureProtection');
-        setupToggle('setting-haptic-feedback', GameState.settings, 'hapticFeedback');
-        setupToggle('setting-gesture-controls', GameState.settings, 'gestureControls');
-        setupToggle('setting-cognitive-load', GameState.settings, 'cognitiveLoad');
-        setupToggle('setting-eye-tracking', GameState.settings, 'eyeTracking');
-        setupToggle('setting-switch-control', GameState.settings, 'switchControl');
-        setupToggle('setting-timeout-extensions', GameState.settings, 'timeoutExtensions');
-        setupToggle('setting-memory-assistance', GameState.settings, 'memoryAssistance');
-
-        // Enhanced button groups for accessibility
-        // High Contrast levels
-        const contrastButtons = ['contrast-off', 'contrast-medium', 'contrast-high', 'contrast-maximum'];
-        contrastButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.contrastLevel = btn.dataset.level;
-                    GameState.settings.highContrast = btn.dataset.level !== 'off';
-                    contrastButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Text size levels  
-        const textSizeButtons = ['text-small', 'text-normal', 'text-large', 'text-xl', 'text-xxl'];
-        textSizeButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.textSize = btn.dataset.size;
-                    GameState.settings.largeText = btn.dataset.size !== 'normal' && btn.dataset.size !== 'small';
-                    textSizeButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Motion levels
-        const motionButtons = ['motion-full', 'motion-reduced', 'motion-minimal', 'motion-none'];
-        motionButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.motionLevel = btn.dataset.level;
-                    GameState.settings.reducedMotion = btn.dataset.level !== 'full';
-                    motionButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Audio description levels
-        const audioDescButtons = ['audio-desc-off', 'audio-desc-basic', 'audio-desc-detailed', 'audio-desc-comprehensive'];
-        audioDescButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.audioDescLevel = btn.dataset.level;
-                    GameState.settings.audioDescriptions = btn.dataset.level !== 'off';
-                    audioDescButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Keyboard navigation levels
-        const keyboardButtons = ['keyboard-basic', 'keyboard-enhanced', 'keyboard-full'];
-        keyboardButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.keyboardLevel = btn.dataset.level;
-                    GameState.settings.keyboardNavigation = true;
-                    keyboardButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Focus indicator levels
-        const focusButtons = ['focus-subtle', 'focus-clear', 'focus-bold'];
-        focusButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.focusLevel = btn.dataset.level;
-                    GameState.settings.focusIndicators = true;
-                    focusButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Colorblind support types
-        const colorblindButtons = ['colorblind-none', 'colorblind-protanopia', 'colorblind-deuteranopia', 'colorblind-tritanopia', 'colorblind-full'];
-        colorblindButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.colorblindType = btn.dataset.type;
-                    GameState.settings.colorBlindSupport = btn.dataset.type !== 'none';
-                    colorblindButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Voice command levels
-        const voiceButtons = ['voice-off', 'voice-basic', 'voice-advanced', 'voice-full'];
-        voiceButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.voiceLevel = btn.dataset.level;
-                    GameState.settings.voiceCommands = btn.dataset.level !== 'off';
-                    voiceButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-
-        // Magnification levels
-        const magnifyButtons = ['magnify-off', 'magnify-1-5x', 'magnify-2x', 'magnify-3x', 'magnify-custom'];
-        magnifyButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.magnifyLevel = btn.dataset.level;
-                    GameState.settings.magnification = btn.dataset.level !== 'off';
-                    magnifyButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-        
-        // Button groups for TTS speed
-        const ttsSpeedButtons = ['tts-speed-slow', 'tts-speed-normal', 'tts-speed-fast', 'tts-speed-very-fast'];
-        ttsSpeedButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.ttsSpeed = parseFloat(btn.dataset.speed);
-                    ttsSpeedButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                });
-            }
-        });
-        
-        // Button groups for UI scale
-        const uiScaleButtons = ['ui-scale-small', 'ui-scale-normal', 'ui-scale-large', 'ui-scale-xl'];
-        uiScaleButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.uiScale = parseFloat(btn.dataset.scale);
-                    uiScaleButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-        
-        // Button groups for reading level
-        const readingButtons = ['reading-basic', 'reading-enhanced', 'reading-full'];
-        readingButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.readingLevel = btn.dataset.level;
-                    readingButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
-        
-        // Button groups for motor assistance
-        const motorButtons = ['motor-none', 'motor-basic', 'motor-advanced'];
-        motorButtons.forEach(id => {
-            const btn = document.getElementById(id);
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    GameState.settings.motorAssistance = btn.dataset.level;
-                    motorButtons.forEach(btnId => {
-                        document.getElementById(btnId)?.classList.remove('button-primary');
-                    });
-                    btn.classList.add('button-primary');
-                    saveSettings();
-                    applySettings();
-                });
-            }
-        });
 
         const setupButtonGroup = (buttons, key, valueMap) => {
-            buttons.forEach(id => {
-                const btn = document.getElementById(id);
+            buttons.forEach(btnId => {
+                const btn = document.getElementById(btnId);
                 if(btn) {
-                    btn.addEventListener('click', () => {
-                        GameState.settings[key] = valueMap[id];
-                        document.querySelectorAll(buttons.map(b => `#${b}`).join(', ')).forEach(b => b.classList.remove('button-primary'));
+                    btn.onclick = () => {
+                        buttons.forEach(id => document.getElementById(id)?.classList.remove('button-primary'));
                         btn.classList.add('button-primary');
+                        GameState.settings[key] = valueMap[btnId];
                         saveSettings();
                         applySettings();
-                    });
+                    };
                 }
             });
         };
@@ -8835,17 +8309,24 @@
         const resetBtn = document.getElementById('reset-settings-btn');
         if(resetBtn) {
             resetBtn.onclick = () => {
-                GameState.settings = {
-                    sound: { master: true, item: true, awareness: true, sanity: true },
-                    textSpeed: TextSpeed.Normal,
-                    colorblindMode: false,
-                    glitchEffect: true,
-                    font: 'Space Mono',
-                    theme: 'green'
-                };
-                saveSettings();
-                applySettings();
-                showSettingsModal(fromPauseMenu);
+                if(confirm(t('confirm_reset_settings') || 'Reset all settings to default?')) {
+                    GameState.settings = {
+                        sound: {
+                            master: true,
+                            item: true,
+                            awareness: true,
+                            sanity: true
+                        },
+                        textSpeed: TextSpeed.Normal,
+                        colorblindMode: false,
+                        glitchEffect: true,
+                        font: 'Space Mono',
+                        theme: 'green'
+                    };
+                    saveSettings();
+                    applySettings();
+                    showSettingsModal(fromPauseMenu);
+                }
             };
         }
 
