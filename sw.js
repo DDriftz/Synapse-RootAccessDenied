@@ -113,29 +113,3 @@ async function syncGameData() {
   // This would sync game saves to a server if implemented
   console.log('SYNAPSE: Syncing game data...');
 }
-
-// Handle push notifications (for future features)
-self.addEventListener('push', event => {
-  if (event.data) {
-    const options = {
-      body: event.data.text(),
-      icon: './Icon.png',
-      badge: './Icon.png',
-      vibrate: [200, 100, 200],
-      tag: 'synapse-notification'
-    };
-    
-    event.waitUntil(
-      self.registration.showNotification('SYNAPSE', options)
-    );
-  }
-});
-
-// Handle notification clicks
-self.addEventListener('notificationclick', event => {
-  event.notification.close();
-  
-  event.waitUntil(
-    clients.openWindow('./')
-  );
-});
