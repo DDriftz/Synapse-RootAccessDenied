@@ -8,9 +8,10 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="cache-buster" content="1800-press-any-key">
+    <meta name="cache-buster" content="1900-clean-title-screen">
     <meta name="last-modified" content="2025-07-15T18:00:00Z">
-    <meta http-equiv="Expires" content="0">
+    <!-- Content Security Policy for enhanced security -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com;">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
     <script>
@@ -42,11 +43,11 @@
             };
         }
     </script>
-    <script src="https://cdn.tailwindcss.com" onerror="console.error('Failed to load Tailwind CSS')"></script>
+    <script src="https://cdn.tailwindcss.com" crossorigin="anonymous" onerror="console.error('Failed to load Tailwind CSS')"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Mono&family=Courier+Prime&display=swap" rel="stylesheet" onerror="console.error('Failed to load Google Fonts')">
-    <script src="https://unpkg.com/tone@15.0.4/build/Tone.js" onerror="console.error('Failed to load Tone.js')"></script>
+    <script src="https://unpkg.com/tone@15.0.4/build/Tone.js" crossorigin="anonymous" onerror="console.error('Failed to load Tone.js')"></script>
     <style>
         :root {
             --main-color: #00ff41;
@@ -67,7 +68,7 @@
             background-color: #0d0d0d;
             color: var(--main-color);
             font-family: 'Space Mono', monospace;
-            position: fixed; 
+            min-height: 100vh; 
         }
         #background-canvas {
             position: fixed;
@@ -1284,19 +1285,7 @@
                         </p>
                     </div>
                     
-                    <!-- Press Any Key to Continue -->
-                    <div id="press-any-key-container" class="mt-8 text-center">
-                        <div class="text-lg text-cyan-400 font-semibold mb-2 animate-pulse" data-lang="press_any_key" data-text="Press any key or tap to continue">
-                            Press any key or tap to continue
-                        </div>
-                        <div class="text-xs text-gray-400 opacity-60" data-lang="press_key_hint" data-text="Touch anywhere, click, or press any key">
-                            Touch anywhere, click, or press any key
-                        </div>
-                        <!-- Mobile touch indicator -->
-                        <div class="mt-3 text-xs text-cyan-300 opacity-80 md:hidden">
-                            👆 Tap anywhere on screen
-                        </div>
-                    </div>
+
                     
                     <!-- Version Indicator -->
                     <div class="mt-4 text-xs text-gray-500 opacity-60">
@@ -1615,8 +1604,7 @@
             'title': 'SYNAPSE',
             'subtitle': 'ROOT ACCESS DENIED',
             'enter_game': 'Enter the Game',
-            'press_any_key': 'Press any key or tap to continue',
-            'press_key_hint': 'Touch anywhere, click, or press any key',
+
             'game_description': 'SYNAPSE is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.',
             'new_game': 'New Game', 'load_game': 'Load Game', 
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -2184,8 +2172,7 @@
             'title': 'SYNAPSE',
             'subtitle': 'ROOT-ÅTKOMST NEKAD',
             'enter_game': 'Starta Spelet',
-            'press_any_key': 'Tryck på valfri tangent eller tryck för att fortsätta',
-            'press_key_hint': 'Klicka var som helst eller tryck på valfri tangent',
+
             'game_description': 'SYNAPSE är ett psykologiskt skräckspel som utspelar sig i en dystopisk framtid där du spelar som en utredare som skickats för att avslöja sanningen bakom ett mystiskt hemligt AI-projekt. Spelet utforskar teman som artificiell intelligens, företagskonspirations, psykologisk manipulation och den tunna gränsen mellan mänsklig och maskinell intelligens.',
             'new_game': 'Nytt Spel', 'load_game': 'Ladda Spel',            'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'select_difficulty': 'Välj svårighetsgrad:', 'easy': 'Lätt', 'normal': 'Normal', 'hard': 'Svår', 'fast':'Snabb', 'slow': 'Långsam',
             'enter_name_placeholder': 'Ange ditt namn', 'enter_backstory_placeholder': 'Ange din bakgrund', 'view_choices': 'Visa Val', 'choose_backstory_title': 'Välj en Bakgrund',
@@ -2922,8 +2909,6 @@
             'title': 'SYNAPSE',
             'subtitle': 'ACCÈS ROOT REFUSÉ',
             'enter_game': 'Entrer dans le Jeu',
-            'press_any_key': 'Appuyez sur n\'importe quelle touche ou touchez pour continuer',
-            'press_key_hint': 'Cliquez n\'importe où ou appuyez sur une touche',
             'game_description': 'SYNAPSE est un jeu d\'aventure textuel d\'horreur psychologique situé dans un futur dystopique où vous incarnez un enquêteur envoyé pour découvrir la vérité derrière un mystérieux projet d\'IA clandestin.',
             'new_game': 'Nouvelle Partie', 'load_game': 'Charger', 
             'en_lang_short': 'EN', 'sv_lang_short': 'SV',
@@ -3144,8 +3129,6 @@
             'title': 'سينابس',
             'subtitle': 'رفض الوصول الجذري',
             'enter_game': 'دخول اللعبة',
-            'press_any_key': 'اضغط على أي مفتاح أو المس للمتابعة',
-            'press_key_hint': 'انقر في أي مكان أو اضغط على أي مفتاح',
             'game_description': 'سينابس هي لعبة مغامرة نصية رعب نفسي تدور أحداثها في مستقبل ديستوبي حيث تلعب دور محقق أُرسل لكشف الحقيقة وراء مشروع ذكاء اصطناعي سري غامض. تستكشف اللعبة موضوعات وعي الذكاء الاصطناعي والمؤامرة المؤسسية والتلاعب النفسي والخط الرفيع بين الذكاء البشري والآلة.',
             'new_game': 'لعبة جديدة', 'load_game': 'تحميل اللعبة', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR', 'select_difficulty': 'اختر الصعوبة:', 'easy': 'سهل', 'normal': 'عادي', 'hard': 'صعب', 'fast':'سريع', 'slow': 'بطيء',
             'enter_name_placeholder': 'أدخل اسمك', 'enter_backstory_placeholder': 'أدخل قصتك الخلفية', 'view_choices': 'عرض الخيارات', 'choose_backstory_title': 'اختر قصة خلفية',
@@ -3364,8 +3347,6 @@
             'title': 'SYNAPSE',
             'subtitle': 'ACCÈS ROOT REFUSÉ',
             'enter_game': 'Entrer dans le Jeu',
-            'press_any_key': 'Appuyez sur n\'importe quelle touche ou touchez pour continuer',
-            'press_key_hint': 'Cliquez n\'importe où ou appuyez sur une touche',
             'game_description': 'SYNAPSE est un jeu d\'aventure textuel d\'horreur psychologique situé dans un futur dystopique où vous incarnez un enquêteur envoyé pour découvrir la vérité derrière un mystérieux projet d\'IA clandestin.',
             'new_game': 'Nouvelle Partie', 'load_game': 'Charger', 
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3383,8 +3364,6 @@
             'title': 'SYNAPSE',
             'subtitle': 'ROOT-ZUGANG VERWEIGERT',
             'enter_game': 'Spiel Betreten',
-            'press_any_key': 'Drücken Sie eine beliebige Taste oder tippen Sie zum Fortfahren',
-            'press_key_hint': 'Klicken Sie irgendwo oder drücken Sie eine Taste',
             'game_description': 'SYNAPSE ist ein psychologisches Horror-Text-Adventure-Spiel in einer dystopischen Zukunft, in der Sie einen Ermittler spielen, der die Wahrheit hinter einem mysteriösen geheimen KI-Projekt aufdecken soll.',
             'new_game': 'Neues Spiel', 'load_game': 'Laden',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3402,8 +3381,6 @@
             'title': 'SYNAPSE',
             'subtitle': 'ACCESSO ROOT NEGATO',
             'enter_game': 'Entra nel Gioco',
-            'press_any_key': 'Premi un tasto qualsiasi o tocca per continuare',
-            'press_key_hint': 'Clicca ovunque o premi un tasto',
             'game_description': 'SYNAPSE è un gioco di avventura testuale horror psicologico ambientato in un futuro distopico dove interpreti un investigatore inviato a scoprire la verità dietro un misterioso progetto AI clandestino.',
             'new_game': 'Nuova Partita', 'load_game': 'Carica',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3421,8 +3398,6 @@
             'title': 'SYNAPSE',
             'subtitle': 'ACESSO ROOT NEGADO',
             'enter_game': 'Entrar no Jogo',
-            'press_any_key': 'Pressione qualquer tecla ou toque para continuar',
-            'press_key_hint': 'Clique em qualquer lugar ou pressione uma tecla',
             'game_description': 'SYNAPSE é um jogo de aventura textual de horror psicológico ambientado em um futuro distópico onde você joga como um investigador enviado para descobrir a verdade por trás de um misterioso projeto de IA clandestino.',
             'new_game': 'Novo Jogo', 'load_game': 'Carregar',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3440,8 +3415,6 @@
             'title': 'СИНАПС',
             'subtitle': 'ДОСТУП ROOT ЗАПРЕЩЁН',
             'enter_game': 'Войти в Игру',
-            'press_any_key': 'Нажмите любую клавишу или коснитесь для продолжения',
-            'press_key_hint': 'Кликните где угодно или нажмите любую клавишу',
             'game_description': 'СИНАПС - это текстовая приключенческая игра в жанре психологического хоррора, действие которой происходит в антиутопическом будущем, где вы играете за следователя, отправленного раскрыть правду о таинственном подпольном проекте ИИ.',
             'new_game': 'Новая Игра', 'load_game': 'Загрузить',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3459,8 +3432,6 @@
             'title': 'シナプス',
             'subtitle': 'ルートアクセス拒否',
             'enter_game': 'ゲームに入る',
-            'press_any_key': '任意のキーを押すかタップして続行',
-            'press_key_hint': 'どこかをクリックするか任意のキーを押してください',
             'game_description': 'シナプスは、謎めいた秘密のAIプロジェクトの真相を解明するために送られた調査員として、ディストピア的な未来を舞台にした心理ホラーテキストアドベンチャーゲームです。',
             'new_game': '新しいゲーム', 'load_game': 'ロード',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3478,8 +3449,6 @@
             'title': '시냅스',
             'subtitle': '루트 액세스 거부됨',
             'enter_game': '게임 입장',
-            'press_any_key': '계속하려면 아무 키나 누르거나 탭하세요',
-            'press_key_hint': '아무 곳이나 클릭하거나 아무 키나 누르세요',
             'game_description': '시냅스는 신비로운 비밀 AI 프로젝트의 진실을 밝히기 위해 파견된 수사관으로서 디스토피아적인 미래를 배경으로 한 심리 공포 텍스트 어드벤처 게임입니다.',
             'new_game': '새 게임', 'load_game': '불러오기',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -3497,8 +3466,6 @@
             'title': '突触',
             'subtitle': '拒绝根访问',
             'enter_game': '进入游戏',
-            'press_any_key': '按任意键继续',
-            'press_key_hint': '点击任何地方或按任意键',
             'game_description': '突触是一款心理恐怖文字冒险游戏，设定在反乌托邦的未来，您将扮演一名调查员，被派去揭露一个神秘秘密AI项目背后的真相。',
             'new_game': '新游戏', 'load_game': '加载游戏',
             'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'es_lang_short': 'ES', 'ar_lang_short': 'AR',
@@ -8389,11 +8356,6 @@
         resetGameState(); 
         setupIntro(); 
         hideModal();
-        
-        // Reactivate "Press Any Key" functionality for title screen
-        if (window.reactivatePressAnyKey) {
-            setTimeout(window.reactivatePressAnyKey, 100);
-        }
     }
 
     // --- NEW FUNCTIONS FOR SAVING/LOADING PLAYER CHOICES ---
@@ -9074,8 +9036,8 @@
     window.addEventListener('beforeunload', saveStateToSession);
     window.addEventListener('DOMContentLoaded', () => {
         console.log('SYNAPSE: DOM Content Loaded - Starting initialization...');
-        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1800 - IMPROVED: Press Any Key to Continue!');
-        console.log('📝 Latest Changes: Replaced Enter Game button with elegant "Press any key" interaction');
+        console.log('🚀 SYNAPSE VERSION: 2025.07.15.1800 - IMPROVED: Clean title screen');
+        console.log('📝 Latest Changes: Removed Enter Game button and Press any key interaction from title screen');
         
         // Check if required dependencies are loaded
         if (typeof window.tailwindcss === 'undefined' && !document.querySelector('[class*="bg-"]')) {
@@ -9089,7 +9051,7 @@
             startScreen: document.getElementById('start-screen'), 
             gameScreen: document.getElementById('game-screen'),
             prologueScreen: document.getElementById('prologue-screen'),
-            pressAnyKeyContainer: document.getElementById('press-any-key-container'),
+
             newGameBtn: document.getElementById('new-game-btn'), 
             loadGameBtn: document.getElementById('load-game-btn'), 
             viewFeaturesBtn: document.getElementById('view-features-btn'),
@@ -9164,7 +9126,7 @@
         };
         
         // Validate that critical UI elements were found
-        const criticalElements = ['appContainer', 'titleScreen', 'startScreen', 'gameScreen', 'prologueScreen', 'pressAnyKeyContainer', 'newGameBtn', 'beginMissionBtn'];
+        const criticalElements = ['appContainer', 'titleScreen', 'startScreen', 'gameScreen', 'prologueScreen', 'newGameBtn', 'beginMissionBtn'];
         const missingElements = criticalElements.filter(elem => !UI[elem]);
         if (missingElements.length > 0) {
             console.error('SYNAPSE: Critical UI elements missing:', missingElements);
@@ -9174,11 +9136,7 @@
         }
         
         // Debug: Check if key elements exist
-        console.log('🔍 Press Any Key Container Debug:');
-        console.log('  Element:', UI.pressAnyKeyContainer);
-        console.log('  ID:', UI.pressAnyKeyContainer?.id);
-        console.log('  Classes:', UI.pressAnyKeyContainer?.className);
-        console.log('  Text Content:', UI.pressAnyKeyContainer?.textContent);
+
         console.log('🔍 Title Lang Buttons Container:', UI.titleLangButtons);
         
         // Load player choices first to pre-populate the setup screen
@@ -9340,105 +9298,7 @@
 
         setupButtonClick(UI.beginMissionBtn, startGame);
 
-        // 🎮 Setup "Press Any Key to Continue" functionality
-        console.log('🎮 Setting up Press Any Key functionality...');
-        console.log('🎮 UI.pressAnyKeyContainer:', UI.pressAnyKeyContainer);
-        console.log('🎮 showStartScreen function:', showStartScreen);
-        
-        // Set up keyboard and click listeners for title screen
-        let titleScreenActive = true;
-        
-        function handleTitleScreenInteraction(event) {
-            console.log('🎬 Title screen interaction called! Event:', event.type, 'titleScreenActive:', titleScreenActive);
-            console.log('🎬 Title screen hidden?', UI.titleScreen.classList.contains('hidden'));
-            
-            if (!titleScreenActive || UI.titleScreen.classList.contains('hidden')) {
-                console.log('🎬 Interaction blocked - titleScreenActive:', titleScreenActive, 'hidden:', UI.titleScreen.classList.contains('hidden'));
-                return;
-            }
-            
-            // Ignore certain keys and interactions
-            if (event.type === 'keydown') {
-                // Ignore modifier keys, F-keys, etc.
-                if (event.key.length > 1 && !['Enter', 'Space', 'Escape'].includes(event.key)) {
-                    console.log('🎬 Ignoring key:', event.key);
-                    return;
-                }
-            }
-            
-            // For touch events, prevent default to avoid scrolling
-            if (event.type === 'touchstart' || event.type === 'touchend') {
-                event.preventDefault();
-            }
-            
-            console.log('🎬 Title screen interaction detected:', event.type, event.key || 'touch/click');
-            titleScreenActive = false;
-            
-            // Remove all event listeners to prevent multiple triggers
-            document.removeEventListener('keydown', handleTitleScreenInteraction);
-            document.removeEventListener('click', handleTitleScreenInteraction);
-            document.removeEventListener('touchstart', handleTitleScreenInteraction);
-            document.removeEventListener('touchend', handleTitleScreenInteraction);
-            document.removeEventListener('pointerdown', handleTitleScreenInteraction);
-            
-            // Visual feedback for touch
-            if (event.type === 'touchstart' || event.type === 'touchend' || event.type === 'pointerdown') {
-                // Add a quick visual feedback
-                const container = UI.pressAnyKeyContainer;
-                if (container) {
-                    container.style.transform = 'scale(0.95)';
-                    setTimeout(() => {
-                        container.style.transform = 'scale(1)';
-                    }, 100);
-                }
-            }
-            
-            // Add a small delay for visual feedback
-            setTimeout(() => {
-                try {
-                    // Initialize audio if needed
-                    if (window.GameState && GameState.settings && GameState.settings.sound) {
-                        initializeAudio().then(() => playSound('uiClick')).catch(() => {});
-                    }
-                } catch (e) {
-                    console.warn('Audio initialization failed:', e);
-                }
-                
-                showStartScreen();
-            }, 150);
-        }
-        
-        function activatePressAnyKey() {
-            console.log('🎮 Activating Press Any Key functionality');
-            titleScreenActive = true;
-            
-            // Add multiple event listeners for better device compatibility
-            document.addEventListener('keydown', handleTitleScreenInteraction);
-            document.addEventListener('click', handleTitleScreenInteraction);
-            document.addEventListener('touchstart', handleTitleScreenInteraction, { passive: false });
-            document.addEventListener('touchend', handleTitleScreenInteraction, { passive: false });
-            
-            // Add pointer events for better stylus/touch support
-            if ('PointerEvent' in window) {
-                document.addEventListener('pointerdown', handleTitleScreenInteraction);
-            }
-            
-            // Make the container more touch-friendly
-            if (UI.pressAnyKeyContainer) {
-                UI.pressAnyKeyContainer.style.cursor = 'pointer';
-                UI.pressAnyKeyContainer.style.userSelect = 'none';
-                UI.pressAnyKeyContainer.style.webkitUserSelect = 'none';
-                UI.pressAnyKeyContainer.style.transition = 'transform 0.1s ease';
-            }
-        }
-        
-        // Make reactivation function globally available
-        window.reactivatePressAnyKey = activatePressAnyKey;
-        
-        // Initial activation
-        activatePressAnyKey();
-        
-        console.log('✅ Press Any Key functionality activated');
+
 
         setupButtonClick(UI.newGameBtn, () => { 
             sessionStorage.removeItem('synapse_session_v15_autosave'); 
