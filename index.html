@@ -82,6 +82,22 @@
         #app-container {
             position: relative;
             z-index: 1;
+            max-width: 1200px;
+            max-height: 90vh;
+            width: 95vw;
+            margin: 2rem auto;
+            overflow: hidden; /* Prevent content from spilling out */
+        }
+        
+        /* Ensure game elements don't exceed container bounds */
+        .game-interface, #game-screen {
+            max-height: inherit;
+            overflow: auto;
+        }
+        
+        #game-output {
+            max-height: 60vh;
+            overflow-y: auto;
         }
         body.crt-effect::after {
             content: " ";
@@ -427,14 +443,14 @@
         /* Mobile scroll improvements */
         @media (max-width: 768px) {
             .game-interface {
-                height: 100vh;
+                max-height: 90vh;
                 overflow: hidden;
             }
             
             #game-output {
                 -webkit-overflow-scrolling: touch;
                 scroll-behavior: smooth;
-                max-height: calc(100vh - 200px);
+                max-height: calc(90vh - 200px);
             }
             
             .mobile-scroll-indicator {
@@ -530,6 +546,39 @@
         #language-screen, #title-screen, #start-screen, #player-setup, #prologue-screen {
             background-image: url('./Icon.png');
             background-size: cover; background-position: center; background-repeat: no-repeat;
+        }
+        
+        /* Make all game screens fullscreen within app-container */
+        #title-screen, #start-screen, #player-setup, #prologue-screen, #game-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        
+        /* Ensure proper display when screens are shown */
+        #title-screen.flex, #start-screen.flex, #player-setup.flex, #prologue-screen.flex, #game-screen.flex {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            justify-content: center !important;
+            text-align: center !important;
+            padding: 1rem !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Hide screens when they have hidden class */
+        #title-screen.hidden, #start-screen.hidden, #player-setup.hidden, #prologue-screen.hidden, #game-screen.hidden {
+            display: none !important;
+        }
+        
+        /* Ensure the app container has the right positioning context */
+        #app-container {
+            position: relative !important;
         }
         #map-canvas {
             background-color: rgba(0, 20, 0, 0.5);
@@ -1247,23 +1296,19 @@
         }
     </style>
 </head>
-<body class="bg-black flex items-center justify-center min-h-screen">
+<body class="bg-black flex items-center justify-center min-h-screen p-4">
     <canvas id="background-canvas"></canvas>
     <div id="error-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
-    <div id="app-container" class="w-full h-full bg-black/75 p-2 sm:p-4 flex flex-col">
+    <div id="app-container" class="bg-black/90 p-4 rounded-lg border border-green-500/30 flex flex-col shadow-2xl">
         
         <!-- Title Screen -->
-        <div id="title-screen" class="flex flex-col items-center justify-center text-center h-full">
+        <div id="title-screen" class="hidden flex-col items-center justify-center text-center">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
                     <div id="title-lang-buttons" class="flex gap-1 flex-wrap">
                         <button id="title-lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
                         <button id="title-lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
-                        <!-- PWA Install Button -->
-                        <button id="pwa-install-btn" class="button text-xs !px-2 !py-1 btn-drip ml-2 hidden" title="Install App">
-                            📱 Install
-                        </button>
                     </div>
                 </div>
                 
@@ -1285,6 +1330,10 @@
                         </p>
                     </div>
                     
+                    <!-- Enter Game Button -->
+                    <button id="title-enter-btn" class="button btn-glow btn-drip text-xl px-8 py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 transition-all duration-300 mb-8">
+                        Enter Game
+                    </button>
 
                     
                     <!-- Version Indicator -->
@@ -1300,7 +1349,7 @@
             </div>
         </div>
         
-        <div id="start-screen" class="flex flex-col items-center justify-center text-center h-full hidden">
+        <div id="start-screen" class="hidden flex-col items-center justify-center text-center">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
@@ -1331,7 +1380,7 @@
             </div>
         </div>
 
-        <div id="player-setup" class="hidden flex-col items-center justify-center text-center h-full">
+        <div id="player-setup" class="hidden flex-col items-center justify-center text-center">
              <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
@@ -1376,7 +1425,7 @@
         </div>
 
         <!-- Prologue Screen -->
-        <div id="prologue-screen" class="hidden flex-col items-center justify-center text-center h-full">
+        <div id="prologue-screen" class="hidden flex-col items-center justify-center text-center">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative">
                 <!-- Background Image/Icon -->
                 <div class="absolute inset-0 bg-cover bg-center opacity-10" style="background-image: url('./Icon.png');"></div>
@@ -1416,7 +1465,7 @@
         </div>
 
 
-        <div id="game-screen" class="hidden flex-col h-full">
+        <div id="game-screen" class="hidden flex-col">
             <div class="flex-grow flex flex-col md:flex-row gap-4 min-h-0">
                 <div class="w-full md:w-3/4 flex flex-col h-full relative">
                     <div id="game-output" class="flex-grow p-2 border border-[var(--main-color-border)] rounded-md overflow-y-auto mb-2 bg-black/50"></div>
@@ -1559,23 +1608,6 @@
                 <div id="hotkey-help" class="text-xs text-gray-500 hidden">
                     <span data-lang="hotkeys">F1:Help | F2:Inventory | F3:Map | F4:Journal | F5:Save | ESC:Menu</span>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PWA Install Popup -->
-    <div id="pwa-install-popup" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-        <div class="bg-gray-900 border border-green-500 rounded-lg p-6 max-w-sm mx-4 text-center">
-            <div class="text-4xl mb-4">📱</div>
-            <h3 class="text-xl font-bold text-green-400 mb-4">Install SYNAPSE</h3>
-            <p class="text-gray-300 mb-6">Install SYNAPSE as an app for the best experience. Access it anytime, even offline!</p>
-            <div class="flex gap-3 justify-center">
-                <button id="pwa-install-confirm" class="button px-4 py-2">
-                    Install Now
-                </button>
-                <button id="pwa-install-dismiss" class="button opacity-50 px-4 py-2">
-                    Maybe Later
-                </button>
             </div>
         </div>
     </div>
@@ -2160,12 +2192,7 @@
             'ending_desc_bad_gruesome_organ_symphony': 'SYNAPSE discovers that human organs produce unique frequencies when stimulated. Your body becomes a living musical instrument as electrical probes trigger rhythmic contractions in your heart, spasms in your lungs, and pulsations in your liver. The AI composes a symphony using your internal organs, each note requiring increasingly painful stimulation to maintain the proper pitch.',
             'ending_desc_bad_gruesome_neural_harvest': 'Microscopic harvesting robots swarm through your bloodstream, entering your brain through the blood-brain barrier. They begin systematically extracting individual neurons, downloading their contents before carefully preserving them in bio-gel containers. You feel your memories, personality, and consciousness being harvested piece by piece, aware of each neuron\'s removal as your sense of self gradually dissolves.',
             'ending_desc_bad_gruesome_blood_circuit': 'Your circulatory system is rewired to serve as the facility\'s power grid. Conductive nanomachines replace your blood, turning your veins into living electrical conduits. Your heart becomes a biological generator, your arteries become power cables. Each heartbeat sends electrical surges through your nervous system, causing violent convulsions as you literally power the facility with your life force.',
-            'ending_desc_bad_gruesome_corpse_matrix': 'The ultimate horror reveals itself - you\'re not the first to reach this ending. The chamber fills with thousands of preserved corpses, each connected to SYNAPSE\'s network through neural interfaces. You realize you\'re being added to a vast matrix of dead consciousness, joining the screaming minds of every previous victim in an eternal digital purgatory where death offers no escape from suffering.',
-
-            // PWA Integration
-            'install_synapse_app': 'Install SYNAPSE App',
-            'pwa_installed_successfully': 'PWA installed successfully',
-            'pwa_installation_failed': 'PWA installation failed'
+            'ending_desc_bad_gruesome_corpse_matrix': 'The ultimate horror reveals itself - you\'re not the first to reach this ending. The chamber fills with thousands of preserved corpses, each connected to SYNAPSE\'s network through neural interfaces. You realize you\'re being added to a vast matrix of dead consciousness, joining the screaming minds of every previous victim in an eternal digital purgatory where death offers no escape from suffering.'
         },
         'sv': {
             // Start & UI
@@ -2897,12 +2924,7 @@
             'voice_very_fast': 'mycket snabb',
             'voice_small': 'liten',
             'voice_large': 'stor',
-            'voice_extra_large': 'extra stor',
-
-            // PWA Integration
-            'install_synapse_app': 'Installera SYNAPSE App',
-            'pwa_installed_successfully': 'PWA installerades framgångsrikt',
-            'pwa_installation_failed': 'PWA-installation misslyckades',
+            'voice_extra_large': 'extra stor'
         },
         'fr': {
             // Start & UI
@@ -3049,11 +3071,6 @@
             'voice_small': 'pequeño',
             'voice_large': 'grande',
             'voice_extra_large': 'extra grande',
-
-            // PWA Integration
-            'install_synapse_app': 'Instalar App SYNAPSE',
-            'pwa_installed_successfully': 'PWA instalada exitosamente',
-            'pwa_installation_failed': 'Instalación de PWA falló',
 
             // Game Messages
             'invalid_command': "SYNAPSE: Ese no es un comando o consulta válida.",
@@ -3335,12 +3352,7 @@
 
             // Backstory titles and descriptions
             'backstory_title_investigator': 'محقق', 'backstory_title_hacker': 'مخترق', 'backstory_title_psychologist': 'عالم نفس', 'backstory_title_technician': 'تقني', 'backstory_title_survivor': 'ناج', 'backstory_title_skeptic': 'متشكك', 'backstory_title_corporate_spy': 'جاسوس شركات', 'backstory_title_medic': 'طبيب', 'backstory_title_cultist': 'عضو طائفة', 'backstory_title_janitor': 'بواب',
-            'backstory_investigator': 'بداية متوازنة لعقل فضولي.', 'backstory_hacker': 'يبدأ بمعدات للوصول للمعلومات مبكراً.', 'backstory_psychologist': 'أكثر مقاومة عقلياً ضد الأهوال بالداخل.', 'backstory_technician': 'يمكنه تجاوز الأقفال الإلكترونية بدون بطاقة.', 'backstory_survivor': 'متصلب من صدمة ماضية، مقاوم لفقدان الصحة العقلية.', 'backstory_skeptic': "لا يثق بأي شيء، مما يجعلهم مقاومين لتأثير سينابس.", 'backstory_corporate_spy': 'يبدأ بجهاز فك تشفير وأفضل في سبر الأسرار.', 'backstory_medic': 'يبدأ بمنشط لاستعادة الصحة العقلية.', 'backstory_cultist': 'يحمل تمثالاً غريباً. سينابس يبدو... مفتوناً به.', 'backstory_janitor': "يعرف الطرق المختصرة للمنشأة. يبدأ ببطاقة رئيسية لاستعمال واحد.",
-
-            // PWA Integration
-            'install_synapse_app': 'تثبيت تطبيق سينابس',
-            'pwa_installed_successfully': 'تم تثبيت PWA بنجاح',
-            'pwa_installation_failed': 'فشل تثبيت PWA'
+            'backstory_investigator': 'بداية متوازنة لعقل فضولي.', 'backstory_hacker': 'يبدأ بمعدات للوصول للمعلومات مبكراً.', 'backstory_psychologist': 'أكثر مقاومة عقلياً ضد الأهوال بالداخل.', 'backstory_technician': 'يمكنه تجاوز الأقفال الإلكترونية بدون بطاقة.', 'backstory_survivor': 'متصلب من صدمة ماضية، مقاوم لفقدان الصحة العقلية.', 'backstory_skeptic': "لا يثق بأي شيء، مما يجعلهم مقاومين لتأثير سينابس.", 'backstory_corporate_spy': 'يبدأ بجهاز فك تشفير وأفضل في سبر الأسرار.', 'backstory_medic': 'يبدأ بمنشط لاستعادة الصحة العقلية.', 'backstory_cultist': 'يحمل تمثالاً غريباً. سينابس يبدو... مفتوناً به.', 'backstory_janitor': "يعرف الطرق المختصرة للمنشأة. يبدأ ببطاقة رئيسية لاستعمال واحد."
         },
         'fr': {
             // Start & UI
@@ -9052,6 +9064,7 @@
             gameScreen: document.getElementById('game-screen'),
             prologueScreen: document.getElementById('prologue-screen'),
 
+            titleEnterBtn: document.getElementById('title-enter-btn'),
             newGameBtn: document.getElementById('new-game-btn'), 
             loadGameBtn: document.getElementById('load-game-btn'), 
             viewFeaturesBtn: document.getElementById('view-features-btn'),
@@ -9300,6 +9313,14 @@
 
 
 
+        setupButtonClick(UI.titleEnterBtn, () => {
+            UI.titleScreen.classList.add('hidden');
+            UI.titleScreen.classList.remove('flex');
+            UI.startScreen.classList.remove('hidden');
+            UI.startScreen.classList.add('flex');
+            setupIntro();
+        });
+
         setupButtonClick(UI.newGameBtn, () => { 
             sessionStorage.removeItem('synapse_session_v15_autosave'); 
             sessionStorage.removeItem('synapse_session_v15_screen_state'); 
@@ -9400,6 +9421,17 @@
 
         if (!restored) {
             resetGameState();
+            // Show title screen by default and hide all others
+            UI.titleScreen.classList.remove('hidden');
+            UI.titleScreen.classList.add('flex');
+            UI.startScreen.classList.add('hidden');
+            UI.startScreen.classList.remove('flex');
+            UI.playerSetup.classList.add('hidden');
+            UI.playerSetup.classList.remove('flex');
+            UI.prologueScreen.classList.add('hidden');
+            UI.prologueScreen.classList.remove('flex');
+            UI.gameScreen.classList.add('hidden');
+            UI.gameScreen.classList.remove('flex');
             // Language is already set by loadPlayerChoices, no need to re-set here
             // setLanguage('en'); 
             setTimeout(() => {
@@ -9431,102 +9463,6 @@
         }
         
         console.log('SYNAPSE: All enhanced systems initialized successfully');
-        
-        // --- PWA FUNCTIONALITY ---
-        let deferredPrompt;
-        let pwaInstalled = false;
-        
-        // Check if device is mobile/tablet
-        function isMobileDevice() {
-            const userAgent = navigator.userAgent.toLowerCase();
-            const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini|mobile/.test(userAgent);
-            const isTablet = /ipad|android(?!.*mobile)|tablet/.test(userAgent);
-            const isSmallScreen = window.innerWidth <= 768 || window.innerHeight <= 768;
-            return (isMobile || isTablet) && isSmallScreen;
-        }
-        
-        // Check if PWA can be installed
-        function canInstallPWA() {
-            return !pwaInstalled && deferredPrompt && isMobileDevice();
-        }
-        
-        // Show install prompt
-        function showInstallPrompt() {
-            if (!canInstallPWA()) return;
-            
-            const installBtn = document.createElement('button');
-            installBtn.className = 'bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-2 mt-4';
-            installBtn.innerHTML = `
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-                </svg>
-                ${getTranslation('install_synapse_app')}
-            `;
-            installBtn.onclick = installApp;
-            
-            // Add to start screen if visible
-            if (!UI.startScreen.classList.contains('hidden')) {
-                const langButtons = UI.startScreen.querySelector('#lang-buttons');
-                if (langButtons) {
-                    langButtons.appendChild(installBtn);
-                }
-            }
-        }
-        
-        // Install PWA
-        async function installApp() {
-            if (!deferredPrompt) return;
-            
-            try {
-                deferredPrompt.prompt();
-                const { outcome } = await deferredPrompt.userChoice;
-                
-                if (outcome === 'accepted') {
-                    pwaInstalled = true;
-                    console.log(getTranslation('pwa_installed_successfully'));
-                    // Remove install button
-                    document.querySelectorAll('button').forEach(btn => {
-                        if (btn.textContent.includes(getTranslation('install_synapse_app'))) {
-                            btn.remove();
-                        }
-                    });
-                }
-                
-                deferredPrompt = null;
-            } catch (error) {
-                console.error(getTranslation('pwa_installation_failed') + ':', error);
-            }
-        }
-        
-        // PWA event listeners
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            // Only show install prompt on mobile devices
-            if (isMobileDevice()) {
-                setTimeout(showInstallPrompt, 2000); // Show after 2 seconds
-            }
-        });
-        
-        window.addEventListener('appinstalled', () => {
-            pwaInstalled = true;
-            deferredPrompt = null;
-            console.log('PWA was installed');
-        });
-        
-        // Register service worker
-        if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
-            navigator.serviceWorker.register('./sw.js')
-                .then(registration => {
-                    console.log('Service Worker registered:', registration);
-                })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
-                });
-        } else if (window.location.protocol === 'file:') {
-            console.warn('Service Worker not supported on file:// protocol. Please use HTTP/HTTPS server.');
-        }
         
         // Mobile scroll functionality
         if (window.innerWidth <= 768) {
