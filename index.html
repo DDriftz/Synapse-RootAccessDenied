@@ -746,7 +746,7 @@
             text-shadow: 0 0 3px var(--main-color-shadow);
             position: relative;
             z-index: 10;
-            pointer-events: auto;
+            pointer-events: auto !important;
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -814,6 +814,7 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            pointer-events: auto !important;
         }
         
         /* Ensure proper display when screens are shown */
@@ -825,6 +826,7 @@
             text-align: center !important;
             padding: 1rem !important;
             box-sizing: border-box !important;
+            pointer-events: auto !important;
         }
         
         /* Hide screens when they have hidden class */
@@ -992,6 +994,19 @@
         }
         .colorblind-support .text-yellow-400 {
             color: #ffe66d !important;
+        }
+        
+        /* Force all interactive elements to be clickable */
+        button, .button, input[type="button"], input[type="submit"], .clickable, [onclick] {
+            pointer-events: auto !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+        
+        /* Ensure containers don't block clicks */
+        .flex, .flex-col, .items-center, .justify-center {
+            pointer-events: auto !important;
         }
         
         .dyslexia-font, .dyslexia-font * {
@@ -6560,7 +6575,7 @@
         return null;
     }
 
-    function enhanceAutocomplete(input) {}
+    function enhanceAutocomplete(input) {
         if (!GameState.settings.smartAutoComplete) {
             return enhanceBasicAutocomplete(input);
         }
@@ -6643,6 +6658,7 @@
                     type: 'action',
                     priority: 6
                 });
+            }
         }
         
         // Suggest common commands
@@ -10364,23 +10380,143 @@
         }, 500);
     }
     
+    // Enhanced button fix with direct event binding
+    function fixButtonsDirectly() {
+        console.log('🔧 Applying direct button fixes...');
+        
+        // Critical buttons that must work
+        const criticalButtons = [
+            { id: 'new-game-btn', handler: () => {
+                console.log('New Game clicked!');
+                sessionStorage.removeItem('synapse_session_v15_autosave'); 
+                sessionStorage.removeItem('synapse_session_v15_screen_state'); 
+                const startScreen = document.getElementById('start-screen');
+                const playerSetup = document.getElementById('player-setup');
+                if (startScreen && playerSetup) {
+                    startScreen.classList.add('hidden'); 
+                    startScreen.classList.remove('flex');
+                    playerSetup.classList.remove('hidden'); 
+                    playerSetup.classList.add('flex'); 
+                    if (window.updateAbilityDisplay) updateAbilityDisplay(); 
+                }
+            }},
+            { id: 'load-game-btn', handler: () => {
+                console.log('Load Game clicked!');
+                sessionStorage.removeItem('synapse_session_v15_autosave'); 
+                sessionStorage.removeItem('synapse_session_v15_screen_state'); 
+                if (window.loadGame) loadGame(); 
+            }},
+            { id: 'start-settings-btn', handler: () => {
+                console.log('Settings clicked!');
+                if (window.showSettingsModal) showSettingsModal(false);
+            }},
+            { id: 'view-features-btn', handler: () => {
+                console.log('Features clicked!');
+                if (window.showFeaturesModal) showFeaturesModal();
+            }},
+            { id: 'begin-mission-btn', handler: () => {
+                console.log('Begin Mission clicked!');
+                if (window.startGame) startGame();
+            }},
+            { id: 'start-game-btn', handler: () => {
+                console.log('Start Game clicked!');
+                if (window.showPrologueScreen) showPrologueScreen();
+            }},
+            { id: 'back-to-start-btn', handler: () => {
+                console.log('Back to Start clicked!');
+                const playerSetup = document.getElementById('player-setup');
+                const startScreen = document.getElementById('start-screen');
+                if (playerSetup && startScreen) {
+                    playerSetup.classList.add('hidden');
+                    playerSetup.classList.remove('flex');
+                    startScreen.classList.remove('hidden');
+                    startScreen.classList.add('flex');
+                }
+            }},
+            { id: 'lang-en-btn', handler: () => {
+                console.log('English Language clicked!');
+                if (window.setLanguage) setLanguage('en');
+            }},
+            { id: 'lang-sv-btn', handler: () => {
+                console.log('Swedish Language clicked!');
+                if (window.setLanguage) setLanguage('sv');
+            }}
+        ];
+        
+        criticalButtons.forEach(({id, handler}) => {
+            const btn = document.getElementById(id);
+            if (btn) {
+                // Remove any existing listeners
+                btn.replaceWith(btn.cloneNode(true));
+                const newBtn = document.getElementById(id);
+                
+                // Force button to be clickable
+                newBtn.style.setProperty('pointer-events', 'auto', 'important');
+                newBtn.style.setProperty('z-index', '1000', 'important');
+                newBtn.style.setProperty('position', 'relative', 'important');
+                newBtn.style.setProperty('cursor', 'pointer', 'important');
+                
+                // Add multiple event types for maximum compatibility
+                ['click', 'touchend', 'mouseup'].forEach(eventType => {
+                    newBtn.addEventListener(eventType, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log(`✅ ${id} ${eventType} event fired!`);
+                        try {
+                            handler();
+                        } catch (error) {
+                            console.error(`❌ Error in ${id} handler:`, error);
+                        }
+                    }, { passive: false });
+                });
+                
+                console.log(`✅ Fixed button: ${id}`);
+            } else {
+                console.warn(`❌ Button not found: ${id}`);
+            }
+        });
+        
+        // Also fix difficulty buttons
+        document.querySelectorAll('.difficulty-btn').forEach(btn => {
+            btn.style.setProperty('pointer-events', 'auto', 'important');
+            btn.style.setProperty('z-index', '1000', 'important');
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                document.querySelectorAll('.difficulty-btn').forEach(b => b.classList.remove('button-primary'));
+                btn.classList.add('button-primary');
+                if (window.updateAbilityDisplay) updateAbilityDisplay();
+            });
+        });
+        
+        console.log('🔧 Direct button fixes complete!');
+    }
+    
     // Run fixes multiple times to ensure they take effect
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
             setTimeout(forceButtonClickability, 100);
+            setTimeout(fixButtonsDirectly, 200);
             setTimeout(forceButtonClickability, 500);
+            setTimeout(fixButtonsDirectly, 700);
             setTimeout(forceButtonClickability, 1000);
+            setTimeout(fixButtonsDirectly, 1200);
         });
     } else {
         forceButtonClickability();
+        fixButtonsDirectly();
         setTimeout(forceButtonClickability, 500);
+        setTimeout(fixButtonsDirectly, 700);
         setTimeout(forceButtonClickability, 1000);
+        setTimeout(fixButtonsDirectly, 1200);
     }
     
     // Also run after window load
     window.addEventListener('load', () => {
         setTimeout(forceButtonClickability, 500);
+        setTimeout(fixButtonsDirectly, 700);
         setTimeout(forceButtonClickability, 1500);
+        setTimeout(fixButtonsDirectly, 1700);
     });
 
     </script>
