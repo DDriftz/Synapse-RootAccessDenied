@@ -1,13 +1,30 @@
 {
   "name": "SYNAPSE - AI Horror Game",
   "short_name": "SYNAPSE",
-  "description": "A terrifying AI chatbot horror adventure where your awareness level determines survival. Playable in 12 languages including English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese, Swedish, and Arabic.",
+  "description": "A terrifying AI chatbot horror adventure where your awareness level determines survival. Fully responsive and installable as an app.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#1a1a1a",
   "orientation": "any",
   "scope": "./",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["games", "entertainment"],
+  "prefer_related_applications": false,
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "screenshots": [
+    {
+      "src": "./Icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "SYNAPSE Game Screenshot"
+    }
+  ],
   "icons": [
     {
       "src": "./Icon.png",
@@ -58,28 +75,30 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["games", "entertainment"],
-  "lang": "en-US",
-  "dir": "auto",
-  "prefer_related_applications": false,
-  "display_override": ["standalone", "minimal-ui", "browser"],
-  "edge_side_panel": {
-    "preferred_width": 400
-  },
-  "screenshots": [
+  "shortcuts": [
     {
-      "src": "./Icon.png",
-      "sizes": "1280x720",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "SYNAPSE Horror Game - Main Interface"
+      "name": "New Game",
+      "short_name": "New Game",
+      "description": "Start a new SYNAPSE adventure",
+      "url": "./index.html?action=new-game",
+      "icons": [
+        {
+          "src": "./Icon.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
-      "src": "./Icon.png",
-      "sizes": "750x1334",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "SYNAPSE Horror Game - Mobile View"
+      "name": "Load Game",
+      "short_name": "Load Game", 
+      "description": "Continue your SYNAPSE journey",
+      "url": "./index.html?action=load-game",
+      "icons": [
+        {
+          "src": "./Icon.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
