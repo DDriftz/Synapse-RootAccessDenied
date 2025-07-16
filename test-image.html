@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Test</title>
+    <style>
+        body { margin: 0; padding: 20px; background: black; color: white; }
+        .test-container { 
+            width: 300px; 
+            height: 300px; 
+            border: 2px solid red; 
+            margin: 20px;
+            position: relative;
+        }
+        .bg-test1 { 
+            background-image: url('./Icon.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .bg-test2 { 
+            background-image: url('Icon.png');
+            background-size: cover;
+            background-position: center;
+        }
+        .img-test { max-width: 100%; max-height: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+    
+    <h2>Test 1: ./Icon.png (relative with dot)</h2>
+    <div class="test-container bg-test1"></div>
+    
+    <h2>Test 2: Icon.png (direct)</h2>
+    <div class="test-container bg-test2"></div>
+    
+    <h2>Test 3: IMG tag</h2>
+    <div class="test-container">
+        <img src="./Icon.png" class="img-test" alt="Icon" onerror="this.style.border='3px solid red'; this.alt='FAILED TO LOAD';">
+    </div>
+    
+    <h2>Test 4: IMG tag direct</h2>
+    <div class="test-container">
+        <img src="Icon.png" class="img-test" alt="Icon" onerror="this.style.border='3px solid red'; this.alt='FAILED TO LOAD';">
+    </div>
+</body>
+</html>

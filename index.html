@@ -244,57 +244,178 @@
             --main-color-shadow: rgba(0,255,65,0.5);
             --main-color-glow: rgba(0,255,65,0.7);
         }
+        /* Enhanced responsive design with simplified background */
         html, body {
             height: 100%;
             width: 100%;
             margin: 0;
             padding: 0;
             overflow: hidden; 
-            font-size: clamp(14px, 1.5vw, 18px); 
+            font-size: clamp(14px, 1.5vw, 18px);
         }
+        
         body {
             background-color: #0d0d0d;
             color: var(--main-color);
             font-family: 'Space Mono', monospace;
-            min-height: 100vh; 
+            min-height: 100vh;
+            min-height: 100dvh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Simplified background image */
+            background-image: url('./Icon.png') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
         }
+        
+        /* App container with semi-transparent background */
+        #app-container {
+            background: rgba(0,0,0,0.85) !important;
+            backdrop-filter: blur(1px);
+        }
+        
+        /* Ensure content screens have proper backgrounds */
+        #start-screen, #player-setup, #prologue-screen {
+            background: rgba(0,0,0,0.7) !important;
+            color: var(--main-color) !important;
+        }
+        
+        /* Ensure all text elements are visible */
+        #start-screen *, #player-setup *, #prologue-screen * {
+            color: inherit !important;
+        }
+        
+        /* Ensure titles are highly visible */
+        .title-slasher, .subtitle-slasher {
+            position: relative !important;
+            z-index: 100 !important;
+            color: #00ff41 !important;
+        }
+        
+        .title-slasher {
+            color: #39FF14 !important;
+        }
+        
+        .subtitle-slasher {
+            color: #ff3333 !important;
+        }
+        
+        /* Ensure buttons are visible */
+        .button {
+            position: relative !important;
+            z-index: 50 !important;
+            background: var(--main-color-faded) !important;
+            color: var(--main-color) !important;
+        }
+        
+        /* Ensure game description text is visible */
+        #intro-text-container {
+            color: #e5e7eb !important;
+            background: rgba(0,0,0,0.5) !important;
+            padding: 1rem !important;
+            border-radius: 0.5rem !important;
+        }
+        
         #background-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh; /* Dynamic viewport height */
             z-index: 0;
             opacity: 0.1;
         }
+        
         #app-container, .app-container-fullscreen {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
             width: 100vw;
             height: 100vh;
+            height: 100dvh; /* Dynamic viewport height */
             display: flex;
             flex-direction: column;
             align-items: stretch;
             justify-content: stretch;
             z-index: 1;
-            max-width: 1200px;
-            max-height: 90vh;
-            width: 95vw;
-            margin: 2rem auto;
-            overflow: hidden; /* Prevent content from spilling out */
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: clamp(8px, 2vw, 16px);
+        }
+        
+        /* Enhanced responsive container that adapts to all screen sizes */
+        @media (min-width: 640px) {
+            #app-container {
+                max-width: min(95vw, 1200px);
+                max-height: min(95vh, 800px);
+                margin: auto;
+                border-radius: 0.5rem;
+                border: 1px solid rgba(0,255,65,0.3);
+                background: rgba(0,0,0,0.9);
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: auto;
+                height: auto;
+            }
+        }
+        
+        /* Ultra-wide screen optimization */
+        @media (min-width: 1920px) {
+            #app-container {
+                max-width: 1400px;
+                max-height: 900px;
+            }
+        }
+        
+        /* Very small screen optimization */
+        @media (max-width: 480px) {
+            #app-container {
+                padding: clamp(4px, 1vw, 8px);
+            }
+        }
+        
+        /* Landscape mobile specific adjustments */
+        @media (max-height: 500px) and (orientation: landscape) {
+            #app-container {
+                padding: 4px;
+            }
+            
+            .landscape-compact .title-wrapper { 
+                margin-bottom: 0.5rem !important; 
+            }
+            
+            .landscape-compact h1 { 
+                font-size: clamp(1.5rem, 8vw, 3rem) !important; 
+            }
+            
+            .landscape-compact h2 { 
+                font-size: clamp(0.75rem, 4vw, 1.25rem) !important; 
+            }
         }
         
         /* Ensure game elements don't exceed container bounds */
         .game-interface, #game-screen {
             max-height: inherit;
             overflow: auto;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         #game-output {
             max-height: 60vh;
+            max-height: 60dvh;
             overflow-y: auto;
         }
         body.crt-effect::after {
@@ -541,100 +662,115 @@
             }
         }
 
-        /* Subtitle with merged blood drip effect into the text */
+        /* Subtitle with enhanced visibility and merged blood drip effect */
         .subtitle-slasher {
             font-family: 'Creepster', cursive;
             letter-spacing: 0.1em;
             position: relative;
             z-index: 2; 
-            /* Fallback color for browsers that don't support background-clip */
-            color: #ff0000;
-            /* Blood-merged text effect with green visibility enhancement */
+            /* Enhanced base color for better visibility */
+            color: #ff3333;
+            /* Stronger text shadow for visibility */
+            text-shadow: 
+                0 0 8px #ff0000, 
+                0 0 16px #ff0000,
+                0 0 24px #ff0000,
+                2px 2px 4px rgba(0,0,0,0.8);
+            /* Blood-merged text effect with enhanced visibility */
             background: linear-gradient(to bottom, 
-                #ff0000 0%, 
-                #ff0000 20%, 
-                #8B0000 40%, 
+                #ff3333 0%, 
+                #ff1111 20%, 
+                #cc0000 40%, 
                 #B22222 60%, 
                 #DC143C 80%, 
-                #660000 100%);
+                #880000 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 100% 300%;
-            animation: blood-merge-drip-with-green 8s infinite ease-out;
+            animation: enhanced-blood-merge-drip 8s infinite ease-out;
             filter: 
-                drop-shadow(0 0 3px #8B0000) 
-                drop-shadow(0 0 8px #B22222) 
-                drop-shadow(0 0 15px #DC143C);
-            /* Ensure text shadow for visibility */
-            text-shadow: 
-                0 0 5px #ff0000, 
-                0 0 10px #ff0000;
+                drop-shadow(0 0 6px #ff0000) 
+                drop-shadow(0 0 12px #B22222) 
+                drop-shadow(0 0 20px #DC143C)
+                drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
+            /* Stronger outline for better visibility */
+            -webkit-text-stroke: 1px rgba(255,0,0,0.5);
         }
 
-        @keyframes blood-merge-drip-with-green {
+        @keyframes enhanced-blood-merge-drip {
             0% { 
                 background: linear-gradient(to bottom, 
-                    #ff0000 0%, #ff0000 20%, #8B0000 40%, #B22222 60%, #DC143C 80%, #660000 100%);
+                    #ff3333 0%, #ff1111 20%, #cc0000 40%, #B22222 60%, #DC143C 80%, #880000 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
                 background-position: 0% 0%;
                 filter: 
-                    drop-shadow(0 0 3px #ff0000)
-                    drop-shadow(0 0 6px #8B0000);
+                    drop-shadow(0 0 6px #ff0000)
+                    drop-shadow(0 0 10px #8B0000)
+                    drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
                 transform: translateY(0px);
+                -webkit-text-stroke: 1px rgba(255,0,0,0.5);
             }
             25% {
                 background: linear-gradient(to bottom, 
-                    #39FF14 0%, #ff0000 15%, #8B0000 35%, #B22222 55%, #DC143C 75%, #660000 100%);
+                    #39FF14 0%, #ff3333 15%, #cc0000 35%, #B22222 55%, #DC143C 75%, #880000 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
                 background-position: 0% 25%;
                 filter: 
-                    drop-shadow(0 2px 5px #8B0000) 
-                    drop-shadow(0 0 8px #B22222)
-                    drop-shadow(0 0 12px #DC143C)
-                    drop-shadow(0 0 5px #39FF14);
+                    drop-shadow(0 2px 6px #8B0000) 
+                    drop-shadow(0 0 12px #B22222)
+                    drop-shadow(0 0 16px #DC143C)
+                    drop-shadow(0 0 8px #39FF14)
+                    drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
                 transform: translateY(1px);
+                -webkit-text-stroke: 1px rgba(255,0,0,0.6);
             }
             50% { 
                 background: linear-gradient(to bottom, 
-                    #39FF14 0%, #39FF14 10%, #ff0000 30%, #8B0000 50%, #B22222 70%, #DC143C 85%, #660000 100%);
+                    #39FF14 0%, #39FF14 10%, #ff3333 30%, #cc0000 50%, #B22222 70%, #DC143C 85%, #880000 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
                 background-position: 0% 50%;
                 filter: 
-                    drop-shadow(0 4px 8px #8B0000) 
-                    drop-shadow(0 0 12px #DC143C)
-                    drop-shadow(0 0 18px #B22222)
-                    drop-shadow(0 0 8px #39FF14);
+                    drop-shadow(0 4px 10px #8B0000) 
+                    drop-shadow(0 0 16px #DC143C)
+                    drop-shadow(0 0 22px #B22222)
+                    drop-shadow(0 0 12px #39FF14)
+                    drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
                 transform: translateY(2px);
+                -webkit-text-stroke: 1px rgba(255,0,0,0.7);
             }
             75% {
                 background: linear-gradient(to bottom, 
-                    #39FF14 0%, #39FF14 15%, #ff0000 25%, #8B0000 45%, #B22222 65%, #DC143C 80%, #660000 100%);
+                    #39FF14 0%, #39FF14 15%, #ff3333 25%, #cc0000 45%, #B22222 65%, #DC143C 80%, #880000 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
                 background-position: 0% 75%;
                 filter: 
-                    drop-shadow(0 6px 12px rgba(139,0,0,0.8)) 
-                    drop-shadow(0 0 15px #B22222)
-                    drop-shadow(0 0 25px rgba(220,20,60,0.6))
-                    drop-shadow(0 0 10px #39FF14);
+                    drop-shadow(0 6px 14px rgba(139,0,0,0.8)) 
+                    drop-shadow(0 0 20px #B22222)
+                    drop-shadow(0 0 30px rgba(220,20,60,0.6))
+                    drop-shadow(0 0 14px #39FF14)
+                    drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
                 transform: translateY(3px);
+                -webkit-text-stroke: 1px rgba(255,0,0,0.8);
             }
             100% { 
                 background: linear-gradient(to bottom, 
-                    #39FF14 0%, #39FF14 20%, #ff0000 30%, #8B0000 50%, #B22222 70%, #DC143C 85%, #660000 100%);
+                    #39FF14 0%, #39FF14 20%, #ff3333 30%, #cc0000 50%, #B22222 70%, #DC143C 85%, #880000 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
                 background-position: 0% 100%;
                 filter: 
-                    drop-shadow(0 8px 15px rgba(139,0,0,0.6)) 
-                    drop-shadow(0 0 20px rgba(220,20,60,0.8))
-                    drop-shadow(0 0 30px rgba(255,99,71,0.4))
-                    drop-shadow(0 0 12px #39FF14);
+                    drop-shadow(0 8px 18px rgba(139,0,0,0.6)) 
+                    drop-shadow(0 0 25px rgba(220,20,60,0.8))
+                    drop-shadow(0 0 35px rgba(255,99,71,0.4))
+                    drop-shadow(0 0 16px #39FF14)
+                    drop-shadow(2px 2px 4px rgba(0,0,0,0.8));
                 transform: translateY(4px);
+                -webkit-text-stroke: 1px rgba(255,0,0,0.9);
             }
         }
 
@@ -700,22 +836,115 @@
             width: 100%;
         }
         
-        .btn-drip { position: relative; z-index: 1; }
-        .btn-drip::before {
-            content: attr(data-text);
-            position: absolute; left: 0; top: 0; width: 100%; height: 100%;
-            color: transparent; z-index: -1;
-            filter: drop-shadow(0 0 2px #ff0000) drop-shadow(0 0 5px #d40000);
-            animation: button-drip-anim 5s infinite ease-out;
-            font-family: inherit; font-size: inherit; letter-spacing: inherit;
-            display: flex; align-items: center; justify-content: center; padding: inherit;
+        .btn-drip { 
+            position: relative; 
+            z-index: 1; 
+            overflow: hidden;
+        }
+        
+        /* Enhanced drip effect integrated into button text - Original style restored */
+        .btn-drip {
+            position: relative;
+            color: #ff3333;
+            text-shadow: 
+                0 0 8px #ff0000,
+                0 0 16px #ff0000,
+                0 0 24px #ff0000,
+                2px 2px 4px rgba(0,0,0,0.8);
+            background: linear-gradient(135deg, 
+                rgba(255,51,51,0.2) 0%, 
+                rgba(255,17,17,0.3) 25%, 
+                rgba(204,0,0,0.4) 50%, 
+                rgba(178,34,34,0.3) 75%, 
+                rgba(136,0,0,0.2) 100%);
+            border: 1px solid #ff3333 !important;
+            animation: button-blood-drip 8s infinite ease-out;
+            overflow: hidden;
         }
 
-        @keyframes button-drip-anim {
-            0% { text-shadow: 1px 1px 0px #600, 0 0 2px #d00, 0px 0px 0px #400; opacity: 1; }
-            50% { text-shadow: 1px 1px 0px #600, 0 0 2px #d00, 0px 10px 5px #400, -2px 15px 6px #300; opacity: 1; }
-            90% { text-shadow: 1px 1px 0px rgba(102,0,0,0.2), 0 0 2px rgba(221,0,0,0.5), 0px 18px 10px rgba(68,0,0,0.1), -2px 22px 12px rgba(51,0,0,0.05); opacity: 0.8; }
-            100% { text-shadow: 1px 1px 0px transparent, 0 0 2px transparent, 0px 20px 15px transparent, -2px 25px 15px transparent; opacity: 0; }
+        .btn-drip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, 
+                transparent 0%, 
+                rgba(139,0,0,0.1) 70%, 
+                rgba(178,34,34,0.3) 85%, 
+                rgba(220,20,60,0.5) 100%);
+            opacity: 0;
+            animation: drip-overlay 8s infinite ease-out 2s;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes button-blood-drip {
+            0%, 75% { 
+                text-shadow: 
+                    0 0 8px #ff0000,
+                    0 0 16px #ff0000,
+                    0 0 24px #ff0000,
+                    2px 2px 4px rgba(0,0,0,0.8);
+                filter: none;
+                transform: translateY(0);
+            }
+            80% {
+                text-shadow: 
+                    0 0 8px #ff0000,
+                    0 0 16px #ff0000,
+                    0 0 24px #ff0000,
+                    2px 2px 4px rgba(0,0,0,0.8),
+                    0 5px 3px #8B0000,
+                    -1px 8px 4px #B22222;
+                filter: drop-shadow(0 3px 2px rgba(139,0,0,0.6));
+                transform: translateY(1px);
+            }
+            85% {
+                text-shadow: 
+                    0 0 8px #ff0000,
+                    0 0 16px #ff0000,
+                    0 0 24px #ff0000,
+                    2px 2px 4px rgba(0,0,0,0.8),
+                    0 8px 4px #8B0000,
+                    -1px 12px 5px #B22222,
+                    2px 15px 6px #DC143C;
+                filter: drop-shadow(0 6px 4px rgba(139,0,0,0.7));
+                transform: translateY(2px);
+            }
+            90% {
+                text-shadow: 
+                    0 0 8px #ff0000,
+                    0 0 16px #ff0000,
+                    0 0 24px #ff0000,
+                    2px 2px 4px rgba(0,0,0,0.8),
+                    0 12px 6px rgba(139,0,0,0.8),
+                    -1px 18px 8px rgba(178,34,34,0.6),
+                    2px 22px 10px rgba(220,20,60,0.4);
+                filter: drop-shadow(0 10px 8px rgba(139,0,0,0.5));
+                transform: translateY(3px);
+            }
+            100% {
+                text-shadow: 
+                    0 0 8px #ff0000,
+                    0 0 16px #ff0000,
+                    0 0 24px #ff0000,
+                    2px 2px 4px rgba(0,0,0,0.8),
+                    0 15px 8px rgba(139,0,0,0.3),
+                    -1px 25px 12px rgba(178,34,34,0.2),
+                    2px 30px 15px rgba(220,20,60,0.1);
+                filter: drop-shadow(0 15px 12px rgba(139,0,0,0.2));
+                transform: translateY(4px);
+            }
+        }
+
+        @keyframes drip-overlay {
+            0%, 60% { opacity: 0; }
+            70% { opacity: 0.3; }
+            80% { opacity: 0.6; }
+            90% { opacity: 0.8; }
+            100% { opacity: 0; }
         }
 
         .input-caret {
@@ -799,9 +1028,13 @@
         .modal-scroll { overflow-y: auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        #language-screen, #start-screen, #player-setup, #prologue-screen {
-            background-image: url('./Icon.png');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
+        /* Simple background image implementation */
+        body {
+            background-image: url('./Icon.png') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
         }
         
         /* Make all game screens fullscreen within app-container */
@@ -1497,8 +1730,16 @@
         .rtl .title-wrapper {
             text-align: center;
         }
-        .rtl input[type="text"] {
-            text-align: right;
+        /* PWA Install Button Styles */
+        #pwa-install-btn {
+            display: none !important;
+        }
+        
+        #pwa-install-btn.visible {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
         }
         .rtl .w-full.flex.justify-end {
             justify-content: flex-start;
@@ -1565,18 +1806,30 @@
         }
     </style>
 </head>
-<body class="bg-black flex items-center justify-center min-h-screen p-4">
+<body class="bg-black flex items-center justify-center min-h-screen overflow-hidden"
+      style="min-height: 100vh; min-height: 100dvh; width: 100vw; position: fixed; top: 0; left: 0;"
+      data-responsive-design="enhanced"
+      data-pwa-enabled="true">
     <canvas id="background-canvas"></canvas>
     <div id="error-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
-    <div id="app-container" class="bg-black/90 p-4 rounded-lg border border-green-500/30 flex flex-col shadow-2xl">
+    <div id="app-container" class="bg-black/80 p-4 rounded-lg border border-green-500/30 flex flex-col shadow-2xl">
         
-        <div id="start-screen" class="flex flex-col items-center justify-center text-center relative min-h-screen">
-            <div class="start-screen-container w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60 relative min-h-screen overflow-hidden">
+        <div id="start-screen" class="flex flex-col items-center justify-center text-center relative min-h-screen" style="background: rgba(0,0,0,0.7); color: #00ff41;">
+            <div class="start-screen-container w-full h-full flex flex-col items-center justify-center relative min-h-screen overflow-hidden" style="position: relative; z-index: 10;">
                 
-                <!-- Language buttons - Upper Right Corner - Responsive -->
-                <div class="absolute top-4 sm:top-6 right-4 sm:right-6 z-50 flex gap-1 sm:gap-2" style="transform: translateY(0); margin-top: env(safe-area-inset-top);">
+                <!-- Language buttons and PWA Install - Upper Right Corner - Responsive -->
+                <div class="absolute top-4 sm:top-6 right-4 sm:right-6 z-50 flex gap-1 sm:gap-2 items-center" style="transform: translateY(0); margin-top: env(safe-area-inset-top);">
                     <button id="lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs sm:text-sm px-2 sm:px-3 py-1 btn-drip bg-green-600/20 border-green-400 text-green-400">EN</button>
                     <button id="lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs sm:text-sm px-2 sm:px-3 py-1 btn-drip bg-green-600/10 border-green-400/50 text-green-400/50 opacity-50">SV</button>
+                    
+                    <!-- PWA Install Button -->
+                    <button id="pwa-install-btn" class="button text-xs sm:text-sm px-2 sm:px-3 py-1 btn-drip bg-purple-600/20 border-purple-400 text-purple-400" title="Install SYNAPSE App" style="display: none;">
+                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16" class="mr-1">
+                            <path d="M8.5 1.5A1.5 1.5 0 0 0 7 0H4.5A1.5 1.5 0 0 0 3 1.5v13A1.5 1.5 0 0 0 4.5 16h7a1.5 1.5 0 0 0 1.5-1.5V6.954a1.5 1.5 0 0 0-.44-1.06L9.06.44A1.5 1.5 0 0 0 8.5 0v1.5z"/>
+                            <path d="M8 7a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 1 1 .708-.708L7.5 11.293V7.5A.5.5 0 0 1 8 7z"/>
+                        </svg>
+                        <span class="hidden sm:inline">Install App</span>
+                    </button>
                 </div>
 
                 <!-- Settings button - Left Lower Corner - Responsive -->
@@ -1605,19 +1858,12 @@
                         <button id="new-game-btn" data-lang="new_game" data-text="New Game" class="button btn-glow btn-drip text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 w-full sm:w-auto">New Game</button>
                         <button id="load-game-btn" data-lang="load_game" data-text="Load Game" class="button btn-glow btn-drip text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-amber-500/20 border-amber-400 hover:bg-amber-500/30 w-full sm:w-auto">Load Game</button>
                     </div>
-
-                    <!-- PWA Install Prompt - Only shown when installable -->
-                    <div id="pwa-install-prompt" class="hidden mt-4 sm:mt-6">
-                        <button id="pwa-install-btn" class="button btn-glow btn-drip text-xs sm:text-sm px-3 sm:px-4 py-1 sm:py-2 bg-purple-600/20 border-purple-400 text-purple-400 hover:bg-purple-600/30">📱 Install App</button>
-                    </div>
-                </div>
-                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="player-setup" class="hidden flex-col items-center justify-center text-center">
-             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
+        <div id="player-setup" class="hidden flex-col items-center justify-center text-center" style="background: rgba(0,0,0,0.7); color: #00ff41;">
+            <div class="w-full h-full flex flex-col items-center justify-center relative" style="position: relative; z-index: 10;">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
                     <div id="setup-lang-buttons" class="flex gap-1 flex-wrap">
@@ -4401,8 +4647,178 @@
 
     let currentNarrator = narratorPersonalities.truthful;
     
-    // --- SPEECH RECOGNITION ---
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    // --- PWA INSTALLATION ---
+    let deferredPrompt = null;
+    let pwaInstallBtn = null;
+    
+    // PWA Install functionality
+    function initializePWAInstall() {
+        pwaInstallBtn = document.getElementById('pwa-install-btn');
+        
+        // Check if app is already installed
+        if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+            // App is already installed
+            if (pwaInstallBtn) {
+                pwaInstallBtn.style.display = 'none';
+            }
+            return;
+        }
+        
+        // Check if running in PWA mode
+        if (window.navigator.standalone === true) {
+            // iOS PWA mode
+            if (pwaInstallBtn) {
+                pwaInstallBtn.style.display = 'none';
+            }
+            return;
+        }
+        
+        // Listen for the beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA: beforeinstallprompt event fired');
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            // Show the install button
+            if (pwaInstallBtn) {
+                pwaInstallBtn.style.display = 'flex';
+                pwaInstallBtn.classList.add('visible');
+            }
+        });
+        
+        // Handle the install button click
+        if (pwaInstallBtn) {
+            pwaInstallBtn.addEventListener('click', installPWA);
+        }
+        
+        // Listen for the app installed event
+        window.addEventListener('appinstalled', (e) => {
+            console.log('PWA: App was installed successfully');
+            if (pwaInstallBtn) {
+                pwaInstallBtn.style.display = 'none';
+                pwaInstallBtn.classList.remove('visible');
+            }
+            deferredPrompt = null;
+            
+            // Show success message
+            if (window.typeWriter && UI.gameOutput) {
+                typeWriter(UI.gameOutput, '[SYNAPSE App installed successfully!]', '#00ff41');
+            }
+        });
+        
+        // For iOS Safari - show manual install instructions
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+        
+        if (isIOS && isSafari && !window.navigator.standalone) {
+            if (pwaInstallBtn) {
+                pwaInstallBtn.style.display = 'flex';
+                pwaInstallBtn.classList.add('visible');
+                pwaInstallBtn.addEventListener('click', showIOSInstallInstructions);
+            }
+        }
+    }
+    
+    async function installPWA() {
+        if (!deferredPrompt) {
+            // For browsers that don't support PWA installation
+            showManualInstallInstructions();
+            return;
+        }
+        
+        try {
+            // Show the install prompt
+            const result = await deferredPrompt.prompt();
+            console.log('PWA: Install prompt result:', result);
+            
+            // Wait for the user to respond to the prompt
+            const choiceResult = await deferredPrompt.userChoice;
+            console.log('PWA: User choice:', choiceResult);
+            
+            if (choiceResult.outcome === 'accepted') {
+                console.log('PWA: User accepted the install prompt');
+            } else {
+                console.log('PWA: User dismissed the install prompt');
+            }
+            
+            // Clear the deferredPrompt
+            deferredPrompt = null;
+            
+            // Hide the install button
+            if (pwaInstallBtn) {
+                pwaInstallBtn.style.display = 'none';
+                pwaInstallBtn.classList.remove('visible');
+            }
+        } catch (error) {
+            console.error('PWA: Error during installation:', error);
+            showManualInstallInstructions();
+        }
+    }
+    
+    function showIOSInstallInstructions() {
+        const instructions = `
+            <div class="pwa-install-instructions bg-blue-900/90 p-4 rounded-lg border border-blue-400">
+                <h3 class="text-blue-400 font-bold mb-2">Install SYNAPSE App</h3>
+                <p class="text-sm mb-2">To install SYNAPSE on your iOS device:</p>
+                <ol class="text-xs space-y-1 list-decimal list-inside">
+                    <li>Tap the Share button <svg style="display: inline; width: 12px; height: 12px;" fill="currentColor" viewBox="0 0 16 16"><path d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12A2.5 2.5 0 1 1 11 13.5a2.5 2.5 0 0 1-.262-1.128L4.02 9.252a2.5 2.5 0 0 1-3.237-2.83A2.5 2.5 0 0 1 4.02 6.748l6.718-3.12A2.5 2.5 0 0 1 11 2.5z"/></svg> at the bottom</li>
+                    <li>Scroll down and tap "Add to Home Screen"</li>
+                    <li>Tap "Add" to confirm</li>
+                </ol>
+            </div>
+        `;
+        
+        if (window.showModal) {
+            showModal(instructions, true);
+        } else {
+            alert('To install: Tap Share button → Add to Home Screen');
+        }
+    }
+    
+    function showManualInstallInstructions() {
+        const isChrome = /Chrome/.test(navigator.userAgent);
+        const isFirefox = /Firefox/.test(navigator.userAgent);
+        const isEdge = /Edg/.test(navigator.userAgent);
+        
+        let instructions = `
+            <div class="pwa-install-instructions bg-blue-900/90 p-4 rounded-lg border border-blue-400">
+                <h3 class="text-blue-400 font-bold mb-2">Install SYNAPSE App</h3>
+        `;
+        
+        if (isChrome || isEdge) {
+            instructions += `
+                <p class="text-sm mb-2">To install SYNAPSE:</p>
+                <ol class="text-xs space-y-1 list-decimal list-inside">
+                    <li>Click the menu (⋮) in the top-right corner</li>
+                    <li>Select "Install SYNAPSE..." or "Apps" → "Install this site as an app"</li>
+                    <li>Click "Install" to confirm</li>
+                </ol>
+            `;
+        } else if (isFirefox) {
+            instructions += `
+                <p class="text-sm mb-2">Firefox doesn't support app installation, but you can:</p>
+                <ol class="text-xs space-y-1 list-decimal list-inside">
+                    <li>Bookmark this page for easy access</li>
+                    <li>Use "Pin Tab" for persistent access</li>
+                    <li>Try using Chrome or Edge for full app installation</li>
+                </ol>
+            `;
+        } else {
+            instructions += `
+                <p class="text-sm mb-2">Your browser may not support app installation.</p>
+                <p class="text-xs">Try using Chrome, Edge, or Safari for the best experience.</p>
+            `;
+        }
+        
+        instructions += `</div>`;
+        
+        if (window.showModal) {
+            showModal(instructions, true);
+        } else {
+            alert('App installation not supported in this browser. Please bookmark this page for easy access.');
+        }
+    }
     let recognition;
     if (SpeechRecognition) {
         recognition = new SpeechRecognition();
@@ -8726,6 +9142,7 @@
             langSvBtn: document.getElementById('lang-sv-btn'),
             langButtons: document.getElementById('lang-buttons'),
             setupLangButtons: document.getElementById('setup-lang-buttons'),
+            pwaInstallBtn: document.getElementById('pwa-install-btn'),
             // UI Elements
             setupSettingsBtn: document.getElementById('setup-settings-btn'),
             setupFeaturesBtn: document.getElementById('setup-features-btn'),
@@ -8750,6 +9167,9 @@
         } else {
             console.log('SYNAPSE: All critical UI elements found successfully');
         }
+        
+        // Initialize PWA install functionality
+        initializePWAInstall();
         
         // Load player choices first to pre-populate the setup screen
         loadPlayerChoices();
@@ -10367,7 +10787,7 @@
         // Test each button by simulating clicks
         setTimeout(() => {
             console.log('🧪 Testing button clickability...');
-            ['start-settings-btn', 'view-features-btn', 'lang-en-btn', 'lang-sv-btn', 'new-game-btn', 'load-game-btn'].forEach(id => {
+            ['start-settings-btn', 'view-features-btn', 'lang-en-btn', 'lang-sv-btn', 'pwa-install-btn', 'new-game-btn', 'load-game-btn'].forEach(id => {
                 const btn = document.getElementById(id);
                 if (btn) {
                     const rect = btn.getBoundingClientRect();
@@ -10440,6 +10860,10 @@
             { id: 'lang-sv-btn', handler: () => {
                 console.log('Swedish Language clicked!');
                 if (window.setLanguage) setLanguage('sv');
+            }},
+            { id: 'pwa-install-btn', handler: () => {
+                console.log('PWA Install clicked!');
+                if (window.installPWA) installPWA();
             }}
         ];
         
