@@ -4,8 +4,7 @@ const urlsToCache = [
   './index.html',
   './Icon.png',
   './manifest.json',
-  'https://unpkg.com/tone@15.0.4/build/Tone.js',
-  'https://cdn.tailwindcss.com'
+  'https://unpkg.com/tone@15.0.4/build/Tone.js'
 ];
 
 // Install event - cache resources
@@ -45,6 +44,11 @@ self.addEventListener('activate', event => {
 
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', event => {
+  // Skip non-HTTP(S) schemes (chrome-extension:, moz-extension:, etc.)
+  if (!event.request.url.startsWith('http')) {
+    return;
+  }
+  
   // Skip external resources that cause CORS issues
   const url = new URL(event.request.url);
   if (url.hostname === 'storage.googleapis.com') {
