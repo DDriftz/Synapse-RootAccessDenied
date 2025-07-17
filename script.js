@@ -2729,8 +2729,7 @@
         }
     }
     let recognition;
-    if (window.SpeechRecognition || window.webkitSpeechRecognition) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
         recognition = new SpeechRecognition();
         recognition.continuous = false;
         recognition.interimResults = false;
@@ -6545,7 +6544,7 @@
     }
 
     function startSpeechRecognition() {
-        if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+        if (!SpeechRecognition) {
             typeWriter(UI.gameOutput, "[SYSTEM] Speech recognition is not supported in your browser.", '#ff474c');
             return;
         }
@@ -7248,7 +7247,7 @@
         UI.difficultyBtns.forEach(btn => { setupButtonClick(btn, () => { UI.difficultyBtns.forEach(b => b.classList.remove('button-primary')); btn.classList.add('button-primary'); updateAbilityDisplay(); }); });
         UI.playerBackstoryInput.addEventListener('input', updateAbilityDisplay);
         
-        if (window.SpeechRecognition || window.webkitSpeechRecognition) {
+        if (SpeechRecognition) {
             setupButtonClick(UI.micBtn, startSpeechRecognition);
         } else {
             UI.micBtn.style.display = 'none';
