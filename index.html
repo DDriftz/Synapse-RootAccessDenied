@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <!-- URGENT: Force cache refresh with timestamp -->
-    <!-- Version: 2025.07.15.2000 - LANGUAGES: English and Swedish only 
+    <!-- Version: 2025.07.15.2000 - LANGUAGES: English and Swedish only -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, max-age=0">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -836,15 +836,10 @@
             width: 100%;
         }
         
-        .btn-drip { 
-            position: relative; 
-            z-index: 1; 
-            overflow: hidden;
-        }
-        
-        /* Enhanced drip effect integrated into button text - Original style restored */
+        /* Enhanced drip effect integrated into button text - Complete consolidated style */
         .btn-drip {
             position: relative;
+            z-index: 1;
             color: #ff3333;
             text-shadow: 
                 0 0 8px #ff0000,
@@ -1028,14 +1023,6 @@
         .modal-scroll { overflow-y: auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        /* Simple background image implementation */
-        body {
-            background-image: url('./Icon.png') !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-repeat: no-repeat !important;
-            background-attachment: fixed !important;
-        }
         
         /* Make all game screens fullscreen within app-container */
         #start-screen, #player-setup, #prologue-screen, #game-screen {
