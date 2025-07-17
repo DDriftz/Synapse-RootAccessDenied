@@ -260,6 +260,8 @@
             font-family: 'Space Mono', monospace;
             margin: 0;
             padding: 0;
+            width: 100%;
+            height: 100%;
             min-height: 100vh;
             min-height: 100dvh;
             overflow: hidden;
@@ -269,6 +271,20 @@
             background-position: center !important;
             background-repeat: no-repeat !important;
             background-attachment: fixed !important;
+        }
+        
+        /* Ensure html also takes full space */
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        /* Handle viewport changes gracefully */
+        * {
+            box-sizing: border-box;
         }
         
         /* App container with semi-transparent background */
@@ -341,10 +357,17 @@
         }
         
         #app-container, .app-container-fullscreen {
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             width: 100vw;
             height: 100vh;
             height: 100dvh; /* Dynamic viewport height */
+            max-width: 100vw;
+            max-height: 100vh;
+            max-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: stretch;
@@ -353,6 +376,7 @@
             overflow: hidden;
             box-sizing: border-box;
             padding: clamp(8px, 2vw, 16px);
+            pointer-events: auto !important;
         }
         
         /* Enhanced responsive container that adapts to all screen sizes */
@@ -1028,7 +1052,11 @@
         
         /* Make all game screens fullscreen within app-container */
         #start-screen, #player-setup, #prologue-screen, #game-screen {
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
             height: 100%;
             z-index: 50;
