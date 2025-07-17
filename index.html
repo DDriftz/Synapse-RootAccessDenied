@@ -258,13 +258,11 @@
             background-color: #0d0d0d;
             color: var(--main-color);
             font-family: 'Space Mono', monospace;
+            margin: 0;
+            padding: 0;
             min-height: 100vh;
             min-height: 100dvh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            overflow: hidden;
             /* Simplified background image */
             background-image: url('./Icon.png') !important;
             background-size: cover !important;
@@ -277,6 +275,7 @@
         #app-container {
             background: rgba(0,0,0,0.85) !important;
             backdrop-filter: blur(1px);
+            pointer-events: auto !important;
         }
         
         /* Ensure content screens have proper backgrounds */
@@ -288,6 +287,13 @@
         /* Ensure all text elements are visible */
         #start-screen *, #player-setup *, #prologue-screen * {
             color: inherit !important;
+        }
+        
+        /* Ensure all buttons are clickable and visible */
+        button, .button, input[type="button"] {
+            pointer-events: auto !important;
+            position: relative !important;
+            z-index: 200 !important;
         }
         
         /* Ensure titles are highly visible */
@@ -335,11 +341,7 @@
         }
         
         #app-container, .app-container-fullscreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: relative;
             width: 100vw;
             height: 100vh;
             height: 100dvh; /* Dynamic viewport height */
@@ -347,7 +349,7 @@
             flex-direction: column;
             align-items: stretch;
             justify-content: stretch;
-            z-index: 1;
+            z-index: 10;
             overflow: hidden;
             box-sizing: border-box;
             padding: clamp(8px, 2vw, 16px);
@@ -1026,14 +1028,10 @@
         
         /* Make all game screens fullscreen within app-container */
         #start-screen, #player-setup, #prologue-screen, #game-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: relative;
             width: 100%;
             height: 100%;
-            z-index: 1;
+            z-index: 50;
             pointer-events: auto !important;
         }
         
@@ -1047,6 +1045,7 @@
             padding: 1rem !important;
             box-sizing: border-box !important;
             pointer-events: auto !important;
+            z-index: 100 !important;
         }
         
         /* Hide screens when they have hidden class */
