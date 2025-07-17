@@ -11,7 +11,7 @@
     <meta name="cache-buster" content="1900-removed-title-screen">
     <meta name="last-modified" content="2025-07-15T18:00:00Z">
     <!-- Content Security Policy for enhanced security -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com; worker-src 'self' blob:; connect-src 'self' https:;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; worker-src 'self' blob:; connect-src 'self' https:;">
     <title>SYNAPSE</title>
     <link rel="icon" type="image/png" href="./Icon.png">
     <script>
@@ -32,32 +32,19 @@
             document.head.appendChild(manifestLink);
         }
         
-        // Suppress Tailwind CDN production warning
-        if (typeof console !== 'undefined' && console.warn) {
-            const originalWarn = console.warn;
-            console.warn = function(message) {
-                if (typeof message === 'string' && message.includes('cdn.tailwindcss.com should not be used in production')) {
-                    return; // Suppress this specific warning
-                }
-                originalWarn.apply(console, arguments);
-            };
+        // Cache control and manifest loading
+        if (window.location.protocol !== 'file:') {
+            const manifestLink = document.createElement('link');
+            manifestLink.rel = 'manifest';
+            manifestLink.href = './manifest.json?cb=' + new Date().getTime();
+            document.head.appendChild(manifestLink);
         }
     </script>
     
-    <!-- Conditional loading for external resources -->
+    <!-- Local Tailwind CSS - No CDN dependency -->
     <script>
-        // Load Tailwind CSS only if not running from file protocol
-        if (window.location.protocol !== 'file:') {
-            const tailwindScript = document.createElement('script');
-            tailwindScript.src = 'https://cdn.tailwindcss.com';
-            tailwindScript.crossOrigin = 'anonymous';
-            tailwindScript.onerror = function() {
-                console.warn('Tailwind CSS CDN failed to load - using fallback styles');
-            };
-            document.head.appendChild(tailwindScript);
-        } else {
-            console.log('Running from file:// - Tailwind CSS CDN skipped to avoid CORS issues');
-        }
+        // Note: Removed CDN dependency - using comprehensive fallback styles instead
+        console.log('Using local fallback styles instead of Tailwind CDN for reliability');
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,24 +64,7 @@
         } else {
             console.log('Running from file:// - Tone.js skipped to avoid CORS issues');
         }
-    </script>
-    <link rel="stylesheet" href="styles.css">                    <!-- Main Title with Blood Drip Effect - Much Larger -->
-                    <div class="title-wrapper mb-4 sm:mb-8 relative">
-                        <h1 id="game-title" data-lang="title" data-text="SYNAPSE" class="text-6xl xs:text-7xl sm:text-8xl md:text-9xl lg-text-10rem xl-text-12rem xxl-text-14rem font-bold title-slasher mb-2 sm:mb-4 text-green-400 relative z-10 leading-none">SYNAPSE</h1>
-                        <h2 data-lang="subtitle" data-text="ROOT ACCESS DENIED" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl xxl:text-8xl font-mono text-red-500 tracking-wider subtitle-slasher leading-tight">ROOT ACCESS DENIED</h2>
-                    </div>
-                    
-                    <!-- Game Description - Responsive -->
-                    <div id="intro-text-container" class="max-w-xs sm:max-w-md md:max-w-lg lg:max-w-2xl xl:max-w-4xl text-xs sm:text-sm md:text-base lg:text-lg text-gray-200 leading-relaxed mt-4 sm:mt-8 mb-4 sm:mb-8 px-2"></div>
-                    
-                    <!-- Game Options - Responsive -->
-                    <div id="start-options" class="mt-4 sm:mt-6 flex flex-col sm:flex-row justify-center gap-3 sm:gap-6 w-full max-w-md sm:max-w-none">
-                        <button id="new-game-btn" data-lang="new_game" data-text="New Game" class="button btn-glow btn-drip text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-green-500/20 border-green-400 hover:bg-green-500/30 w-full sm:w-auto">New Game</button>
-                        <button id="load-game-btn" data-lang="load_game" data-text="Load Game" class="button btn-glow btn-drip text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-2 sm:py-3 bg-amber-500/20 border-amber-400 hover:bg-amber-500/30 w-full sm:w-auto">Load Game</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<<
 
         <div id="player-setup" class="hidden flex-col items-center justify-center text-center" style="background: rgba(0,0,0,0.7); color: #00ff41;">
             <div class="w-full h-full flex flex-col items-center justify-center relative" style="position: relative; z-index: 10;">
@@ -316,7 +286,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
     <div id="modal" class="modal">
         <div id="modal-content" class="modal-content"></div>
