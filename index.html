@@ -1002,8 +1002,8 @@
 
         /* Ensure buttons are fully visible */
         #title-lang-buttons .button,
-        #title-settings-btn,
-        #title-features-btn {
+        #start-settings-btn,
+        #view-features-btn {
             margin: 2px;
             min-height: 32px;
         }
@@ -1014,7 +1014,7 @@
         }
 
         /* Add safe area for buttons */
-        .title-screen .w-full {
+        .start-screen .w-full {
             padding-left: 4px;
             padding-right: 4px;
         }
@@ -1254,19 +1254,41 @@
         </div>
     </div>
     
-    <script>
-    // SYNAPSE: AI HORROR GAME - V2.5 BUGFIX UPDATE
+    <!-- Modal Container -->
+    <div id="modal" class="modal hidden">
+        <div id="modal-content" class="modal-content">
+            <!-- Modal content will be dynamically inserted here -->
+        </div>
+    </div>
     
-    // --- TRANSLATIONS ---
-    const translations = {
-        'en': {
-            // Start & UI
-            'new_game': 'New Game', 'load_game': 'Load Game', 'en_lang_short': 'EN', 'sv_lang_short': 'SV', 'select_difficulty': 'Select difficulty:', 'easy': 'Easy', 'normal': 'Normal', 'hard': 'Hard', 'fast':'Fast', 'slow': 'Slow',
-            'enter_name_placeholder': 'Enter your name', 'enter_backstory_placeholder': 'Enter your backstory', 'view_choices': 'View Choices', 'choose_backstory_title': 'Choose a Backstory',
-            'choose_backstory_desc': 'You can click a button to select a backstory, or type your choice on the main screen.',
-            'begin': 'Begin', 'continue': 'Continue', 'understand_game': 'Understand the Game', 'intro_1': 'SYNAPSE is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.', 'intro_2': 'Decades ago... a clandestine project was born...', 'intro_3': 'You have been sent to uncover what became of Project SYNAPSE...', 'intro_4': "As you activate the central terminal, a voice greets you... 'Hello, {playerName}.'",
-            'stats_title': 'STATS', 'awareness': 'Awareness', 'sanity': 'Sanity', 'tone': 'Tone', 'turn': 'Turn', 'objectives_title': 'OBJECTIVES', 'inventory_title': 'INVENTORY', 'journal_title': 'JOURNAL', 'map_title': 'MAP', 'progress_btn': 'PROGRESS', 'status_btn': 'Status', 'go_back_btn': 'Go Back',
-            'mic_tooltip': 'Use Voice Command',
+    <!-- Microphone Permission Modal -->
+    <div id="mic-permission-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="bg-black border-2 border-green-400 p-6 rounded-lg max-w-md w-full mx-4">
+            <h2 class="text-xl font-bold text-green-400 mb-4" data-lang="mic_permission_title">Microphone Access</h2>
+            <p class="text-gray-300 mb-4" data-lang="mic_permission_desc">This site would like to access your microphone to enable voice input for your name. This makes character creation faster and more accessible.</p>
+            <div class="flex items-center mb-4">
+                <input type="checkbox" id="remember-mic-choice" class="mr-2">
+                <label for="remember-mic-choice" class="text-sm text-gray-400" data-lang="mic_remember_choice">Remember my choice for this session</label>
+            </div>
+            <div class="flex gap-4 justify-center">
+                <button id="mic-allow-btn" class="button bg-green-600 hover:bg-green-700" data-lang="mic_allow">Allow Access</button>
+                <button id="mic-deny-btn" class="button bg-red-600 hover:bg-red-700" data-lang="mic_deny">Deny Access</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Import external script.js for translations and game logic -->
+    <script src="script.js"></script>
+    <script>
+        // Initialize game when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof initializeGame === 'function') {
+                initializeGame();
+            }
+        });
+    </script>
+</body>
+</html>
             'mic_permission_title': 'Microphone Access',
             'mic_permission_desc': 'This site would like to access your microphone to enable voice input for your name. This makes character creation faster and more accessible.',
             'mic_remember_choice': 'Remember my choice for this session',
@@ -5966,7 +5988,6 @@
         // Initialize UI elements after DOM is loaded
         UI = {
             appContainer: document.getElementById('app-container'),
-            titleScreen: document.getElementById('title-screen'),
             startScreen: document.getElementById('start-screen'), 
             gameScreen: document.getElementById('game-screen'),
             prologueScreen: document.getElementById('prologue-screen'),
@@ -5975,8 +5996,6 @@
             loadGameBtn: document.getElementById('load-game-btn'), 
             viewFeaturesBtn: document.getElementById('view-features-btn'),
             startSettingsBtn: document.getElementById('start-settings-btn'),
-            titleSettingsBtn: document.getElementById('title-settings-btn'),
-            titleFeaturesBtn: document.getElementById('title-features-btn'),
             playerSetup: document.getElementById('player-setup'), 
             startOptions: document.getElementById('start-options'), 
             playerNameInput: document.getElementById('player-name'),
@@ -6169,9 +6188,9 @@
                 } else {
                     GameState.playerName = 'Agent'; // Default name
                 }
-                if (UI.titleScreen) {
-                    UI.titleScreen.classList.add('hidden');
-                    UI.titleScreen.classList.remove('flex');
+                if (UI.startScreen) {
+                    UI.startScreen.classList.add('hidden');
+                    UI.startScreen.classList.remove('flex');
                 }
                 UI.startScreen.classList.remove('hidden');
                 UI.startScreen.classList.add('flex');
@@ -6224,8 +6243,8 @@
 
         setupButtonClick(UI.setupSettingsBtn, () => showSettingsModal(false));
         setupButtonClick(UI.setupFeaturesBtn, showFeaturesModal);
-        setupButtonClick(UI.titleSettingsBtn, () => showSettingsModal(false));
-        setupButtonClick(UI.titleFeaturesBtn, showFeaturesModal);
+        setupButtonClick(UI.startSettingsBtn, () => showSettingsModal(false));
+        setupButtonClick(UI.viewFeaturesBtn, showFeaturesModal);
 
         UI.difficultyBtns.forEach(btn => { setupButtonClick(btn, () => { UI.difficultyBtns.forEach(b => b.classList.remove('button-primary')); btn.classList.add('button-primary'); updateAbilityDisplay(); }); });
         UI.playerBackstoryInput.addEventListener('input', updateAbilityDisplay);
