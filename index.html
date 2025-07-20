@@ -515,7 +515,24 @@
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         #start-screen, #player-setup {
             background-image: url('./Icon.png');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        #start-screen::before, #player-setup::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+        #start-screen > *, #player-setup > * {
+            position: relative;
+            z-index: 2;
         }
         #map-canvas {
             background-color: rgba(0, 20, 0, 0.5);
@@ -949,20 +966,6 @@
             to { opacity: 1; }
         }
 
-        /* Name Microphone Button Styles */
-        #name-mic-btn {
-            transition: all 0.3s ease;
-        }
-
-        #name-mic-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
-        }
-
-        #name-mic-btn.bg-red-500 {
-            animation: micPulse 1s infinite;
-        }
-
         @keyframes micPulse {
             0%, 100% { 
                 box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
@@ -1054,8 +1057,8 @@
                 <div class="flex flex-col items-center justify-center text-center px-2 sm:px-4 w-full max-w-6xl mx-auto">
                     <!-- Main Title with Blood Drip Effect - Much Larger -->
                     <div class="title-wrapper mb-4 sm:mb-8 relative">
-                        <h1 id="game-title" data-lang="title" data-text="SYNAPSE" class="text-6xl xs:text-7xl sm:text-8xl md:text-9xl lg-text-10rem xl-text-12rem xxl-text-14rem font-bold title-slasher mb-2 sm:mb-4 text-green-400 relative z-10 leading-none">SYNAPSE</h1>
-                        <h2 data-lang="subtitle" data-text="ROOT ACCESS DENIED" class="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl xxl:text-8xl font-mono text-red-500 tracking-wider subtitle-slasher leading-tight">ROOT ACCESS DENIED</h2>
+                        <h1 id="game-title" data-lang="title" data-text="SYNAPSE" class="text-5xl xs:text-6xl sm:text-7xl md:text-8xl lg-text-9xl xl-text-10rem xxl-text-12rem font-bold title-slasher mb-2 sm:mb-4 text-green-400 relative z-10 leading-none">SYNAPSE</h1>
+                        <h2 data-lang="subtitle" data-text="Root Access Denied" class="text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl xxl:text-7xl font-mono text-red-500 tracking-wider subtitle-slasher leading-tight">Root Access Denied</h2>
                     </div>
                     
                     <!-- Game Description - Responsive -->
@@ -1083,7 +1086,7 @@
                 <!-- Main Content -->
                 <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full overflow-y-auto min-h-[calc(100vh-8rem)]">
                     <div class="title-wrapper -mt-8 mb-4">
-                        <h1 data-text="SYNAPSE" class="text-6xl md:text-7xl font-bold title-slasher">SYNAPSE</h1>
+                        <h1 data-text="SYNAPSE Root Access Denied" class="text-6xl md:text-7xl font-bold title-slasher">SYNAPSE Root Access Denied</h1>
                     </div>
                     <p class="mb-4" data-lang="select_difficulty">Select difficulty:</p>
                     <div class="flex gap-4 mb-6">
@@ -5230,18 +5233,22 @@
 
     function setupIntro() { UI.introTextContainer.innerHTML = `<p class="mb-4">${t('intro_1')}</p><p>${t('intro_2')}</p><p>${t('intro_3')}</p>`; }
     
+    function setupTitleIntro() {
+        // Setup title screen with proper translations
+        const titleElements = document.querySelectorAll('[data-lang]');
+        titleElements.forEach(el => {
+            const translatedText = t(el.dataset.lang);
+            el.textContent = translatedText;
+            if (el.hasAttribute('data-text')) {
+                el.setAttribute('data-text', translatedText);
+            }
+        });
+    }
+    
     async function startGame() { 
         // Game state was already initialized in showPrologueScreen
-        UI.prologueScreen.classList.add('hidden');
-        UI.prologueScreen.classList.remove('flex');
         UI.gameScreen.classList.remove('hidden'); 
         UI.gameScreen.classList.add('flex');
-        
-        // Initialize systems
-        await initializeGameSystems();
-        
-        addToOutput('Welcome to SYNAPSE: Root Access Denied', 'system');
-        addToOutput('You find yourself in a dimly lit facility...', 'narrative');
         
         // Initialize player stats based on backstory and difficulty
         switch (GameState.playerBackstory) {
@@ -5283,11 +5290,6 @@
                 if (GameState.difficulty !== Difficulty.Hard) GameState.inventory.push(itemData['master keycard']); // Assuming 'master keycard' is defined in itemData
                 break;
         }
-
-        // Hide prologue and show game screen
-        document.getElementById('prologue-screen').classList.add('hidden');
-        UI.gameScreen.classList.remove('hidden'); 
-        UI.gameScreen.classList.add('flex'); 
 
         UI.gameOutput.innerHTML = ''; 
         buildDialogueTree(GameState.chatbotTone);
@@ -5513,8 +5515,10 @@
         nameRecognition.interimResults = false;
 
         nameRecognition.onstart = () => {
-            UI.nameMicBtn.classList.add('bg-red-500', 'border-red-700');
-            UI.nameMicBtn.title = "Listening...";
+            if (UI.nameMicBtn) {
+                UI.nameMicBtn.classList.add('bg-red-500', 'border-red-700');
+                UI.nameMicBtn.title = "Listening...";
+            }
         };
 
         nameRecognition.onresult = (event) => {
@@ -5540,8 +5544,10 @@
         };
 
         nameRecognition.onend = () => {
-            UI.nameMicBtn.classList.remove('bg-red-500', 'border-red-700');
-            UI.nameMicBtn.title = "Speak your name";
+            if (UI.nameMicBtn) {
+                UI.nameMicBtn.classList.remove('bg-red-500', 'border-red-700');
+                UI.nameMicBtn.title = "Speak your name";
+            }
         };
 
         nameRecognition.start();
@@ -5960,6 +5966,7 @@
         // Initialize UI elements after DOM is loaded
         UI = {
             appContainer: document.getElementById('app-container'),
+            titleScreen: document.getElementById('title-screen'),
             startScreen: document.getElementById('start-screen'), 
             gameScreen: document.getElementById('game-screen'),
             prologueScreen: document.getElementById('prologue-screen'),
@@ -5975,9 +5982,9 @@
             playerNameInput: document.getElementById('player-name'),
             playerBackstoryInput: document.getElementById('player-backstory'),
             titlePlayerNameInput: document.getElementById('player-name-input'),
-            nameMicBtn: document.getElementById('name-mic-btn'),
             continueToStartBtn: document.getElementById('continue-to-start-btn'),
-            startGameBtn: document.getElementById('start-game-btn'), 
+            startGameBtn: document.getElementById('start-game-btn'),
+            beginMissionBtn: document.getElementById('begin-mission-btn'), 
             difficultyBtns: document.querySelectorAll('.difficulty-btn'),
             backToStartBtn: document.getElementById('back-to-start-btn'),
             gameOutput: document.getElementById('game-output'), 
@@ -6029,7 +6036,7 @@
         };
         
         // Validate that critical UI elements were found
-        const criticalElements = ['appContainer', 'startScreen', 'gameScreen', 'prologueScreen', 'newGameBtn', 'beginMissionBtn'];
+        const criticalElements = ['appContainer', 'startScreen', 'gameScreen', 'newGameBtn'];
         const missingElements = criticalElements.filter(elem => !UI[elem]);
         if (missingElements.length > 0) {
             console.error('SYNAPSE: Critical UI elements missing:', missingElements);
@@ -6094,9 +6101,83 @@
             UI.playerSetup.classList.remove('flex');
             UI.prologueScreen.classList.remove('hidden');
             UI.prologueScreen.classList.add('flex');
+            
+            // Start the glitch fade out after 4 seconds
+            setTimeout(() => {
+                const glitchOverlay = document.getElementById('glitch-overlay');
+                const staticOverlay = document.getElementById('static-overlay');
+                
+                if (glitchOverlay) glitchOverlay.classList.add('glitch-fade-out');
+                if (staticOverlay) staticOverlay.classList.add('static-fade-out');
+                
+                // Show terminal prompt after glitch fades
+                setTimeout(() => {
+                    const terminalPrompt = document.getElementById('terminal-prompt');
+                    if (terminalPrompt) {
+                        terminalPrompt.style.opacity = '1';
+                        
+                        // Animate connection status
+                        animateConnectionStatus();
+                        
+                        // Transition to game after connection sequence
+                        setTimeout(() => {
+                            transitionToGame();
+                        }, 3000);
+                    }
+                }, 1000);
+            }, 4000);
         }
 
-        setupButtonClick(UI.beginMissionBtn, startGame);
+        function animateConnectionStatus() {
+            const connectionStatus = document.getElementById('connection-status');
+            if (!connectionStatus) return;
+            
+            const statuses = [
+                'Establishing secure link...',
+                'Bypassing firewall...',
+                'Decrypting protocols...',
+                'Connection established.',
+                'SYNAPSE online.'
+            ];
+            
+            let currentIndex = 0;
+            const interval = setInterval(() => {
+                connectionStatus.textContent = statuses[currentIndex];
+                currentIndex++;
+                
+                if (currentIndex >= statuses.length) {
+                    clearInterval(interval);
+                }
+            }, 600);
+        }
+
+        function transitionToGame() {
+            // Hide prologue and start the actual game
+            UI.prologueScreen.classList.add('hidden');
+            UI.prologueScreen.classList.remove('flex');
+            startGame();
+        }
+
+        setupButtonClick(UI.startGameBtn, showPrologueScreen);
+        if (UI.beginMissionBtn) setupButtonClick(UI.beginMissionBtn, startGame);
+        
+        if (UI.continueToStartBtn) {
+            setupButtonClick(UI.continueToStartBtn, () => {
+                const playerName = UI.titlePlayerNameInput.value.trim();
+                if (playerName) {
+                    GameState.playerName = playerName;
+                } else {
+                    GameState.playerName = 'Agent'; // Default name
+                }
+                if (UI.titleScreen) {
+                    UI.titleScreen.classList.add('hidden');
+                    UI.titleScreen.classList.remove('flex');
+                }
+                UI.startScreen.classList.remove('hidden');
+                UI.startScreen.classList.add('flex');
+                setupIntro(); // Update intro with player name
+            });
+        }
 
 
 
@@ -6131,15 +6212,15 @@
         
         const setupLangEnBtn = UI.setupLangButtons.children[0];
         const setupLangSvBtn = UI.setupLangButtons.children[1];
-        const setupLangEsBtn = UI.setupLangButtons.children[2];
-        const setupLangArBtn = UI.setupLangButtons.children[3];
+        const titleLangEnBtn = document.getElementById('title-lang-en-btn');
+        const titleLangSvBtn = document.getElementById('title-lang-sv-btn');
         
         setupButtonClick(UI.langEnBtn, setLanguage, 'en');
         setupButtonClick(UI.langSvBtn, setLanguage, 'sv');
         setupButtonClick(setupLangEnBtn, setLanguage, 'en');
         setupButtonClick(setupLangSvBtn, setLanguage, 'sv');
-        setupButtonClick(titleLangEnBtn, setLanguage, 'en');
-        setupButtonClick(titleLangSvBtn, setLanguage, 'sv');
+        if (titleLangEnBtn) setupButtonClick(titleLangEnBtn, setLanguage, 'en');
+        if (titleLangSvBtn) setupButtonClick(titleLangSvBtn, setLanguage, 'sv');
 
         setupButtonClick(UI.setupSettingsBtn, () => showSettingsModal(false));
         setupButtonClick(UI.setupFeaturesBtn, showFeaturesModal);

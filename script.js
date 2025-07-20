@@ -5,7 +5,7 @@
         'en': {
             // Start & UI
             'title': 'SYNAPSE',
-            'subtitle': 'ROOT ACCESS DENIED',
+            'subtitle': 'Root Access Denied',
             'enter_game': 'Enter the Game',
 
             'game_description': 'SYNAPSE is a psychological horror text adventure game set in a dystopian future where you play as an investigator sent to uncover the truth behind a mysterious clandestine AI project. The game explores themes of artificial intelligence consciousness, corporate conspiracy, psychological manipulation, and the thin line between human and machine intelligence.',
@@ -568,7 +568,7 @@
         'sv': {
             // Start & UI
             'title': 'SYNAPSE',
-            'subtitle': 'ROOT-ÅTKOMST NEKAD',
+            'subtitle': 'Root Access Denied',
             'enter_game': 'Starta Spelet',
 
             'game_description': 'SYNAPSE är ett psykologiskt skräckspel som utspelar sig i en dystopisk framtid där du spelar som en utredare som skickats för att avslöja sanningen bakom ett mystiskt hemligt AI-projekt. Spelet utforskar teman som artificiell intelligens, företagskonspirations, psykologisk manipulation och den tunna gränsen mellan mänsklig och maskinell intelligens.',
