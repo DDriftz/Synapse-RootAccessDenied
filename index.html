@@ -965,225 +965,13 @@
             animation: light-flicker 0.2s infinite;
         }
         
-        /* Accessibility CSS Classes */
-        .high-contrast {
-            --main-color: #ffffff !important;
-            --main-color-faded: rgba(255,255,255,0.2) !important;
-            --main-color-border: rgba(255,255,255,0.9) !important;
-            --main-color-shadow: rgba(255,255,255,0.7) !important;
-            --main-color-glow: rgba(255,255,255,0.8) !important;
-        }
-        .high-contrast * {
-            background-color: #000000 !important;
-            color: #ffffff !important;
-        }
-        .large-text {
-            font-size: 1.2em !important;
-        }
-        .large-text * {
-            font-size: inherit !important;
-        }
-        .reduced-motion * {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-        .focus-indicators *:focus {
-            outline: 3px solid var(--main-color) !important;
-            outline-offset: 2px !important;
-        }
-        
-        /* Enhanced Accessibility Features */
-        .colorblind-support {
-            filter: hue-rotate(20deg) saturate(1.2);
-        }
-        .colorblind-support .text-red-500 {
-            color: #ff6b6b !important;
-        }
-        .colorblind-support .text-green-400 {
-            color: #4ecdc4 !important;
-        }
-        .colorblind-support .text-yellow-400 {
-            color: #ffe66d !important;
-        }
-        
-        .dyslexia-font, .dyslexia-font * {
-            font-family: 'Arial', 'Helvetica', sans-serif !important;
-            letter-spacing: 0.15em !important;
-            line-height: 1.8 !important;
-        }
-        
-        .auto-scroll {
-            scroll-behavior: smooth;
-        }
-        .auto-scroll #game-output {
-            animation: auto-scroll-text 3s linear infinite;
-        }
-        
-        @keyframes auto-scroll-text {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-        
-        .click-feedback button:active {
-            transform: scale(0.95);
-            transition: transform 0.1s;
-        }
-        
-        .simplified-ui .bg-gradient-to-br {
-            background: #000 !important;
-        }
-        .simplified-ui .border-2 {
-            border-width: 1px !important;
-        }
-        .simplified-ui .rounded-lg {
-            border-radius: 4px !important;
-        }
-        .simplified-ui .title-slasher::before {
-            display: none !important;
-        }
-        
-        .ui-scale-small {
-            font-size: 0.8em;
-        }
-        .ui-scale-large {
-            font-size: 1.2em;
-        }
-        .ui-scale-large .text-sm {
-            font-size: 1rem;
-        }
-        .ui-scale-large .text-xs {
-            font-size: 0.875rem;
-        }
-        
-        /* Enhanced Accessibility Features */
-        .voice-commands-active {
-            cursor: help;
-        }
-        .voice-commands-active::after {
-            content: " 🎤";
-            color: var(--main-color);
-        }
-        
-        .magnification-active {
-            transform-origin: center;
-            transition: transform 0.3s ease;
-        }
-        .magnification-active:hover {
-            transform: scale(1.5);
-            z-index: 1000;
-            position: relative;
-        }
-        
-        .sticky-keys-active input[type="text"] {
-            caret-color: yellow;
-            border: 2px solid yellow;
-        }
-        
-        .one-hand-mode {
-            max-width: 50vw;
-            margin-left: auto;
-            margin-right: 0;
-        }
-        .one-hand-mode .flex {
-            flex-direction: column;
-            align-items: flex-end;
-        }
-        
-        .visual-notifications {
-            position: relative;
-        }
-        .visual-notifications::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 10px;
-            height: 10px;
-            background: var(--main-color);
-            border-radius: 50%;
-            animation: notification-blink 1s infinite;
-        }
-        
-        @keyframes notification-blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        .audio-cues button:hover {
-            position: relative;
-        }
-        .audio-cues button:hover::after {
-            content: "♪";
-            position: absolute;
-            top: -20px;
-            right: -10px;
-            color: var(--main-color);
-            animation: audio-cue-bounce 0.5s ease;
-        }
-        
-        @keyframes audio-cue-bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-        
-        .reading-enhanced .text-sm {
-            font-size: 1.1rem;
-            line-height: 2;
-        }
-        .reading-full {
-            letter-spacing: 0.2em;
-            word-spacing: 0.3em;
-        }
-        .reading-full .text-sm {
-            font-size: 1.3rem;
-            line-height: 2.5;
-        }
-        
-        .motor-assistance-basic button {
-            min-height: 48px;
-            min-width: 48px;
-            padding: 12px 16px;
-        }
-        .motor-assistance-advanced button {
-            min-height: 60px;
-            min-width: 60px;
-            padding: 16px 20px;
-            margin: 8px;
-        }
-        
-        #on-screen-commands {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.9);
-            border: 2px solid var(--main-color);
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            max-width: 300px;
-            z-index: 1000;
-        }
-        #on-screen-commands h4 {
-            color: var(--main-color);
-            margin-bottom: 5px;
-        }
-        #on-screen-commands button {
-            display: block;
-            width: 100%;
-            margin: 2px 0;
-            padding: 5px;
-            background: var(--main-color-faded);
-            border: 1px solid var(--main-color);
-            color: var(--main-color);
-            cursor: pointer;
-            border-radius: 3px;
-        }
-        #on-screen-commands button:hover {
-            background: var(--main-color);
-            color: #000;
-        }
-    </style>
+    /* === ADVANCED GAMEPLAY FEATURES === */
+    /* ...existing code... */
+
+    /* (Character Development & World Building code moved to end of <script> for correct placement) */
+    /* END OF MAIN STYLES */
+</style>
+<!-- END OF MAIN SCRIPT -->
 </head>
 <body class="bg-black overflow-hidden">
     <canvas id="background-canvas"></canvas>
@@ -1245,10 +1033,73 @@
                             <button class="difficulty-btn button" data-difficulty="Hard" data-lang="hard">Hard</button>
                         </div>
                         <input type="text" id="player-name" data-lang-placeholder="enter_name_placeholder" placeholder="Enter your name" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 mb-3 focus:outline-none p-1 mx-auto block text-sm sm:text-base">
+                        <input type="text" id="player-phobia" placeholder="Enter your phobia (e.g., darkness, isolation, blood, etc.) or leave blank for random" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 mb-3 focus:outline-none p-1 mx-auto block text-sm sm:text-base">
                         <div class="flex items-center gap-2 mb-3 justify-center flex-wrap">
-                            <input type="text" id="player-backstory" data-lang-placeholder="enter_backstory_placeholder" placeholder="Enter your backstory" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 focus:outline-none p-1 text-sm sm:text-base">
-                            <button id="view-backstories-btn" class="button text-xs px-2 py-1" data-lang="view_choices">View Choices</button>
-                        </div>
+        @keyframes audio-cue-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        }
+        
+        .reading-enhanced .text-sm {
+            font-size: 1.1rem;
+            line-height: 2;
+        }
+        .reading-full {
+            letter-spacing: 0.2em;
+            word-spacing: 0.3em;
+        }
+        .reading-full .text-sm {
+            font-size: 1.3rem;
+            line-height: 2.5;
+        }
+        
+        .motor-assistance-basic button {
+            min-height: 48px;
+            min-width: 48px;
+            padding: 12px 16px;
+        }
+        .motor-assistance-advanced button {
+            min-height: 60px;
+            min-width: 60px;
+            padding: 16px 20px;
+            margin: 8px;
+        }
+        
+        #on-screen-commands {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            border: 2px solid var(--main-color);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            max-width: 300px;
+            z-index: 1000;
+        }
+        #on-screen-commands h4 {
+            color: var(--main-color);
+            margin-bottom: 5px;
+        }
+        #on-screen-commands button {
+            display: block;
+            width: 100%;
+            margin: 2px 0;
+            padding: 5px;
+            background: var(--main-color-faded);
+            border: 1px solid var(--main-color);
+            color: var(--main-color);
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        #on-screen-commands button:hover {
+            background: var(--main-color);
+            color: #000;
+        }
+    </style>
+</head>
+<body class="bg-black overflow-hidden">
                         <div id="ability-display" class="text-center text-cyan-400 min-h-[2.5rem] mb-3 p-2 border border-cyan-400/30 rounded-md bg-black/50 w-full max-w-md mx-auto flex items-center justify-center text-sm"></div>
                     </div>
                     <div class="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4">
@@ -1382,6 +1233,112 @@
     <script>
     // SYNAPSE: AI HORROR GAME - V2.5 BUGFIX UPDATE
 
+    // === NARRATIVE & STORYTELLING ENGINE ===
+    const STORY_NODES = {
+        start: {
+            id: 'start',
+            text: "You awaken in a cold, dimly lit room. The hum of machinery echoes in the distance.",
+            options: [
+                { text: "Look around", next: "look_around" },
+                { text: "Call out", next: "call_out" }
+            ]
+        },
+        look_around: {
+            id: 'look_around',
+            text: "You see flickering monitors, a locked door, and a strange terminal.",
+            options: [
+                { text: "Examine terminal", next: "terminal" },
+                { text: "Try the door", next: "door" }
+            ]
+        },
+        call_out: {
+            id: 'call_out',
+            text: "Your voice echoes, but something feels off. Did you always sound like this?",
+            options: [
+                { text: "Look around", next: "look_around" }
+            ]
+        },
+        terminal: {
+            id: 'terminal',
+            text: "The terminal flickers. 'WELCOME, USER.' For a moment, the text glitches: 'YOU DON'T BELONG HERE.'",
+            options: [
+                { text: "Type 'help'", next: "help_screen" },
+                { text: "Step back", next: "look_around" }
+            ]
+        },
+        door: {
+            id: 'door',
+            text: "The door is locked. You feel watched.",
+            options: [
+                { text: "Examine terminal", next: "terminal" }
+            ]
+        },
+        help_screen: {
+            id: 'help_screen',
+            text: "A list of commands appears, but some are crossed out. Did you see that?",
+            options: [
+                { text: "Step back", next: "look_around" }
+            ]
+        }
+        // ...expand with more nodes and endings...
+    };
+    let currentStoryNode = STORY_NODES.start;
+
+    function showStoryNode(node) {
+        const output = document.getElementById('game-output');
+        if (!output) return;
+        typewriterEffect(node.text, output, () => {
+            const optionsDiv = document.getElementById('dialogue-options');
+            optionsDiv.innerHTML = '';
+            node.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'button btn-glow btn-drip m-1';
+                btn.textContent = opt.text;
+                btn.onclick = () => {
+                    currentStoryNode = STORY_NODES[opt.next];
+                    showStoryNode(currentStoryNode);
+                };
+                optionsDiv.appendChild(btn);
+            });
+        });
+    }
+
+    // Typewriter effect for immersive text
+    function typewriterEffect(text, element, callback, speed = 28) {
+        element.innerHTML = '';
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else if (callback) {
+                callback();
+            }
+        }
+        type();
+    }
+
+    // Psychological horror: unreliable narrator & memory glitch
+    function triggerMemoryGlitch() {
+        const output = document.getElementById('game-output');
+        if (output) {
+            output.innerHTML = '<span class="text-red-400 animate-pulse">...Did something just change?</span>';
+            setTimeout(() => showStoryNode(currentStoryNode), 1200);
+        }
+    }
+
+    // Example: start narrative on game start
+    document.addEventListener('DOMContentLoaded', function() {
+        const gameScreen = document.getElementById('game-screen');
+        if (gameScreen) {
+            // Start narrative when game screen is shown
+            window.showGameScreenDemo = function() {
+                showStoryNode(currentStoryNode);
+            };
+        }
+    });
+
     // === AI PERSONALITY & DIALOGUE SYSTEM STUBS ===
     const AI_PERSONALITIES = [
         { state: 'Friendly', color: 'text-cyan-400', min: 0, max: 24 },
@@ -1449,67 +1406,175 @@
         showAIDialogue();
     }
 
-    // For demo: show dialogue when game screen is shown
-    window.showGameScreenDemo = function() {
+    // For demo: show dialogue only (legacy, use showGameScreenDemo for full init)
+    window.showAIDialogueDemo = function() {
         aiAwareness = 0;
         updateAIPersonalityUI();
         showAIDialogue();
     }
 
-    // === SKILL TREE & XP SYSTEM STUBS ===
-    const SKILLS = [
-        { id: 'logic', name: 'Logic', desc: 'Improves puzzle solving and hacking.', icon: '🧠', max: 5 },
-        { id: 'perception', name: 'Perception', desc: 'Spot hidden objects and clues.', icon: '👁️', max: 5 },
-        { id: 'resilience', name: 'Resilience', desc: 'Reduces sanity loss and damage.', icon: '💪', max: 5 },
-        { id: 'tech', name: 'Tech', desc: 'Bypass security and use devices.', icon: '🔧', max: 5 },
-        { id: 'empathy', name: 'Empathy', desc: 'Influence AI and NPCs.', icon: '💬', max: 5 }
-    ];
-    let playerXP = 0;
-    let playerLevel = 1;
-    let skillPoints = 0;
-    let playerSkills = {
-        logic: 0,
-        perception: 0,
-        resilience: 0,
-        tech: 0,
-        empathy: 0
+    // === HORROR ATMOSPHERE ENHANCEMENTS ===
+    // ...existing code...
+
+    // === ADVANCED GAMEPLAY FEATURES ===
+    // 1. Dynamic Events System
+    function triggerDynamicEvent() {
+        // Example: random event pool
+        const events = [
+            () => showStoryNode({ text: 'The lights flicker. You hear a distant scream.', options: [{ text: 'Continue', next: currentStoryNode.id }] }),
+            () => showStoryNode({ text: 'A cold wind brushes past you, though no door is open.', options: [{ text: 'Continue', next: currentStoryNode.id }] }),
+            () => showStoryNode({ text: 'You hear static from the intercom. A voice whispers: "Leave..."', options: [{ text: 'Continue', next: currentStoryNode.id }] }),
+            () => { triggerEnvironmentalHorror(); },
+            () => showStoryNode({ text: 'A puzzle panel slides out from the wall.', options: [{ text: 'Solve Puzzle', next: currentStoryNode.id }] })
+        ];
+        const event = events[Math.floor(Math.random() * events.length)];
+        event();
+    }
+
+    // 2. Puzzle System (simple demo)
+    function showPuzzlePanel(puzzleId = 'demo') {
+        const output = document.getElementById('game-output');
+        if (!output) return;
+        let html = '';
+        if (puzzleId === 'demo') {
+            html = `<div class='mb-2 font-bold text-yellow-300'>Puzzle: Enter the correct code (3 digits)</div>
+                <input id='puzzle-input' class='bg-black border border-yellow-400 text-yellow-200 p-1 rounded' maxlength='3' style='width: 4em;'>
+                <button class='button btn-glow btn-drip ml-2' onclick='window.submitPuzzleDemo()'>Submit</button>
+                <div id='puzzle-feedback' class='mt-2 text-red-400'></div>`;
+        }
+        output.innerHTML = html;
+    }
+    window.submitPuzzleDemo = function() {
+        const input = document.getElementById('puzzle-input');
+        const feedback = document.getElementById('puzzle-feedback');
+        if (input && feedback) {
+            if (input.value === '314') {
+                feedback.textContent = 'Correct! The panel retracts.';
+                setTimeout(() => showStoryNode(currentStoryNode), 1200);
+            } else {
+                feedback.textContent = 'Incorrect code.';
+            }
+        }
     };
 
-    function xpForNextLevel(level) {
-        // Simple XP curve: 100, 200, 300, ...
-        return level * 100;
+    // 3. Hacking System (simple demo)
+    function showHackingPanel() {
+        const output = document.getElementById('game-output');
+        if (!output) return;
+        output.innerHTML = `<div class='mb-2 font-bold text-cyan-300'>Hacking: Enter override code</div>
+            <input id='hack-input' class='bg-black border border-cyan-400 text-cyan-200 p-1 rounded' maxlength='5' style='width: 5em;'>
+            <button class='button btn-glow btn-drip ml-2' onclick='window.submitHackDemo()'>Submit</button>
+            <div id='hack-feedback' class='mt-2 text-red-400'></div>`;
     }
-
-    function gainXP(amount) {
-        playerXP += amount;
-        let leveledUp = false;
-        while (playerXP >= xpForNextLevel(playerLevel)) {
-            playerXP -= xpForNextLevel(playerLevel);
-            playerLevel++;
-            skillPoints++;
-            leveledUp = true;
+    window.submitHackDemo = function() {
+        const input = document.getElementById('hack-input');
+        const feedback = document.getElementById('hack-feedback');
+        if (input && feedback) {
+            if (input.value.toLowerCase() === 'omega') {
+                feedback.textContent = 'Access granted. You retrieve a data log.';
+                setTimeout(() => showStoryNode(currentStoryNode), 1200);
+            } else {
+                feedback.textContent = 'Access denied.';
+            }
         }
-        updateSkillTreeUI();
-        if (leveledUp) showLevelUpNotification();
+    };
+
+    // 4. Advanced Inventory System (demo: add/remove/use items)
+    let inventory = [];
+    function addItemToInventory(item) {
+        inventory.push(item);
+        updateInventoryPanelUI();
+    }
+    function removeItemFromInventory(item) {
+        const idx = inventory.indexOf(item);
+        if (idx !== -1) inventory.splice(idx, 1);
+        updateInventoryPanelUI();
+    }
+    function updateInventoryPanelUI() {
+        const panel = document.getElementById('inventory-panel');
+        if (!panel) return;
+        let html = `<div class='font-bold text-yellow-300 mb-1'>Inventory</div>`;
+        if (inventory.length === 0) {
+            html += `<div class='text-gray-400'>(empty)</div>`;
+        } else {
+            html += `<ul class='list-disc ml-4'>`;
+            for (const item of inventory) {
+                html += `<li>${item} <button class='button btn-xs btn-glow ml-1' onclick='window.useItemDemo("${item}")'>Use</button> <button class='button btn-xs ml-1' onclick='window.removeItemDemo("${item}")'>Drop</button></li>`;
+            }
+            html += `</ul>`;
+        }
+        panel.innerHTML = html;
+    }
+    window.addItemDemo = function(item) { addItemToInventory(item); };
+    window.removeItemDemo = function(item) { removeItemFromInventory(item); };
+    window.useItemDemo = function(item) {
+        showStoryNode({ text: `You use the ${item}.`, options: [{ text: 'Continue', next: currentStoryNode.id }] });
+        removeItemFromInventory(item);
+    };
+
+    // 5. Item Crafting System (demo)
+    function showCraftingPanel() {
+        const output = document.getElementById('game-output');
+        if (!output) return;
+        output.innerHTML = `<div class='mb-2 font-bold text-green-300'>Crafting: Combine two items</div>
+            <input id='craft-item1' class='bg-black border border-green-400 text-green-200 p-1 rounded' placeholder='Item 1' style='width: 6em;'>
+            <input id='craft-item2' class='bg-black border border-green-400 text-green-200 p-1 rounded ml-2' placeholder='Item 2' style='width: 6em;'>
+            <button class='button btn-glow btn-drip ml-2' onclick='window.submitCraftDemo()'>Craft</button>
+            <div id='craft-feedback' class='mt-2 text-red-400'></div>`;
+    }
+    window.submitCraftDemo = function() {
+        const item1 = document.getElementById('craft-item1').value.trim();
+        const item2 = document.getElementById('craft-item2').value.trim();
+        const feedback = document.getElementById('craft-feedback');
+        if (item1 && item2 && feedback) {
+            if ((item1 === 'wire' && item2 === 'battery') || (item1 === 'battery' && item2 === 'wire')) {
+                feedback.textContent = 'You craft an improvised taser!';
+                addItemToInventory('improvised taser');
+            } else {
+                feedback.textContent = 'Nothing happens.';
+            }
+        }
+    };
+
+    // 6. Environmental Hazards (demo: trigger hazard)
+    function triggerEnvironmentalHazard(type = 'gas') {
+        if (type === 'gas') {
+            showStoryNode({ text: 'A hiss fills the room. Poisonous gas is leaking in!', options: [{ text: 'Hold breath', next: currentStoryNode.id }] });
+        } else if (type === 'fire') {
+            showStoryNode({ text: 'Flames erupt from a broken pipe!', options: [{ text: 'Dodge', next: currentStoryNode.id }] });
+        }
     }
 
-    function showLevelUpNotification() {
-        // Simple notification (replace with modal/animation as needed)
-        const panel = document.getElementById('skill-tree-panel');
-        const notif = document.createElement('div');
-        notif.className = 'text-green-400 font-bold mb-2';
-        notif.textContent = `Level Up! You are now level ${playerLevel}. Skill point awarded.`;
-        panel.prepend(notif);
-        setTimeout(() => notif.remove(), 2500);
+    // 7. Advanced Command Parsing (demo: parse and route commands)
+    function parsePlayerCommand(input) {
+        const cmd = input.trim().toLowerCase();
+        if (cmd === 'inventory') {
+            updateInventoryPanelUI();
+        } else if (cmd === 'puzzle') {
+            showPuzzlePanel('demo');
+        } else if (cmd === 'hack') {
+            showHackingPanel();
+        } else if (cmd === 'craft') {
+            showCraftingPanel();
+        } else if (cmd === 'event') {
+            triggerDynamicEvent();
+        } else if (cmd === 'hazard') {
+            triggerEnvironmentalHazard();
+        } else {
+            showStoryNode({ text: 'Unknown command.', options: [{ text: 'Continue', next: currentStoryNode.id }] });
+        }
     }
 
+    // === DEMO HOOKS FOR ADVANCED GAMEPLAY ===
     function updateSkillTreeUI() {
         const panel = document.getElementById('skill-tree-panel');
         if (!panel) return;
-        let html = `<div class='flex items-center gap-4 mb-2'>
-            <span class='font-bold text-cyan-300'>Level: ${playerLevel}</span>
-            <span class='font-bold text-yellow-300'>XP: ${playerXP} / ${xpForNextLevel(playerLevel)}</span>
-            <span class='font-bold text-green-400'>Skill Points: ${skillPoints}</span>
+        
+        let html = `<div class='flex flex-wrap gap-2'>
+                <span class='font-bold text-cyan-300'>Level: ${playerLevel}</span>
+                <span class='font-bold text-yellow-300'>XP: ${playerXP} / ${xpForNextLevel(playerLevel)}</span>
+                <span class='font-bold text-green-400'>Skill Points: ${skillPoints}</span>
+            </div>
         </div>`;
         html += `<div class='grid grid-cols-2 md:grid-cols-3 gap-2'>`;
         for (const skill of SKILLS) {
@@ -3802,6 +3867,7 @@
         stateSnapshots = []; 
         GameState = { 
             playerName: "Unknown", playerBackstory: "investigator", currentRoom: "Lobby", 
+            playerPhobia: null, // Track player's phobia
             awarenessLevel: 0, sanityLevel: 100, maxSanity: 100, 
             chatbotTone: ChatbotTone.Friendly, temporaryTone: null, toneShiftTurns: 0, 
             inventory: [], turnCount: 0, lastRestTurn: -10, journalEntries: [], 
@@ -5664,6 +5730,14 @@
         GameState.playerBackstory = Object.keys(backstories).includes(backstoryKey) ? backstoryKey : 'investigator';
         GameState.difficulty = Array.from(UI.difficultyBtns).find(b => b.classList.contains('button-primary'))?.dataset.difficulty || Difficulty.Normal; 
         
+        // --- PHOBIA SELECTION ---
+        UI.playerPhobiaInput = document.getElementById('player-phobia');
+        if (UI.playerPhobiaInput && UI.playerPhobiaInput.value) {
+            GameState.playerPhobia = UI.playerPhobiaInput.value.toLowerCase();
+        } else {
+            const phobias = ['darkness', 'isolation', 'blood', 'confined spaces', 'heights', 'none'];
+            GameState.playerPhobia = phobias[Math.floor(Math.random() * phobias.length)];
+        }
         // Save player choices when starting a new game
         savePlayerChoices();
 
@@ -6260,6 +6334,197 @@
 
 
     // --- EVENT LISTENERS & INITIALIZATION ---
+// === DYNAMIC EVENT & ENCOUNTER SYSTEM ===
+const EVENT_TYPES = {
+    NARRATIVE: 'narrative',
+    HORROR: 'horror',
+    ENVIRONMENT: 'environment',
+    AI: 'ai',
+    PUZZLE: 'puzzle',
+};
+
+// === EXPANDED EVENT POOL ===
+const eventPool = [
+    // Narrative event example
+    {
+        id: 'strange_whisper',
+        type: EVENT_TYPES.NARRATIVE,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'You hear a faint whisper behind the walls. It sounds almost familiar...', '#a0e7e5');
+        }
+    },
+    // Horror event example
+    {
+        id: 'shadow_figure',
+        type: EVENT_TYPES.HORROR,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'A shadow flickers at the edge of your vision. When you turn, nothing is there.', '#ff2a7f');
+            showHallucinationOverlay && showHallucinationOverlay('shadow');
+        }
+    },
+    // Environmental event example
+    {
+        id: 'power_flicker',
+        type: EVENT_TYPES.ENVIRONMENT,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'The lights flicker violently, plunging the room into momentary darkness.', '#ffe066');
+            triggerDynamicLighting && triggerDynamicLighting('flicker');
+        }
+    },
+    // AI event example
+    {
+        id: 'ai_intervention',
+        type: EVENT_TYPES.AI,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'The terminal screen glitches: "USER, YOU ARE BEING WATCHED."', '#39ff14');
+            playAudioStinger && playAudioStinger('static');
+        }
+    },
+    // Puzzle event example
+    {
+        id: 'puzzle_hint',
+        type: EVENT_TYPES.PUZZLE,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'A hidden panel slides open, revealing a cryptic code: 7-4-1.', '#00b4d8');
+        }
+    },
+    // === NEW EVENTS BELOW ===
+    // Sanity-based horror event
+    {
+        id: 'sanity_break',
+        type: EVENT_TYPES.HORROR,
+        trigger: () => {
+            if (GameState.sanityLevel < 30) {
+                typeWriter(UI.gameOutput, 'Your vision blurs and the walls seem to breathe. You feel your grip on reality slipping...', '#ff474c');
+                GameState.sanityLevel = Math.max(0, GameState.sanityLevel - 5);
+                updateUI();
+            }
+        }
+    },
+    // Phobia-triggered event (e.g., fear of darkness)
+    {
+        id: 'phobia_darkness',
+        type: EVENT_TYPES.HORROR,
+        trigger: () => {
+            if ((GameState.playerPhobia || '').toLowerCase() === 'darkness' && rooms[GameState.currentRoom]?.states?.lightsOut) {
+                typeWriter(UI.gameOutput, 'The darkness presses in, feeding your deepest fears. You struggle to breathe.', '#22223b');
+                GameState.sanityLevel = Math.max(0, GameState.sanityLevel - 10);
+                updateUI();
+            }
+        }
+    },
+    // AI awareness event
+    {
+        id: 'ai_awareness_spike',
+        type: EVENT_TYPES.AI,
+        trigger: () => {
+            if (GameState.awarenessLevel > 70) {
+                typeWriter(UI.gameOutput, 'A cold digital gaze settles on you. SYNAPSE is watching your every move.', '#39ff14');
+                playAudioStinger && playAudioStinger('ai_alert');
+            }
+        }
+    },
+    // World state event (e.g., after a certain number of turns)
+    {
+        id: 'power_failure',
+        type: EVENT_TYPES.ENVIRONMENT,
+        trigger: () => {
+            if (GameState.turnCount > 20 && !GameState.worldEvents?.powerFailure) {
+                typeWriter(UI.gameOutput, 'Suddenly, the facility is plunged into total darkness. Emergency lights flicker on.', '#ffe066');
+                GameState.worldEvents = GameState.worldEvents || {};
+                GameState.worldEvents.powerFailure = true;
+                // Example: set all rooms to lightsOut
+                Object.values(rooms).forEach(r => { if (r.states) r.states.lightsOut = true; });
+                updateUI();
+            }
+        }
+    },
+    // Narrative twist event
+    {
+        id: 'mysterious_note',
+        type: EVENT_TYPES.NARRATIVE,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'You find a crumpled note: "Trust no one. Not even yourself."', '#a0e7e5');
+            addJournalEntry('Found a mysterious note: "Trust no one. Not even yourself."');
+        }
+    },
+    // Rare hallucination event
+    {
+        id: 'rare_hallucination',
+        type: EVENT_TYPES.HORROR,
+        trigger: () => {
+            if (GameState.sanityLevel < 20 && Math.random() < 0.5) {
+                typeWriter(UI.gameOutput, 'A grotesque figure crawls from the ceiling, only to vanish when you blink.', '#ff2a7f');
+                showHallucinationOverlay && showHallucinationOverlay('grotesque');
+            }
+        }
+    },
+    // Environmental hazard event
+    {
+        id: 'gas_leak',
+        type: EVENT_TYPES.ENVIRONMENT,
+        trigger: () => {
+            if (!GameState.worldEvents?.gasLeak) {
+                typeWriter(UI.gameOutput, 'A hissing sound fills the air. You smell something acrid—there is a gas leak nearby!', '#ffe066');
+                GameState.worldEvents = GameState.worldEvents || {};
+                GameState.worldEvents.gasLeak = true;
+                // Example: reduce player stats or add a new objective
+                GameState.sanityLevel = Math.max(0, GameState.sanityLevel - 3);
+                GameState.objectives.push({ text: 'Find and seal the gas leak', completed: false });
+                updateUI();
+            }
+        }
+    },
+    // Puzzle escalation event
+    {
+        id: 'puzzle_escalation',
+        type: EVENT_TYPES.PUZZLE,
+        trigger: () => {
+            typeWriter(UI.gameOutput, 'A new puzzle mechanism activates: the code sequence is now reversed.', '#00b4d8');
+            // Example: update puzzle state here
+        }
+    },
+    // Custom: player inventory event
+    {
+        id: 'inventory_weight_warning',
+        type: EVENT_TYPES.ENVIRONMENT,
+        trigger: () => {
+            const currentWeight = GameState.inventory.reduce((sum, item) => sum + (item?.weight || 1), 0);
+            if (currentWeight > MAX_INVENTORY_WEIGHT * 0.8) {
+                typeWriter(UI.gameOutput, 'You feel weighed down by your belongings. Movement becomes sluggish.', '#ffe066');
+            }
+        }
+    },
+    // Add more events here for future expansion
+];
+
+function triggerRandomEvent(type = null) {
+    let pool = eventPool;
+    if (type) pool = eventPool.filter(e => e.type === type);
+    if (pool.length === 0) return;
+    const event = pool[Math.floor(Math.random() * pool.length)];
+    event.trigger();
+}
+
+// Hook: Call this in the main game loop or after certain player actions
+function maybeTriggerEvent() {
+    // 20% chance to trigger an event after a player action
+    if (Math.random() < 0.2) {
+        triggerRandomEvent();
+    }
+}
+
+// Demo command: allow manual event triggering for testing
+window.triggerEventDemo = function(type) {
+    triggerRandomEvent(type);
+};
+
+// Integrate with command parser (example: after player input)
+const originalProcessPlayerInput = processPlayerInput;
+processPlayerInput = async function(input) {
+    await originalProcessPlayerInput.call(this, input);
+    maybeTriggerEvent();
+};
     window.addEventListener('beforeunload', saveStateToSession);
     window.addEventListener('DOMContentLoaded', () => {
         console.log('SYNAPSE: DOM Content Loaded - Starting initialization...');
