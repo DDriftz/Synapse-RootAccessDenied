@@ -62,9 +62,172 @@
             z-index: 0;
             opacity: 0.1;
         }
+        /* === CORE LAYOUT & VIEWPORT HANDLING === */
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Support for CSS custom properties and viewport units */
+        :root {
+            --vh: 1vh;
+            --vw: 1vw;
+        }
+        
+        /* Dynamic viewport height handling for mobile devices */
+        @supports (-webkit-touch-callout: none) {
+            :root {
+                --vh: calc(var(--vh, 1vh) * 0.01);
+            }
+        }
+        
         #app-container {
             position: relative;
             z-index: 1;
+            width: 100vw;
+            width: calc(var(--vw, 1vw) * 100);
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+            min-height: -webkit-fill-available;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Enhanced responsive breakpoints */
+        @media screen and (max-width: 320px) {
+            #app-container { padding: 0.25rem; }
+            .text-7xl { font-size: 3rem; }
+            .md\:text-9xl { font-size: 4rem; }
+        }
+        
+        @media screen and (min-width: 321px) and (max-width: 480px) {
+            #app-container { padding: 0.5rem; }
+            .text-7xl { font-size: 4rem; }
+            .md\:text-9xl { font-size: 5rem; }
+        }
+        
+        @media screen and (min-width: 481px) and (max-width: 768px) {
+            #app-container { padding: 0.75rem; }
+        }
+        
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            #app-container { padding: 1rem; }
+        }
+        
+        @media screen and (min-width: 1025px) and (max-width: 1440px) {
+            #app-container { padding: 1.25rem; }
+        }
+        
+        @media screen and (min-width: 1441px) {
+            #app-container { padding: 1.5rem; }
+        }
+        
+        /* Ultra-wide screen adjustments */
+        @media screen and (min-aspect-ratio: 21/9) {
+            .max-w-4xl { max-width: 60rem; }
+            #intro-text-container { max-width: 50rem; }
+        }
+        
+        /* Very tall screen adjustments */
+        @media screen and (min-aspect-ratio: 1/2) {
+            .title-wrapper { margin-top: -8rem; }
+            .title-wrapper h1 { font-size: 5rem; }
+            .title-wrapper h2 { font-size: 1.5rem; }
+        }
+        
+        /* Game screen specific adjustments */
+        #game-screen .flex-grow {
+            height: calc(100vh - 8rem);
+            height: calc(var(--vh, 1vh) * 100 - 8rem);
+        }
+        
+        /* Modal responsive adjustments */
+        .modal-content { 
+            background-color: #0d0d0d; 
+            border: 2px solid var(--main-color); 
+            padding: 1rem; 
+            border-radius: 0.5rem; 
+            max-width: min(48rem, 95vw); 
+            width: 100%; 
+            text-align: center; 
+            animation: scaleUp 0.3s ease-out; 
+            max-height: min(90vh, calc(var(--vh, 1vh) * 90)); 
+            display: flex; 
+            flex-direction: column;
+            margin: 1rem;
+        }
+        
+        @media screen and (max-width: 480px) {
+            .modal-content { 
+                padding: 0.75rem; 
+                margin: 0.5rem;
+                max-width: calc(100vw - 1rem);
+            }
+        }
+        
+        /* Dynamic responsive classes added by JavaScript */
+        .ultra-wide .max-w-4xl {
+            max-width: 70rem;
+        }
+        
+        .ultra-wide #intro-text-container {
+            max-width: 60rem;
+        }
+        
+        .very-tall .title-wrapper {
+            margin-top: -12rem;
+        }
+        
+        .very-tall .title-wrapper h1 {
+            font-size: 4rem !important;
+        }
+        
+        .very-tall .title-wrapper h2 {
+            font-size: 1.25rem !important;
+        }
+        
+        .small-screen #app-container {
+            padding: 0.25rem !important;
+        }
+        
+        .small-screen .text-7xl {
+            font-size: 2.5rem !important;
+        }
+        
+        .small-screen .md\:text-9xl {
+            font-size: 3.5rem !important;
+        }
+        
+        .small-screen .text-2xl {
+            font-size: 1.25rem !important;
+        }
+        
+        .small-screen .md\:text-3xl {
+            font-size: 1.5rem !important;
+        }
+        
+        /* Ensure game screens fill properly */
+        #start-screen, #player-setup, #game-screen {
+            min-height: 100%;
+            height: 100%;
+        }
+        
+        /* Background canvas adjustments */
+        #background-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
         }
         body.crt-effect::after {
             content: " ";
@@ -850,10 +1013,10 @@
         }
     </style>
 </head>
-<body class="bg-black flex items-center justify-center min-h-screen">
+<body class="bg-black overflow-hidden">
     <canvas id="background-canvas"></canvas>
     <div id="error-container" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.9); display: none;"></div>
-    <div id="app-container" class="w-full h-full bg-black/75 p-2 sm:p-4 flex flex-col">
+    <div id="app-container" class="w-screen h-screen bg-black/75 p-1 xs:p-2 sm:p-3 lg:p-4 flex flex-col">
         
         <div id="start-screen" class="flex flex-col items-center justify-center text-center h-full">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
@@ -897,26 +1060,28 @@
                 </div>
 
                 <!-- Main Content -->
-                <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full overflow-y-auto">
-                    <div class="title-wrapper mt-4 mb-6">
-                        <h1 id="setup-game-title" data-text="SYNAPSE" class="text-6xl md:text-7xl font-bold title-slasher mb-2">SYNAPSE</h1>
-                        <h2 data-text="ROOT ACCESS DENIED" class="text-xl md:text-2xl font-mono text-red-500 tracking-wider subtitle-slasher -mt-2 mb-4">ROOT ACCESS DENIED</h2>
+                <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full">
+                    <div class="title-wrapper -mt-16 sm:-mt-20">
+                        <h1 id="setup-game-title" data-text="SYNAPSE" class="text-7xl md:text-9xl font-bold title-slasher mb-2">SYNAPSE</h1>
+                        <h2 data-text="ROOT ACCESS DENIED" class="text-2xl md:text-3xl font-mono text-red-500 tracking-wider subtitle-slasher -mt-2 mb-4">ROOT ACCESS DENIED</h2>
                     </div>
-                    <p class="mb-4" data-lang="select_difficulty">Select difficulty:</p>
-                    <div class="flex gap-4 mb-6">
-                        <button class="difficulty-btn button" data-difficulty="Easy" data-lang="easy">Easy</button>
-                        <button class="difficulty-btn button button-primary" data-difficulty="Normal" data-lang="normal">Normal</button>
-                        <button class="difficulty-btn button" data-difficulty="Hard" data-lang="hard">Hard</button>
+                    <div class="max-w-4xl text-sm md:text-base text-white mt-8 sm:mt-12">
+                        <p class="mb-6" data-lang="select_difficulty">Select difficulty:</p>
+                        <div class="flex gap-4 mb-8 justify-center">
+                            <button class="difficulty-btn button" data-difficulty="Easy" data-lang="easy">Easy</button>
+                            <button class="difficulty-btn button button-primary" data-difficulty="Normal" data-lang="normal">Normal</button>
+                            <button class="difficulty-btn button" data-difficulty="Hard" data-lang="hard">Hard</button>
+                        </div>
+                        <input type="text" id="player-name" data-lang-placeholder="enter_name_placeholder" placeholder="Enter your name" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-64 mb-6 focus:outline-none p-1 mx-auto block">
+                        <div class="flex items-center gap-2 mb-8 justify-center">
+                            <input type="text" id="player-backstory" data-lang-placeholder="enter_backstory_placeholder" placeholder="Enter your backstory" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-64 focus:outline-none p-1">
+                            <button id="view-backstories-btn" class="button text-xs px-2 py-1" data-lang="view_choices">View Choices</button>
+                        </div>
+                        <div id="ability-display" class="text-center text-cyan-400 min-h-[4rem] mb-8 p-2 border border-cyan-400/30 rounded-md bg-black/50 w-full max-w-md mx-auto flex items-center justify-center"></div>
                     </div>
-                    <input type="text" id="player-name" data-lang-placeholder="enter_name_placeholder" placeholder="Enter your name" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-64 mb-4 focus:outline-none p-1">
-                    <div class="flex items-center gap-2 mb-6">
-                        <input type="text" id="player-backstory" data-lang-placeholder="enter_backstory_placeholder" placeholder="Enter your backstory" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-64 focus:outline-none p-1">
-                        <button id="view-backstories-btn" class="button text-xs px-2 py-1" data-lang="view_choices">View Choices</button>
-                    </div>
-                    <div id="ability-display" class="text-center text-cyan-400 min-h-[4rem] mt-2 mb-4 p-2 border border-cyan-400/30 rounded-md bg-black/50 w-full max-w-md flex items-center justify-center"></div>
-                    <div class="flex gap-4">
+                    <div class="mt-10 flex flex-wrap justify-center gap-4">
                        <button id="back-to-start-btn" data-lang="go_back_btn" data-text="Go Back" class="button btn-glow btn-drip">Go Back</button>
-                       <button id="start-game-btn" class="button button-primary" data-lang="begin">Begin</button>
+                       <button id="start-game-btn" class="button button-primary btn-glow btn-drip" data-lang="begin">Begin</button>
                     </div>
                 </div>
 
@@ -929,56 +1094,55 @@
         </div>
 
 
-        <div id="game-screen" class="hidden flex-col h-full">
-            <div class="flex-grow flex flex-col md:flex-row gap-4 min-h-0">
-                <div class="w-full md:w-3/4 flex flex-col h-full relative">
-                    <div id="game-output" class="flex-grow p-2 border border-[var(--main-color-border)] rounded-md overflow-y-auto mb-2 bg-black/50"></div>
-                    <div id="dialogue-options" class="flex flex-wrap gap-2 justify-center p-2"></div>
+        <div id="game-screen" class="hidden flex flex-col h-full overflow-hidden">
+            <div class="flex-grow flex flex-col md:flex-row gap-2 md:gap-4 min-h-0 h-full">
+                <div class="w-full md:w-3/4 flex flex-col min-h-0 flex-shrink">
+                    <div id="game-output" class="flex-grow p-2 border border-[var(--main-color-border)] rounded-md overflow-y-auto mb-2 bg-black/50 min-h-0"></div>
+                    <div id="dialogue-options" class="flex flex-wrap gap-2 justify-center p-2 flex-shrink-0"></div>
                 </div>
 
-                <div id="side-panel" class="w-full md:w-1/4 hidden md:flex flex-col gap-4">
-                    <div id="stats-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50">
-                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2" data-lang="stats_title">STATS</h3>
-                        <div id="player-name-display"></div>
-                        <div id="awareness-display"><span data-lang="awareness">Awareness</span>: 0</div>
-                        <div id="sanity-display"><span data-lang="sanity">Sanity</span>: 100</div>
-                        <div id="tone-display"><span data-lang="tone">Tone</span>: Friendly</div>
-                        <div id="turn-display"><span data-lang="turn">Turn</span>: 0</div>
+                <div id="side-panel" class="w-full md:w-1/4 hidden md:flex flex-col gap-2 md:gap-4 min-h-0 overflow-hidden">
+                    <div id="stats-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base" data-lang="stats_title">STATS</h3>
+                        <div id="player-name-display" class="text-xs md:text-sm"></div>
+                        <div id="awareness-display" class="text-xs md:text-sm"><span data-lang="awareness">Awareness</span>: 0</div>
+                        <div id="sanity-display" class="text-xs md:text-sm"><span data-lang="sanity">Sanity</span>: 100</div>
+                        <div id="tone-display" class="text-xs md:text-sm"><span data-lang="tone">Tone</span>: Friendly</div>
+                        <div id="turn-display" class="text-xs md:text-sm"><span data-lang="turn">Turn</span>: 0</div>
                     </div>
-                    <div id="objectives-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 overflow-y-auto h-24 flex-shrink-0">
-                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2" data-lang="objectives_title">OBJECTIVES</h3>
-                        <ul id="objectives-list" class="list-none p-0 text-sm"></ul>
+                    <div id="objectives-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 overflow-y-auto flex-1 min-h-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base" data-lang="objectives_title">OBJECTIVES</h3>
+                        <ul id="objectives-list" class="list-none p-0 text-xs md:text-sm"></ul>
                     </div>
-                    <div id="inventory-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50">
-                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2"><span data-lang="inventory_title">INVENTORY</span> (<span id="inventory-weight">0</span>/5)</h3>
-                        <ul id="inventory-list" class="list-none p-0"></ul>
+                    <div id="inventory-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base"><span data-lang="inventory_title">INVENTORY</span> (<span id="inventory-weight">0</span>/5)</h3>
+                        <ul id="inventory-list" class="list-none p-0 text-xs md:text-sm"></ul>
                     </div>
-                    <div id="map-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-grow flex flex-col relative min-h-[12rem]">
-                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 flex justify-between items-center">
+                    <div id="map-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-1 flex flex-col relative min-h-0">
+                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 flex justify-between items-center text-sm md:text-base">
                             <span data-lang="map_title">MAP</span>
                             <div id="map-controls" class="flex gap-1">
                                 <button id="map-layers-btn" class="button !p-1 text-xs" title="Toggle Layers (Placeholder)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M7.765 1.558a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .884l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.884z"/><path d="m2.125 8.567-1.86.992a.5.5 0 0 0 0 .884l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.884l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0z"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M7.765 1.558a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .884l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.884z"/><path d="m2.125 8.567-1.86.992a.5.5 0 0 0 0 .884l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.884l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0z"/></svg>
                                 </button>
                                 <button id="map-toggle-btn" class="button !p-1 text-xs">
-                                    <svg id="map-expand-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <svg id="map-expand-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.42 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
                                     </svg>
-                                    </svg>
-                                    <svg id="map-minimize-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="hidden" viewBox="0 0 16 16">
+                                    <svg id="map-minimize-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="hidden" viewBox="0 0 16 16">
                                         <path d="M5.5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1 0-1h3.5V.5a.5.5 0 0 1 .5-.5zM5 11h-4a.5.5 0 0 1 0-1h3.5V6.5a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5zm5.5 0a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v3.5H11a.5.5 0 0 1 0 1h-4.5zM11 5h4.5a.5.5 0 0 1 0-1H11.5V.5a.5.5 0 0 1-1 0v4a.5.5 0 0 1 .5.5z"/>
                                     </svg>
                                 </button>
                             </div>
                         </h3>
-                         <canvas id="map-canvas"></canvas>
+                         <canvas id="map-canvas" class="flex-1 min-h-0"></canvas>
                      </div>
-                     <div id="journal-panel" class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 overflow-y-auto h-24 flex-shrink-0">
-                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2" data-lang="journal_title">JOURNAL</h3>
-                         <ul id="journal-list" class="list-none p-0 text-sm"></ul>
+                     <div id="journal-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 overflow-y-auto flex-1 min-h-0">
+                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base" data-lang="journal_title">JOURNAL</h3>
+                         <ul id="journal-list" class="list-none p-0 text-xs md:text-sm"></ul>
                      </div>
-                     <div class="p-3 border border-[var(--main-color-border)] rounded-md bg-black/50">
-                         <button id="view-progression-btn" class="button w-full" data-lang="progress_btn">PROGRESS</button>
+                     <div class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-shrink-0">
+                         <button id="view-progression-btn" class="button w-full text-xs md:text-sm" data-lang="progress_btn">PROGRESS</button>
                      </div>
                 </div>
             </div>
@@ -990,14 +1154,14 @@
                 </svg>
             </div>
 
-            <div class="mt-2 flex items-center border-t-2 border-[var(--main-color-border)] pt-2 gap-2 relative">
+            <div class="mt-1 md:mt-2 flex items-center border-t-2 border-[var(--main-color-border)] pt-1 md:pt-2 gap-1 md:gap-2 relative flex-shrink-0">
                 <div id="autocomplete-box" class="hidden"></div>
-                <button id="status-btn" class="button md:hidden" data-lang="status_btn">Status</button>
-                <span class="text-xl hidden sm:inline">&gt;</span>
-                <input type="text" id="player-input" class="flex-grow bg-transparent text-lg ml-2 focus:outline-none" autocomplete="off" autocapitalize="none" spellcheck="false">
+                <button id="status-btn" class="button md:hidden text-xs !px-2 !py-1" data-lang="status_btn">Status</button>
+                <span class="text-lg md:text-xl hidden sm:inline">&gt;</span>
+                <input type="text" id="player-input" class="flex-grow bg-transparent text-sm md:text-lg ml-1 md:ml-2 focus:outline-none min-w-0" autocomplete="off" autocapitalize="none" spellcheck="false">
                 <div class="input-caret"></div>
-                <button id="mic-btn" class="button !p-2 ml-2" data-lang-title="mic_tooltip" title="Use Voice Command">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <button id="mic-btn" class="button !p-1 md:!p-2 ml-1 md:ml-2 flex-shrink-0" data-lang-title="mic_tooltip" title="Use Voice Command">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M5 3a3 0 0 1 6 0v5a3 3 0 0 1-6 0V3z"/>
                         <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
                     </svg>
@@ -7015,6 +7179,100 @@
         document.addEventListener('keydown', userInteractionHandler);
         document.addEventListener('touchstart', userInteractionHandler);
     });
+
+    // === VIEWPORT & RESPONSIVE HANDLING ===
+    function updateViewportUnits() {
+        // Get the actual viewport dimensions
+        const vh = window.innerHeight * 0.01;
+        const vw = window.innerWidth * 0.01;
+        
+        // Set CSS custom properties
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+        document.documentElement.style.setProperty('--vw', `${vw}px`);
+        
+        // Handle mobile viewport issues
+        if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            // On mobile, use window.innerHeight for more accurate viewport height
+            document.documentElement.style.setProperty('--mobile-vh', `${window.innerHeight}px`);
+            
+            // Apply mobile-specific fixes
+            const appContainer = document.getElementById('app-container');
+            if (appContainer) {
+                appContainer.style.height = `${window.innerHeight}px`;
+                appContainer.style.maxHeight = `${window.innerHeight}px`;
+            }
+        }
+    }
+    
+    // Handle orientation changes and resize events
+    function handleResize() {
+        updateViewportUnits();
+        
+        // Additional responsive adjustments
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const aspectRatio = width / height;
+        
+        // Adjust for ultra-wide screens
+        if (aspectRatio > 2.1) {
+            document.body.classList.add('ultra-wide');
+        } else {
+            document.body.classList.remove('ultra-wide');
+        }
+        
+        // Adjust for very tall screens  
+        if (aspectRatio < 0.6) {
+            document.body.classList.add('very-tall');
+        } else {
+            document.body.classList.remove('very-tall');
+        }
+        
+        // Adjust for small screens
+        if (width < 480 || height < 600) {
+            document.body.classList.add('small-screen');
+        } else {
+            document.body.classList.remove('small-screen');
+        }
+    }
+    
+    // Initial setup
+    updateViewportUnits();
+    handleResize();
+    
+    // Event listeners for viewport changes
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', () => {
+        // Delay to account for browser UI changes
+        setTimeout(handleResize, 100);
+    });
+    
+    // Handle iOS Safari viewport issues
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        window.addEventListener('scroll', (e) => {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // Prevent zoom on double tap
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', (event) => {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+    }
+    
+    // Handle screen orientation lock if supported
+    if (screen.orientation && screen.orientation.lock) {
+        // Allow both orientations but handle them gracefully
+        window.addEventListener('orientationchange', () => {
+            setTimeout(() => {
+                updateViewportUnits();
+                handleResize();
+            }, 500); // Give time for orientation change to complete
+        });
+    }
     </script>
 </body>
 </html>
