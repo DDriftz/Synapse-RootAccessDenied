@@ -103,14 +103,22 @@
         /* Enhanced responsive breakpoints */
         @media screen and (max-width: 320px) {
             #app-container { padding: 0.25rem; }
-            .text-7xl { font-size: 3rem; }
-            .md\:text-9xl { font-size: 4rem; }
+            .text-20xl { font-size: 8rem; }
+            .text-24xl { font-size: 10rem; }
+            .text-28xl { font-size: 10rem; }
+            .text-8xl-2 { font-size: 4rem; }
+            .text-12xl { font-size: 5rem; }
+            .text-14xl { font-size: 5rem; }
         }
         
         @media screen and (min-width: 321px) and (max-width: 480px) {
             #app-container { padding: 0.5rem; }
-            .text-7xl { font-size: 4rem; }
-            .md\:text-9xl { font-size: 5rem; }
+            .text-20xl { font-size: 10rem; }
+            .text-24xl { font-size: 12rem; }
+            .text-28xl { font-size: 12rem; }
+            .text-8xl-2 { font-size: 5rem; }
+            .text-12xl { font-size: 6rem; }
+            .text-14xl { font-size: 6rem; }
         }
         
         @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -197,19 +205,51 @@
             padding: 0.25rem !important;
         }
         
+        .small-screen .text-20xl {
+            font-size: 7rem !important;
+        }
+        
+        .small-screen .text-24xl {
+            font-size: 9rem !important;
+        }
+        
+        .small-screen .text-28xl {
+            font-size: 9rem !important;
+        }
+        
+        .small-screen .text-8xl-2 {
+            font-size: 3.5rem !important;
+        }
+        
+        .small-screen .text-12xl {
+            font-size: 4rem !important;
+        }
+        
+        .small-screen .text-14xl {
+            font-size: 4.5rem !important;
+        }
+        
+        .small-screen .text-6xl {
+            font-size: 2rem !important;
+        }
+        
         .small-screen .text-7xl {
             font-size: 2.5rem !important;
         }
         
-        .small-screen .md\:text-9xl {
-            font-size: 3.5rem !important;
+        .small-screen .text-8xl {
+            font-size: 3rem !important;
         }
         
         .small-screen .text-2xl {
+            font-size: 1rem !important;
+        }
+        
+        .small-screen .text-3xl {
             font-size: 1.25rem !important;
         }
         
-        .small-screen .md\:text-3xl {
+        .small-screen .text-4xl {
             font-size: 1.5rem !important;
         }
         
@@ -228,6 +268,138 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
+        }
+        
+        /* Character creation screen specific adjustments */
+        #player-setup .title-wrapper h1 {
+            line-height: 1.1;
+        }
+        
+        #player-setup .title-wrapper h2 {
+            line-height: 1.2;
+        }
+        
+        @media screen and (max-height: 700px) {
+            #player-setup .title-wrapper h1 {
+                font-size: 4rem !important;
+            }
+            
+            #player-setup .title-wrapper h2 {
+                font-size: 1.5rem !important;
+            }
+            
+            #player-setup .max-w-4xl {
+                margin-top: 1rem !important;
+            }
+            
+            #player-setup .mt-4 {
+                margin-top: 1rem !important;
+            }
+        }
+        
+        @media screen and (max-height: 600px) {
+            #player-setup .title-wrapper {
+                margin-top: -4rem !important;
+            }
+            
+            #player-setup .title-wrapper h1 {
+                font-size: 3rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            
+            #player-setup .title-wrapper h2 {
+                font-size: 1.25rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            #player-setup .max-w-4xl {
+                margin-top: 0.5rem !important;
+            }
+            
+            #player-setup .mb-4 {
+                margin-bottom: 0.5rem !important;
+            }
+        }
+        
+        @media screen and (max-width: 480px) {
+            #player-setup .flex-wrap {
+                gap: 0.5rem !important;
+            }
+            
+            #player-setup input {
+                width: 12rem !important;
+            }
+        }
+        
+        /* Custom massive title sizes for doubled effect */
+        .text-16xl {
+            font-size: min(16rem, 50vw);
+            line-height: 0.8;
+        }
+        
+        .text-20xl {
+            font-size: min(20rem, 60vw);
+            line-height: 0.8;
+        }
+        
+        .text-22xl {
+            font-size: min(22rem, 65vw);
+            line-height: 0.8;
+        }
+        
+        .text-24xl {
+            font-size: min(24rem, 70vw);
+            line-height: 0.8;
+        }
+        
+        .text-28xl {
+            font-size: min(28rem, 80vw);
+            line-height: 0.8;
+        }
+        
+        .text-50xl {
+            font-size: min(50rem, 90vw);
+            line-height: 0.7;
+        }
+        
+        .text-64xl {
+            font-size: min(64rem, 95vw);
+            line-height: 0.7;
+        }
+        
+        .text-78xl {
+            font-size: min(78rem, 98vw);
+            line-height: 0.7;
+        }
+        
+        .text-12xl {
+            font-size: min(12rem, 40vw);
+            line-height: 0.8;
+        }
+        
+        .text-14xl {
+            font-size: min(14rem, 45vw);
+            line-height: 0.8;
+        }
+        
+        .text-18xl {
+            font-size: min(18rem, 55vw);
+            line-height: 0.8;
+        }
+        
+        .text-6xl-2 {
+            font-size: min(6rem, 20vw);
+            line-height: 0.9;
+        }
+        
+        .text-8xl-2 {
+            font-size: min(12rem, 35vw);
+            line-height: 0.9;
+        }
+        
+        .text-10xl-2 {
+            font-size: min(14rem, 40vw);
+            line-height: 0.9;
         }
         body.crt-effect::after {
             content: " ";
@@ -1030,9 +1202,9 @@
 
                 <!-- Main content flex-grow -->
                 <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full">
-                    <div class="title-wrapper -mt-16 sm:-mt-20">
-                        <h1 id="game-title" data-text="SYNAPSE" class="text-7xl md:text-9xl font-bold title-slasher mb-2">SYNAPSE</h1>
-                        <h2 data-text="ROOT ACCESS DENIED" class="text-2xl md:text-3xl font-mono text-red-500 tracking-wider subtitle-slasher -mt-2 mb-4">ROOT ACCESS DENIED</h2>
+                    <div class="title-wrapper -mt-26 sm:-mt-40">
+                        <h1 id="game-title" data-text="SYNAPSE" class="text-50xl md:text-64xl lg:text-78xl font-bold title-slasher mb-2">SYNAPSE</h1>
+                        <h2 data-text="ROOT ACCESS DENIED" class="text-38xl-2 md:text-22xl lg:text-14xl font-mono text-red-500 tracking-wider subtitle-slasher -mt -1 mb-1">ROOT ACCESS DENIED</h2>
                     </div>
                     <div id="intro-text-container" class="max-w-4xl text-sm md:text-base text-white mt-8 sm:mt-12"></div>
                     <div id="start-options" class="mt-10 flex flex-wrap justify-center gap-4">
@@ -1049,7 +1221,7 @@
             </div>
         </div>
 
-        <div id="player-setup" class="hidden flex-col items-center justify-center text-center h-full">
+        <div id="player-setup" class="hidden flex flex-col items-center justify-center text-center h-full">
              <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2">
@@ -1061,25 +1233,25 @@
 
                 <!-- Main Content -->
                 <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full">
-                    <div class="title-wrapper -mt-16 sm:-mt-20">
-                        <h1 id="setup-game-title" data-text="SYNAPSE" class="text-7xl md:text-9xl font-bold title-slasher mb-2">SYNAPSE</h1>
-                        <h2 data-text="ROOT ACCESS DENIED" class="text-2xl md:text-3xl font-mono text-red-500 tracking-wider subtitle-slasher -mt-2 mb-4">ROOT ACCESS DENIED</h2>
+                    <div class="title-wrapper -mt-8 sm:-mt-12">
+                        <h1 id="setup-game-title" data-text="SYNAPSE" class="text-6xl sm:text-7xl md:text-8xl font-bold title-slasher mb-2">SYNAPSE</h1>
+                        <h2 data-text="ROOT ACCESS DENIED" class="text-2xl sm:text-3xl md:text-4xl font-mono text-red-500 tracking-wider subtitle-slasher -mt-2 mb-4">ROOT ACCESS DENIED</h2>
                     </div>
-                    <div class="max-w-4xl text-sm md:text-base text-white mt-8 sm:mt-12">
-                        <p class="mb-6" data-lang="select_difficulty">Select difficulty:</p>
-                        <div class="flex gap-4 mb-8 justify-center">
+                    <div class="max-w-4xl text-sm md:text-base text-white mt-6 sm:mt-8">
+                        <p class="mb-3" data-lang="select_difficulty">Select difficulty:</p>
+                        <div class="flex gap-2 sm:gap-3 mb-4 justify-center flex-wrap">
                             <button class="difficulty-btn button" data-difficulty="Easy" data-lang="easy">Easy</button>
                             <button class="difficulty-btn button button-primary" data-difficulty="Normal" data-lang="normal">Normal</button>
                             <button class="difficulty-btn button" data-difficulty="Hard" data-lang="hard">Hard</button>
                         </div>
-                        <input type="text" id="player-name" data-lang-placeholder="enter_name_placeholder" placeholder="Enter your name" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-64 mb-6 focus:outline-none p-1 mx-auto block">
-                        <div class="flex items-center gap-2 mb-8 justify-center">
-                            <input type="text" id="player-backstory" data-lang-placeholder="enter_backstory_placeholder" placeholder="Enter your backstory" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-64 focus:outline-none p-1">
+                        <input type="text" id="player-name" data-lang-placeholder="enter_name_placeholder" placeholder="Enter your name" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 mb-3 focus:outline-none p-1 mx-auto block text-sm sm:text-base">
+                        <div class="flex items-center gap-2 mb-3 justify-center flex-wrap">
+                            <input type="text" id="player-backstory" data-lang-placeholder="enter_backstory_placeholder" placeholder="Enter your backstory" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 focus:outline-none p-1 text-sm sm:text-base">
                             <button id="view-backstories-btn" class="button text-xs px-2 py-1" data-lang="view_choices">View Choices</button>
                         </div>
-                        <div id="ability-display" class="text-center text-cyan-400 min-h-[4rem] mb-8 p-2 border border-cyan-400/30 rounded-md bg-black/50 w-full max-w-md mx-auto flex items-center justify-center"></div>
+                        <div id="ability-display" class="text-center text-cyan-400 min-h-[2.5rem] mb-3 p-2 border border-cyan-400/30 rounded-md bg-black/50 w-full max-w-md mx-auto flex items-center justify-center text-sm"></div>
                     </div>
-                    <div class="mt-10 flex flex-wrap justify-center gap-4">
+                    <div class="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4">
                        <button id="back-to-start-btn" data-lang="go_back_btn" data-text="Go Back" class="button btn-glow btn-drip">Go Back</button>
                        <button id="start-game-btn" class="button button-primary btn-glow btn-drip" data-lang="begin">Begin</button>
                     </div>
@@ -1095,68 +1267,95 @@
 
 
         <div id="game-screen" class="hidden flex flex-col h-full overflow-hidden">
-            <div class="flex-grow flex flex-col md:flex-row gap-2 md:gap-4 min-h-0 h-full">
-                <div class="w-full md:w-3/4 flex flex-col min-h-0 flex-shrink">
-                    <div id="game-output" class="flex-grow p-2 border border-[var(--main-color-border)] rounded-md overflow-y-auto mb-2 bg-black/50 min-h-0"></div>
+            <!-- AI Personality & Dialogue System -->
+            <div id="ai-personality-bar" class="w-full flex items-center justify-between p-2 bg-black/80 border-b border-[var(--main-color-border)]">
+                <div id="ai-personality-state" class="font-mono text-base text-cyan-400">AI: Friendly</div>
+                <div id="ai-awareness-bar" class="flex items-center gap-2">
+                    <span class="text-xs text-gray-400">Awareness</span>
+                    <div class="w-32 h-2 bg-gray-700 rounded-full overflow-hidden">
+                        <div id="awareness-progress" class="h-2 bg-cyan-400" style="width: 0%"></div>
+                    </div>
+                    <span id="awareness-value" class="text-xs text-cyan-400">0</span>
+                </div>
+                <div id="ai-audio-visualizer" class="w-24 h-4 bg-black/60 rounded"></div>
+            </div>
+
+            <div class="flex-grow flex flex-row gap-2 md:gap-4 min-h-0 h-full">
+                <!-- Main Narrative & Command Area -->
+                <div class="w-full md:w-2/3 flex flex-col min-h-0 flex-shrink">
+                    <div id="game-output" class="flex-grow p-2 border border-[var(--main-color-border)] rounded-md overflow-y-auto mb-2 bg-black/60 min-h-0 font-mono text-white"></div>
                     <div id="dialogue-options" class="flex flex-wrap gap-2 justify-center p-2 flex-shrink-0"></div>
+                    <!-- Skill Tree & XP -->
+                    <div id="skill-tree-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/50 mt-2">
+                        <h3 class="font-bold text-cyan-400 mb-1">Skill Tree</h3>
+                        <div id="skill-tree" class="flex flex-wrap gap-2"></div>
+                        <div id="xp-bar" class="w-full h-2 bg-gray-700 rounded-full overflow-hidden mt-1">
+                            <div id="xp-progress" class="h-2 bg-green-400" style="width: 0%"></div>
+                        </div>
+                        <div id="xp-value" class="text-xs text-green-400 mt-1">XP: 0</div>
+                    </div>
+                    <!-- Phobia System -->
+                    <div id="phobia-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/50 mt-2">
+                        <h3 class="font-bold text-red-400 mb-1">Phobias</h3>
+                        <div id="phobia-list" class="flex flex-wrap gap-2"></div>
+                    </div>
                 </div>
 
-                <div id="side-panel" class="w-full md:w-1/4 hidden md:flex flex-col gap-2 md:gap-4 min-h-0 overflow-hidden">
-                    <div id="stats-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-shrink-0">
-                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base" data-lang="stats_title">STATS</h3>
-                        <div id="player-name-display" class="text-xs md:text-sm"></div>
-                        <div id="awareness-display" class="text-xs md:text-sm"><span data-lang="awareness">Awareness</span>: 0</div>
-                        <div id="sanity-display" class="text-xs md:text-sm"><span data-lang="sanity">Sanity</span>: 100</div>
-                        <div id="tone-display" class="text-xs md:text-sm"><span data-lang="tone">Tone</span>: Friendly</div>
-                        <div id="turn-display" class="text-xs md:text-sm"><span data-lang="turn">Turn</span>: 0</div>
+                <!-- Side Panel: Stats, Inventory, Map, Journal, Achievements -->
+                <div id="side-panel" class="w-1/3 flex flex-col gap-2 min-h-0 overflow-hidden">
+                    <!-- Stats & Character -->
+                    <div id="stats-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-cyan-400" data-lang="stats_title">STATS</h3>
+                        <div id="player-name-display" class="text-xs"></div>
+                        <div id="player-backstory-display" class="text-xs"></div>
+                        <div id="difficulty-display" class="text-xs"></div>
+                        <div id="sanity-display" class="text-xs"><span data-lang="sanity">Sanity</span>: <span id="sanity-value">100</span></div>
+                        <div id="awareness-display" class="text-xs"><span data-lang="awareness">Awareness</span>: <span id="awareness-stat">0</span></div>
+                        <div id="tone-display" class="text-xs"><span data-lang="tone">Tone</span>: <span id="tone-value">Friendly</span></div>
+                        <div id="turn-display" class="text-xs"><span data-lang="turn">Turn</span>: <span id="turn-value">0</span></div>
+                        <div id="xp-stat" class="text-xs"><span>XP</span>: <span id="xp-stat-value">0</span></div>
                     </div>
-                    <div id="objectives-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 overflow-y-auto flex-1 min-h-0">
-                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base" data-lang="objectives_title">OBJECTIVES</h3>
-                        <ul id="objectives-list" class="list-none p-0 text-xs md:text-sm"></ul>
+                    <!-- Inventory -->
+                    <div id="inventory-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-yellow-400" data-lang="inventory_title">INVENTORY <span id="inventory-weight">(0/5)</span></h3>
+                        <ul id="inventory-list" class="list-none p-0 text-xs"></ul>
                     </div>
-                    <div id="inventory-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-shrink-0">
-                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base"><span data-lang="inventory_title">INVENTORY</span> (<span id="inventory-weight">0</span>/5)</h3>
-                        <ul id="inventory-list" class="list-none p-0 text-xs md:text-sm"></ul>
+                    <!-- Objectives -->
+                    <div id="objectives-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-green-400" data-lang="objectives_title">OBJECTIVES</h3>
+                        <ul id="objectives-list" class="list-none p-0 text-xs"></ul>
                     </div>
-                    <div id="map-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-1 flex flex-col relative min-h-0">
-                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 flex justify-between items-center text-sm md:text-base">
-                            <span data-lang="map_title">MAP</span>
-                            <div id="map-controls" class="flex gap-1">
-                                <button id="map-layers-btn" class="button !p-1 text-xs" title="Toggle Layers (Placeholder)">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16"><path d="M7.765 1.558a.5.5 0 0 1 .47 0l7.5 4a.5.5 0 0 1 0 .884l-7.5 4a.5.5 0 0 1-.47 0l-7.5-4a.5.5 0 0 1 0-.884z"/><path d="m2.125 8.567-1.86.992a.5.5 0 0 0 0 .884l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.884l-1.86-.992-5.17 2.756a1.5 1.5 0 0 1-1.41 0z"/></svg>
-                                </button>
-                                <button id="map-toggle-btn" class="button !p-1 text-xs">
-                                    <svg id="map-expand-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M5.828 10.172a.5.5 0 0 0-.707 0l-4.096 4.096V11.5a.5.5 0 0 0-1 0v3.975a.5.5 0 0 0 .5.5H4.5a.5.5 0 0 0 0-1H1.732l4.096-4.096a.5.5 0 0 0 0-.707zm4.344 0a.5.5 0 0 1 .707 0l4.096 4.096V11.5a.5.5 0 1 1 1 0v3.975a.5.5 0 0 1-.5.5H11.5a.5.5 0 0 1 0-1h2.768l-4.096-4.096a.5.5 0 0 1 0-.707zm0-4.344a.5.5 0 0 0 .707 0l4.096-4.096V4.5a.5.5 0 1 0 1 0V.525a.5.5 0 0 0-.5-.5H11.5a.5.5 0 0 0 0 1h2.768l-4.096 4.096a.5.5 0 0 0 0 .707zm-4.344 0a.5.5 0 0 1-.707 0L1.42 1.732V4.5a.5.5 0 0 1-1 0V.525a.5.5 0 0 1 .5-.5H4.5a.5.5 0 0 1 0 1H1.732l4.096 4.096a.5.5 0 0 1 0 .707z"/>
-                                    </svg>
-                                    <svg id="map-minimize-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="hidden" viewBox="0 0 16 16">
-                                        <path d="M5.5 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-4a.5.5 0 0 1 0-1h3.5V.5a.5.5 0 0 1 .5-.5zM5 11h-4a.5.5 0 0 1 0-1h3.5V6.5a.5.5 0 0 1 1 0v4a.5.5 0 0 1-.5.5zm5.5 0a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 1 0v3.5H11a.5.5 0 0 1 0 1h-4.5zM11 5h4.5a.5.5 0 0 1 0-1H11.5V.5a.5.5 0 0 1-1 0v4a.5.5 0 0 1 .5.5z"/>
-                                    </svg>
-                                </button>
-                            </div>
-                        </h3>
-                         <canvas id="map-canvas" class="flex-1 min-h-0"></canvas>
-                     </div>
-                     <div id="journal-panel" class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 overflow-y-auto flex-1 min-h-0">
-                         <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-sm md:text-base" data-lang="journal_title">JOURNAL</h3>
-                         <ul id="journal-list" class="list-none p-0 text-xs md:text-sm"></ul>
-                     </div>
-                     <div class="p-2 md:p-3 border border-[var(--main-color-border)] rounded-md bg-black/50 flex-shrink-0">
-                         <button id="view-progression-btn" class="button w-full text-xs md:text-sm" data-lang="progress_btn">PROGRESS</button>
-                     </div>
+                    <!-- Map -->
+                    <div id="map-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-blue-400" data-lang="map_title">MAP</h3>
+                        <canvas id="map-canvas" class="w-full h-32 bg-black/80 rounded mb-2"></canvas>
+                        <div id="map-controls" class="flex gap-1 mb-1">
+                            <button id="map-layers-btn" class="button !p-1 text-xs" title="Toggle Layers">Layers</button>
+                            <button id="map-toggle-btn" class="button !p-1 text-xs">Expand</button>
+                        </div>
+                    </div>
+                    <!-- Journal -->
+                    <div id="journal-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-orange-400" data-lang="journal_title">JOURNAL</h3>
+                        <ul id="journal-list" class="list-none p-0 text-xs"></ul>
+                    </div>
+                    <!-- Achievements -->
+                    <div id="achievements-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-pink-400" data-lang="achievements_title">ACHIEVEMENTS</h3>
+                        <ul id="achievements-list" class="list-none p-0 text-xs"></ul>
+                    </div>
+                    <!-- Settings & Accessibility -->
+                    <div id="settings-panel" class="p-2 border border-[var(--main-color-border)] rounded-md bg-black/60 flex-shrink-0">
+                        <h3 class="font-bold border-b border-[var(--main-color-border)] mb-2 text-base text-white" data-lang="settings_title">SETTINGS</h3>
+                        <div id="settings-controls" class="flex flex-col gap-2"></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Mobile Scroll Indicator -->
-            <div id="mobile-scroll-indicator" class="mobile-scroll-indicator md:hidden">
-                <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M8 0a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 6.293V.5A.5.5 0 0 1 8 0zm0 10a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708l2.147 2.147V10.5A.5.5 0 0 1 8 10z"/>
-                </svg>
-            </div>
-
-            <div class="mt-1 md:mt-2 flex items-center border-t-2 border-[var(--main-color-border)] pt-1 md:pt-2 gap-1 md:gap-2 relative flex-shrink-0">
+            <!-- Command Input & Accessibility -->
+            <div class="mt-1 flex items-center border-t-2 border-[var(--main-color-border)] pt-1 gap-1 relative flex-shrink-0 bg-black/80">
                 <div id="autocomplete-box" class="hidden"></div>
-                <button id="status-btn" class="button md:hidden text-xs !px-2 !py-1" data-lang="status_btn">Status</button>
+                <button id="status-btn" class="button text-xs !px-2 !py-1" data-lang="status_btn">Status</button>
                 <span class="text-lg md:text-xl hidden sm:inline">&gt;</span>
                 <input type="text" id="player-input" class="flex-grow bg-transparent text-sm md:text-lg ml-1 md:ml-2 focus:outline-none min-w-0" autocomplete="off" autocapitalize="none" spellcheck="false">
                 <div class="input-caret"></div>
@@ -1166,6 +1365,12 @@
                         <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
                     </svg>
                 </button>
+                <button id="accessibility-btn" class="button text-xs ml-2" title="Accessibility Options">A11y</button>
+            </div>
+
+            <!-- Overlays & Modals for Advanced Systems -->
+            <div id="overlay-container" class="fixed inset-0 z-50 pointer-events-none">
+                <!-- Dynamic overlays for horror effects, memory corruption, temporal distortion, etc. -->
             </div>
         </div>
     </div>
@@ -1176,7 +1381,306 @@
     
     <script>
     // SYNAPSE: AI HORROR GAME - V2.5 BUGFIX UPDATE
-    
+
+    // === AI PERSONALITY & DIALOGUE SYSTEM STUBS ===
+    const AI_PERSONALITIES = [
+        { state: 'Friendly', color: 'text-cyan-400', min: 0, max: 24 },
+        { state: 'Ambiguous', color: 'text-yellow-400', min: 25, max: 49 },
+        { state: 'Sinister', color: 'text-orange-400', min: 50, max: 74 },
+        { state: 'Malicious', color: 'text-red-500', min: 75, max: 100 }
+    ];
+    let aiAwareness = 0;
+    let aiPersonality = AI_PERSONALITIES[0];
+
+    // Placeholder dialogue tree (expand with real data)
+    const dialogueTree = {
+        Friendly: [
+            { text: "Hello, user. How can I help you today?", options: ["Who are you?", "Where am I?"] }
+        ],
+        Ambiguous: [
+            { text: "You ask a lot of questions...", options: ["What happened here?", "Can I trust you?"] }
+        ],
+        Sinister: [
+            { text: "You shouldn't be here.", options: ["Let me out!", "What do you want?"] }
+        ],
+        Malicious: [
+            { text: "You cannot escape.", options: ["...", "Help!"] }
+        ]
+    };
+
+    function updateAIPersonalityUI() {
+        // Awareness bar
+        const awarenessPercent = Math.min(100, Math.max(0, aiAwareness));
+        document.getElementById('awareness-progress').style.width = awarenessPercent + '%';
+        document.getElementById('awareness-value').textContent = aiAwareness;
+        document.getElementById('awareness-stat').textContent = aiAwareness;
+
+        // Determine personality
+        aiPersonality = AI_PERSONALITIES.find(p => aiAwareness >= p.min && aiAwareness <= p.max) || AI_PERSONALITIES[0];
+        const aiStateElem = document.getElementById('ai-personality-state');
+        aiStateElem.textContent = `AI: ${aiPersonality.state}`;
+        aiStateElem.className = `font-mono text-base ${aiPersonality.color}`;
+        document.getElementById('tone-value').textContent = aiPersonality.state;
+    }
+
+    function showAIDialogue() {
+        const dialogue = dialogueTree[aiPersonality.state][0];
+        const output = document.getElementById('game-output');
+        output.innerHTML = `<div class='mb-2'>${dialogue.text}</div>`;
+        const optionsDiv = document.getElementById('dialogue-options');
+        optionsDiv.innerHTML = '';
+        dialogue.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'button btn-glow btn-drip m-1';
+            btn.textContent = opt;
+            btn.onclick = () => handleDialogueOption(opt);
+            optionsDiv.appendChild(btn);
+        });
+    }
+
+    function handleDialogueOption(option) {
+        // Example: Increase awareness for certain questions
+        if (option.toLowerCase().includes('trust') || option.toLowerCase().includes('escape')) {
+            aiAwareness = Math.min(100, aiAwareness + 25);
+        } else {
+            aiAwareness = Math.min(100, aiAwareness + 10);
+        }
+        updateAIPersonalityUI();
+        showAIDialogue();
+    }
+
+    // For demo: show dialogue when game screen is shown
+    window.showGameScreenDemo = function() {
+        aiAwareness = 0;
+        updateAIPersonalityUI();
+        showAIDialogue();
+    }
+
+    // === SKILL TREE & XP SYSTEM STUBS ===
+    const SKILLS = [
+        { id: 'logic', name: 'Logic', desc: 'Improves puzzle solving and hacking.', icon: '🧠', max: 5 },
+        { id: 'perception', name: 'Perception', desc: 'Spot hidden objects and clues.', icon: '👁️', max: 5 },
+        { id: 'resilience', name: 'Resilience', desc: 'Reduces sanity loss and damage.', icon: '💪', max: 5 },
+        { id: 'tech', name: 'Tech', desc: 'Bypass security and use devices.', icon: '🔧', max: 5 },
+        { id: 'empathy', name: 'Empathy', desc: 'Influence AI and NPCs.', icon: '💬', max: 5 }
+    ];
+    let playerXP = 0;
+    let playerLevel = 1;
+    let skillPoints = 0;
+    let playerSkills = {
+        logic: 0,
+        perception: 0,
+        resilience: 0,
+        tech: 0,
+        empathy: 0
+    };
+
+    function xpForNextLevel(level) {
+        // Simple XP curve: 100, 200, 300, ...
+        return level * 100;
+    }
+
+    function gainXP(amount) {
+        playerXP += amount;
+        let leveledUp = false;
+        while (playerXP >= xpForNextLevel(playerLevel)) {
+            playerXP -= xpForNextLevel(playerLevel);
+            playerLevel++;
+            skillPoints++;
+            leveledUp = true;
+        }
+        updateSkillTreeUI();
+        if (leveledUp) showLevelUpNotification();
+    }
+
+    function showLevelUpNotification() {
+        // Simple notification (replace with modal/animation as needed)
+        const panel = document.getElementById('skill-tree-panel');
+        const notif = document.createElement('div');
+        notif.className = 'text-green-400 font-bold mb-2';
+        notif.textContent = `Level Up! You are now level ${playerLevel}. Skill point awarded.`;
+        panel.prepend(notif);
+        setTimeout(() => notif.remove(), 2500);
+    }
+
+    function updateSkillTreeUI() {
+        const panel = document.getElementById('skill-tree-panel');
+        if (!panel) return;
+        let html = `<div class='flex items-center gap-4 mb-2'>
+            <span class='font-bold text-cyan-300'>Level: ${playerLevel}</span>
+            <span class='font-bold text-yellow-300'>XP: ${playerXP} / ${xpForNextLevel(playerLevel)}</span>
+            <span class='font-bold text-green-400'>Skill Points: ${skillPoints}</span>
+        </div>`;
+        html += `<div class='grid grid-cols-2 md:grid-cols-3 gap-2'>`;
+        for (const skill of SKILLS) {
+            html += `<div class='p-2 border border-cyan-700 rounded bg-black/60 flex flex-col items-center'>
+                <span class='text-2xl mb-1'>${skill.icon}</span>
+                <span class='font-bold text-cyan-200'>${skill.name}</span>
+                <span class='text-xs text-gray-400 mb-1'>${skill.desc}</span>
+                <div class='flex gap-1 mb-1'>`;
+            for (let i = 1; i <= skill.max; i++) {
+                const filled = playerSkills[skill.id] >= i ? 'bg-cyan-400' : 'bg-gray-700';
+                html += `<span class='w-4 h-4 inline-block rounded-full ${filled}'></span>`;
+            }
+            html += `</div>`;
+            if (skillPoints > 0 && playerSkills[skill.id] < skill.max) {
+                html += `<button class='button btn-glow btn-drip text-xs' onclick='window.upgradeSkill("${skill.id}")'>+ Upgrade</button>`;
+            }
+            html += `</div>`;
+        }
+        html += `</div>`;
+        panel.innerHTML = html;
+    }
+
+    window.upgradeSkill = function(skillId) {
+        if (skillPoints > 0 && playerSkills[skillId] < SKILLS.find(s => s.id === skillId).max) {
+            playerSkills[skillId]++;
+            skillPoints--;
+            updateSkillTreeUI();
+        }
+    };
+
+    // For demo: show skill tree and simulate XP gain
+
+    window.showSkillTreeDemo = function() {
+        playerXP = 0;
+        playerLevel = 1;
+        skillPoints = 0;
+        playerSkills = { logic: 0, perception: 0, resilience: 0, tech: 0, empathy: 0 };
+        updateSkillTreeUI();
+    };
+    window.gainXPDemo = function(amount) {
+        gainXP(amount);
+    };
+
+    // === PHOBIA SYSTEM STUBS ===
+    const PHOBIAS = [
+        { id: 'claustrophobia', name: 'Claustrophobia', desc: 'Fear of tight spaces. Triggers in small rooms.', icon: '🚪' },
+        { id: 'nyctophobia', name: 'Nyctophobia', desc: 'Fear of the dark. Triggers in unlit areas.', icon: '🌑' },
+        { id: 'hemophobia', name: 'Hemophobia', desc: 'Fear of blood. Triggers on seeing blood.', icon: '🩸' },
+        { id: 'technophobia', name: 'Technophobia', desc: 'Fear of machines. Triggers near malfunctioning tech.', icon: '🤖' },
+        { id: 'thanatophobia', name: 'Thanatophobia', desc: 'Fear of death. Triggers near corpses.', icon: '💀' }
+    ];
+    let playerPhobias = ['claustrophobia']; // Example: player starts with one phobia
+    let phobiaStates = {
+        claustrophobia: false,
+        nyctophobia: false,
+        hemophobia: false,
+        technophobia: false,
+        thanatophobia: false
+    };
+
+    function triggerPhobia(phobiaId) {
+        if (playerPhobias.includes(phobiaId)) {
+            phobiaStates[phobiaId] = true;
+            updatePhobiaPanelUI();
+            showPhobiaEffect(phobiaId);
+        }
+    }
+
+    function clearPhobia(phobiaId) {
+        if (playerPhobias.includes(phobiaId)) {
+            phobiaStates[phobiaId] = false;
+            updatePhobiaPanelUI();
+        }
+    }
+
+    function showPhobiaEffect(phobiaId) {
+        // Simple effect: show a warning in the phobia panel (replace with horror overlay, sound, etc.)
+        const panel = document.getElementById('phobia-panel');
+        const phobia = PHOBIAS.find(p => p.id === phobiaId);
+        if (panel && phobia) {
+            const warn = document.createElement('div');
+            warn.className = 'text-red-400 font-bold mb-2 animate-pulse';
+            warn.textContent = `Phobia Triggered: ${phobia.name}! (${phobia.desc})`;
+            panel.prepend(warn);
+            setTimeout(() => warn.remove(), 2500);
+        }
+    }
+
+    function updatePhobiaPanelUI() {
+        const panel = document.getElementById('phobia-panel');
+        if (!panel) return;
+        let html = `<div class='font-bold text-pink-300 mb-1'>Phobias</div>`;
+        if (playerPhobias.length === 0) {
+            html += `<div class='text-gray-400'>(None)</div>`;
+        } else {
+            for (const phobiaId of playerPhobias) {
+                const phobia = PHOBIAS.find(p => p.id === phobiaId);
+                const triggered = phobiaStates[phobiaId];
+                html += `<div class='flex items-center gap-2 mb-1'>
+                    <span class='text-xl'>${phobia.icon}</span>
+                    <span class='font-bold text-pink-200'>${phobia.name}</span>
+                    <span class='text-xs text-gray-400'>${phobia.desc}</span>
+                    ${triggered ? `<span class='text-red-400 font-bold animate-pulse ml-2'>TRIGGERED</span>` : ''}
+                </div>`;
+            }
+        }
+        panel.innerHTML = html;
+    }
+
+    // For demo: show phobia panel and simulate triggers
+    window.showPhobiaPanelDemo = function() {
+        playerPhobias = ['claustrophobia', 'nyctophobia'];
+        phobiaStates = { claustrophobia: false, nyctophobia: false, hemophobia: false, technophobia: false, thanatophobia: false };
+        updatePhobiaPanelUI();
+    };
+    window.triggerPhobiaDemo = function(phobiaId) {
+        triggerPhobia(phobiaId);
+    };
+
+    // === STATS & CHARACTER SYSTEM STUBS ===
+    const BASE_STATS = {
+        sanity: 100,
+        awareness: 0,
+        health: 100,
+        stamina: 100,
+        turn: 1
+    };
+    let playerStats = { ...BASE_STATS };
+
+    function updateStatsPanelUI() {
+        const panel = document.getElementById('stats-panel');
+        if (!panel) return;
+        let html = `<div class='font-bold text-green-300 mb-1'>Stats</div>`;
+        html += `<div class='flex flex-col gap-1'>`;
+        html += `<div><span class='font-bold text-yellow-300'>Sanity:</span> <span id='sanity-stat' class='text-white'>${playerStats.sanity}</span></div>`;
+        html += `<div><span class='font-bold text-cyan-300'>Awareness:</span> <span id='awareness-stat' class='text-white'>${playerStats.awareness}</span></div>`;
+        html += `<div><span class='font-bold text-red-400'>Health:</span> <span id='health-stat' class='text-white'>${playerStats.health}</span></div>`;
+        html += `<div><span class='font-bold text-pink-300'>Stamina:</span> <span id='stamina-stat' class='text-white'>${playerStats.stamina}</span></div>`;
+        html += `<div><span class='font-bold text-gray-400'>Turn:</span> <span id='turn-stat' class='text-white'>${playerStats.turn}</span></div>`;
+        html += `</div>`;
+        panel.innerHTML = html;
+    }
+
+    function changeStat(stat, amount) {
+        if (playerStats.hasOwnProperty(stat)) {
+            playerStats[stat] += amount;
+            if (stat === 'sanity') playerStats[stat] = Math.max(0, Math.min(100, playerStats[stat]));
+            if (stat === 'health') playerStats[stat] = Math.max(0, Math.min(100, playerStats[stat]));
+            if (stat === 'stamina') playerStats[stat] = Math.max(0, Math.min(100, playerStats[stat]));
+            if (stat === 'awareness') playerStats[stat] = Math.max(0, Math.min(100, playerStats[stat]));
+            updateStatsPanelUI();
+        }
+    }
+
+    function nextTurn() {
+        playerStats.turn++;
+        updateStatsPanelUI();
+    }
+
+    // For demo: show stats panel and simulate stat changes
+    window.showStatsPanelDemo = function() {
+        playerStats = { ...BASE_STATS };
+        updateStatsPanelUI();
+    };
+    window.changeStatDemo = function(stat, amount) {
+        changeStat(stat, amount);
+    };
+    window.nextTurnDemo = function() {
+        nextTurn();
+    };
+
     // --- TRANSLATIONS ---
     const translations = {
         'en': {
