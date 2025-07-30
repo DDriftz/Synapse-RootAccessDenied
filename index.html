@@ -712,7 +712,7 @@
         <div id="start-screen" class="flex flex-col items-center justify-center text-center h-full">
             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
-                <div class="w-full flex justify-end p-2">
+                <div class="w-full flex justify-start p-2">
                     <div id="lang-buttons" class="flex gap-2">
                         <button id="lang-en-btn" data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
                         <button id="lang-sv-btn" data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
@@ -743,7 +743,7 @@
         <div id="player-setup" class="hidden flex flex-col items-center justify-center text-center h-full">
              <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
-                <div class="w-full flex justify-end p-2">
+                <div class="w-full flex justify-start p-2">
                     <div id="setup-lang-buttons" class="flex gap-2">
                         <button data-lang="en_lang_short" data-text="EN" class="button text-xs !px-2 !py-1 btn-drip">EN</button>
                         <button data-lang="sv_lang_short" data-text="SV" class="button text-xs !px-2 !py-1 opacity-50 btn-drip">SV</button>
@@ -764,9 +764,24 @@
                             <button class="difficulty-btn button" data-difficulty="Hard" data-lang="hard">Hard</button>
                         </div>
                         <input type="text" id="player-name" data-lang-placeholder="enter_name_placeholder" placeholder="Enter your name" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 mb-3 focus:outline-none p-1 mx-auto block text-sm sm:text-base">
-                        <input type="text" id="player-phobia" placeholder="Enter your phobia (e.g., darkness, isolation, blood, etc.) or leave blank for random" class="bg-transparent border-b-2 border-[var(--main-color)] text-center w-48 sm:w-64 mb-3 focus:outline-none p-1 mx-auto block text-sm sm:text-base">
-                        <div class="flex items-center gap-2 mb-3 justify-center flex-wrap">
-                            
+                        
+                        <!-- Backstory Selection -->
+                        <div class="mb-4">
+                            <p class="mb-2 text-sm" data-lang="select_backstory">Select your backstory:</p>
+                            <div class="flex items-center justify-center gap-2 mb-3">
+                                <input type="text" id="player-backstory-input" placeholder="Type backstory name (e.g. investigator, hacker)" class="bg-transparent border border-[var(--main-color)] text-center w-48 sm:w-64 focus:outline-none p-2 text-sm sm:text-base rounded">
+                                <button id="view-backstories-btn" class="button !p-2 text-xs btn-glow btn-drip">View List</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Phobia Selection -->
+                        <div class="mb-4">
+                            <p class="mb-2 text-sm" data-lang="select_phobia">Select your phobia:</p>
+                            <div class="flex items-center justify-center gap-2 mb-3">
+                                <input type="text" id="player-phobia-input" placeholder="Type phobia name (e.g. darkness, spiders)" class="bg-transparent border border-[var(--main-color)] text-center w-48 sm:w-64 focus:outline-none p-2 text-sm sm:text-base rounded">
+                                <button id="view-phobias-btn" class="button !p-2 text-xs btn-glow btn-drip">View List</button>
+                            </div>
+                        </div>
                         <div id="ability-display" class="text-center text-cyan-400 min-h-[2.5rem] mb-3 p-2 border border-cyan-400/30 rounded-md bg-black/50 w-full max-w-md mx-auto flex items-center justify-center text-sm"></div>
                     </div>
                     <div class="mt-4 sm:mt-6 flex flex-wrap justify-center gap-2 sm:gap-4">
@@ -896,14 +911,50 @@
             </div>
         </div>
     </div>
-
-    <div id="modal" class="modal">
-        <div id="modal-content" class="modal-content"></div>
-    </div>
     
+    <!-- Backstory List Modal -->
+    <div id="backstory-list-modal" class="modal hidden fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm pointer-events-none">
+        <div class="bg-black/95 border-2 border-cyan-400 rounded-lg shadow-2xl max-w-4xl max-h-[80vh] overflow-hidden relative pointer-events-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-cyan-400">Available Backstories</h2>
+                    <button id="close-backstory-modal" class="button !p-2 text-xs hover:bg-red-600 z-50">✕ Close</button>
+                </div>
+                <div id="backstory-modal-content" class="max-h-[60vh] overflow-y-auto pr-2">
+                    <!-- Backstory list will be populated here -->
+                </div>
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-400">Review all available backstories and their unique abilities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phobia List Modal -->
+    <div id="phobia-list-modal" class="modal hidden fixed inset-0 z-30 flex items-center justify-center bg-black/80 backdrop-blur-sm pointer-events-none">
+        <div class="bg-black/95 border-2 border-red-400 rounded-lg shadow-2xl max-w-4xl max-h-[80vh] overflow-hidden relative pointer-events-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold text-red-400">Available Phobias</h2>
+                    <button id="close-phobia-modal" class="button !p-2 text-xs hover:bg-red-600 z-50">✕ Close</button>
+                </div>
+                <div id="phobia-modal-content" class="max-h-[60vh] overflow-y-auto pr-2">
+                    <!-- Phobia list will be populated here -->
+                </div>
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-400">Choose a phobia that will affect your character's behavior and abilities</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Load all JavaScript modules -->
     <script src="./debug.js"></script>
     <script src="./simple-init.js"></script>
     <script src="./robust-init.js"></script>
+    <script src="./update-backstory.js"></script>
+    <script src="./update-phobia.js"></script>
+    <script src="./fix-modal.js"></script>
+    <script src="./modal-final-fix.js"></script>
 </body>
 </html>
