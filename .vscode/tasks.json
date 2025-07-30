@@ -1,11 +1,39 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "shell",
-			"label": "Open index.html in browser",
-			"command": "start index.html",
-			"group": "test"
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Game",
+            "type": "shell",
+            "command": "npm start",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Validate HTML",
+            "type": "shell",
+            "command": "npx html-validator-cli --file index.html",
+            "problemMatcher": []
+        },
+        {
+            "label": "Check for Broken Links",
+            "type": "shell",
+            "command": "npx broken-link-checker -r .",
+            "problemMatcher": []
+        },
+        {
+            "label": "Analyze JS Performance",
+            "type": "shell",
+            "command": "npx lighthouse index.html --view --only-categories=performance",
+            "problemMatcher": []
+        },
+        {
+            "label": "Lint Code",
+            "type": "shell",
+            "command": "npx eslint .",
+            "problemMatcher": []
+        }
+    ]
 }

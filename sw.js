@@ -1,9 +1,15 @@
-const CACHE_NAME = 'synapse-horror-v1.0.1';
+const CACHE_NAME = 'synapse-horror-v2.5.0';
 const urlsToCache = [
   './',
   './index.html',
   './Icon.png',
   './manifest.json',
+  './style.css',
+  './main.js',
+  './script.js',
+  './js/game.js',
+  './js/ui.js',
+  './js/utils.js',
   'https://unpkg.com/tone@15.0.4/build/Tone.js',
   'https://cdn.tailwindcss.com'
 ];
