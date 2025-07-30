@@ -902,15 +902,12 @@
     </div>
     
     <!-- Load all JavaScript modules -->
-    <!-- Load all JavaScript modules in correct order -->
-    <!-- Instantiate the GameEngine before anything else -->
-    <script type="module" src="engine-init.js"></script>
-    <script type="module" src="js/utils.js"></script>
-    <script type="module" src="js/audio.js"></script>
-    <script type="module" src="js/systems/initialization.js"></script>
+    <script type="module" src="script.js"></script>
     <script type="module" src="js/game.js"></script>
     <script type="module" src="js/ui.js"></script>
-    <script type="module" src="script.js"></script>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/audio.js"></script>
+    <script type="module" src="initialization.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
