@@ -1,0 +1,17 @@
+{
+  "name": "synapse-horror-game",
+  "version": "2.5.0",
+  "description": "SYNAPSE - AI Horror Game",
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "dev": "npx serve . -l 3000",
+    "validate": "npx html-validator-cli --file index.html",
+    "lint": "npx eslint ."
+  },
+  "keywords": ["horror", "game", "ai", "interactive-fiction"],
+  "author": "DDriftz",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}

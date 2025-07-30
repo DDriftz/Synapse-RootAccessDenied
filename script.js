@@ -1,6 +1,6 @@
-import { GameState, stateSnapshots, currentLanguage, animationFrameId, UI, currentTextSpeed } from './game.js';
-import { updateUIText, showModal, hideModal } from './ui.js';
-import { getRandomElement, getRandomNumber } from './utils.js';
+import { GameState } from './js/game.js';
+import { showModal, hideModal } from './js/ui.js';
+import { getRandomElement, getRandomNumber } from './js/utils.js';
 
 // --- ENUMS & CONSTANTS ---
 const ChatbotTone = { Friendly: 'Friendly', Ambiguous: 'Ambiguous', Sinister: 'Sinister', Malicious: 'Malicious' };

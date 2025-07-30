@@ -1,6 +1,7 @@
 // js/audio.js - Complete audio system with Tone.js
 
 import { GameState } from './game.js';
+// Tone.js is loaded from CDN in index.html, available globally
 
 // Audio State
 const AudioState = {

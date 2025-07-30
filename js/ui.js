@@ -17,6 +17,35 @@ const UIState = {
     activeAnimations: new Set()
 };
 
+// Language translations (basic implementation)
+const translations = {
+    en: {
+        status_btn: 'Status',
+        new_game: 'New Game',
+        load_game: 'Load Game',
+        settings_btn: 'Settings',
+        understand_game: 'Understand the Game'
+    },
+    sv: {
+        status_btn: 'Status',
+        new_game: 'Nytt Spel',
+        load_game: 'Ladda Spel',
+        settings_btn: 'Inställningar',
+        understand_game: 'Förstå Spelet'
+    }
+};
+
+// Update UI text based on current language
+export function updateUIText(language = 'en') {
+    const elements = document.querySelectorAll('[data-lang]');
+    elements.forEach(element => {
+        const key = element.dataset.lang;
+        if (translations[language] && translations[language][key]) {
+            element.textContent = translations[language][key];
+        }
+    });
+}
+
 // Modal Management
 export function showModal(content, title = '', buttons = [], options = {}) {
     const modal = document.getElementById('modal');
