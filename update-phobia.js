@@ -32,10 +32,11 @@ function setupPhobiaSelection() {
         
         console.log('Phobia input value:', phobiaValue);
         
-        // Define available phobias
+        // Define available phobias (expanded to 20)
         const availablePhobias = [
-            'random', 'darkness', 'isolation', 'blood', 'machinery', 
-            'mirrors', 'silence', 'crowds', 'heights', 'spiders', 'death'
+            'random', 'darkness', 'isolation', 'blood', 'machinery', 'mirrors', 
+            'silence', 'crowds', 'heights', 'spiders', 'death', 'confinement',
+            'water', 'fire', 'clowns', 'dolls', 'needles', 'germs', 'storms', 'flying'
         ];
         
         let selectedPhobia = 'random'; // default

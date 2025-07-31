@@ -7,284 +7,287 @@
     --main-color-glow: rgba(0,255,65,0.7);
 }
 
-/* Terminal-style improvements to match reference image exactly */
-#game-output {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    line-height: 1.3;
-    letter-spacing: 0.3px;
-    background: #000000 !important;
-    border: 1px solid var(--main-color-border) !important;
-    color: var(--main-color) !important;
-    padding: 1rem !important;
-    font-size: 14px;
-}
-
-/* Side panel styling to match exactly */
-#side-panel > div {
-    background: #000000 !important;
-    border: 1px solid var(--main-color-border) !important;
-    margin-bottom: 0.25rem !important;
-}
-
-#side-panel h3 {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    font-weight: bold;
-    letter-spacing: 1px;
-    font-size: 12px !important;
-    text-transform: uppercase;
-    padding: 0.5rem;
-    margin: 0 !important;
-    border-bottom: 1px solid var(--main-color-border) !important;
-}
-
-/* Stats panel content */
-#stats-panel div {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    font-size: 11px;
-    color: var(--main-color);
-    padding: 0.25rem 0.5rem;
-}
-
-/* Inventory styling to match image */
-#inventory-panel ul {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    font-size: 11px;
-    color: var(--main-color);
-    padding: 0.5rem;
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #000000;
+    color: #00ff41;
+    overflow: hidden;
+}
+
+/* Game Container */
+#app-container {
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    padding: 0;
+    margin: 0;
+}
+
+/* Start Screen Styling */
+#start-screen {
+    background: #000000;
+    color: #00ff41;
+}
+
+.title-slasher {
+    color: #00ff41;
+    text-shadow: 0 0 10px #00ff41;
+}
+
+.subtitle-slasher {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+/* Button Styling */
+.button {
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    padding: 0.5rem 1rem;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 5px #00ff41;
+}
+
+.button-primary {
+    background: rgba(0, 255, 65, 0.2);
+}
+
+/* Player Setup Screen */
+#player-setup {
+    background: #000000;
+    color: #00ff41;
+}
+
+#player-name, #player-backstory-input, #player-phobia-input {
+    background: transparent;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    padding: 0.5rem;
+}
+
+/* Game Screen - Main Layout */
+#game-screen {
+    background: #000000;
+    padding: 8px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Main Terminal Output */
+#game-output {
+    background: #000000;
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 12px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* Right Sidebar Panels */
+#stats-panel, #objectives-panel, #inventory-panel, #journal-panel {
+    background: #000000;
+    border: 1px solid #00ff41;
+    margin-bottom: 8px;
+}
+
+#stats-panel h3, #objectives-panel h3, #inventory-panel h3, #journal-panel h3 {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    font-weight: bold;
+    color: #00ff41;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    margin: 0;
+    border-bottom: 1px solid #00ff41;
+}
+
+#stats-panel div, #objectives-panel ul, #inventory-panel ul, #journal-panel ul {
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #00ff41;
+    padding: 8px 12px;
+    margin: 0;
+    list-style: none;
+}
+
+#stats-panel div {
+    padding: 2px 12px;
 }
 
 #inventory-panel li {
-    color: var(--main-color);
-    padding: 0.1rem 0;
+    color: #00ff41;
+    margin: 2px 0;
 }
 
-/* Objectives and Journal styling */
-#objectives-panel ul, #journal-panel ul {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    font-size: 11px;
-    color: var(--main-color);
-    padding: 0.5rem;
-    margin: 0;
+/* Dialogue Options */
+#dialogue-options {
+    margin-top: 8px;
 }
 
-/* Dialogue buttons terminal style to match image exactly */
 .dialogue-btn {
-    background: rgba(0, 255, 65, 0.15) !important;
-    border: 1px solid var(--main-color-border) !important;
-    color: var(--main-color) !important;
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    padding: 0.4rem 0.8rem !important;
-    margin: 0.2rem !important;
-    border-radius: 2px !important;
-    font-size: 12px !important;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid #00ff41;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    padding: 6px 12px;
+    margin: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .dialogue-btn:hover {
-    background: rgba(0, 255, 65, 0.25) !important;
-    box-shadow: 0 0 5px var(--main-color-glow);
-    transform: translateY(-1px);
+    background: rgba(0, 255, 65, 0.2);
+    box-shadow: 0 0 5px #00ff41;
 }
 
-/* Command input terminal style */
+/* Command Input */
 #player-input {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    background: transparent !important;
-    border: none !important;
-    color: var(--main-color) !important;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #00ff41;
+    font-family: 'Courier New', monospace;
     font-size: 14px;
-    letter-spacing: 0.3px;
-}
-
-/* Status button */
-#status-btn {
-    background: rgba(0, 255, 65, 0.1) !important;
-    border: 1px solid var(--main-color-border) !important;
-    color: var(--main-color) !important;
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    font-size: 12px;
-}
-
-/* Make sure all text in game area uses terminal font */
-#game-output * {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    color: var(--main-color);
-}
-
-/* Specific styling for SYNAPSE messages */
-#game-output .text-green-400,
-#game-output .text-cyan-400,
-#game-output .text-white,
-#game-output .text-yellow-400,
-#game-output .text-red-400 {
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-}
-
-/* Status button */
-#status-btn {
-    background: rgba(0, 255, 65, 0.1) !important;
-    border: 1px solid var(--main-color-border) !important;
-    color: var(--main-color) !important;
-    font-family: 'Space Mono', 'Courier New', monospace !important;
-    font-size: 12px;
-}
-html, body {
-    height: 100%;
     width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; 
-    font-size: clamp(14px, 1.5vw, 18px); 
-}
-body {
-    background-color: #0d0d0d;
-    color: var(--main-color);
-    font-family: 'Space Mono', monospace;
-    position: fixed; 
-}
-#background-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.1;
-}
-/* === CORE LAYOUT & VIEWPORT HANDLING === */
-* {
-    box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-}
-
-/* Support for CSS custom properties and viewport units */
-:root {
-    --vh: 1vh;
-    --vw: 1vw;
-}
-
-/* Dynamic viewport height handling for mobile devices */
-@supports (-webkit-touch-callout: none) {
-    :root {
-        --vh: calc(var(--vh, 1vh) * 0.01);
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .w-80 {
+        width: 35%;
+    }
+    
+    #game-output {
+        font-size: 12px;
+    }
+    
+    .dialogue-btn {
+        font-size: 10px;
+        padding: 4px 8px;
     }
 }
 
-#app-container {
-    position: relative;
-    z-index: 1;
-    width: 100vw;
-    width: calc(var(--vw, 1vw) * 100);
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    min-height: -webkit-fill-available;
+/* Hide elements not in reference image */
+#breadcrumb-nav,
+#ai-personality-bar,
+#skill-tree-panel,
+#phobia-panel,
+#map-panel,
+#achievements-panel,
+#settings-panel,
+#command-suggestions,
+#autocomplete-box,
+#status-btn,
+#mic-btn,
+#accessibility-btn,
+#overlay-container,
+.input-caret {
+    display: none !important;
+}
+
+/* Utility classes for layout */
+.hidden {
+    display: none;
+}
+
+.flex {
     display: flex;
+}
+
+.flex-col {
     flex-direction: column;
 }
 
-/* Enhanced responsive breakpoints */
-@media screen and (max-width: 320px) {
-    #app-container { padding: 0.25rem; }
-    .text-20xl { font-size: 8rem; }
-    .text-24xl { font-size: 10rem; }
-    .text-28xl { font-size: 10rem; }
-    .text-8xl-2 { font-size: 4rem; }
-    .text-12xl { font-size: 5rem; }
-    .text-14xl { font-size: 5rem; }
+.flex-row {
+    flex-direction: row;
 }
 
-@media screen and (min-width: 321px) and (max-width: 480px) {
-    #app-container { padding: 0.5rem; }
-    .text-20xl { font-size: 10rem; }
-    .text-24xl { font-size: 12rem; }
-    .text-28xl { font-size: 12rem; }
-    .text-8xl-2 { font-size: 5rem; }
-    .text-12xl { font-size: 6rem; }
-    .text-14xl { font-size: 6rem; }
+.flex-grow {
+    flex-grow: 1;
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    #app-container { padding: 0.75rem; }
+.h-full {
+    height: 100%;
 }
 
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    #app-container { padding: 1rem; }
+.w-80 {
+    width: 320px;
 }
 
-@media screen and (min-width: 1025px) and (max-width: 1440px) {
-    #app-container { padding: 1.25rem; }
+.gap-2 {
+    gap: 8px;
 }
 
-@media screen and (min-width: 1441px) {
-    #app-container { padding: 1.5rem; }
+.p-3 {
+    padding: 12px;
 }
 
-/* Ultra-wide screen adjustments */
-@media screen and (min-aspect-ratio: 21/9) {
-    .max-w-4xl { max-width: 60rem; }
-    #intro-text-container { max-width: 50rem; }
+.mb-2 {
+    margin-bottom: 8px;
 }
 
-/* Very tall screen adjustments */
-@media screen and (min-aspect-ratio: 1/2) {
-    .title-wrapper { margin-top: -8rem; }
-    .title-wrapper h1 { font-size: 5rem; }
-    .title-wrapper h2 { font-size: 1.5rem; }
+.mt-2 {
+    margin-top: 8px;
 }
 
-/* Game screen specific adjustments */
-#game-screen .flex-grow {
-    height: calc(100vh - 8rem);
-    height: calc(var(--vh, 1vh) * 100 - 8rem);
+.text-sm {
+    font-size: 12px;
 }
 
-/* Modal responsive adjustments */
-.modal-content { 
-    background-color: #0d0d0d; 
-    border: 2px solid var(--main-color); 
-    padding: 1rem; 
-    border-radius: 0.5rem; 
-    max-width: min(48rem, 95vw); 
-    width: 100%; 
-    text-align: center; 
-    animation: scaleUp 0.3s ease-out; 
-    max-height: min(90vh, calc(var(--vh, 1vh) * 90)); 
-    display: flex; 
-    flex-direction: column;
-    margin: 1rem;
+.text-xs {
+    font-size: 11px;
 }
 
-@media screen and (max-width: 480px) {
-    .modal-content { 
-        padding: 0.75rem; 
-        margin: 0.5rem;
-        max-width: calc(100vw - 1rem);
-    }
+.font-bold {
+    font-weight: bold;
 }
 
-/* Dynamic responsive classes added by JavaScript */
-.ultra-wide .max-w-4xl {
-    max-width: 70rem;
+.border-b {
+    border-bottom: 1px solid;
 }
 
-.ultra-wide #intro-text-container {
-    max-width: 60rem;
+.pb-1 {
+    padding-bottom: 4px;
 }
 
-.very-tall .title-wrapper {
-    margin-top: -12rem;
+.space-y-1 > * + * {
+    margin-top: 4px;
 }
 
-.very-tall .title-wrapper h1 {
+.overflow-y-auto {
+    overflow-y: auto;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.mr-2 {
+    margin-right: 8px;
+
     font-size: 4rem !important;
 }
 

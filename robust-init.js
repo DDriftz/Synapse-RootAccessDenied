@@ -316,19 +316,37 @@ function updateAbilityDisplay() {
 function setupLanguageButtons() {
     console.log('Setting up language buttons...');
     
+    // Load saved language or default to English
+    const savedLanguage = localStorage.getItem('synapse_language') || 'en';
+    
     // Apply translations initially
-    applyTranslations('en');
+    if (window.setLanguage) {
+        window.setLanguage(savedLanguage);
+    } else {
+        // Fallback if translations.js hasn't loaded yet
+        setTimeout(() => {
+            if (window.setLanguage) {
+                window.setLanguage(savedLanguage);
+            }
+        }, 100);
+    }
     
     document.querySelectorAll('[data-lang="en_lang_short"], [data-lang="sv_lang_short"]').forEach(btn => {
         btn.addEventListener('click', function() {
             const lang = this.getAttribute('data-text').toLowerCase();
-            applyTranslations(lang);
             
-            // Update button states
-            document.querySelectorAll('[data-lang$="_lang_short"]').forEach(b => {
-                b.classList.add('opacity-50');
-            });
-            this.classList.remove('opacity-50');
+            if (window.setLanguage) {
+                window.setLanguage(lang);
+            } else {
+                // Fallback for old system
+                applyTranslations(lang);
+                
+                // Update button states
+                document.querySelectorAll('[data-lang$="_lang_short"]').forEach(b => {
+                    b.classList.add('opacity-50');
+                });
+                this.classList.remove('opacity-50');
+            }
             
             console.log(`Language changed to: ${lang}`);
         });
