@@ -25,13 +25,14 @@ window.addEventListener('error', function(e) {
 });
 
 // Module loading with individual error handling
-async function loadModulesSafely() {}
+async function loadModulesSafely() {
     console.log('Starting safe module loading...');
     
     const status = document.getElementById('debug-status');
     if (status) {
         status.innerHTML = 'Loading modules...';
         status.style.color = '#ff0';
+    }
 
     // Load utils first (no dependencies)
     try {

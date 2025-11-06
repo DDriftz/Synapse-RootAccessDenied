@@ -425,7 +425,7 @@ function showPhobiaEffect(phobiaId) {
     if (panel && phobia) {
         const warn = document.createElement('div');
         warn.className = 'text-red-400 font-bold mb-2 animate-pulse';
-        warn.textContent = `Phobia Triggered: ${phobia.name}! (${phobia.desc}`;
+        warn.textContent = `Phobia Triggered: ${phobia.name}! (${phobia.desc})`;
         panel.prepend(warn);
         setTimeout(() => warn.remove(), 2500);
     }
