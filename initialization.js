@@ -2793,7 +2793,7 @@ function showErrorScreen(error) {
                 <div class="text-center max-w-2xl">
                     <h1 class="text-6xl font-bold text-red-500 mb-4 glitch" data-text="SYSTEM FAILURE">SYSTEM FAILURE</h1>
                     <div class="text-xl text-red-400 mb-4">Critical error detected</div>
-                    <pre class="text-sm text-gray-400 mb-6 text-left bg-black/50 p-4 rounded border border-red-500/50">${error.stack || error.message || error}</pre>
+                    <pre id="error-details" class="text-sm text-gray-400 mb-6 text-left bg-black/50 p-4 rounded border border-red-500/50"></pre>
                     <div class="flex gap-4 justify-center">
                         <button class="button btn-glow" onclick="location.reload()">Restart System</button>
                         <button class="button" onclick="reportError()">Report Error</button>
@@ -2801,6 +2801,10 @@ function showErrorScreen(error) {
                 </div>
             </div>
         `;
+        const errorDetails = errorContainer.querySelector('#error-details');
+        if (errorDetails) {
+            errorDetails.textContent = error && (error.stack || error.message) ? (error.stack || error.message) : String(error);
+        }
         errorContainer.style.display = 'flex';
     }
 }
