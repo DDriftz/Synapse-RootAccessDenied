@@ -98,15 +98,33 @@ function updateAbilityDisplay() {
     
     const selectedBackstory = backstorySelect.value;
     const selectedPhobia = phobiaSelect.value;
-    
-    let displayText = '';
+    let hasContent = false;
+
+    abilityDisplay.textContent = '';
     
     // Show backstory info
     if (selectedBackstory && selectedBackstory !== 'random' && BACKSTORIES[selectedBackstory]) {
         const backstory = BACKSTORIES[selectedBackstory];
-        displayText += `<strong>${backstory.name}:</strong> ${backstory.desc}<br>`;
-        displayText += `<em>Skills:</em> ${backstory.skills.join(', ')}<br>`;
-        displayText += `<em>Starting Items:</em> ${backstory.startItems.join(', ')}<br>`;
+
+        const backstoryTitle = document.createElement('strong');
+        backstoryTitle.textContent = `${backstory.name}:`;
+        abilityDisplay.appendChild(backstoryTitle);
+        abilityDisplay.appendChild(document.createTextNode(` ${backstory.desc}`));
+        abilityDisplay.appendChild(document.createElement('br'));
+
+        const skillsLabel = document.createElement('em');
+        skillsLabel.textContent = 'Skills:';
+        abilityDisplay.appendChild(skillsLabel);
+        abilityDisplay.appendChild(document.createTextNode(` ${backstory.skills.join(', ')}`));
+        abilityDisplay.appendChild(document.createElement('br'));
+
+        const itemsLabel = document.createElement('em');
+        itemsLabel.textContent = 'Starting Items:';
+        abilityDisplay.appendChild(itemsLabel);
+        abilityDisplay.appendChild(document.createTextNode(` ${backstory.startItems.join(', ')}`));
+        abilityDisplay.appendChild(document.createElement('br'));
+
+        hasContent = true;
     }
     
     // Show phobia info
@@ -123,14 +141,20 @@ function updateAbilityDisplay() {
             spiders: 'Spiders (Arachnophobia)',
             death: 'Death (Thanatophobia)'
         };
-        
-        if (displayText) displayText += '<br>';
-        displayText += `<strong>Phobia:</strong> ${phobiaNames[selectedPhobia] || selectedPhobia}`;
+
+        if (hasContent) {
+            abilityDisplay.appendChild(document.createElement('br'));
+        }
+
+        const phobiaLabel = document.createElement('strong');
+        phobiaLabel.textContent = 'Phobia:';
+        abilityDisplay.appendChild(phobiaLabel);
+        abilityDisplay.appendChild(document.createTextNode(` ${phobiaNames[selectedPhobia] || selectedPhobia}`));
+
+        hasContent = true;
     }
     
-    if (!displayText) {
-        displayText = 'Select your backstory and phobia to see character details';
+    if (!hasContent) {
+        abilityDisplay.textContent = 'Select your backstory and phobia to see character details';
     }
-    
-    abilityDisplay.innerHTML = displayText;
 }
