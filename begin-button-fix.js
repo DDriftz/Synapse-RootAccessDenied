@@ -285,7 +285,10 @@ function processPlayerCommand(command) {
     
     const commandDiv = document.createElement('div');
     commandDiv.className = 'mb-2';
-    commandDiv.innerHTML = `<span class="text-cyan-400">&gt; ${command}</span>`;
+    const commandSpan = document.createElement('span');
+    commandSpan.className = 'text-cyan-400';
+    commandSpan.textContent = `> ${command}`;
+    commandDiv.appendChild(commandSpan);
     gameOutput.appendChild(commandDiv);
     
     // Basic command processing with translation support
