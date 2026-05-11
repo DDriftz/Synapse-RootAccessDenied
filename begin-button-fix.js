@@ -47,10 +47,10 @@ async function startEnhancedNewGame() {
     const difficulty = document.querySelector('.difficulty-btn.button-primary')?.getAttribute('data-difficulty') || 'Normal';
     
     // Get backstory from input field
-    const backstoryInput = document.getElementById('player-backstory-input')?.value.trim().toLowerCase() || '';
+    const backstoryInput = document.getElementById('player-backstory')?.value.trim().toLowerCase() || '';
     
     // Get phobia from input field  
-    const phobiaInput = document.getElementById('player-phobia-input')?.value.trim().toLowerCase() || '';
+    const phobiaInput = document.getElementById('player-phobia')?.value.trim().toLowerCase() || '';
     
     console.log('Player setup:', { playerName, difficulty, backstoryInput, phobiaInput });
     
