@@ -2972,6 +2972,21 @@
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
+    // Utility function to escape HTML special characters in text nodes
+    function escapeHTML(string) {
+        return String(string)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Utility function to escape HTML attribute values
+    function escapeHTMLAttribute(string) {
+        return escapeHTML(string);
+    }
+
     async function typeWriter(element, text, color = 'var(--main-color)', speed = currentTextSpeed) {
         const resolvedColor = color.startsWith('var(') ? getComputedStyle(document.documentElement).getPropertyValue(color.slice(4, -1)).trim() : color;
         
@@ -2988,7 +3003,7 @@
         
         // Create a regex to find all known item names as whole words
         const objectRegex = new RegExp(`\\b(${(Object.keys(itemData)).map(escapeRegExp).join('|')})\\b`, 'gi');
-        let processedText = text.replace(objectRegex, (match) => `<span class="clickable-object" data-object-name="${match}">${match}</span>`);
+        let processedText = escapeHTML(text).replace(objectRegex, (match) => `<span class="clickable-object" data-object-name="${escapeHTMLAttribute(match)}">${escapeHTML(match)}</span>`);
 
         return new Promise(resolve => {
             const MAX_OUTPUT_NODES = 100; // Limit output lines to prevent performance issues
@@ -3000,8 +3015,8 @@
             function typing() {
                 if (i < text.length) {
                     if(speed > 0) playSound('typewriter');
-                    // Use the original text for the animation, then set the processed HTML at the end
-                    p.innerHTML = text.substring(0, i + 1);
+                    // Use safe text rendering for the animation, then set the processed HTML at the end
+                    p.textContent = text.substring(0, i + 1);
                     i++;
                     element.scrollTop = element.scrollHeight;
                     setTimeout(typing, speed);
