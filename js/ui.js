@@ -46,6 +46,15 @@ export function updateUIText(language = 'en') {
     });
 }
 
+function escapeHTML(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 // Modal Management
 export function showModal(content, title = '', buttons = [], options = {}) {
     const modal = document.getElementById('modal');
@@ -58,20 +67,24 @@ export function showModal(content, title = '', buttons = [], options = {}) {
         hideModal();
     }
     
+    const safeTitle = escapeHTML(title);
+    const safeContent = escapeHTML(content);
     let html = '<div class="modal-inner">';
     
     if (title) {
-        html += `<h2 class="text-2xl font-bold mb-4 text-cyan-400 glitch" data-text="${title}">${title}</h2>`;
+        html += `<h2 class="text-2xl font-bold mb-4 text-cyan-400 glitch" data-text="${safeTitle}">${safeTitle}</h2>`;
     }
     
-    html += `<div class="modal-body mb-4 ${options.scrollable ? 'modal-scroll max-h-[60vh]' : ''}">${content}</div>`;
+    html += `<div class="modal-body mb-4 ${options.scrollable ? 'modal-scroll max-h-[60vh]' : ''}">${safeContent}</div>`;
     
     if (buttons.length > 0) {
         html += '<div class="modal-buttons flex gap-2 justify-center flex-wrap">';
         buttons.forEach((btn, index) => {
             const btnClass = btn.primary ? 'button-primary' : '';
             const btnId = `modal-btn-${index}`;
-            html += `<button id="${btnId}" class="button btn-glow btn-drip ${btnClass} ${btn.class || ''}">${btn.text}</button>`;
+            const safeBtnClass = escapeHTML(btn.class || '');
+            const safeBtnText = escapeHTML(btn.text || '');
+            html += `<button id="${btnId}" class="button btn-glow btn-drip ${btnClass} ${safeBtnClass}">${safeBtnText}</button>`;
         });
         html += '</div>';
     }
