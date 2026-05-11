@@ -981,14 +981,3 @@ function formatDuration(seconds) {
         return `${secs}s`;
     }
 }
-
-// Export functions
-export { 
-    updateBreadcrumbs, 
-    setupInventoryDragDrop, 
-    setupHotkeys,
-    applyTextEffect,
-    applyAccessibilitySettings,
-    showSessionStats,
-    updateMapDisplay
-};
