@@ -1023,8 +1023,18 @@ function handleBasicCommand(command) {
     const gameOutput = document.getElementById('game-output');
     if (gameOutput) {
         const response = getBasicResponse(command);
-        gameOutput.innerHTML += `<div style="color: #0ff;">>${command}</div>`;
-        gameOutput.innerHTML += `<div style="color: #fff;">${response}</div><br>`;
+
+        const commandDiv = document.createElement('div');
+        commandDiv.style.color = '#0ff';
+        commandDiv.textContent = `>${command}`;
+
+        const responseDiv = document.createElement('div');
+        responseDiv.style.color = '#fff';
+        responseDiv.textContent = response;
+
+        gameOutput.appendChild(commandDiv);
+        gameOutput.appendChild(responseDiv);
+        gameOutput.appendChild(document.createElement('br'));
         gameOutput.scrollTop = gameOutput.scrollHeight;
     }
 }
