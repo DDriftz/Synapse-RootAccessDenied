@@ -785,7 +785,9 @@ function showPhobiasModal() {
 
 function getCurrentDifficulty() {
     const difficultyBtn = document.querySelector('.difficulty-btn.button-primary');
-    return difficultyBtn ? difficultyBtn.getAttribute('data-difficulty') : 'Normal';
+    const rawDifficulty = difficultyBtn ? difficultyBtn.getAttribute('data-difficulty') : null;
+    const allowedDifficulties = ['Easy', 'Normal', 'Hard'];
+    return allowedDifficulties.includes(rawDifficulty) ? rawDifficulty : 'Normal';
 }
 
 function getItemsByDifficulty(baseItems, bonusItems, difficulty) {
