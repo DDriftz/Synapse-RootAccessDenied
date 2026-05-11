@@ -2640,10 +2640,8 @@
     function speakText(text, options = {}) {
         if (!GameState.settings.audioDescriptions || !('speechSynthesis' in window)) return;
         
-        // Convert potential HTML input into plain text safely
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = String(text ?? '');
-        const cleanText = (tempDiv.textContent || tempDiv.innerText || '').replace(/\s+/g, ' ').trim();
+        // Normalize input as plain text without interpreting it as HTML
+        const cleanText = String(text ?? '').replace(/\s+/g, ' ').trim();
         
         if (cleanText.length === 0) return;
         
