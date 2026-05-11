@@ -5591,7 +5591,7 @@
         const originalSpeakText = window.speakText;
         window.speakText = function(text) {
             if (GameState.settings?.screenReader || GameState.settings?.audioDescriptions) {
-                const utterance = new SpeechSynthesisUtterance(text.replace(/<[^>]*>/g, ''));
+                const utterance = new SpeechSynthesisUtterance(String(text).replace(/[<>]/g, ''));
                 utterance.rate = GameState.settings?.ttsSpeed || 1;
                 utterance.pitch = 1;
                 utterance.volume = 0.8;
