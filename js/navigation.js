@@ -206,29 +206,54 @@ export function updateCommandSuggestions() {
     const contextCommands = getContextualCommands(GameState.currentRoom, GameState.inventory);
     const recentCommands = CommandSuggestions.recentCommands.slice(0, 5);
 
-    let html = '';
+    suggestionsContainer.textContent = '';
     
     if (contextCommands.length > 0) {
-        html += '<div class="mb-2"><h5 class="text-xs text-cyan-400 mb-1">Suggested Actions:</h5>';
-        html += '<div class="flex flex-wrap gap-1">';
+        const contextSection = document.createElement('div');
+        contextSection.className = 'mb-2';
+
+        const contextHeader = document.createElement('h5');
+        contextHeader.className = 'text-xs text-cyan-400 mb-1';
+        contextHeader.textContent = 'Suggested Actions:';
+        contextSection.appendChild(contextHeader);
+
+        const contextButtons = document.createElement('div');
+        contextButtons.className = 'flex flex-wrap gap-1';
+
         contextCommands.slice(0, 6).forEach(cmd => {
-            html += `<button class="suggestion-btn text-xs px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded border border-cyan-600 text-cyan-300" 
-                            onclick="useSuggestion('${cmd}')">${cmd}</button>`;
+            const button = document.createElement('button');
+            button.className = 'suggestion-btn text-xs px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded border border-cyan-600 text-cyan-300';
+            button.textContent = cmd;
+            button.addEventListener('click', () => window.useSuggestion(cmd));
+            contextButtons.appendChild(button);
         });
-        html += '</div></div>';
+
+        contextSection.appendChild(contextButtons);
+        suggestionsContainer.appendChild(contextSection);
     }
 
     if (recentCommands.length > 0) {
-        html += '<div><h5 class="text-xs text-yellow-400 mb-1">Recent Commands:</h5>';
-        html += '<div class="flex flex-wrap gap-1">';
-        recentCommands.forEach(cmd => {
-            html += `<button class="suggestion-btn text-xs px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded border border-yellow-600 text-yellow-300" 
-                            onclick="useSuggestion('${cmd}')">${cmd}</button>`;
-        });
-        html += '</div></div>';
-    }
+        const recentSection = document.createElement('div');
 
-    suggestionsContainer.innerHTML = html;
+        const recentHeader = document.createElement('h5');
+        recentHeader.className = 'text-xs text-yellow-400 mb-1';
+        recentHeader.textContent = 'Recent Commands:';
+        recentSection.appendChild(recentHeader);
+
+        const recentButtons = document.createElement('div');
+        recentButtons.className = 'flex flex-wrap gap-1';
+
+        recentCommands.forEach(cmd => {
+            const button = document.createElement('button');
+            button.className = 'suggestion-btn text-xs px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded border border-yellow-600 text-yellow-300';
+            button.textContent = cmd;
+            button.addEventListener('click', () => window.useSuggestion(cmd));
+            recentButtons.appendChild(button);
+        });
+
+        recentSection.appendChild(recentButtons);
+        suggestionsContainer.appendChild(recentSection);
+    }
 }
 
 window.useSuggestion = function(command) {
