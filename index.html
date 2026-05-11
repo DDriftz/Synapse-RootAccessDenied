@@ -2640,10 +2640,10 @@
     function speakText(text, options = {}) {
         if (!GameState.settings.audioDescriptions || !('speechSynthesis' in window)) return;
         
-        // Clean HTML tags from text
-        const cleanText = text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ');
+        // Normalize input as plain text without interpreting it as HTML
+        const cleanText = String(text ?? '').replace(/\s+/g, ' ').trim();
         
-        if (cleanText.trim().length === 0) return;
+        if (cleanText.length === 0) return;
         
         const utterance = new SpeechSynthesisUtterance(cleanText);
         utterance.rate = options.rate || 1;
