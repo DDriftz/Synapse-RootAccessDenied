@@ -864,25 +864,13 @@ export function typewriterEffect(text, element, callback, speed = 30) {
     if (!element || UIState.typewriterActive) return;
     
     UIState.typewriterActive = true;
-    element.innerHTML = '';
+    element.textContent = '';
     let index = 0;
     
     function type() {
         if (index < text.length) {
-            // Check for HTML tags
-            if (text[index] === '<') {
-                const tagEnd = text.indexOf('>', index);
-                if (tagEnd !== -1) {
-                    element.innerHTML += text.substring(index, tagEnd + 1);
-                    index = tagEnd + 1;
-                } else {
-                    element.innerHTML += text[index];
-                    index++;
-                }
-            } else {
-                element.innerHTML += text[index];
-                index++;
-            }
+            element.textContent += text[index];
+            index++;
             
             // Variable speed for punctuation
             let delay = speed;
