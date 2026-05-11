@@ -2640,10 +2640,12 @@
     function speakText(text, options = {}) {
         if (!GameState.settings.audioDescriptions || !('speechSynthesis' in window)) return;
         
-        // Clean HTML tags from text
-        const cleanText = text.replace(/<[^>]*>/g, '').replace(/&[^;]+;/g, ' ');
+        // Convert potential HTML input into plain text safely
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = String(text ?? '');
+        const cleanText = (tempDiv.textContent || tempDiv.innerText || '').replace(/\s+/g, ' ').trim();
         
-        if (cleanText.trim().length === 0) return;
+        if (cleanText.length === 0) return;
         
         const utterance = new SpeechSynthesisUtterance(cleanText);
         utterance.rate = options.rate || 1;
