@@ -270,7 +270,7 @@
             top: 0;
             transform: translateX(-50%);
             color: transparent; 
-            z-index: 1;
+            z-index: 0;
             white-space: nowrap;
             animation: liquid-drip-back 8s infinite ease-out;
             filter: 
@@ -288,7 +288,7 @@
             top: 0;
             transform: translateX(-50%);
             color: transparent; 
-            z-index: 3;
+            z-index: 1;
             white-space: nowrap;
             animation: liquid-drip-front 8s infinite ease-out 2s;
             filter: 
@@ -296,7 +296,7 @@
                 drop-shadow(0 0 8px #B22222) 
                 drop-shadow(0 0 15px #DC143C)
                 drop-shadow(0 0 25px #FF6347);
-            opacity: 0.8;
+            opacity: 0.6;
         }
 
         @keyframes liquid-drip-back {
@@ -519,8 +519,7 @@
                 -webkit-background-clip: text;
                 background-position: 0% 0%;
                 filter: 
-                    drop-shadow(0 0 3px #ff0000)
-                    drop-shadow(0 0 6px #8B0000);
+                    drop-shadow(0 2px 2px rgba(139,0,0,0.5));
                 transform: translateY(0px);
             }
             25% {
@@ -530,10 +529,8 @@
                 -webkit-background-clip: text;
                 background-position: 0% 25%;
                 filter: 
-                    drop-shadow(0 2px 5px #8B0000) 
-                    drop-shadow(0 0 8px #B22222)
-                    drop-shadow(0 0 12px #DC143C)
-                    drop-shadow(0 0 8px #39FF14);
+                    drop-shadow(0 4px 3px rgba(139,0,0,0.4))
+                    drop-shadow(0 0 5px rgba(57, 255, 20, 0.4));
                 transform: translateY(1px);
             }
             50% { 
@@ -543,10 +540,8 @@
                 -webkit-background-clip: text;
                 background-position: 0% 50%;
                 filter: 
-                    drop-shadow(0 4px 8px #8B0000) 
-                    drop-shadow(0 0 12px #DC143C)
-                    drop-shadow(0 0 18px #B22222)
-                    drop-shadow(0 0 12px #39FF14);
+                    drop-shadow(0 6px 4px rgba(139,0,0,0.3))
+                    drop-shadow(0 0 8px rgba(57, 255, 20, 0.6));
                 transform: translateY(2px);
             }
             75% {
@@ -556,10 +551,8 @@
                 -webkit-background-clip: text;
                 background-position: 0% 75%;
                 filter: 
-                    drop-shadow(0 6px 12px rgba(139,0,0,0.8)) 
-                    drop-shadow(0 0 15px #B22222)
-                    drop-shadow(0 0 25px rgba(220,20,60,0.6))
-                    drop-shadow(0 0 12px #39FF14);
+                    drop-shadow(0 8px 5px rgba(139,0,0,0.2))
+                    drop-shadow(0 0 10px rgba(57, 255, 20, 0.5));
                 transform: translateY(3px);
             }
             100% { 
@@ -569,10 +562,8 @@
                 -webkit-background-clip: text;
                 background-position: 0% 100%;
                 filter: 
-                    drop-shadow(0 8px 15px rgba(139,0,0,0.6)) 
-                    drop-shadow(0 0 20px rgba(220,20,60,0.8))
-                    drop-shadow(0 0 30px rgba(255,99,71,0.4))
-                    drop-shadow(0 0 15px #39FF14);
+                    drop-shadow(0 10px 6px rgba(139,0,0,0.1))
+                    drop-shadow(0 0 15px rgba(57, 255, 20, 0.4));
                 transform: translateY(4px);
             }
         }
@@ -826,15 +817,17 @@
                 </div>
 
                 <!-- Main content flex-grow -->
-                <div class="flex-grow flex flex-col items-center justify-center text-center px-4 w-full overflow-hidden">
-                    <div class="title-wrapper">
-                        <h1 id="game-title" data-text="SYNAPSE" class="title-slasher">SYNAPSE</h1>
-                        <h2 data-text="ROOT ACCESS DENIED" class="subtitle-slasher">ROOT ACCESS DENIED</h2>
-                    </div>
-                    <div id="intro-text-container" class="max-w-4xl text-sm md:text-base text-white mt-8 sm:mt-12"></div>
-                    <div id="start-options" class="mt-10 flex flex-wrap justify-center gap-4">
-                        <button id="new-game-btn" data-lang="new_game" data-text="New Game" class="button btn-glow btn-drip">New Game</button>
-                        <button id="load-game-btn" data-lang="load_game" data-text="Load Game" class="button btn-glow btn-drip">Load Game</button>
+                <div class="flex-grow flex w-full px-4 overflow-y-auto">
+                    <div class="m-auto flex flex-col items-center justify-center text-center w-full py-8">
+                        <div class="title-wrapper">
+                            <h1 id="game-title" data-text="SYNAPSE" class="title-slasher">SYNAPSE</h1>
+                            <h2 data-text="ROOT ACCESS DENIED" class="subtitle-slasher">ROOT ACCESS DENIED</h2>
+                        </div>
+                        <div id="intro-text-container" class="max-w-4xl text-sm md:text-base text-white mt-8 sm:mt-12"></div>
+                        <div id="start-options" class="mt-10 flex flex-wrap justify-center gap-4">
+                            <button id="new-game-btn" data-lang="new_game" data-text="New Game" class="button btn-glow btn-drip">New Game</button>
+                            <button id="load-game-btn" data-lang="load_game" data-text="Load Game" class="button btn-glow btn-drip">Load Game</button>
+                        </div>
                     </div>
                 </div>
 
@@ -857,13 +850,14 @@
                 </div>
 
                 <!-- Main content -->
-                <div class="flex-grow flex flex-col items-center justify-center w-full px-4 overflow-y-auto">
-                    <div class="title-wrapper mb-4">
-                        <h1 id="setup-game-title" data-text="SYNAPSE" class="title-slasher">SYNAPSE</h1>
-                        <h2 data-text="ROOT ACCESS DENIED" class="subtitle-slasher">ROOT ACCESS DENIED</h2>
-                    </div>
+                <div class="flex-grow flex w-full px-4 overflow-y-auto">
+                    <div class="m-auto flex flex-col items-center w-full max-w-4xl py-8">
+                        <div class="title-wrapper mb-8 mt-4">
+                            <h1 id="setup-game-title" data-text="SYNAPSE" class="title-slasher">SYNAPSE</h1>
+                            <h2 data-text="ROOT ACCESS DENIED" class="subtitle-slasher">ROOT ACCESS DENIED</h2>
+                        </div>
 
-                    <div class="max-w-4xl w-full space-y-4 mb-4">
+                        <div class="w-full space-y-4 mb-4">
                         <!-- Difficulty Selection -->
                         <div>
                             <label data-lang="select_difficulty" class="block text-lg font-bold mb-2">Select difficulty:</label>
