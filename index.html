@@ -28,7 +28,7 @@
     <script src="https://cdn.tailwindcss.com" onerror="console.error('Failed to load Tailwind CSS')"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Mono&family=Courier+Prime&display=swap" rel="stylesheet" onerror="console.error('Failed to load Google Font[...]
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Mono&family=Courier+Prime&display=swap" rel="stylesheet" onerror="console.error('Failed to load Google Font')">
     <script src="https://unpkg.com/tone@15.0.4/build/Tone.js" onerror="console.error('Failed to load Tone.js')"></script>
     <style>
         :root {
@@ -647,10 +647,10 @@
         
         .glitch { animation: glitch-anim 1.5s infinite alternate-reverse; }
         @keyframes glitch-anim {
-          0% { transform: translate(0); clip-path: inset(45% 0 50% 0); } 5% { transform: translate(2px, -3px); clip-path: inset(25% 0 35% 0); } 10% { transform: translate(-2px, 3px); clip-path: i[...]
+          0% { transform: translate(0); clip-path: inset(45% 0 50% 0); } 5% { transform: translate(2px, -3px); clip-path: inset(25% 0 35% 0); } 10% { transform: translate(-2px, 3px); clip-path: inset(58% 0 43% 0); } 15% { transform: translate(2px, -1px); clip-path: inset(10% 0 85% 0); } 20% { transform: translate(-2px, 2px); clip-path: inset(40% 0 4% 0); } 24% { transform: translate(2px, -2px); clip-path: inset(77% 0 6% 0); } 28% { transform: translate(-2px, 2px); clip-path: inset(20% 0 60% 0); } 32% { transform: translate(0.5px, -0.5px); clip-path: inset(8% 0 88% 0); } 36% { transform: translate(-1px, 1px); clip-path: inset(37% 0 58% 0); } 40% { transform: translate(1px, -1px); clip-path: inset(73% 0 9% 0); } 44% { transform: translate(-0.5px, 0.5px); clip-path: inset(45% 0 48% 0); } 48% { transform: translate(0.5px, -0.5px); clip-path: inset(14% 0 76% 0); } 52% { transform: translate(-1px, 1px); clip-path: inset(56% 0 33% 0); } 56% { transform: translate(1px, -1px); clip-path: inset(5% 0 85% 0); } 60% { transform: translate(-0.5px, 0.5px); clip-path: inset(32% 0 58% 0); } 64% { transform: translate(0.5px, -0.5px); clip-path: inset(85% 0 10% 0); } 68% { transform: translate(-1px, 1px); clip-path: inset(25% 0 58% 0); } 72% { transform: translate(1px, -1px); clip-path: inset(75% 0 20% 0); } 76% { transform: translate(-0.5px, 0.5px); clip-path: inset(35% 0 64% 0); } 80% { transform: translate(0.5px, -0.5px); clip-path: inset(7% 0 92% 0); } 84% { transform: translate(-1px, 1px); clip-path: inset(50% 0 40% 0); } 88% { transform: translate(1px, -1px); clip-path: inset(27% 0 71% 0); } 92% { transform: translate(-0.5px, 0.5px); clip-path: inset(63% 0 34% 0); } 96% { transform: translate(0.5px, -0.5px); clip-path: inset(41% 0 53% 0); } 100% { transform: translate(0); clip-path: inset(0% 0 0% 0); }
         }
         .button {
-            background-color: var(--main-color-faded); border: 1px solid var(--main-color-border); color: #fff; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: all 0.2s; cursor: pointe[...]
+            background-color: var(--main-color-faded); border: 1px solid var(--main-color-border); color: #fff; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: all 0.2s; cursor: pointer;
         }
         .button:hover, .button:active { background-color: rgba(0,255,65,0.3); box-shadow: 0 0 10px rgba(0,255,65,0.5); }
         .button:active { transform: translateY(1px) scale(0.98); }
@@ -661,7 +661,7 @@
         }
         
         @keyframes button-glow-border {
-            0%, 19.9%, 22.1%, 60%, 100% { box-shadow: 0 0 5px var(--main-color-glow), 0 0 5px rgba(255,0,0,0.6), inset 0 0 3px var(--main-color-shadow); text-shadow: 0 0 3px var(--main-color-shad[...]
+            0%, 19.9%, 22.1%, 60%, 100% { box-shadow: 0 0 5px var(--main-color-glow), 0 0 5px rgba(255,0,0,0.6), inset 0 0 3px var(--main-color-shadow); text-shadow: 0 0 3px var(--main-color-shadow); }
             20% { box-shadow: 0 0 10px var(--main-color-glow), 0 0 12px rgba(255,0,0,0.8), inset 0 0 5px var(--main-color-glow); text-shadow: 0 0 5px var(--main-color); }
             22% { box-shadow: 0 0 5px var(--main-color-glow), 0 0 5px rgba(255,0,0,0.6), inset 0 0 3px var(--main-color-shadow); text-shadow: 0 0 3px var(--main-color-shadow); }
         }
@@ -672,9 +672,9 @@
 
         .button-primary { background-color: var(--main-color); color: #000; font-weight: bold; text-shadow: none; }
         .button-primary:hover, .button-primary:active { background-color: #fff; }
-        .modal { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 1rem; z-index: 50; animation: fadeIn 0.3s ease[...]
+        .modal { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 1rem; z-index: 50; animation: fadeIn 0.3s ease-in; }
         .modal.flex { display: flex; }
-        .modal-content { background-color: #0d0d0d; border: 2px solid var(--main-color); padding: 1.5rem; border-radius: 0.5rem; max-width: 48rem; width: 100%; text-align: center; animation: scal[...]
+        .modal-content { background-color: #0d0d0d; border: 2px solid var(--main-color); padding: 1.5rem; border-radius: 0.5rem; max-width: 48rem; width: 100%; text-align: center; animation: scaleUp 0.3s ease-in; }
         .modal-scroll { overflow-y: auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -906,7 +906,7 @@
                             <!-- Player Name -->
                             <div>
                                 <label for="player-name" data-lang="enter_name_placeholder" class="block text-sm font-bold mb-2">Enter your name</label>
-                                <input type="text" id="player-name" placeholder="Subject #..." data-lang-placeholder="enter_name_placeholder" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded" />
+                                <input type="text" id="player-name" placeholder="Subject #..." data-lang-placeholder="enter_name_placeholder" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded">
                             </div>
 
                             <!-- Backstory Selection -->
