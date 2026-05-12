@@ -128,29 +128,6 @@ async function loadModulesSafely() {
         // Main is not critical, continue
     }
 
-    // Load enhanced features
-    try {
-        const enhancedFeatures = await import('./js/enhanced-features.js');
-        if (enhancedFeatures && typeof enhancedFeatures.initializeEnhancedFeatures === 'function') {
-            enhancedFeatures.initializeEnhancedFeatures();
-            console.log('✓ Enhanced Features initialized');
-        }
-    } catch (error) {
-        console.error('✗ Enhanced features module failed:', error);
-    }
-
-    // Load accessibility features
-    try {
-        const accessibility = await import('./js/accessibility.js');
-        if (accessibility && typeof accessibility.initAccessibility === 'function') {
-            window.accessibility = accessibility;
-            accessibility.initAccessibility();
-            console.log('✓ Accessibility module initialized');
-        }
-    } catch (error) {
-        console.error('✗ Accessibility module failed:', error);
-    }
-
     ModuleState.allLoaded = true;
     console.log('✓ All modules loaded successfully!');
     
