@@ -28,7 +28,7 @@
     <script src="https://cdn.tailwindcss.com" onerror="console.error('Failed to load Tailwind CSS')"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Mono&family=Courier+Prime&display=swap" rel="stylesheet" onerror="console.error('Failed to load Google Fonts')">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=VT323&family=Space+Mono&family=Courier+Prime&display=swap" rel="stylesheet" onerror="console.error('Failed to load Google Font[...]
     <script src="https://unpkg.com/tone@15.0.4/build/Tone.js" onerror="console.error('Failed to load Tone.js')"></script>
     <style>
         :root {
@@ -233,7 +233,8 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            margin: 0;
+            max-width: 90vw;
+            margin: 0 auto;
             padding: 0 1rem;
             gap: 0.5rem;
             flex-shrink: 0;
@@ -249,7 +250,7 @@
             text-align: center;
             white-space: normal;
             word-wrap: break-word;
-            max-width: 95vw;
+            max-width: 90vw;
             font-weight: bold;
             text-shadow: 
                 0 0 10px #39FF14,
@@ -484,7 +485,7 @@
             text-align: center;
             white-space: normal;
             word-wrap: break-word;
-            max-width: 95vw;
+            max-width: 90vw;
             font-weight: bold;
             /* Fallback color for browsers that don't support background-clip */
             color: #39FF14;
@@ -646,10 +647,10 @@
         
         .glitch { animation: glitch-anim 1.5s infinite alternate-reverse; }
         @keyframes glitch-anim {
-          0% { transform: translate(0); clip-path: inset(45% 0 50% 0); } 5% { transform: translate(2px, -3px); clip-path: inset(25% 0 35% 0); } 10% { transform: translate(-2px, 3px); clip-path: inset(60% 0 20% 0); } 15% { transform: translate(-2px, -2px); clip-path: inset(50% 0 30% 0); } 20% { transform: translate(2px, 2px); clip-path: inset(80% 0 10% 0); } 24%, 55% { transform: translate(0); clip-path: inset(0); }
+          0% { transform: translate(0); clip-path: inset(45% 0 50% 0); } 5% { transform: translate(2px, -3px); clip-path: inset(25% 0 35% 0); } 10% { transform: translate(-2px, 3px); clip-path: i[...]
         }
         .button {
-            background-color: var(--main-color-faded); border: 1px solid var(--main-color-border); color: #fff; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: all 0.2s; cursor: pointer; flex-shrink: 0;
+            background-color: var(--main-color-faded); border: 1px solid var(--main-color-border); color: #fff; padding: 0.5rem 1rem; border-radius: 0.375rem; transition: all 0.2s; cursor: pointe[...]
         }
         .button:hover, .button:active { background-color: rgba(0,255,65,0.3); box-shadow: 0 0 10px rgba(0,255,65,0.5); }
         .button:active { transform: translateY(1px) scale(0.98); }
@@ -660,7 +661,7 @@
         }
         
         @keyframes button-glow-border {
-            0%, 19.9%, 22.1%, 60%, 100% { box-shadow: 0 0 5px var(--main-color-glow), 0 0 5px rgba(255,0,0,0.6), inset 0 0 3px var(--main-color-shadow); text-shadow: 0 0 3px var(--main-color-shadow); }
+            0%, 19.9%, 22.1%, 60%, 100% { box-shadow: 0 0 5px var(--main-color-glow), 0 0 5px rgba(255,0,0,0.6), inset 0 0 3px var(--main-color-shadow); text-shadow: 0 0 3px var(--main-color-shad[...]
             20% { box-shadow: 0 0 10px var(--main-color-glow), 0 0 12px rgba(255,0,0,0.8), inset 0 0 5px var(--main-color-glow); text-shadow: 0 0 5px var(--main-color); }
             22% { box-shadow: 0 0 5px var(--main-color-glow), 0 0 5px rgba(255,0,0,0.6), inset 0 0 3px var(--main-color-shadow); text-shadow: 0 0 3px var(--main-color-shadow); }
         }
@@ -671,9 +672,9 @@
 
         .button-primary { background-color: var(--main-color); color: #000; font-weight: bold; text-shadow: none; }
         .button-primary:hover, .button-primary:active { background-color: #fff; }
-        .modal { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 1rem; z-index: 50; animation: fadeIn 0.3s ease-out; overflow: hidden; }
+        .modal { display: none; position: fixed; inset: 0; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 1rem; z-index: 50; animation: fadeIn 0.3s ease[...]
         .modal.flex { display: flex; }
-        .modal-content { background-color: #0d0d0d; border: 2px solid var(--main-color); padding: 1.5rem; border-radius: 0.5rem; max-width: 48rem; width: 100%; text-align: center; animation: scaleUp 0.3s ease-out; max-height: 90vh; overflow-y: auto; }
+        .modal-content { background-color: #0d0d0d; border: 2px solid var(--main-color); padding: 1.5rem; border-radius: 0.5rem; max-width: 48rem; width: 100%; text-align: center; animation: scal[...]
         .modal-scroll { overflow-y: auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes scaleUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -766,6 +767,27 @@
             background-color: #0d0d0d;
         }
         
+        /* Setup screen content wrapper - centers everything */
+        .setup-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;
+        }
+
+        /* Setup form container - constrains width */
+        .setup-form-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 0 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
         /* Responsive title sizing */
         @media (max-width: 480px) {
             .title-slasher {
@@ -775,6 +797,11 @@
             
             .subtitle-slasher {
                 font-size: clamp(0.75rem, 5vw, 1.5rem);
+            }
+
+            .setup-form-container {
+                max-width: 100%;
+                padding: 0 0.5rem;
             }
         }
 
@@ -787,6 +814,10 @@
             .subtitle-slasher {
                 font-size: clamp(1rem, 6vw, 1.75rem);
             }
+
+            .setup-form-container {
+                max-width: 550px;
+            }
         }
 
         @media (min-width: 769px) {
@@ -797,6 +828,10 @@
             
             .subtitle-slasher {
                 font-size: clamp(1.25rem, 7vw, 2.5rem);
+            }
+
+            .setup-form-container {
+                max-width: 600px;
             }
         }
     </style>
@@ -840,7 +875,7 @@
         </div>
 
         <div id="player-setup" class="hidden">
-             <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
+            <div class="w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-60">
                 <!-- Header for lang buttons -->
                 <div class="w-full flex justify-end p-2 flex-shrink-0">
                     <div id="setup-lang-buttons" class="flex gap-2">
@@ -850,69 +885,70 @@
                 </div>
 
                 <!-- Main content -->
-                <div class="flex-grow flex w-full px-4 overflow-y-auto">
-                    <div class="m-auto flex flex-col items-center w-full max-w-4xl py-8">
+                <div class="flex-grow flex w-full px-4 overflow-y-auto items-center justify-center">
+                    <div class="setup-content-wrapper">
                         <div class="title-wrapper mb-8 mt-4">
                             <h1 id="setup-game-title" data-text="SYNAPSE" class="title-slasher">SYNAPSE</h1>
                             <h2 data-text="ROOT ACCESS DENIED" class="subtitle-slasher">ROOT ACCESS DENIED</h2>
                         </div>
 
-                        <div class="w-full space-y-4 mb-4">
-                        <!-- Difficulty Selection -->
-                        <div>
-                            <label data-lang="select_difficulty" class="block text-lg font-bold mb-2">Select difficulty:</label>
-                            <div class="flex flex-wrap justify-center gap-2">
-                                <button class="difficulty-btn button btn-glow btn-drip" data-difficulty="Easy" data-lang="easy">Easy</button>
-                                <button class="difficulty-btn button btn-glow btn-drip button-primary" data-difficulty="Normal" data-lang="normal">Normal</button>
-                                <button class="difficulty-btn button btn-glow btn-drip" data-difficulty="Hard" data-lang="hard">Hard</button>
+                        <div class="setup-form-container">
+                            <!-- Difficulty Selection -->
+                            <div>
+                                <label data-lang="select_difficulty" class="block text-lg font-bold mb-2">Select difficulty:</label>
+                                <div class="flex flex-wrap justify-center gap-2">
+                                    <button class="difficulty-btn button btn-glow btn-drip" data-difficulty="Easy" data-lang="easy">Easy</button>
+                                    <button class="difficulty-btn button btn-glow btn-drip button-primary" data-difficulty="Normal" data-lang="normal">Normal</button>
+                                    <button class="difficulty-btn button btn-glow btn-drip" data-difficulty="Hard" data-lang="hard">Hard</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Player Name -->
-                        <div>
-                            <label for="player-name" data-lang="enter_name_placeholder" class="block text-sm font-bold mb-2">Enter your name</label>
-                            <input type="text" id="player-name" placeholder="Subject #..." data-lang-placeholder="enter_name_placeholder" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded" />
-                        </div>
+                            <!-- Player Name -->
+                            <div>
+                                <label for="player-name" data-lang="enter_name_placeholder" class="block text-sm font-bold mb-2">Enter your name</label>
+                                <input type="text" id="player-name" placeholder="Subject #..." data-lang-placeholder="enter_name_placeholder" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded" />
+                            </div>
 
-                        <!-- Backstory Selection -->
-                        <div>
-                            <label for="player-backstory" data-lang="select_backstory" class="block text-lg font-bold mb-2">Select your backstory:</label>
-                            <select id="player-backstory" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded">
-                                <option value="random" data-lang="random_backstory">Random</option>
-                                <option value="investigator" data-lang="investigator_backstory">Investigator</option>
-                                <option value="hacker" data-lang="hacker_backstory">Hacker</option>
-                                <option value="psychologist" data-lang="psychologist_backstory">Psychologist</option>
-                                <option value="survivor" data-lang="survivor_backstory">Survivor</option>
-                                <option value="corporate_spy" data-lang="corporate_spy_backstory">Corporate Spy</option>
-                                <option value="medic" data-lang="medic_backstory">Medic</option>
-                                <option value="technician" data-lang="technician_backstory">Technician</option>
-                                <option value="cultist" data-lang="cultist_backstory">Cultist</option>
-                                <option value="janitor" data-lang="janitor_backstory">Janitor</option>
-                                <option value="skeptic" data-lang="skeptic_backstory">Skeptic</option>
-                            </select>
-                        </div>
+                            <!-- Backstory Selection -->
+                            <div>
+                                <label for="player-backstory" data-lang="select_backstory" class="block text-lg font-bold mb-2">Select your backstory:</label>
+                                <select id="player-backstory" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded">
+                                    <option value="random" data-lang="random_backstory">Random</option>
+                                    <option value="investigator" data-lang="investigator_backstory">Investigator</option>
+                                    <option value="hacker" data-lang="hacker_backstory">Hacker</option>
+                                    <option value="psychologist" data-lang="psychologist_backstory">Psychologist</option>
+                                    <option value="survivor" data-lang="survivor_backstory">Survivor</option>
+                                    <option value="corporate_spy" data-lang="corporate_spy_backstory">Corporate Spy</option>
+                                    <option value="medic" data-lang="medic_backstory">Medic</option>
+                                    <option value="technician" data-lang="technician_backstory">Technician</option>
+                                    <option value="cultist" data-lang="cultist_backstory">Cultist</option>
+                                    <option value="janitor" data-lang="janitor_backstory">Janitor</option>
+                                    <option value="skeptic" data-lang="skeptic_backstory">Skeptic</option>
+                                </select>
+                            </div>
 
-                        <!-- Phobia Selection -->
-                        <div>
-                            <label for="player-phobia" data-lang="select_phobia" class="block text-lg font-bold mb-2">Select your phobia:</label>
-                            <select id="player-phobia" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded">
-                                <option value="random" data-lang="random_phobia">Random</option>
-                                <option value="darkness" data-lang="darkness_phobia">Darkness</option>
-                                <option value="isolation" data-lang="isolation_phobia">Isolation</option>
-                                <option value="blood" data-lang="blood_phobia">Blood</option>
-                                <option value="machinery" data-lang="machinery_phobia">Machinery</option>
-                                <option value="mirrors" data-lang="mirrors_phobia">Mirrors</option>
-                                <option value="silence" data-lang="silence_phobia">Silence</option>
-                                <option value="crowds" data-lang="crowds_phobia">Crowds</option>
-                                <option value="heights" data-lang="heights_phobia">Heights</option>
-                                <option value="spiders" data-lang="spiders_phobia">Spiders</option>
-                                <option value="death" data-lang="death_phobia">Death</option>
-                            </select>
-                        </div>
+                            <!-- Phobia Selection -->
+                            <div>
+                                <label for="player-phobia" data-lang="select_phobia" class="block text-lg font-bold mb-2">Select your phobia:</label>
+                                <select id="player-phobia" class="w-full px-3 py-2 bg-gray-900 border border-cyan-400 text-white rounded">
+                                    <option value="random" data-lang="random_phobia">Random</option>
+                                    <option value="darkness" data-lang="darkness_phobia">Darkness</option>
+                                    <option value="isolation" data-lang="isolation_phobia">Isolation</option>
+                                    <option value="blood" data-lang="blood_phobia">Blood</option>
+                                    <option value="machinery" data-lang="machinery_phobia">Machinery</option>
+                                    <option value="mirrors" data-lang="mirrors_phobia">Mirrors</option>
+                                    <option value="silence" data-lang="silence_phobia">Silence</option>
+                                    <option value="crowds" data-lang="crowds_phobia">Crowds</option>
+                                    <option value="heights" data-lang="heights_phobia">Heights</option>
+                                    <option value="spiders" data-lang="spiders_phobia">Spiders</option>
+                                    <option value="death" data-lang="death_phobia">Death</option>
+                                </select>
+                            </div>
 
-                        <!-- Ability Display -->
-                        <div class="mt-4 p-4 bg-gray-800 border border-cyan-400 rounded text-left">
-                            <div id="ability-display" class="text-sm text-gray-300">Select your backstory and phobia to see character details</div>
+                            <!-- Ability Display -->
+                            <div class="mt-4 p-4 bg-gray-800 border border-cyan-400 rounded text-left">
+                                <div id="ability-display" class="text-sm text-gray-300">Select your backstory and phobia to see character details</div>
+                            </div>
                         </div>
                     </div>
                 </div>
