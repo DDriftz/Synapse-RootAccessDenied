@@ -1055,3 +1055,30 @@ input:checked + .slider:before {
 .flicker {
     animation: light-flicker 0.2s infinite;
 }
+
+/* Accessibility & Comfort Enhancements */
+.no-word-wrap p, .no-word-wrap span, .no-word-wrap div {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.cursor-block * {
+    cursor: cell !important;
+}
+.cursor-block input, .cursor-block textarea {
+    caret-color: transparent;
+}
+.cursor-block input:focus, .cursor-block textarea:focus {
+    outline: 2px solid var(--main-color);
+    outline-offset: 2px;
+}
+
+.cursor-underline * {
+    cursor: text !important;
+}
+
+.sr-optimized *:focus {
+    outline: 3px solid var(--main-color) !important;
+    outline-offset: 2px;
+}
+

@@ -868,6 +868,14 @@ export function typewriterEffect(text, element, callback, speed = 30) {
     let index = 0;
     
     function type() {
+        // Handle Pause/Resume globally via window object
+        const isPaused = window.accessibility && window.accessibility.AccessibilitySettings ? window.accessibility.AccessibilitySettings.isPaused : false;
+        
+        if (isPaused) {
+            setTimeout(type, 100);
+            return;
+        }
+
         if (index < text.length) {
             element.textContent += text[index];
             index++;
@@ -878,6 +886,13 @@ export function typewriterEffect(text, element, callback, speed = 30) {
                 delay *= 3;
             } else if ([',', ';', ':'].includes(text[index - 1])) {
                 delay *= 2;
+            }
+
+            // Adjust delay based on reading speed setting
+            if (window.accessibility && window.accessibility.AccessibilitySettings) {
+                const rs = window.accessibility.AccessibilitySettings.readingSpeed;
+                if (rs === 'Fast') delay /= 2;
+                if (rs === 'Slow') delay *= 2;
             }
             
             setTimeout(type, delay);
