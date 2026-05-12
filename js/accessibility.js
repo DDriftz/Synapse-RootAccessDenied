@@ -260,9 +260,9 @@ export function formatGameText(text, type = 'description') {
     if (!AccessibilitySettings.textHighlighting) return text;
     
     if (type === 'dialogue') {
-        return \`<span class="text-yellow-400 font-bold">\${text}</span>\`;
+        return `<span class="text-yellow-400 font-bold">${text}</span>`;
     } else if (type === 'system') {
-        return \`<span class="text-red-400 italic">\${text}</span>\`;
+        return `<span class="text-red-400 italic">${text}</span>`;
     }
     return text;
 }
